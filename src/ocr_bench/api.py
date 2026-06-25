@@ -56,6 +56,7 @@ def create_app() -> FastAPI:
             "kbbi_loaded": c._loaded,
             "kbbi_size": len(c._kbbi_set) if c._kbbi_set else 0,
             "iou_threshold": s.iou_threshold,
+            "enable_preprocessing": s.enable_preprocessing,
         }
 
     @app.get("/api/results/{category}")

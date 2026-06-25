@@ -20,6 +20,8 @@ class Settings(BaseSettings):
 
     # Runner
     iou_threshold: float = 0.5                    # detection match threshold
+    enable_preprocessing: bool = False            # grayscale + CLAHE + 2x upscale (helps faint/low-contrast text)
+    preproc_upscale_min_side: int = 800           # images with shorter side below this get upscaled 2x
 
     # Server
     serve_host: str = "127.0.0.1"

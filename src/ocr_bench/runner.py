@@ -154,7 +154,10 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
     per_cat_dir.mkdir(parents=True, exist_ok=True)
 
     settings = get_settings()
-    engine = BenchEngine()
+    engine = BenchEngine(
+        enable_preprocessing=settings.enable_preprocessing,
+        preproc_upscale_min_side=settings.preproc_upscale_min_side,
+    )
     corrector = get_corrector()  # lazy-loads dict if enabled
 
     overall = []
