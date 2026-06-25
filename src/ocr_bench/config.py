@@ -21,6 +21,10 @@ class Settings(BaseSettings):
     # Runner
     iou_threshold: float = 0.5                    # detection match threshold
 
+    # Server
+    serve_host: str = "127.0.0.1"
+    serve_port: int = 8765                        # change in .env if 8765 is taken
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",

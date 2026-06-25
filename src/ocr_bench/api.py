@@ -97,7 +97,9 @@ app = create_app()
 def serve() -> None:
     """Entry point for ``ocr-bench-serve`` console script."""
     import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8765, log_level="warning")
+    from .config import get_settings
+    s = get_settings()
+    uvicorn.run(app, host=s.serve_host, port=s.serve_port, log_level="warning")
 
 
 if __name__ == "__main__":  # ponytail: self-check
