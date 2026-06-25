@@ -101,16 +101,16 @@
     <dl class="glossary">
       <div><dt>GT</dt><dd><b>G</b>round <b>T</b>ruth — the human-labeled text + polygon from the labelme JSON sidecar. This is the reference, not what OCR produced.</dd></div>
       <div><dt>PR / Predicted</dt><dd>What the OCR engine actually returned: polygon, text, and a confidence score.</dd></div>
-      <div><dt>TP / FP / FN</dt><dd>Detection outcomes after matching predicted lines to GT lines by polygon overlap (IoU ≥ 0.5). <b>TP</b> = predicted line that overlaps a GT line. <b>FP</b> = predicted line with no matching GT (extra / spurious). <b>FN</b> = GT line the engine missed.</dd></div>
-      <div><dt>Detection F1</dt><dd>Harmonic mean of detection precision (TP / (TP+FP)) and recall (TP / (TP+FN)). 1.0 = every line found with no extras; 0.0 = nothing found or everything wrong.</dd></div>
-      <div><dt>CER (matched)</dt><dd><b>C</b>haracter <b>E</b>rror <b>R</b>ate on matched line pairs. Edit distance between predicted and GT characters, divided by GT length. 0.0 = identical, 1.0 = every character wrong.</dd></div>
-      <div><dt>WER (matched)</dt><dd><b>W</b>ord <b>E</b>rror <b>R</b>ate on matched line pairs. Same idea as CER but at the word level.</dd></div>
-      <div><dt>Joined-page CER</dt><dd>Coarse CER computed by joining all GT lines into one string and all predicted lines into another, then comparing. No alignment — order matters. Useful as a smoke check; noisier than per-line CER.</dd></div>
-      <div><dt>Mean conf</dt><dd>Average OCR confidence score on matched lines. High conf + high CER means the engine is confidently wrong.</dd></div>
-      <div><dt>IoU</dt><dd><b>I</b>ntersection-over-<b>U</b>nion of two polygons, via their axis-aligned bounding boxes. ≥ 0.5 counts as a match.</dd></div>
-      <div><dt>Missed</dt><dd>In the drill-down: a GT line the OCR did not detect. Drawn dashed red.</dd></div>
-      <div><dt>Spurious</dt><dd>In the drill-down: a predicted line with no matching GT. Drawn dashed amber.</dd></div>
-      <div><dt>Matched</dt><dd>In the drill-down: a predicted line that overlaps a GT line. Drawn indigo.</dd></div>
+      <div><dt>TP / FP / FN</dt><dd>Detection outcomes after matching predicted lines to GT lines by polygon overlap (IoU ≥ 0.5). <b>TP</b> = predicted line that overlaps a GT line. <b>FP</b> = predicted line with no matching GT (extra / spurious). <b>FN</b> = GT line the engine missed. <span class="dir dir-up">TP↑</span> <span class="dir dir-down">FP↓</span> <span class="dir dir-down">FN↓</span></dd></div>
+      <div><dt>Detection F1</dt><dd>Harmonic mean of detection precision (TP / (TP+FP)) and recall (TP / (TP+FN)). 1.0 = every line found with no extras; 0.0 = nothing found or everything wrong. <span class="dir dir-up">↑ better · 1.0 perfect</span></dd></div>
+      <div><dt>CER (matched)</dt><dd><b>C</b>haracter <b>E</b>rror <b>R</b>ate on matched line pairs. Edit distance between predicted and GT characters, divided by GT length. 0.0 = identical, 1.0 = every character wrong. <span class="dir dir-down">↓ better · 0.0 perfect</span></dd></div>
+      <div><dt>WER (matched)</dt><dd><b>W</b>ord <b>E</b>rror <b>R</b>ate on matched line pairs. Same idea as CER but at the word level. <span class="dir dir-down">↓ better · 0.0 perfect</span></dd></div>
+      <div><dt>Joined-page CER</dt><dd>Coarse CER computed by joining all GT lines into one string and all predicted lines into another, then comparing. No alignment — order matters. Useful as a smoke check; noisier than per-line CER. <span class="dir dir-down">↓ better · 0.0 perfect</span></dd></div>
+      <div><dt>Mean conf</dt><dd>Average OCR confidence score on matched lines. High conf + high CER means the engine is confidently wrong. <span class="dir dir-up">↑ better · 1.0 max</span></dd></div>
+      <div><dt>IoU</dt><dd><b>I</b>ntersection-over-<b>U</b>nion of two polygons, via their axis-aligned bounding boxes. ≥ 0.5 counts as a match. <span class="dir dir-up">↑ better · 1.0 identical</span></dd></div>
+      <div><dt>Missed</dt><dd>In the drill-down: a GT line the OCR did not detect. Drawn dashed red. <span class="dir dir-down">fewer ↓ better</span></dd></div>
+      <div><dt>Spurious</dt><dd>In the drill-down: a predicted line with no matching GT. Drawn dashed amber. <span class="dir dir-down">fewer ↓ better</span></dd></div>
+      <div><dt>Matched</dt><dd>In the drill-down: a predicted line that overlaps a GT line. Drawn indigo. <span class="dir dir-up">more ↑ better</span></dd></div>
     </dl>
   </section>
 
