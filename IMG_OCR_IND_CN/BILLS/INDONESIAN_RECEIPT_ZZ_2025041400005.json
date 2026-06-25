@@ -1,0 +1,538 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "PT. Demo Tour",
+            "points": [
+                [
+                    325.075719,
+                    0.5545
+                ],
+                [
+                    727.713128,
+                    54.174147
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Taman Villa Meruya",
+            "points": [
+                [
+                    322.106464,
+                    57.701121
+                ],
+                [
+                    731.459128,
+                    103.706785
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Jakarta Barat, DKI Jakarta, Indonesia",
+            "points": [
+                [
+                    320.71332,
+                    105.551218
+                ],
+                [
+                    1088.292814,
+                    149.913819
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "###",
+            "points": [
+                [
+                    319.07466,
+                    151.151703
+                ],
+                [
+                    1281.9695339999998,
+                    198.23832
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Email : info@travelbos.com",
+            "points": [
+                [
+                    318.027919,
+                    199.284721
+                ],
+                [
+                    880.649936,
+                    249.091896
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "###",
+            "points": [
+                [
+                    2528.718748,
+                    70.508767
+                ],
+                [
+                    2985.259452,
+                    173.918103
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "###",
+            "points": [
+                [
+                    1315.021498,
+                    398.265471
+                ],
+                [
+                    1785.0071460000001,
+                    466.374627
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Jakarta Barat, DKI Jakarta, Indonesia",
+            "points": [
+                [
+                    1312.396023,
+                    470.846008
+                ],
+                [
+                    2266.456423,
+                    526.324526
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "PonSel 0818",
+            "points": [
+                [
+                    1314.277137,
+                    528.336084
+                ],
+                [
+                    1675.78258,
+                    582.4619250000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Keterangan",
+            "points": [
+                [
+                    988.113507,
+                    723.419912
+                ],
+                [
+                    1299.518243,
+                    783.481538
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Harga",
+            "points": [
+                [
+                    2533.52714,
+                    725.594856
+                ],
+                [
+                    2699.6211780000003,
+                    783.455726
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "###",
+            "points": [
+                [
+                    64.962483,
+                    797.649372
+                ],
+                [
+                    797.1456880000001,
+                    855.429911
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "###",
+            "points": [
+                [
+                    150.200013,
+                    852.74772
+                ],
+                [
+                    1565.798021,
+                    907.133347
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "###",
+            "points": [
+                [
+                    148.730658,
+                    907.245255
+                ],
+                [
+                    793.815781,
+                    959.1313580000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "c/in : 24 Juni 2012",
+            "points": [
+                [
+                    149.880902,
+                    960.528631
+                ],
+                [
+                    761.866599,
+                    1006.697259
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "###",
+            "points": [
+                [
+                    147.184761,
+                    1008.187068
+                ],
+                [
+                    863.386768,
+                    1062.903316
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Referensi Dokumen :",
+            "points": [
+                [
+                    145.83422,
+                    1063.252803
+                ],
+                [
+                    551.203262,
+                    1110.7793350000002
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "###",
+            "points": [
+                [
+                    144.488403,
+                    1115.226968
+                ],
+                [
+                    386.300151,
+                    1162.7717229999998
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "###",
+            "points": [
+                [
+                    2806.789446,
+                    857.203125
+                ],
+                [
+                    2985.254018,
+                    913.067165
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "USD : Tiga Ratus Enam Puluh",
+            "points": [
+                [
+                    46.854702,
+                    1439.745452
+                ],
+                [
+                    798.8076619999999,
+                    1498.6194429999998
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Total : USD",
+            "points": [
+                [
+                    2107.710573,
+                    1437.882305
+                ],
+                [
+                    2453.594886,
+                    1501.532968
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "###",
+            "points": [
+                [
+                    2708.747969,
+                    1434.429274
+                ],
+                [
+                    2986.468668,
+                    1508.5541030000002
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Diterima Oleh",
+            "points": [
+                [
+                    1746.804875,
+                    1533.921931
+                ],
+                [
+                    2009.6823650000001,
+                    1577.9520810000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "PT. Demo Tour",
+            "points": [
+                [
+                    2382.260485,
+                    1533.932692
+                ],
+                [
+                    2717.6898189999997,
+                    1579.707938
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "KANTOR PUSAT",
+            "points": [
+                [
+                    2389.941629,
+                    1584.728458
+                ],
+                [
+                    2702.268459,
+                    1631.271555
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "###",
+            "points": [
+                [
+                    46.570236,
+                    1691.41149
+                ],
+                [
+                    923.831418,
+                    1754.141351
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "HO / TBOS System / Kamis, 14 Jun 2012 / 02:59:17 WIB",
+            "points": [
+                [
+                    45.968124,
+                    1631.093537
+                ],
+                [
+                    1460.340218,
+                    1692.602968
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "###",
+            "points": [
+                [
+                    43.380216,
+                    310.111819
+                ],
+                [
+                    521.90725,
+                    364.784639
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "###",
+            "points": [
+                [
+                    43.380216,
+                    366.511171
+                ],
+                [
+                    766.467269,
+                    419.687668
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Tanggal : Kamis, 14 Juni 2012",
+            "points": [
+                [
+                    42.2288,
+                    421.759512
+                ],
+                [
+                    861.804225,
+                    478.73432099999997
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Nomor : IN. 20120614",
+            "points": [
+                [
+                    42.061331,
+                    482.898879
+                ],
+                [
+                    833.9191069999999,
+                    544.84397
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Jatuh Tempo: Kamis, 14 Juni 2012",
+            "points": [
+                [
+                    40.165952,
+                    550.005819
+                ],
+                [
+                    908.435653,
+                    607.870058
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "###",
+            "points": [
+                [
+                    41.212694,
+                    609.648912
+                ],
+                [
+                    344.138847,
+                    657.781902
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_RECEIPT_ZZ_2025041400005.jpg",
+    "imageData": null,
+    "imageHeight": 1884,
+    "imageWidth": 3020
+}

@@ -1,0 +1,378 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "59. Penyelesaian",
+            "points": [
+                [
+                    228.633456,
+                    547.525677
+                ],
+                [
+                    588.872075,
+                    614.859997
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Perselisihan",
+            "points": [
+                [
+                    317.618541,
+                    620.060426
+                ],
+                [
+                    589.727493,
+                    671.6078210000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "58.4 Pejabat Penandatangan Kontrak dan Penyedia berkewajiban",
+            "points": [
+                [
+                    804.254617,
+                    287.829726
+                ],
+                [
+                    2162.552401,
+                    348.506717
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "untuk bertindak dengan itikad baik sehubungan dengan",
+            "points": [
+                [
+                    917.365658,
+                    352.05506
+                ],
+                [
+                    2162.129914,
+                    401.75148
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "hak-hak Pihak lain, dan mengambil semua langkah yang",
+            "points": [
+                [
+                    915.796088,
+                    407.166549
+                ],
+                [
+                    2106.5411750000003,
+                    453.39725599999997
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "diperlukan untuk memastikan terpenuhinya tujuan Kontrak.",
+            "points": [
+                [
+                    916.384238,
+                    458.400648
+                ],
+                [
+                    2172.045853,
+                    512.518513
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "59.1 Pejabat Penandatangan Kontrak dan Penyedia berkewajiban",
+            "points": [
+                [
+                    801.506459,
+                    558.182049
+                ],
+                [
+                    2174.5552399999997,
+                    610.048104
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "untuk berupaya sungguh-sungguh menyelesaikan secara",
+            "points": [
+                [
+                    914.418362,
+                    616.852241
+                ],
+                [
+                    2174.854157,
+                    664.876964
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "musyawarah mufakat atas semua perselisihan yang timbul",
+            "points": [
+                [
+                    915.805599,
+                    670.191471
+                ],
+                [
+                    2176.1387919999997,
+                    715.216132
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "dari atau berhubungan dengan Kontrak ini atau",
+            "points": [
+                [
+                    918.493023,
+                    725.350557
+                ],
+                [
+                    2094.9466789999997,
+                    770.188173
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "interpretasinya selama atau setelah pelaksanaan pekerjaan",
+            "points": [
+                [
+                    914.222765,
+                    777.661142
+                ],
+                [
+                    2138.182952,
+                    824.63385
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Jasa Konsultansi ini secara musyawarah dan damai.",
+            "points": [
+                [
+                    911.020078,
+                    830.655111
+                ],
+                [
+                    1998.86607,
+                    876.445735
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "59.2 Dalam hal penyelesaian perselisihan melalui musyawarah",
+            "points": [
+                [
+                    803.429248,
+                    926.486562
+                ],
+                [
+                    2160.530176,
+                    980.157219
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "mufakat tidak tercapai, maka penyelesaian sengketa dapat",
+            "points": [
+                [
+                    919.715655,
+                    990.380221
+                ],
+                [
+                    2159.252265,
+                    1033.827876
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "dilakukan melalui mediasi, konsiliasi, arbitrase atau litigasi",
+            "points": [
+                [
+                    919.810601,
+                    1038.847457
+                ],
+                [
+                    2159.478406,
+                    1084.942827
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "sesuai dengan ketentuan peraturan perundang-undangan.",
+            "points": [
+                [
+                    918.263599,
+                    1093.074833
+                ],
+                [
+                    2147.34487,
+                    1144.770578
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "59.3 Penyelesaian sengketa dapat dilakukan di layanan",
+            "points": [
+                [
+                    819.518873,
+                    1194.32338
+                ],
+                [
+                    2114.817216,
+                    1245.00173
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "penyelesaian sengketa yang diselenggarakan oleh LKPP,",
+            "points": [
+                [
+                    920.587022,
+                    1250.919413
+                ],
+                [
+                    2144.440631,
+                    1297.6726580000002
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Lembaga Arbitrase, Dewan Sengketa Konstruksi atau",
+            "points": [
+                [
+                    920.10313,
+                    1305.054749
+                ],
+                [
+                    2144.266925,
+                    1350.391927
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pengadilan Negeri.",
+            "points": [
+                [
+                    919.328514,
+                    1356.201539
+                ],
+                [
+                    1338.799837,
+                    1409.23606
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "59.4 Pejabat Penandatangan Kontrak dan Penyedia bersama-sama",
+            "points": [
+                [
+                    801.744744,
+                    1456.349244
+                ],
+                [
+                    2170.346528,
+                    1505.895725
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "memilih dan menetapkan tempat penyelesaian sengketa dan",
+            "points": [
+                [
+                    910.363972,
+                    1513.335582
+                ],
+                [
+                    2172.263337,
+                    1560.955102
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "dicantumkan dalam SSKK.",
+            "points": [
+                [
+                    911.641825,
+                    1567.677859
+                ],
+                [
+                    1507.130537,
+                    1611.936
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_CONTRACT_WXD_000029.jpg",
+    "imageData": null,
+    "imageHeight": 3496,
+    "imageWidth": 2475
+}

@@ -1,0 +1,282 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "ВАВ 4",
+            "points": [
+                [
+                    224.855159,
+                    174.79986
+                ],
+                [
+                    407.714317,
+                    222.667054
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Wacana Chatting dalam",
+            "points": [
+                [
+                    145.217958,
+                    241.313958
+                ],
+                [
+                    486.63590500000004,
+                    275.821821
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Komunikasi Digital",
+            "points": [
+                [
+                    175.399524,
+                    279.225752
+                ],
+                [
+                    456.59691699999996,
+                    312.810652
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Perkembangan peradaban manusia diiringi dengan",
+            "points": [
+                [
+                    139.829297,
+                    364.143798
+                ],
+                [
+                    532.34204,
+                    382.03801
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "perkembangan cara penyampaian informasi (yang selanjutnya",
+            "points": [
+                [
+                    99.495003,
+                    388.763226
+                ],
+                [
+                    532.383523,
+                    407.16540499999996
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "dikenal dengan istilah Teknologi Informasi). Perkembangan",
+            "points": [
+                [
+                    99.495003,
+                    413.020744
+                ],
+                [
+                    532.383523,
+                    431.16700199999997
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "penyampaian informasi yang sekarang dilakukan oleh negara-",
+            "points": [
+                [
+                    99.495003,
+                    437.816053
+                ],
+                [
+                    532.957036,
+                    456.257501
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "negara maju adalah internet. Salah satu manfaat internet yaitu",
+            "points": [
+                [
+                    99.508015,
+                    461.629034
+                ],
+                [
+                    532.839835,
+                    480.43562
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "seseorang dapat berkomunikasi dengan orang lain, baik dalam",
+            "points": [
+                [
+                    99.388994,
+                    485.673098
+                ],
+                [
+                    532.733826,
+                    504.366426
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "bentuk informasi, bertukar pendapat, dan sebagainya.",
+            "points": [
+                [
+                    99.388994,
+                    510.441944
+                ],
+                [
+                    480.663505,
+                    528.4122169999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Perkembangan internet di Indonesia memancing",
+            "points": [
+                [
+                    142.768144,
+                    543.322339
+                ],
+                [
+                    533.238906,
+                    562.2899120000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "pebisnis untuk membuka warnet (warung internet) sehingga",
+            "points": [
+                [
+                    99.27979,
+                    567.162719
+                ],
+                [
+                    533.02391,
+                    586.9342300000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "kita tidak ketinggalan informasi dengan negara-negara lain",
+            "points": [
+                [
+                    99.016377,
+                    591.658397
+                ],
+                [
+                    533.023911,
+                    610.656157
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "(Usman, Sakaria, dan Hasriani, n.d). Warnet telah terdapat di",
+            "points": [
+                [
+                    98.429673,
+                    616.297841
+                ],
+                [
+                    532.618315,
+                    634.986358
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "berbagai tempat dan telah menjadi bagian dari hidup baik",
+            "points": [
+                [
+                    99.425591,
+                    639.889359
+                ],
+                [
+                    532.6183149999999,
+                    659.620667
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "pelajar, mahasiswa, pegawai, maupun pengangguran untuk",
+            "points": [
+                [
+                    98.918576,
+                    665.813553
+                ],
+                [
+                    533.53094,
+                    684.2549759999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "mencari informasi terkini.",
+            "points": [
+                [
+                    99.932607,
+                    689.451061
+                ],
+                [
+                    279.364839,
+                    705.6959489999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_THESIS_005727.jpg",
+    "imageData": null,
+    "imageHeight": 906,
+    "imageWidth": 611
+}

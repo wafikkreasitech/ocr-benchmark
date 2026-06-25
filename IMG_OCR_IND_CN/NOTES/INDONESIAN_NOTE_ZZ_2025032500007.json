@@ -1,0 +1,202 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "Debat",
+            "points": [
+                [
+                    251.396444,
+                    185.620178
+                ],
+                [
+                    623.654046,
+                    297.546196
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "kompetitif",
+            "points": [
+                [
+                    249.368227,
+                    313.059553
+                ],
+                [
+                    956.3612049999999,
+                    437.639811
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "debat dalam bentuk pertandingan",
+            "points": [
+                [
+                    1185.612099,
+                    174.970009
+                ],
+                [
+                    3760.063198,
+                    300.173111
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "ciri-ciri :",
+            "points": [
+                [
+                    1262.851917,
+                    336.924249
+                ],
+                [
+                    2017.464476,
+                    435.23159
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "pemenang.",
+            "points": [
+                [
+                    1200.561787,
+                    750.530952
+                ],
+                [
+                    1975.564848,
+                    886.940986
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "o mengutarakan pendapat secara logis, jelas",
+            "points": [
+                [
+                    254.199628,
+                    1038.87522
+                ],
+                [
+                    3480.094282,
+                    1197.871778
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "terstruktur.",
+            "points": [
+                [
+                    431.90286,
+                    1192.884572
+                ],
+                [
+                    1298.096816,
+                    1309.3202469999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "o mendengarkan pendapat berbeda.",
+            "points": [
+                [
+                    241.417175,
+                    1309.320247
+                ],
+                [
+                    2840.508159,
+                    1440.6533840000002
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "o melatih kemampuan bahasa (Indo / asing)",
+            "points": [
+                [
+                    228.634722,
+                    1445.447293
+                ],
+                [
+                    3406.4986580000004,
+                    1589.7296549999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Tujuaп :",
+            "points": [
+                [
+                    276.775941,
+                    903.570184
+                ],
+                [
+                    841.724234,
+                    998.982792
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "o disaksikan juri, yang akan menunjuk",
+            "points": [
+                [
+                    1029.666117,
+                    615.98414
+                ],
+                [
+                    3707.116588,
+                    737.8644810000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "o aturannya ketat dan jelas",
+            "points": [
+                [
+                    1029.666117,
+                    468.979398
+                ],
+                [
+                    3046.841207,
+                    563.232177
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_NOTE_ZZ_2025032500007.jpg",
+    "imageData": null,
+    "imageHeight": 1628,
+    "imageWidth": 3900
+}

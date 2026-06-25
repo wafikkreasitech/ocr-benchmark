@@ -1,0 +1,442 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "dilakukan pada saat puncak keberadaan anakan tersebut agar",
+            "points": [
+                [
+                    166.830585,
+                    147.70438
+                ],
+                [
+                    1066.691176,
+                    186.50005499999997
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "memperoleh hasil maksimal.",
+            "points": [
+                [
+                    168.206628,
+                    199.982246
+                ],
+                [
+                    556.45597,
+                    234.16921100000002
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Sebelum keadaan akut atau terjadi pembengkakan secara",
+            "points": [
+                [
+                    244.576772,
+                    246.757176
+                ],
+                [
+                    1064.8335240000001,
+                    283.076526
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "permanen, manusia yang terinfeksi akan mengalami masa gejala",
+            "points": [
+                [
+                    170.270674,
+                    296.97144
+                ],
+                [
+                    1066.071958,
+                    331.983842
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "belum muncul atau belum terlihat namun mikrofilaria sudah",
+            "points": [
+                [
+                    166.830585,
+                    342.370642
+                ],
+                [
+                    1064.833523,
+                    375.938518
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "banyak terdapat dalam darah manusia. Terkadang penderita tidak",
+            "points": [
+                [
+                    166.830585,
+                    389.833431
+                ],
+                [
+                    1066.071958,
+                    426.703073
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "menyadari bahwa dalam tubuhnya sedang terjadi perkembangan",
+            "points": [
+                [
+                    166.142564,
+                    439.359827
+                ],
+                [
+                    1064.8335240000001,
+                    476.848548
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "filaria. Kondisi ini menyebabkan manusia menjadi sangat potensial",
+            "points": [
+                [
+                    167.518607,
+                    485.446898
+                ],
+                [
+                    1067.929611,
+                    524.517704
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "sebagai sumber penularan. Hal inilah yang menjadi salah satu",
+            "points": [
+                [
+                    164.078499,
+                    537.03688
+                ],
+                [
+                    1069.168046,
+                    570.948699
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "dasar adanya pengobatan masal bagi kabupaten/kota yang telah",
+            "points": [
+                [
+                    166.142564,
+                    582.436101
+                ],
+                [
+                    1066.0719589999999,
+                    619.236935
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "ditetapkan sebagai daerah endemis penyakit kaki gajah.",
+            "points": [
+                [
+                    165.454542,
+                    630.586759
+                ],
+                [
+                    918.07898,
+                    668.76333
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Nyamuk sebagai Vektor Penular",
+            "points": [
+                [
+                    163.169761,
+                    721.46896
+                ],
+                [
+                    689.39854,
+                    769.407178
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Nyamuk dikatakan sebagai vektor karena mampu menular-",
+            "points": [
+                [
+                    244.000851,
+                    789.172261
+                ],
+                [
+                    1067.346837,
+                    828.291228
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "kan atau menyebarkan penyakit dari manusia yang terinfeksi ke",
+            "points": [
+                [
+                    165.745535,
+                    839.111369
+                ],
+                [
+                    1067.097056,
+                    877.148323
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "manusia sehat lainnya. Di Indonesia terdapat kurang lebih 23",
+            "points": [
+                [
+                    164.913029,
+                    889.050499
+                ],
+                [
+                    1066.347802,
+                    923.5917
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "spesies dari genus Culex, Anopheles, dan Mansonia, yang dapat",
+            "points": [
+                [
+                    167.410547,
+                    935.660345
+                ],
+                [
+                    1067.846309,
+                    973.780511
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "berperan menjadi vektor penyakit kaki gajah.²¹",
+            "points": [
+                [
+                    166.578041,
+                    984.767132
+                ],
+                [
+                    795.118161,
+                    1020.223889
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Saat nyamuk menghisap darah manusia yang sudah",
+            "points": [
+                [
+                    245.665863,
+                    1031.376978
+                ],
+                [
+                    1066.347802,
+                    1070.4127
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "terinfeksi, mikrofilaria atau larva akan masuk bersama darah",
+            "points": [
+                [
+                    166.578041,
+                    1081.316109
+                ],
+                [
+                    1064.849296,
+                    1116.10699
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "ke dalam lambung nyamuk. Selanjutnya akan bermigrasi dan",
+            "points": [
+                [
+                    164.913029,
+                    1127.093611
+                ],
+                [
+                    1064.849296,
+                    1164.0485410000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "berkembang di dalam dada nyamuk. Mikrofilaria untuk per tama",
+            "points": [
+                [
+                    166.578041,
+                    1174.535801
+                ],
+                [
+                    1066.347802,
+                    1213.488265
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "kalinya berkembang menjadi larva stadium 1 (L1) dalam dada",
+            "points": [
+                [
+                    166.056207,
+                    1221.46047
+                ],
+                [
+                    1065.538392,
+                    1261.790073
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "nyamuk. Kemudian mengalami perkembangan menjadi L2 dan",
+            "points": [
+                [
+                    165.299383,
+                    1272.156227
+                ],
+                [
+                    1066.219531,
+                    1310.140216
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "terakhir L3. Waktu yang diperlukan untuk berkembang dari L1",
+            "points": [
+                [
+                    166.056207,
+                    1318.312071
+                ],
+                [
+                    1067.5818100000001,
+                    1357.809371
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "menjadi L3 adalah 10-12 hari. Setelah L3 terbentuk maka nyamuk",
+            "points": [
+                [
+                    166.056207,
+                    1369.007849
+                ],
+                [
+                    1070.3063670000001,
+                    1405.478527
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "sudah siap menularkan penyakit kaki gajah ke manusia lainnya.",
+            "points": [
+                [
+                    166.813031,
+                    1416.677005
+                ],
+                [
+                    1013.090672,
+                    1455.190647
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "18",
+            "points": [
+                [
+                    596.184637,
+                    1697.335507
+                ],
+                [
+                    633.4685139999999,
+                    1726.180134
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_BOOKCONTENT_WXD_20250403000004.jpg",
+    "imageData": null,
+    "imageHeight": 1786,
+    "imageWidth": 1259
+}

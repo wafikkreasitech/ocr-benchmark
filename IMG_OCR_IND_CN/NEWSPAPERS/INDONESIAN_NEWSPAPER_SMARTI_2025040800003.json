@@ -1,0 +1,818 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "MIMI/UPEKS",
+            "points": [
+                [
+                    457.93988,
+                    5.831172
+                ],
+                [
+                    508.135532,
+                    14.967593999999998
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "HADIRKAN PROGRAM BARU: Indosat Ooredoo Hutchison (IOH) melalui",
+            "points": [
+                [
+                    6.876326,
+                    18.167617
+                ],
+                [
+                    508.92188600000003,
+                    36.430077999999995
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "brand Tri kembali menghadirkan program #MudahnyaKebaikan dengan",
+            "points": [
+                [
+                    6.876326,
+                    37.817112
+                ],
+                [
+                    512.043772,
+                    58.275695999999996
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Sedekah Kuota selama Ramadan.",
+            "points": [
+                [
+                    4.736908,
+                    58.517994
+                ],
+                [
+                    247.063805,
+                    74.540134
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "dan pekerja lepas online.",
+            "points": [
+                [
+                    9.080464,
+                    87.6097
+                ],
+                [
+                    198.980658,
+                    107.756791
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Tahun lalu, program ini berha-",
+            "points": [
+                [
+                    18.201932,
+                    108.885734
+                ],
+                [
+                    241.981846,
+                    126.905217
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "sil mengumpulkan lebih dari",
+            "points": [
+                [
+                    7.343049,
+                    127.99075
+                ],
+                [
+                    244.718286,
+                    147.225995
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "250TB kuota, yang disalurkan",
+            "points": [
+                [
+                    7.343049,
+                    148.398348
+                ],
+                [
+                    245.500126,
+                    168.719126
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "dalam bentuk 1.000 routers den-",
+            "points": [
+                [
+                    8.21175,
+                    168.371764
+                ],
+                [
+                    243.97987,
+                    186.130728
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "gan kuota 250GB kepada 588",
+            "points": [
+                [
+                    9.514809,
+                    188.779385
+                ],
+                [
+                    245.15263099999999,
+                    209.968563
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "sekolah dan pesantren di seluruh",
+            "points": [
+                [
+                    9.080452,
+                    209.621213
+                ],
+                [
+                    245.93447,
+                    229.11698900000002
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Indonesia. Keberhasilan ini",
+            "points": [
+                [
+                    8.332638,
+                    229.317925
+                ],
+                [
+                    244.381922,
+                    247.811563
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "menunjukkan adanya peran be-",
+            "points": [
+                [
+                    8.797504,
+                    250.342021
+                ],
+                [
+                    243.92379,
+                    268.80632099999997
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "sar sektor telekomunikasi dalam",
+            "points": [
+                [
+                    9.123843,
+                    270.567942
+                ],
+                [
+                    244.217494,
+                    286.71604
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "pemerataan akses internet, yang",
+            "points": [
+                [
+                    8.797504,
+                    289.162726
+                ],
+                [
+                    244.21749400000002,
+                    310.7914
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "berkontribusi terhadap pertum-",
+            "points": [
+                [
+                    9.123843,
+                    311.34599
+                ],
+                [
+                    244.217494,
+                    329.875527
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "buhan ekonomi berbasis digital.",
+            "points": [
+                [
+                    9.141625,
+                    331.293122
+                ],
+                [
+                    243.748739,
+                    351.519032
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "\"Program ini lebih dari sekadar",
+            "points": [
+                [
+                    20.711781,
+                    352.349422
+                ],
+                [
+                    245.29144,
+                    371.537347
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "inisiatif Ramadan. Ini adalah bagian",
+            "points": [
+                [
+                    8.251614,
+                    372.219457
+                ],
+                [
+                    244.549749,
+                    392.08948399999997
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "dari upaya kami dalam memban-",
+            "points": [
+                [
+                    8.844953,
+                    393.275758
+                ],
+                [
+                    245.083756,
+                    412.37471
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "gun ekosistem digital yang inklu-",
+            "points": [
+                [
+                    8.251619,
+                    413.145788
+                ],
+                [
+                    244.668422,
+                    433.846205
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "sif dan berkelanjutan bagi gen-",
+            "points": [
+                [
+                    9.141633,
+                    434.795226
+                ],
+                [
+                    243.867411,
+                    453.330698
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "erasi muda Indonesia,\" ujar dia.",
+            "points": [
+                [
+                    9.141633,
+                    453.330698
+                ],
+                [
+                    243.867411,
+                    453.330698
+                ],
+                [
+                    240.663368,
+                    473.882835
+                ],
+                [
+                    8.370282,
+                    472.548281
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "Penyediaan akses internet di",
+            "points": [
+                [
+                    20.652445,
+                    476.018122
+                ],
+                [
+                    246.003439,
+                    474.416657
+                ],
+                [
+                    246.537446,
+                    493.367328
+                ],
+                [
+                    17.715406,
+                    495.235704
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "wilayah pelosok juga berpotensi",
+            "points": [
+                [
+                    8.221951,
+                    496.955792
+                ],
+                [
+                    246.537446,
+                    493.367328
+                ],
+                [
+                    245.588104,
+                    514.038087
+                ],
+                [
+                    10.090975,
+                    515.639553
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "mendorong pertumbuhan eko-",
+            "points": [
+                [
+                    7.954947,
+                    516.647889
+                ],
+                [
+                    244.093126,
+                    514.048253
+                ],
+                [
+                    243.986083,
+                    535.124046
+                ],
+                [
+                    8.755958,
+                    535.924778
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "nomi lokal, termasuk peningkatan",
+            "points": [
+                [
+                    262.69917,
+                    86.95959
+                ],
+                [
+                    507.651613,
+                    106.55129000000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "produktivitas pelajar, guru, serta",
+            "points": [
+                [
+                    263.727218,
+                    108.278524
+                ],
+                [
+                    507.79152999999997,
+                    127.60062500000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "pelaku usaha yang mulai beradap-",
+            "points": [
+                [
+                    264.595931,
+                    129.120351
+                ],
+                [
+                    506.22785,
+                    147.530618
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "tasi dengan teknologi digital.",
+            "points": [
+                [
+                    265.89899,
+                    149.093767
+                ],
+                [
+                    483.16357700000003,
+                    167.85139700000002
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Selain itu, dengan akses inter-",
+            "points": [
+                [
+                    276.433238,
+                    169.362474
+                ],
+                [
+                    507.676104,
+                    188.54446199999998
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "net yang lebih luas, sekolah-",
+            "points": [
+                [
+                    265.990428,
+                    189.914611
+                ],
+                [
+                    507.088696,
+                    207.922191
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "sekolah di daerah terpencil dapat",
+            "points": [
+                [
+                    265.990428,
+                    209.48808
+                ],
+                [
+                    507.969808,
+                    230.235939
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "mengadopsi model pembelaja-",
+            "points": [
+                [
+                    265.990428,
+                    230.692654
+                ],
+                [
+                    508.720381,
+                    251.016431
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "ran hybrid dan memanfaatkan",
+            "points": [
+                [
+                    265.664089,
+                    251.571021
+                ],
+                [
+                    507.5782,
+                    270.687762
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "berbagai platform edukasi digi-",
+            "points": [
+                [
+                    265.990428,
+                    271.796932
+                ],
+                [
+                    507.251861,
+                    292.414307
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "tal. Hal ini sejalan dengan visi",
+            "points": [
+                [
+                    265.990437,
+                    292.675287
+                ],
+                [
+                    508.328782,
+                    313.81462500000004
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "pemerintah dalam mendukung",
+            "points": [
+                [
+                    266.316775,
+                    314.532323
+                ],
+                [
+                    507.447669,
+                    332.898752
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "transformasi digital di sektor",
+            "points": [
+                [
+                    266.316775,
+                    333.779563
+                ],
+                [
+                    507.15396499999997,
+                    354.918899
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "pendidikan dan ekonomi kreatif.",
+            "points": [
+                [
+                    263.706066,
+                    354.984146
+                ],
+                [
+                    506.566558,
+                    373.709424
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Inisiatif ini dapat menjadi",
+            "points": [
+                [
+                    277.738593,
+                    374.557615
+                ],
+                [
+                    506.566558,
+                    395.72957
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "stimulus bagi operator teleko-",
+            "points": [
+                [
+                    266.969444,
+                    395.109752
+                ],
+                [
+                    503.335815,
+                    416.575309
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "munikasi lainnya untuk mem-",
+            "points": [
+                [
+                    266.643114,
+                    416.966781
+                ],
+                [
+                    501.704131,
+                    436.279263
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "eka ke daerah-daerah yang",
+            "points": [
+                [
+                    266.176924,
+                    457.432182
+                ],
+                [
+                    503.098066,
+                    476.860744
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "perluas cakupan layanan mer-",
+            "points": [
+                [
+                    267.948469,
+                    436.866467
+                ],
+                [
+                    503.17265,
+                    457.712206
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "sebelumnya kurang terjangkau,",
+            "points": [
+                [
+                    266.176924,
+                    476.860744
+                ],
+                [
+                    503.098066,
+                    476.860744
+                ],
+                [
+                    503.447902,
+                    498.743612
+                ],
+                [
+                    268.217777,
+                    497.142147
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "sehingga mempercepat pene-",
+            "points": [
+                [
+                    268.320092,
+                    497.669731
+                ],
+                [
+                    502.420167,
+                    517.836323
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "trasi internet di Indonesia (mim)",
+            "points": [
+                [
+                    269.129196,
+                    517.890247
+                ],
+                [
+                    503.87654999999995,
+                    535.306853
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_NEWSPAPER_SMARTI_2025040800003.jpg",
+    "imageData": null,
+    "imageHeight": 542,
+    "imageWidth": 531
+}

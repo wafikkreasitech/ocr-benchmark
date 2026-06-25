@@ -1,0 +1,586 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "No",
+            "points": [
+                [
+                    32.574283,
+                    76.370753
+                ],
+                [
+                    77.62211400000001,
+                    112.23156499999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kecamatan",
+            "points": [
+                [
+                    117.633574,
+                    79.732687
+                ],
+                [
+                    269.984859,
+                    110.130344
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Besaran",
+            "points": [
+                [
+                    336.437443,
+                    25.941432
+                ],
+                [
+                    443.461079,
+                    56.199009000000004
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "PDRB per",
+            "points": [
+                [
+                    318.530237,
+                    62.362593
+                ],
+                [
+                    460.2491,
+                    94.721391
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "kapita",
+            "points": [
+                [
+                    345.756713,
+                    99.672576
+                ],
+                [
+                    430.886376,
+                    132.37686100000002
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "kecamatan",
+            "points": [
+                [
+                    315.179544,
+                    136.55188
+                ],
+                [
+                    459.986822,
+                    165.429078
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "1",
+            "points": [
+                [
+                    44.123749,
+                    176.258976
+                ],
+                [
+                    63.667798999999995,
+                    205.84416
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kaliwates",
+            "points": [
+                [
+                    101.986448,
+                    175.026255
+                ],
+                [
+                    239.102621,
+                    205.073712
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "27.081,44",
+            "points": [
+                [
+                    326.666133,
+                    176.258976
+                ],
+                [
+                    461.473953,
+                    208.925951
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2",
+            "points": [
+                [
+                    44.123749,
+                    231.731205
+                ],
+                [
+                    66.74560299999999,
+                    262.857284
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Sumbersari",
+            "points": [
+                [
+                    103.833149,
+                    230.498484
+                ],
+                [
+                    257.56944500000003,
+                    265.168627
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "24.524,36",
+            "points": [
+                [
+                    324.819479,
+                    231.731205
+                ],
+                [
+                    461.473953,
+                    267.47997
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "3",
+            "points": [
+                [
+                    42.892623,
+                    285.970714
+                ],
+                [
+                    63.667799,
+                    316.018171
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Patrang",
+            "points": [
+                [
+                    103.833149,
+                    287.203435
+                ],
+                [
+                    213.710739,
+                    319.87041
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "22.000,46",
+            "points": [
+                [
+                    325.43503,
+                    286.587086
+                ],
+                [
+                    461.473953,
+                    319.099962
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "4",
+            "points": [
+                [
+                    42.277071,
+                    343.292012
+                ],
+                [
+                    64.43725,
+                    373.801743
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Ambulu",
+            "points": [
+                [
+                    101.986448,
+                    340.826594
+                ],
+                [
+                    216.019092,
+                    374.572191
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "16.374,18",
+            "points": [
+                [
+                    326.666133,
+                    344.524733
+                ],
+                [
+                    461.473953,
+                    373.80174300000004
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "5",
+            "points": [
+                [
+                    43.508198,
+                    395.066149
+                ],
+                [
+                    65.976152,
+                    427.733077
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Puger",
+            "points": [
+                [
+                    102.602047,
+                    397.531544
+                ],
+                [
+                    190.62721,
+                    430.814867
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "15.742,07",
+            "points": [
+                [
+                    327.281731,
+                    397.531544
+                ],
+                [
+                    461.47395299999994,
+                    429.273972
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "6",
+            "points": [
+                [
+                    44.7393,
+                    452.387401
+                ],
+                [
+                    65.976152,
+                    482.434858
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Wuluhan",
+            "points": [
+                [
+                    101.986448,
+                    451.154704
+                ],
+                [
+                    231.408111,
+                    488.59844
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "13.875,70",
+            "points": [
+                [
+                    327.281731,
+                    456.08554
+                ],
+                [
+                    461.47395299999994,
+                    487.057544
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "7",
+            "points": [
+                [
+                    44.123772,
+                    507.243305
+                ],
+                [
+                    64.745049,
+                    540.5266280000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Bangsalsari",
+            "points": [
+                [
+                    103.833149,
+                    506.010584
+                ],
+                [
+                    263.263401,
+                    544.378866
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "12.554,85",
+            "points": [
+                [
+                    329.128433,
+                    508.476003
+                ],
+                [
+                    462.551204,
+                    540.526629
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "8",
+            "points": [
+                [
+                    45.354899,
+                    563.948232
+                ],
+                [
+                    63.206148,
+                    597.539753
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Sumberbaru",
+            "points": [
+                [
+                    103.833149,
+                    565.797325
+                ],
+                [
+                    269.419008,
+                    597.539753
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "12.415,95",
+            "points": [
+                [
+                    329.128433,
+                    562.099162
+                ],
+                [
+                    462.551204,
+                    598.310201
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "9",
+            "points": [
+                [
+                    43.508198,
+                    622.502252
+                ],
+                [
+                    66.283952,
+                    654.552878
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Tanggul",
+            "points": [
+                [
+                    101.370944,
+                    620.036833
+                ],
+                [
+                    220.943597,
+                    656.86422
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "12.200,54",
+            "points": [
+                [
+                    327.897283,
+                    621.269554
+                ],
+                [
+                    461.012302,
+                    654.552877
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "10",
+            "points": [
+                [
+                    39.814842,
+                    675.509063
+                ],
+                [
+                    75.51736299999999,
+                    708.484212
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Rambipuji",
+            "points": [
+                [
+                    103.833149,
+                    677.974481
+                ],
+                [
+                    246.33547900000002,
+                    711.566002
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "11.512,74",
+            "points": [
+                [
+                    328.512834,
+                    676.125411
+                ],
+                [
+                    461.781752,
+                    708.484211
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_TABLE_WXD_2025040500072.png",
+    "imageData": null,
+    "imageHeight": 751,
+    "imageWidth": 501
+}

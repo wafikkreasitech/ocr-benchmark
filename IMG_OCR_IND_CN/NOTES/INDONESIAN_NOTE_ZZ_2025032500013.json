@@ -1,0 +1,170 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "Kaidah Bahasa",
+            "points": [
+                [
+                    939.064584,
+                    586.144755
+                ],
+                [
+                    3722.1757799999996,
+                    979.530319
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "(b) kata yang menyatakan urutan waktu",
+            "points": [
+                [
+                    345.574008,
+                    1343.832117
+                ],
+                [
+                    4212.130105,
+                    1538.7049929999998
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "(konjungsi kronologis, temporal)",
+            "points": [
+                [
+                    351.017862,
+                    1561.871651
+                ],
+                [
+                    3347.905114,
+                    1770.371997
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "(c) Kata kerja material",
+            "points": [
+                [
+                    356.461716,
+                    1774.460281
+                ],
+                [
+                    2578.9490189999997,
+                    2002.039004
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "(d) Kata kerja yang menunjukkan kalimat",
+            "points": [
+                [
+                    351.017862,
+                    2014.303852
+                ],
+                [
+                    4327.813765,
+                    2240.519744
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "tak langsung sebagai cara menceritakan",
+            "points": [
+                [
+                    351.017862,
+                    2254.147215
+                ],
+                [
+                    4259.764553,
+                    2472.186749
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "tuturan seorang tokoh oleh pengarang",
+            "points": [
+                [
+                    340.129947,
+                    2493.990786
+                ],
+                [
+                    4069.22676,
+                    2717.481226
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "(e) kata kerja mental",
+            "points": [
+                [
+                    345.574008,
+                    2739.285262
+                ],
+                [
+                    2442.850595,
+                    2955.961966
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "(f) dialog.",
+            "points": [
+                [
+                    405.457232,
+                    2973.677928
+                ],
+                [
+                    1394.892732,
+                    3194.442707
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "(a) kalimat bermakna lampau",
+            "points": [
+                [
+                    334.686093,
+                    1076.733708
+                ],
+                [
+                    3170.9771630000005,
+                    1320.665458
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_NOTE_ZZ_2025032500013.jpg",
+    "imageData": null,
+    "imageHeight": 4124,
+    "imageWidth": 5852
+}

@@ -1,0 +1,954 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "PENAWARAN RENCANA",
+            "points": [
+                [
+                    105.23134,
+                    112.803544
+                ],
+                [
+                    563.423522,
+                    149.72581300000002
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "ANGGARAN BIAYA",
+            "points": [
+                [
+                    107.195728,
+                    165.830216
+                ],
+                [
+                    481.214117,
+                    203.636263
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "STUDIO SHODWE",
+            "points": [
+                [
+                    757.406298,
+                    95.127987
+                ],
+                [
+                    1013.365316,
+                    123.212478
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "INTERIOR",
+            "points": [
+                [
+                    762.31735,
+                    129.497123
+                ],
+                [
+                    917.0123580000001,
+                    158.563592
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "+123-456-7890 (Ketut)",
+            "points": [
+                [
+                    712.225527,
+                    210.019109
+                ],
+                [
+                    966.514796,
+                    236.336044
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Nama Klien: Jacqueline Thompson",
+            "points": [
+                [
+                    105.23134,
+                    278.757409
+                ],
+                [
+                    543.092164,
+                    307.038274
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "hello@reallygreatsite.com",
+            "points": [
+                [
+                    714.189969,
+                    278.757409
+                ],
+                [
+                    992.149986,
+                    306.154496
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Deskripsi",
+            "points": [
+                [
+                    106.213561,
+                    360.261347
+                ],
+                [
+                    223.978239,
+                    389.229616
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Material",
+            "points": [
+                [
+                    342.921637,
+                    358.297417
+                ],
+                [
+                    449.391122,
+                    390.113393
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kuantitas",
+            "points": [
+                [
+                    530.520164,
+                    360.261347
+                ],
+                [
+                    654.472647,
+                    388.345838
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Harga",
+            "points": [
+                [
+                    741.691299,
+                    361.243325
+                ],
+                [
+                    820.6594,
+                    390.11339300000003
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Total",
+            "points": [
+                [
+                    933.218549,
+                    361.243325
+                ],
+                [
+                    1000.989815,
+                    386.77470900000003
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kabinet Bawah",
+            "points": [
+                [
+                    104.249173,
+                    461.404825
+                ],
+                [
+                    270.828761,
+                    482.910068
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "(3 meter)",
+            "points": [
+                [
+                    107.195728,
+                    488.900167
+                ],
+                [
+                    208.950714,
+                    514.726072
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kabinet Atas (3",
+            "points": [
+                [
+                    104.249173,
+                    586.115732
+                ],
+                [
+                    273.480677,
+                    609.290304
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "meter)",
+            "points": [
+                [
+                    107.195728,
+                    618.520885
+                ],
+                [
+                    181.54757899999998,
+                    641.106307
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Meja Dapur (Top",
+            "points": [
+                [
+                    107.195728,
+                    713.772547
+                ],
+                [
+                    286.74025800000004,
+                    739.20565
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Table)",
+            "points": [
+                [
+                    106.213561,
+                    745.195748
+                ],
+                [
+                    176.243746,
+                    765.718986
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Multiplek +",
+            "points": [
+                [
+                    346.850414,
+                    462.386831
+                ],
+                [
+                    468.838509,
+                    482.91006799999997
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "HPL",
+            "points": [
+                [
+                    385.155853,
+                    491.846075
+                ],
+                [
+                    429.059764,
+                    509.423405
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Multiplek +",
+            "points": [
+                [
+                    345.868193,
+                    588.079689
+                ],
+                [
+                    464.418648,
+                    609.290304
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "HPL",
+            "points": [
+                [
+                    385.155853,
+                    617.538933
+                ],
+                [
+                    429.943736,
+                    636.6874170000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Granit",
+            "points": [
+                [
+                    374.351744,
+                    714.754498
+                ],
+                [
+                    442.319346,
+                    734.78676
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "3 Meter",
+            "points": [
+                [
+                    559.985937,
+                    460.422874
+                ],
+                [
+                    648.284843,
+                    482.91006899999996
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2.500.000/m",
+            "points": [
+                [
+                    708.29675,
+                    457.476912
+                ],
+                [
+                    854.2503399999999,
+                    482.910069
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "7.500.000/m",
+            "points": [
+                [
+                    887.05561,
+                    461.404825
+                ],
+                [
+                    1039.884479,
+                    480.258735
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "3 Meter",
+            "points": [
+                [
+                    561.950271,
+                    585.133727
+                ],
+                [
+                    647.40087,
+                    608.406526
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Hitam",
+            "points": [
+                [
+                    373.369577,
+                    745.195748
+                ],
+                [
+                    438.783458,
+                    763.067652
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Backplash",
+            "points": [
+                [
+                    104.249173,
+                    838.4834
+                ],
+                [
+                    221.326323,
+                    865.585885
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Keramik",
+            "points": [
+                [
+                    359.618912,
+                    839.465405
+                ],
+                [
+                    452.927011,
+                    860.283218
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "3 Meter",
+            "points": [
+                [
+                    559.985937,
+                    714.754498
+                ],
+                [
+                    649.168815,
+                    735.670538
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "3 Meter",
+            "points": [
+                [
+                    560.968104,
+                    838.4834
+                ],
+                [
+                    645.632926,
+                    862.0507739999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2.000.000/m",
+            "points": [
+                [
+                    706.332415,
+                    588.079689
+                ],
+                [
+                    855.1343119999999,
+                    607.522748
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "3.000.000/m",
+            "points": [
+                [
+                    706.332415,
+                    710.826585
+                ],
+                [
+                    855.1343119999999,
+                    733.9029830000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "1.500.000/m",
+            "points": [
+                [
+                    707.314583,
+                    837.501448
+                ],
+                [
+                    854.2503399999999,
+                    859.39944
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "6.000.000/m",
+            "points": [
+                [
+                    887.05561,
+                    586.115732
+                ],
+                [
+                    1034.580646,
+                    608.406526
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "9.000.000/m",
+            "points": [
+                [
+                    888.037778,
+                    710.826585
+                ],
+                [
+                    1037.232563,
+                    732.135427
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "4.500.000/m",
+            "points": [
+                [
+                    889.019945,
+                    838.4834
+                ],
+                [
+                    1036.348591,
+                    859.3994399999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Dapur (Dinding)",
+            "points": [
+                [
+                    107.287867,
+                    870.840157
+                ],
+                [
+                    277.381819,
+                    895.3341869999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Mozaik",
+            "points": [
+                [
+                    368.516811,
+                    870.102382
+                ],
+                [
+                    448.730278,
+                    890.686219
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Rak Piring",
+            "points": [
+                [
+                    106.54995,
+                    966.750611
+                ],
+                [
+                    214.28839399999998,
+                    990.949523
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Terbuka",
+            "points": [
+                [
+                    106.54995,
+                    997.737036
+                ],
+                [
+                    199.013144,
+                    1016.845343
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kayu",
+            "points": [
+                [
+                    380.323763,
+                    966.012816
+                ],
+                [
+                    436.11159299999997,
+                    990.949523
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Solid",
+            "points": [
+                [
+                    381.799637,
+                    996.261486
+                ],
+                [
+                    437.43987500000003,
+                    1016.845343
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "1 Unit",
+            "points": [
+                [
+                    572.186787,
+                    966.750611
+                ],
+                [
+                    635.353987,
+                    985.63756
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "1.000.000/m",
+            "points": [
+                [
+                    707.966799,
+                    966.012816
+                ],
+                [
+                    853.1923400000001,
+                    985.63756
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "TOTAL",
+            "points": [
+                [
+                    108.763741,
+                    1081.105378
+                ],
+                [
+                    263.434851,
+                    1116.444652
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Catatan:",
+            "points": [
+                [
+                    107.287867,
+                    1172.589183
+                ],
+                [
+                    210.967688,
+                    1196.788095
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Harga hanya estimasi",
+            "points": [
+                [
+                    119.832776,
+                    1219.806615
+                ],
+                [
+                    331.841406,
+                    1239.2838
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "1.000.000/m",
+            "points": [
+                [
+                    890.266205,
+                    966.047237
+                ],
+                [
+                    1035.139325,
+                    984.017369
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Rp28.000.000",
+            "points": [
+                [
+                    692.845736,
+                    1079.956381
+                ],
+                [
+                    1027.183576,
+                    1125.421827
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Apabila penawaran cocok,",
+            "points": [
+                [
+                    119.246044,
+                    1264.567755
+                ],
+                [
+                    381.88394999999997,
+                    1284.5018440000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "wajib DP 50%",
+            "points": [
+                [
+                    105.940608,
+                    1292.99153
+                ],
+                [
+                    241.574228,
+                    1311.222411
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Metode Pembayaran:",
+            "points": [
+                [
+                    106.550474,
+                    1349.69636
+                ],
+                [
+                    366.169335,
+                    1373.2318989999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "(0123-456-789)",
+            "points": [
+                [
+                    104.111012,
+                    1398.474732
+                ],
+                [
+                    266.273698,
+                    1420.424959
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Bank Borcelle",
+            "points": [
+                [
+                    106.550474,
+                    1426.522273
+                ],
+                [
+                    240.476475,
+                    1445.66776
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "###",
+            "points": [
+                [
+                    658.911926,
+                    1169.270628
+                ],
+                [
+                    874.128241,
+                    1366.8028199999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Cia Rodriguez",
+            "points": [
+                [
+                    655.383821,
+                    1377.888817
+                ],
+                [
+                    867.928766,
+                    1408.072939
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pemimpin Perusahaan",
+            "points": [
+                [
+                    639.759213,
+                    1416.185881
+                ],
+                [
+                    881.990906,
+                    1437.0980780000002
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_TRADE_054915.jpg",
+    "imageData": null,
+    "imageHeight": 1600,
+    "imageWidth": 1131
+}

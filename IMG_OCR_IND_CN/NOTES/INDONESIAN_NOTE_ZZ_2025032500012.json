@@ -1,0 +1,138 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "Pengertian",
+            "points": [
+                [
+                    921.849659,
+                    1550.742179
+                ],
+                [
+                    3269.920687,
+                    2153.477772
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Novel sejarah adalah novel ya adalah",
+            "points": [
+                [
+                    267.129292,
+                    2141.827851
+                ],
+                [
+                    3650.014156,
+                    2425.073093
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "novel yang di dalamnya menjelaskan",
+            "points": [
+                [
+                    275.517995,
+                    2473.220598
+                ],
+                [
+                    3618.8484550000003,
+                    2791.995476
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "dan tentang fakta kejadian masa lalu",
+            "points": [
+                [
+                    283.906698,
+                    2791.995476
+                ],
+                [
+                    3675.902037,
+                    3103.141278
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "yang menjadi asal-muasal atau latar",
+            "points": [
+                [
+                    292.295401,
+                    3127.548722
+                ],
+                [
+                    3597.495062,
+                    3395.992022
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "belakang terjadinya sesuatu yang",
+            "points": [
+                [
+                    293.312612,
+                    3435.749183
+                ],
+                [
+                    3343.474704,
+                    3769.7306909999998
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "memiliki nilai kesejarahan bisa",
+            "points": [
+                [
+                    304.611005,
+                    3769.730691
+                ],
+                [
+                    3106.075403,
+                    4061.203307
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "bersifat naratif atau deskriptif.",
+            "points": [
+                [
+                    304.611005,
+                    4105.51815
+                ],
+                [
+                    3191.6162999999997,
+                    4426.296509
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_NOTE_ZZ_2025032500012.jpg",
+    "imageData": null,
+    "imageHeight": 4596,
+    "imageWidth": 4636
+}

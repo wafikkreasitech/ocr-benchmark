@@ -1,0 +1,378 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "22",
+            "points": [
+                [
+                    2160.944202,
+                    10.488804
+                ],
+                [
+                    2219.849145,
+                    48.154782000000004
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "12. LETTER OF INTENT",
+            "points": [
+                [
+                    369.174968,
+                    281.91965
+                ],
+                [
+                    946.095118,
+                    354.83495899999997
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "LOI adalah perjanjian yang menguraikan poin-poin utama dari kesepakatan yang",
+            "points": [
+                [
+                    443.165494,
+                    358.484516
+                ],
+                [
+                    2192.848376,
+                    420.302452
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "diusulkan dan berfungsi sebagai \"perjanjian untuk menyetujui\" antara dua pihak. LOI",
+            "points": [
+                [
+                    441.600506,
+                    428.910034
+                ],
+                [
+                    2185.023318,
+                    480.946648
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "juga disebut sebagai Surat Permintaan atau Makalah Konsep. Hanya dua pihak yang",
+            "points": [
+                [
+                    440.035459,
+                    489.945476
+                ],
+                [
+                    2185.023318,
+                    543.547108
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "dapat terlibat dalam LOI; dengan demikian, LOI tidak dapat dibentuk antara lebih dari",
+            "points": [
+                [
+                    443.165494,
+                    549.415901
+                ],
+                [
+                    2185.023318,
+                    602.2350389999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "dua pihak. LOI sering dianggap sebagai perjanjian utama yang disusun sebelum",
+            "points": [
+                [
+                    450.990552,
+                    612.016361
+                ],
+                [
+                    2185.023319,
+                    664.8354989999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "menandatangani kontrak tertulis; oleh karena itu, tidak mengikat secara hukum. Letter",
+            "points": [
+                [
+                    449.425564,
+                    677.746856
+                ],
+                [
+                    2185.023318,
+                    731.348488
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "of intent umumnya disampaikan oleh satu pihak ke pihak lain dan selanjutnya",
+            "points": [
+                [
+                    446.295529,
+                    738.782328
+                ],
+                [
+                    2186.9795830000003,
+                    793.948948
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "dinegosiasikan sebelum eksekusi atau penandatanganan. Di sini, kedua belah pihak",
+            "points": [
+                [
+                    441.600506,
+                    798.252754
+                ],
+                [
+                    2188.9358469999997,
+                    854.5931439999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "akan berusaha untuk mengamankan posisi masing-masing. Jika dinegosiasikan dengan",
+            "points": [
+                [
+                    443.165494,
+                    863.983248
+                ],
+                [
+                    2185.023318,
+                    913.281074
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "hati-hati, LOI dapat berfungsi untuk melindungi kedua belah pihak dalam suatu",
+            "points": [
+                [
+                    444.730482,
+                    923.453674
+                ],
+                [
+                    2185.023319,
+                    977.8378
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "transaksi.",
+            "points": [
+                [
+                    446.295529,
+                    987.619121
+                ],
+                [
+                    643.486958,
+                    1032.613202
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "13. PERBEDAAN LOI DAN MOU",
+            "points": [
+                [
+                    371.850626,
+                    1101.281494
+                ],
+                [
+                    1128.533678,
+                    1161.143166
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "LOI (Letter of Intent) dan MOU (Memorandum of Understanding) sebagian besar",
+            "points": [
+                [
+                    439.14611,
+                    1167.011959
+                ],
+                [
+                    2190.785256,
+                    1221.787362
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "memiliki sifat yang sama dan sering membingungkan satu sama lain. Baik LOI dan",
+            "points": [
+                [
+                    443.841132,
+                    1231.177496
+                ],
+                [
+                    2188.8289910000003,
+                    1282.431557
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "MOU banyak digunakan dalam transaksi yang bersifat pribadi dan bisnis. Perbedaan",
+            "points": [
+                [
+                    443.841132,
+                    1289.082874
+                ],
+                [
+                    2188.8289910000003,
+                    1348.944546
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "utama antara LOI dan MOU adalah bahwa LOI adalah perjanjian yang menguraikan",
+            "points": [
+                [
+                    446.971167,
+                    1357.943374
+                ],
+                [
+                    2181.003934,
+                    1409.588742
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "poin-poin utama dari kesepakatan yang diusulkan dan berfungsi sebagai \"kesepakatan",
+            "points": [
+                [
+                    443.841132,
+                    1422.108821
+                ],
+                [
+                    2182.9601979999998,
+                    1476.10173
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "untuk menyetujui\" antara dua pihak sedangkan MOU adalah perjanjian antara dua atau",
+            "points": [
+                [
+                    442.276145,
+                    1486.274329
+                ],
+                [
+                    2188.8289919999997,
+                    1536.745926
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "lebih pihak untuk melakukan tugas atau proyek tertentu. Kedua perjanjian tidak",
+            "points": [
+                [
+                    440.711097,
+                    1544.179766
+                ],
+                [
+                    2196.654049,
+                    1599.346386
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "bermaksud penegakan hukum antara para pihak.",
+            "points": [
+                [
+                    442.276145,
+                    1609.910261
+                ],
+                [
+                    1412.2107799999999,
+                    1662.245807
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "OTIH HANDAYANI, Teknik Penyusunan Kontrak",
+            "points": [
+                [
+                    159.904717,
+                    3193.631699
+                ],
+                [
+                    1121.6754190000001,
+                    3270.459504
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_CONTRACT_WXD_000084.jpg",
+    "imageData": null,
+    "imageHeight": 3509,
+    "imageWidth": 2482
+}

@@ -1,0 +1,1002 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "GEOGRAFI DAN IKLIM",
+            "points": [
+                [
+                    441.2891,
+                    63.446748
+                ],
+                [
+                    637.867981,
+                    79.017352
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "1.2.3",
+            "points": [
+                [
+                    109.440593,
+                    131.568142
+                ],
+                [
+                    143.50129,
+                    145.192421
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Tabel",
+            "points": [
+                [
+                    57.862965,
+                    123.78284
+                ],
+                [
+                    95.81631300000001,
+                    137.407119
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Table",
+            "points": [
+                [
+                    56.889803,
+                    140.326607
+                ],
+                [
+                    94.843151,
+                    155.897211
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Perkembangan Konsumsi Bahan Perusak Ozon di Indonesia",
+            "points": [
+                [
+                    174.642499,
+                    121.836514
+                ],
+                [
+                    561.961284,
+                    138.380281
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "menurut Senyawa Kimia dan Kode HS (metrik ton), 2019-2021",
+            "points": [
+                [
+                    176.588824,
+                    141.29977
+                ],
+                [
+                    584.668364,
+                    156.43913899999998
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Development Consumption of Ozone Depleting Substances in",
+            "points": [
+                [
+                    174.642499,
+                    158.8167
+                ],
+                [
+                    574.6124,
+                    174.387304
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Indonesia by Chemical Compound and HS Code (metric ton),",
+            "points": [
+                [
+                    172.696173,
+                    174.387304
+                ],
+                [
+                    569.746587,
+                    190.931071
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2019-2021",
+            "points": [
+                [
+                    172.696173,
+                    190.931071
+                ],
+                [
+                    248.60287,
+                    203.582187
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Komoditi",
+            "points": [
+                [
+                    146.820588,
+                    230.830745
+                ],
+                [
+                    203.837382,
+                    240.879804
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Commodity",
+            "points": [
+                [
+                    143.50129,
+                    243.481861
+                ],
+                [
+                    205.78370800000002,
+                    255.159814
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "(1)",
+            "points": [
+                [
+                    162.863494,
+                    261.339288
+                ],
+                [
+                    185.246238,
+                    273.017241
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kode HS",
+            "points": [
+                [
+                    315.341175,
+                    230.758303
+                ],
+                [
+                    368.42278100000004,
+                    241.213771
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "HS Code",
+            "points": [
+                [
+                    316.963311,
+                    244.101147
+                ],
+                [
+                    363.92668,
+                    254.014688
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "(2)",
+            "points": [
+                [
+                    330.951743,
+                    260.186482
+                ],
+                [
+                    347.84134500000005,
+                    272.25048300000003
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2019",
+            "points": [
+                [
+                    416.204019,
+                    236.058479
+                ],
+                [
+                    448.374689,
+                    247.75690500000002
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "(3)",
+            "points": [
+                [
+                    422.651699,
+                    261.312925
+                ],
+                [
+                    441.66164100000003,
+                    273.011351
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2020",
+            "points": [
+                [
+                    496.602637,
+                    235.256358
+                ],
+                [
+                    528.042156,
+                    249.87939
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "(4)",
+            "points": [
+                [
+                    505.374799,
+                    260.186482
+                ],
+                [
+                    519.296395,
+                    273.99059600000004
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2021",
+            "points": [
+                [
+                    577.788523,
+                    236.058479
+                ],
+                [
+                    606.303435,
+                    247.75690500000002
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "(5)",
+            "points": [
+                [
+                    585.199553,
+                    260.017861
+                ],
+                [
+                    598.360282,
+                    273.17859
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Chlorodifluoromethane (HCFC-22)",
+            "points": [
+                [
+                    68.521115,
+                    290.702279
+                ],
+                [
+                    212.484865,
+                    301.96201399999995
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2903.71.00.00",
+            "points": [
+                [
+                    304.975542,
+                    292.310813
+                ],
+                [
+                    369.316883,
+                    302.766281
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "3 070,00",
+            "points": [
+                [
+                    412.035611,
+                    288.908564
+                ],
+                [
+                    451.444682,
+                    302.581099
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2 880,00ʳ",
+            "points": [
+                [
+                    489.152629,
+                    289.898051
+                ],
+                [
+                    532.097167,
+                    301.962014
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2905,05",
+            "points": [
+                [
+                    574.33864,
+                    291.232405
+                ],
+                [
+                    612.98157,
+                    302.016479
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Dichlorotrifluoroethanes (HCFC-123)",
+            "points": [
+                [
+                    68.521115,
+                    307.591881
+                ],
+                [
+                    222.13606599999997,
+                    317.243082
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2903.72.00.00",
+            "points": [
+                [
+                    306.584075,
+                    306.787614
+                ],
+                [
+                    366.90408199999996,
+                    317.243082
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "100.00ʳ",
+            "points": [
+                [
+                    416.768621,
+                    304.90494
+                ],
+                [
+                    453.764892,
+                    316.164675
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "130,00ʳ",
+            "points": [
+                [
+                    499.608097,
+                    305.121234
+                ],
+                [
+                    530.960586,
+                    317.243082
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "34,52",
+            "points": [
+                [
+                    586.468907,
+                    305.179081
+                ],
+                [
+                    612.205443,
+                    317.243082
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Diclorofluoroethanes (HCFC-141b)",
+            "points": [
+                [
+                    63.186659,
+                    322.186116
+                ],
+                [
+                    214.97196,
+                    332.17061700000005
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2903.73.00.00",
+            "points": [
+                [
+                    306.244577,
+                    320.914932
+                ],
+                [
+                    367.708349,
+                    333.328417
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "440,00ʳ",
+            "points": [
+                [
+                    419.985688,
+                    320.0036
+                ],
+                [
+                    453.559464,
+                    332.52415
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "240,00",
+            "points": [
+                [
+                    498.80383,
+                    322.068683
+                ],
+                [
+                    529.365967,
+                    331.71988400000004
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "100,00",
+            "points": [
+                [
+                    580.83904,
+                    321.264416
+                ],
+                [
+                    613.8139769999999,
+                    332.52415099999996
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Chlorodifluoroethanes (HCFC-142b)",
+            "points": [
+                [
+                    67.716848,
+                    337.349751
+                ],
+                [
+                    220.527532,
+                    347.805219
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2903.74.00.00",
+            "points": [
+                [
+                    306.191705,
+                    335.32914
+                ],
+                [
+                    366.511712,
+                    347.393141
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "...ʳ",
+            "points": [
+                [
+                    438.483823,
+                    334.936951
+                ],
+                [
+                    455.373425,
+                    348.609486
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "...ʳ",
+            "points": [
+                [
+                    515.61355,
+                    334.997769
+                ],
+                [
+                    533.726799,
+                    345.831769
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "...",
+            "points": [
+                [
+                    600.945709,
+                    338.154018
+                ],
+                [
+                    614.618244,
+                    347.805219
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Dicloropentafluoropropanes (HCFC-225)",
+            "points": [
+                [
+                    67.716848,
+                    351.022286
+                ],
+                [
+                    239.025667,
+                    363.890554
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2903.75.00.00",
+            "points": [
+                [
+                    305.779808,
+                    349.413752
+                ],
+                [
+                    368.512615,
+                    362.28202
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2,00",
+            "points": [
+                [
+                    428.028356,
+                    351.826553
+                ],
+                [
+                    452.960625,
+                    362.28202
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2,00",
+            "points": [
+                [
+                    506.846498,
+                    351.022286
+                ],
+                [
+                    530.974501,
+                    361.477754
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Total Konsumsi HCFC/Total HCFC Consumption",
+            "points": [
+                [
+                    120.798454,
+                    379.171622
+                ],
+                [
+                    336.341945,
+                    394.45269
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "3 612,00ʳ",
+            "points": [
+                [
+                    407.11742,
+                    379.975889
+                ],
+                [
+                    453.764892,
+                    393.648424
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "3 252,00ʳ",
+            "points": [
+                [
+                    487.544096,
+                    377.563089
+                ],
+                [
+                    532.892768,
+                    394.415433
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "3 039,57",
+            "points": [
+                [
+                    571.187839,
+                    379.975889
+                ],
+                [
+                    613.00971,
+                    392.03989
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Methyl Bromide",
+            "points": [
+                [
+                    67.716848,
+                    407.320959
+                ],
+                [
+                    137.68805600000002,
+                    422.602027
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2903.39.10.00",
+            "points": [
+                [
+                    310.605409,
+                    408.929492
+                ],
+                [
+                    371.729683,
+                    421.79776
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "73,50ʳ",
+            "points": [
+                [
+                    424.007022,
+                    410.538026
+                ],
+                [
+                    453.76489200000003,
+                    420.993494
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "73,50ʳ",
+            "points": [
+                [
+                    503.949866,
+                    408.929492
+                ],
+                [
+                    531.778767,
+                    421.299406
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "80,00",
+            "points": [
+                [
+                    585.795356,
+                    407.673166
+                ],
+                [
+                    614.748959,
+                    422.149968
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Total Konsumsi/Total Consumption",
+            "points": [
+                [
+                    144.12219,
+                    437.078829
+                ],
+                [
+                    309.801142,
+                    452.359897
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "3 685,50ʳ",
+            "points": [
+                [
+                    403.900353,
+                    439.491629
+                ],
+                [
+                    456.341995,
+                    451.69451599999996
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "3 325,50ʳ",
+            "points": [
+                [
+                    485.131295,
+                    438.687362
+                ],
+                [
+                    534.115734,
+                    454.33977600000003
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "3 119,57",
+            "points": [
+                [
+                    571.187839,
+                    440.138856
+                ],
+                [
+                    614.343196,
+                    452.359898
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Sumber/Source: Kementerian Lingkungan Hidup dan Kehutanan/Ministry of Environment and Forestry",
+            "points": [
+                [
+                    57.26138,
+                    473.270833
+                ],
+                [
+                    436.07102299999997,
+                    483.726301
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "...",
+            "points": [
+                [
+                    602.177354,
+                    351.824456
+                ],
+                [
+                    614.458191,
+                    362.28591
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Statistik Indonesia 2023",
+            "points": [
+                [
+                    432.486945,
+                    942.198539
+                ],
+                [
+                    593.870093,
+                    959.571229
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "39",
+            "points": [
+                [
+                    616.27172,
+                    942.655715
+                ],
+                [
+                    635.93029,
+                    957.285349
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_TABLE_BG_2025032500084.jpg",
+    "imageData": null,
+    "imageHeight": 985,
+    "imageWidth": 693
+}

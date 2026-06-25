@@ -1,0 +1,378 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "PROVINSI SULAWESI SELATAN",
+            "points": [
+                [
+                    366.322302,
+                    58.390531
+                ],
+                [
+                    966.5086079999999,
+                    93.717274
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "KOTA MAKASSAR",
+            "points": [
+                [
+                    483.799863,
+                    104.219826
+                ],
+                [
+                    846.165705,
+                    140.978732
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "ΝΙΚ",
+            "points": [
+                [
+                    40.087891,
+                    199.835993
+                ],
+                [
+                    143.6276,
+                    247.202463
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ": 7371090112891050",
+            "points": [
+                [
+                    300.07364,
+                    191.749023
+                ],
+                [
+                    901.642803,
+                    243.043454
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Nama",
+            "points": [
+                [
+                    37.776568,
+                    272.618639
+                ],
+                [
+                    132.186429,
+                    306.00620599999996
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Tempat/Tgl Lahir : MAKASSAR, 01-12-1989",
+            "points": [
+                [
+                    36.620923,
+                    318.829825
+                ],
+                [
+                    761.260824,
+                    356.95405800000003
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Jenis Kelamin : LAKI-LAKI",
+            "points": [
+                [
+                    37.41642,
+                    361.893007
+                ],
+                [
+                    524.221788,
+                    396.486468
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Alamat :",
+            "points": [
+                [
+                    37.41642,
+                    406.086637
+                ],
+                [
+                    151.33614599999999,
+                    437.830589
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Agama",
+            "points": [
+                [
+                    37.015322,
+                    582.663881
+                ],
+                [
+                    150.67310600000002,
+                    619.1828999999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Status Perkawinan : KAWIN",
+            "points": [
+                [
+                    38.794458,
+                    625.348451
+                ],
+                [
+                    472.212733,
+                    661.487034
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pekerjaan",
+            "points": [
+                [
+                    38.201413,
+                    669.81155
+                ],
+                [
+                    197.559951,
+                    707.10127
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kewarganegaraan : WNI",
+            "points": [
+                [
+                    38.794458,
+                    713.681815
+                ],
+                [
+                    426.19273000000004,
+                    752.271491
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Berlaku Hingga : SEUMUR HIDUP",
+            "points": [
+                [
+                    38.201413,
+                    757.552079
+                ],
+                [
+                    608.339169,
+                    798.4236880000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ": ROGER HOTAPEA",
+            "points": [
+                [
+                    338.210837,
+                    276.632457
+                ],
+                [
+                    634.089127,
+                    310.483632
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Gol. Darah :",
+            "points": [
+                [
+                    670.635661,
+                    362.641292
+                ],
+                [
+                    859.2880670000001,
+                    395.703393
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ": JL. KESADARAN 3",
+            "points": [
+                [
+                    337.506919,
+                    408.407469
+                ],
+                [
+                    641.903602,
+                    441.864096
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ": KRISTEN",
+            "points": [
+                [
+                    337.440084,
+                    586.877643
+                ],
+                [
+                    495.90106000000003,
+                    617.489813
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ": PRAJURIT (TNI-AD)",
+            "points": [
+                [
+                    339.350294,
+                    676.881746
+                ],
+                [
+                    661.360182,
+                    711.104854
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "MAKASSAR",
+            "points": [
+                [
+                    1071.332129,
+                    681.901
+                ],
+                [
+                    1238.198757,
+                    710.465384
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "02-03-2019",
+            "points": [
+                [
+                    1075.278823,
+                    728.456229
+                ],
+                [
+                    1232.5155020000002,
+                    755.2057580000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "RT/RW : 002/003",
+            "points": [
+                [
+                    113.968931,
+                    449.084114
+                ],
+                [
+                    487.53239,
+                    484.278941
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kel/Desa : PANAIKANG",
+            "points": [
+                [
+                    113.968931,
+                    494.785396
+                ],
+                [
+                    557.2958619999999,
+                    529.277971
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kecamatan : PANAKUKANG",
+            "points": [
+                [
+                    113.968931,
+                    538.440078
+                ],
+                [
+                    593.6871639999999,
+                    572.932653
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_IDCARD_034418.jpg",
+    "imageData": null,
+    "imageHeight": 912,
+    "imageWidth": 1346
+}

@@ -1,0 +1,442 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "DAFTAR PUSTAKA",
+            "points": [
+                [
+                    469.22438,
+                    155.099486
+                ],
+                [
+                    818.3022,
+                    192.541199
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Addis, D.G & Brady, M.A. 2007. Morbidity Management in the",
+            "points": [
+                [
+                    193.001102,
+                    357.603883
+                ],
+                [
+                    1090.239254,
+                    387.316958
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Global Programme to Eliminate Lymphatic Filariasis: a",
+            "points": [
+                [
+                    293.524236,
+                    405.065719
+                ],
+                [
+                    1090.239254,
+                    436.261977
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Review of the Scientific Literature. Diakses melalui http://",
+            "points": [
+                [
+                    295.107253,
+                    452.527556
+                ],
+                [
+                    1090.239254,
+                    482.982222
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "parasitesandvectors.biomedcentral.com/articles/10.1186,",
+            "points": [
+                [
+                    295.107253,
+                    503.153512
+                ],
+                [
+                    1087.419515,
+                    535.585771
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "[disitasi 4 Februari 2016].",
+            "points": [
+                [
+                    295.107253,
+                    547.45123
+                ],
+                [
+                    632.394003,
+                    582.355444
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Adriannoor, Fahrian. 2015. Seruyan Optimis Bebas Filariasis 2020.",
+            "points": [
+                [
+                    190.878798,
+                    598.707266
+                ],
+                [
+                    1090.936733,
+                    626.838259
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Artikel Internet diakses melalui http://www.antarakalteng.",
+            "points": [
+                [
+                    290.610401,
+                    646.169102
+                ],
+                [
+                    1090.936734,
+                    677.2664599999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "com tanggal 28 Januari 2016.",
+            "points": [
+                [
+                    292.193441,
+                    695.212976
+                ],
+                [
+                    687.26118,
+                    722.503523
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Aloysius Carol. 2015. Filaria May Be Deemde a Scourgue of the",
+            "points": [
+                [
+                    192.461815,
+                    741.092776
+                ],
+                [
+                    1092.420835,
+                    773.673316
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Past, but Danger astill lurks. Diakses melalui http://www.",
+            "points": [
+                [
+                    293.776503,
+                    786.97253
+                ],
+                [
+                    1090.194683,
+                    818.168788
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "sundayobserver.lk [disitasi 29 Januari 2016].",
+            "points": [
+                [
+                    294.567989,
+                    836.016449
+                ],
+                [
+                    883.45939,
+                    871.563355
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Andi Raditya. 2011. Nemathelminthes-Wucheria Brancrofti. http://",
+            "points": [
+                [
+                    191.507578,
+                    884.230978
+                ],
+                [
+                    1093.339537,
+                    916.29538
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "masihtertulis.blogspot.co.id/2011/05/ nemathelminthes-",
+            "points": [
+                [
+                    293.028035,
+                    932.08834
+                ],
+                [
+                    1093.339537,
+                    964.75095
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "wucheria-brancroftii.html [disitasi 21 Januari 2016]",
+            "points": [
+                [
+                    289.197106,
+                    981.859993
+                ],
+                [
+                    977.512851,
+                    1014.103844
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Anonim. Ayo Lindungi Diri Dari Penyakit Kaki Gajah (Filariasis). Info",
+            "points": [
+                [
+                    190.549853,
+                    1028.760194
+                ],
+                [
+                    1091.543775,
+                    1059.867436
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kesehatan. Enesis Grup. 12 Oktober 2015. www.enesis.",
+            "points": [
+                [
+                    292.070309,
+                    1076.617528
+                ],
+                [
+                    1089.748011,
+                    1106.528355
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "com",
+            "points": [
+                [
+                    292.070309,
+                    1127.346314
+                ],
+                [
+                    353.485356,
+                    1154.0865979999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Anonim. Cara Mengusir Nyamuk. www.id.wikihow.com",
+            "points": [
+                [
+                    190.94802,
+                    1170.569875
+                ],
+                [
+                    935.642161,
+                    1205.5241489999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Anonim. Limfedema Estadio I. 2015. Diakses melalui http://www.",
+            "points": [
+                [
+                    192.222753,
+                    1221.528371
+                ],
+                [
+                    1094.5878,
+                    1253.297751
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "medi.pt tanggal 29 Januari 2016.",
+            "points": [
+                [
+                    290.688994,
+                    1269.6096
+                ],
+                [
+                    732.591388,
+                    1299.767604
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Anonim. Limfedema Stadium III. 2015. Diakes melalui http://flebo.",
+            "points": [
+                [
+                    192.030634,
+                    1315.188401
+                ],
+                [
+                    1088.42782,
+                    1352.564593
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "org/limfostaz/ tanggal 28 Januari 2016.",
+            "points": [
+                [
+                    290.970728,
+                    1363.441278
+                ],
+                [
+                    821.289585,
+                    1396.318473
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Anonim. Lymphedema, Symptomatic foot and leg. 2015 Diakses",
+            "points": [
+                [
+                    191.239125,
+                    1413.276216
+                ],
+                [
+                    1089.91192,
+                    1446.005083
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "melalui https://lookfordiagnosis.com [disitasi 29 Januari",
+            "points": [
+                [
+                    292.553768,
+                    1460.738053
+                ],
+                [
+                    1091.396022,
+                    1493.46692
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2016].",
+            "points": [
+                [
+                    291.762282,
+                    1507.408916
+                ],
+                [
+                    379.769448,
+                    1543.8951220000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "53",
+            "points": [
+                [
+                    623.109915,
+                    1701.573538
+                ],
+                [
+                    661.426294,
+                    1731.052758
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_BOOKCONTENT_WXD_20250403000008.jpg",
+    "imageData": null,
+    "imageHeight": 1786,
+    "imageWidth": 1259
+}

@@ -1,0 +1,242 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "Confianza",
+            "points": [
+                [
+                    226.402251,
+                    93.537841
+                ],
+                [
+                    469.10803,
+                    153.064627
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "TODAY'S MENU",
+            "points": [
+                [
+                    168.870077,
+                    180.890388
+                ],
+                [
+                    552.431964,
+                    274.873091
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "SIOMAY IKAN",
+            "points": [
+                [
+                    280.392904,
+                    294.396193
+                ],
+                [
+                    564.193184,
+                    344.18571599999996
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Rp 20.000/porsi",
+            "points": [
+                [
+                    286.36275,
+                    345.279461
+                ],
+                [
+                    541.868031,
+                    404.904917
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "RISOL",
+            "points": [
+                [
+                    286.311576,
+                    409.86225
+                ],
+                [
+                    410.57964100000004,
+                    454.576808
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "SMOKED",
+            "points": [
+                [
+                    416.614735,
+                    409.313605
+                ],
+                [
+                    548.289506,
+                    437.294494
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "BEEF",
+            "points": [
+                [
+                    433.348404,
+                    438.666106
+                ],
+                [
+                    515.645136,
+                    464.726738
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Rp 8000/pcs",
+            "points": [
+                [
+                    289.336109,
+                    511.677458
+                ],
+                [
+                    292.903063,
+                    461.20217
+                ],
+                [
+                    533.757402,
+                    473.820962
+                ],
+                [
+                    517.298056,
+                    526.49087
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "STRAWBERRY",
+            "points": [
+                [
+                    297.022539,
+                    633.082165
+                ],
+                [
+                    298.608488,
+                    599.428346
+                ],
+                [
+                    532.641312,
+                    612.63396
+                ],
+                [
+                    521.635983,
+                    652.436567
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "Rp 8000/pcs",
+            "points": [
+                [
+                    295.116242,
+                    684.34205
+                ],
+                [
+                    295.943039,
+                    634.101694
+                ],
+                [
+                    530.373496,
+                    657.910918
+                ],
+                [
+                    520.93003,
+                    701.974394
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "PUDING",
+            "points": [
+                [
+                    287.839337,
+                    561.487349
+                ],
+                [
+                    288.647711,
+                    516.292193
+                ],
+                [
+                    439.767907,
+                    523.555647
+                ],
+                [
+                    437.14497,
+                    567.54028
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "COKLAT",
+            "points": [
+                [
+                    292.187649,
+                    594.794918
+                ],
+                [
+                    294.119918,
+                    563.896828
+                ],
+                [
+                    427.655644,
+                    569.133523
+                ],
+                [
+                    423.383603,
+                    600.553697
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_WHITEBOARD_ZZ_2025040300003.jpg",
+    "imageData": null,
+    "imageHeight": 720,
+    "imageWidth": 720
+}

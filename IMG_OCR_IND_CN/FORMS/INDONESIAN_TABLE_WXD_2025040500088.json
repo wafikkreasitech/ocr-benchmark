@@ -1,0 +1,650 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "Tabel 3.2/Table 3.2",
+            "points": [
+                [
+                    516.045806,
+                    25.068112
+                ],
+                [
+                    809.181661,
+                    56.316097
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Laju Pertumbuhan Komponen Konsumsi Rumah Tangga",
+            "points": [
+                [
+                    245.728198,
+                    60.780094
+                ],
+                [
+                    1074.543787,
+                    95.004077
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "ADHK 2010",
+            "points": [
+                [
+                    576.064035,
+                    100.956074
+                ],
+                [
+                    748.671949,
+                    127.740061
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Growth Rate of Household Consumption Component",
+            "points": [
+                [
+                    275.488184,
+                    136.668056
+                ],
+                [
+                    1046.271802,
+                    164.940042
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "at 2010 Constant Prices",
+            "points": [
+                [
+                    480.333824,
+                    173.868038
+                ],
+                [
+                    838.941646,
+                    200.652025
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Komponen/Component",
+            "points": [
+                [
+                    162.40024,
+                    217.020017
+                ],
+                [
+                    510.592068,
+                    246.780002
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "(1)",
+            "points": [
+                [
+                    315.664164,
+                    267.611992
+                ],
+                [
+                    352.864146,
+                    304.81197399999996
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Konsumsi Rumah Tangga/Household",
+            "points": [
+                [
+                    28.480306,
+                    312.251969
+                ],
+                [
+                    580.528033,
+                    340.523955
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Expenditure",
+            "points": [
+                [
+                    30.165513,
+                    343.559182
+                ],
+                [
+                    206.55223900000001,
+                    365.70297000000005
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "a.",
+            "points": [
+                [
+                    71.087592,
+                    379.44739
+                ],
+                [
+                    94.758538,
+                    398.536863
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Mkn, Min & Rokok/Food, Drinks &",
+            "points": [
+                [
+                    123.774536,
+                    369.520864
+                ],
+                [
+                    568.177457,
+                    400.827599
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Cigarettes",
+            "points": [
+                [
+                    124.538115,
+                    406.93623
+                ],
+                [
+                    259.69158100000004,
+                    435.188649
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "b.",
+            "points": [
+                [
+                    68.796855,
+                    435.18865
+                ],
+                [
+                    95.522117,
+                    463.44106899999997
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pakaian & Alas Kaki/ Clothing &",
+            "points": [
+                [
+                    123.774536,
+                    438.242965
+                ],
+                [
+                    542.979353,
+                    463.441069
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Footwear",
+            "points": [
+                [
+                    123.010957,
+                    470.313279
+                ],
+                [
+                    246.710739,
+                    493.98422500000004
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2013",
+            "points": [
+                [
+                    672.024187,
+                    219.859399
+                ],
+                [
+                    745.327762,
+                    245.821082
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "(2)",
+            "points": [
+                [
+                    690.350081,
+                    268.728449
+                ],
+                [
+                    730.8197630000001,
+                    297.74444700000004
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2014",
+            "points": [
+                [
+                    788.08818,
+                    220.622978
+                ],
+                [
+                    862.1553329999999,
+                    246.58466099999998
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2015",
+            "points": [
+                [
+                    899.5707,
+                    220.622978
+                ],
+                [
+                    975.92859,
+                    245.821082
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2016*",
+            "points": [
+                [
+                    1006.471746,
+                    219.859399
+                ],
+                [
+                    1102.682688,
+                    246.58466099999998
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2017**",
+            "points": [
+                [
+                    1131.981861,
+                    218.332242
+                ],
+                [
+                    1243.181206,
+                    248.163993
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "(3)",
+            "points": [
+                [
+                    803.359758,
+                    267.201291
+                ],
+                [
+                    840.775124,
+                    297.74444700000004
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "(4)",
+            "points": [
+                [
+                    918.660172,
+                    268.728449
+                ],
+                [
+                    956.839117,
+                    296.217289
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "(5)",
+            "points": [
+                [
+                    1033.960587,
+                    271.019186
+                ],
+                [
+                    1077.484584,
+                    297.744448
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "(6)",
+            "points": [
+                [
+                    1169.114052,
+                    267.96487
+                ],
+                [
+                    1211.87447,
+                    298.50802600000003
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "3,62",
+            "points": [
+                [
+                    692.640818,
+                    325.233288
+                ],
+                [
+                    751.436393,
+                    353.485707
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "3,71",
+            "points": [
+                [
+                    689.360267,
+                    390.901073
+                ],
+                [
+                    745.865106,
+                    419.15349199999997
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "3,44",
+            "points": [
+                [
+                    691.11366,
+                    451.987386
+                ],
+                [
+                    752.199972,
+                    483.294121
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "3,71",
+            "points": [
+                [
+                    806.414074,
+                    325.996867
+                ],
+                [
+                    865.9732280000001,
+                    355.776444
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "4,06",
+            "points": [
+                [
+                    801.832601,
+                    388.610337
+                ],
+                [
+                    865.973229,
+                    417.62633500000004
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "4,32",
+            "points": [
+                [
+                    804.886916,
+                    455.80528
+                ],
+                [
+                    867.500386,
+                    481.766963
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "3,68",
+            "points": [
+                [
+                    917.133015,
+                    325.233288
+                ],
+                [
+                    978.219327,
+                    353.485707
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "3,56",
+            "points": [
+                [
+                    917.133015,
+                    390.901073
+                ],
+                [
+                    978.219327,
+                    419.15349199999997
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "3,63",
+            "points": [
+                [
+                    916.369436,
+                    452.750964
+                ],
+                [
+                    978.982906,
+                    480.239804
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "4,03",
+            "points": [
+                [
+                    1043.123533,
+                    326.760446
+                ],
+                [
+                    1102.682687,
+                    355.776444
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "4,08",
+            "points": [
+                [
+                    1040.069218,
+                    390.137495
+                ],
+                [
+                    1101.9191090000002,
+                    419.917072
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "3,97",
+            "points": [
+                [
+                    1043.123533,
+                    453.514543
+                ],
+                [
+                    1103.446266,
+                    481.766962
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "4,08",
+            "points": [
+                [
+                    1183.622051,
+                    325.233288
+                ],
+                [
+                    1245.4719420000001,
+                    353.485707
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "4,61",
+            "points": [
+                [
+                    1183.622051,
+                    390.901073
+                ],
+                [
+                    1245.4719420000001,
+                    419.917071
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "4,45",
+            "points": [
+                [
+                    1184.38563,
+                    454.278122
+                ],
+                [
+                    1246.9991,
+                    481.003384
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_TABLE_WXD_2025040500088.png",
+    "imageData": null,
+    "imageHeight": 501,
+    "imageWidth": 1292
+}

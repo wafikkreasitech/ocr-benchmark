@@ -1,0 +1,754 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "I",
+            "points": [
+                [
+                    108.278517,
+                    22.076853
+                ],
+                [
+                    149.606596,
+                    94.400991
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "ndonesia menjadi pasar",
+            "points": [
+                [
+                    154.169213,
+                    24.662992
+                ],
+                [
+                    472.301301,
+                    49.151337
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "potensial bagi bisnis pe-",
+            "points": [
+                [
+                    153.280694,
+                    49.151337
+                ],
+                [
+                    482.637015,
+                    73.118412
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "karena banyaknya sampah",
+            "points": [
+                [
+                    101.928114,
+                    98.547413
+                ],
+                [
+                    460.201929,
+                    123.02945700000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "yang belum terkelola dengan",
+            "points": [
+                [
+                    101.928114,
+                    123.029457
+                ],
+                [
+                    494.926491,
+                    149.099304
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "baik, teknologi pengolahan",
+            "points": [
+                [
+                    101.188454,
+                    149.053481
+                ],
+                [
+                    464.89066099999997,
+                    175.198241
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "sampah mampu menghasilkan",
+            "points": [
+                [
+                    101.851061,
+                    174.612743
+                ],
+                [
+                    517.182895,
+                    196.869147
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "banyak nilai tambah, termasuk",
+            "points": [
+                [
+                    102.453812,
+                    199.040503
+                ],
+                [
+                    523.094214,
+                    223.468263
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "bagi industri peternakan dan",
+            "points": [
+                [
+                    102.453812,
+                    225.639619
+                ],
+                [
+                    494.92649200000005,
+                    250.65287800000002
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "perikanan.",
+            "points": [
+                [
+                    104.082329,
+                    251.738556
+                ],
+                [
+                    247.39185500000002,
+                    276.166316
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Data Sistem Informasi Pe-",
+            "points": [
+                [
+                    138.824033,
+                    277.752174
+                ],
+                [
+                    496.555009,
+                    299.46573900000004
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "ngelolaan Sampah Nasional",
+            "points": [
+                [
+                    102.996651,
+                    300.594076
+                ],
+                [
+                    480.269835,
+                    323.39331899999996
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "(SIPSN) Kementerian Ling-",
+            "points": [
+                [
+                    105.168007,
+                    324.979177
+                ],
+                [
+                    489.49809999999997,
+                    349.992436
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "kungan Hidup dan Kehutanan",
+            "points": [
+                [
+                    102.996651,
+                    349.949777
+                ],
+                [
+                    517.182895,
+                    373.334518
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "(KLHK) melaporkan, jumlah",
+            "points": [
+                [
+                    103.53949,
+                    374.920376
+                ],
+                [
+                    498.726365,
+                    397.762278
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "timbulan sampah yang diha-",
+            "points": [
+                [
+                    101.910973,
+                    400.433814
+                ],
+                [
+                    495.469331,
+                    423.275716
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "silkan dari seluruh wilayah In-",
+            "points": [
+                [
+                    100.222544,
+                    424.861574
+                ],
+                [
+                    522.611286,
+                    446.032299
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "donesia mencapai 35,83 juta",
+            "points": [
+                [
+                    99.196777,
+                    447.703476
+                ],
+                [
+                    492.212296,
+                    473.75975400000004
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "ton pada 2022. Dari jumlah",
+            "points": [
+                [
+                    102.453812,
+                    474.302593
+                ],
+                [
+                    482.98403099999996,
+                    497.877553
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "tersebut, 13,39 juta ton atau",
+            "points": [
+                [
+                    100.282455,
+                    499.101082
+                ],
+                [
+                    488.95526099999995,
+                    523.163823
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "37,37 persen belum terkelola.",
+            "points": [
+                [
+                    98.558544,
+                    523.571666
+                ],
+                [
+                    504.15475599999996,
+                    550.0814650000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Masih banyaknya sampah",
+            "points": [
+                [
+                    132.817361,
+                    551.343088
+                ],
+                [
+                    494.982,
+                    575.3677349999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "yang belum dikelola menjadi",
+            "points": [
+                [
+                    93.225547,
+                    576.481146
+                ],
+                [
+                    503.069078,
+                    601.1556519999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "peluang bagi bisnis pengelola-",
+            "points": [
+                [
+                    93.480898,
+                    602.636122
+                ],
+                [
+                    518.811412,
+                    627.883403
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "an sampah. Ketua II Asosiasi",
+            "points": [
+                [
+                    89.532977,
+                    628.969081
+                ],
+                [
+                    504.154756,
+                    653.465603
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Black Soldier Fly (BSF) Indo-",
+            "points": [
+                [
+                    88.339995,
+                    655.568198
+                ],
+                [
+                    515.554378,
+                    681.1010480000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "nesia, sebuah asosiasi pegiat",
+            "points": [
+                [
+                    89.425673,
+                    681.101048
+                ],
+                [
+                    494.38365200000004,
+                    706.762534
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "larva lalat tentara hitam, Mar-",
+            "points": [
+                [
+                    86.168638,
+                    707.680753
+                ],
+                [
+                    526.9539990000001,
+                    732.108513
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "kus Susanto di sela-sela acara",
+            "points": [
+                [
+                    87.797156,
+                    733.554112
+                ],
+                [
+                    514.891837,
+                    756.536273
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Festival Ekonomi Sirkular, di",
+            "points": [
+                [
+                    86.168638,
+                    761.421825
+                ],
+                [
+                    506.32611199999997,
+                    784.763907
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Jakarta, Rabu (17/7/2024), me-",
+            "points": [
+                [
+                    85.560382,
+                    789.086553
+                ],
+                [
+                    528.039678,
+                    814.16572
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "nyebut bahwa peluang usaha",
+            "points": [
+                [
+                    85.625799,
+                    815.957089
+                ],
+                [
+                    504.154756,
+                    842.230502
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "pengelolaan sampah organik",
+            "points": [
+                [
+                    81.977644,
+                    871.48953
+                ],
+                [
+                    499.38694,
+                    867.937111
+                ],
+                [
+                    499.73728,
+                    893.032311
+                ],
+                [
+                    82.266756,
+                    901.112032
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "dengan teknologi larva lalat",
+            "points": [
+                [
+                    82.266756,
+                    901.112032
+                ],
+                [
+                    488.634668,
+                    892.979978
+                ],
+                [
+                    485.66062,
+                    920.391886
+                ],
+                [
+                    83.997282,
+                    931.330468
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "tentara hitam (black soldier",
+            "points": [
+                [
+                    83.997282,
+                    931.330468
+                ],
+                [
+                    485.66062,
+                    920.391886
+                ],
+                [
+                    485.667048,
+                    949.135449
+                ],
+                [
+                    83.454443,
+                    953.044032
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "sampah dengan maggot sangat",
+            "points": [
+                [
+                    80.313054,
+                    1013.266731
+                ],
+                [
+                    527.612484,
+                    1004.038466
+                ],
+                [
+                    526.953999,
+                    1029.041508
+                ],
+                [
+                    81.825926,
+                    1041.526808
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "besar karena sebagian besar",
+            "points": [
+                [
+                    81.825926,
+                    1041.526808
+                ],
+                [
+                    490.652764,
+                    1030.059713
+                ],
+                [
+                    489.091905,
+                    1060.04268
+                ],
+                [
+                    82.48441,
+                    1067.007804
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "sampah yang dihasilkan di In-",
+            "points": [
+                [
+                    80.740247,
+                    1073.554316
+                ],
+                [
+                    523.696965,
+                    1058.89766
+                ],
+                [
+                    523.269771,
+                    1089.807046
+                ],
+                [
+                    81.398732,
+                    1097.406794
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "ngelolaan sampah. Selain",
+            "points": [
+                [
+                    154.47494,
+                    75.379451
+                ],
+                [
+                    493.041425,
+                    97.95029
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "yang menarik saat ini adalah",
+            "points": [
+                [
+                    504.154756,
+                    842.230502
+                ],
+                [
+                    85.625799,
+                    842.230502
+                ],
+                [
+                    81.977644,
+                    871.48953
+                ],
+                [
+                    502.949377,
+                    867.906792
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "fly) atau maggot.",
+            "points": [
+                [
+                    75.376929,
+                    957.29231
+                ],
+                [
+                    74.969086,
+                    985.841325
+                ],
+                [
+                    329.870999,
+                    980.131522
+                ],
+                [
+                    328.239627,
+                    954.437409
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "Potensi bisnis pengolahan",
+            "points": [
+                [
+                    119.94787,
+                    984.8338
+                ],
+                [
+                    500.470528,
+                    974.725154
+                ],
+                [
+                    502.674898,
+                    1004.552955
+                ],
+                [
+                    121.053444,
+                    1012.426213
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_NEWSPAPER_SMARTI_2025040800010.jpg",
+    "imageData": null,
+    "imageHeight": 1100,
+    "imageWidth": 550
+}

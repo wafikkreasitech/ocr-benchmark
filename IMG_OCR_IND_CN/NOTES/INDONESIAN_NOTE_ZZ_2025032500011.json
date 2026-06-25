@@ -1,0 +1,154 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "e. pencegahan pencemaran air",
+            "points": [
+                [
+                    510.051412,
+                    89.801078
+                ],
+                [
+                    3964.5315339999997,
+                    289.593772
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "1. menggunakan pestisida sesuai aturan yang ada",
+            "points": [
+                [
+                    244.417204,
+                    398.813906
+                ],
+                [
+                    5350.058491000001,
+                    620.350166
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2. sisa buangan pabrik dinetralkan dulu sebelum",
+            "points": [
+                [
+                    187.805132,
+                    689.179159
+                ],
+                [
+                    5214.847100000001,
+                    940.5312570000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "dibuang ke sungai",
+            "points": [
+                [
+                    187.805132,
+                    992.090662
+                ],
+                [
+                    2127.727738,
+                    1204.773207
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "daerah pemukiman penduduk",
+            "points": [
+                [
+                    194.250058,
+                    1597.913668
+                ],
+                [
+                    3397.3780810000003,
+                    1804.151287
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "3. pembuangan air limbah tidak boleh melalui",
+            "points": [
+                [
+                    187.805132,
+                    1314.336942
+                ],
+                [
+                    5085.948588,
+                    1559.244115
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "4. setiap rumah hendaknya menggunakan",
+            "points": [
+                [
+                    207.139909,
+                    1894.380246
+                ],
+                [
+                    4652.755418000001,
+                    2081.349132
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "septic tank yg baik.",
+            "points": [
+                [
+                    258.863209,
+                    2153.536786
+                ],
+                [
+                    2406.722718,
+                    2366.849393
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "SiDU",
+            "points": [
+                [
+                    4576.915383,
+                    2090.746535
+                ],
+                [
+                    4984.050835999999,
+                    2243.028552
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_NOTE_ZZ_2025032500011.jpg",
+    "imageData": null,
+    "imageHeight": 2532,
+    "imageWidth": 5596
+}

@@ -1,0 +1,650 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "Ibunda Sang Penebus",
+            "points": [
+                [
+                    567.279837,
+                    109.122956
+                ],
+                [
+                    813.257049,
+                    137.776248
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "hakiki, khususnya kebenaran tentang Maria yang benar-benar",
+            "points": [
+                [
+                    204.534391,
+                    167.677533
+                ],
+                [
+                    1176.762209,
+                    209.591058
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "hadir dalam misteri Kristus karena Dia “percaya”. Penuh rahmat",
+            "points": [
+                [
+                    204.534391,
+                    211.982542
+                ],
+                [
+                    1172.980203,
+                    249.238993
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "dinyatakan oleh malaikat sebagai kurnia dari Allah sendiri. Iman",
+            "points": [
+                [
+                    206.551489,
+                    252.259799
+                ],
+                [
+                    1171.0892,
+                    288.886927
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Maria, yang diungkapkan oleh Elisabeth pada Kunjungan tersebut,",
+            "points": [
+                [
+                    211.594145,
+                    292.537114
+                ],
+                [
+                    1174.871207,
+                    326.646865
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "menunjukkan bagaimana Perawan dari Nasareth Menjawab kurnia",
+            "points": [
+                [
+                    206.551489,
+                    329.793536
+                ],
+                [
+                    1169.198197,
+                    364.406802
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "tersebut.",
+            "points": [
+                [
+                    206.551489,
+                    371.077766
+                ],
+                [
+                    344.72076500000003,
+                    405.942733
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "13. Seperti diajarkan Konsili, “Ketaatan iman\" (Rm 16:26:",
+            "points": [
+                [
+                    207.560008,
+                    443.576835
+                ],
+                [
+                    1171.0892,
+                    481.46260800000005
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Bdk.Rm 1:5, Kor. 10:5-6) harus ditujukan kepada Allah yang",
+            "points": [
+                [
+                    200.500197,
+                    485.867896
+                ],
+                [
+                    1165.920392,
+                    520.103569
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "mewahyukan, suatu ketaatan di mana manusia mempercayakan",
+            "points": [
+                [
+                    204.534391,
+                    522.117516
+                ],
+                [
+                    1172.980203,
+                    558.87048
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "seluruh dirinya dengan bebas kepada Allah”²⁹. Uraian iman ini",
+            "points": [
+                [
+                    208.177713,
+                    562.481432
+                ],
+                [
+                    1180.027308,
+                    596.9688050000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "mendapatkan relasi yang sempurna dalam Maria. Saat “yang",
+            "points": [
+                [
+                    207.169194,
+                    601.751773
+                ],
+                [
+                    1172.463295,
+                    636.6167399999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "menentukan” ialah pada Pemakluman dan kata-kata Elisabeth:",
+            "points": [
+                [
+                    209.186233,
+                    641.022114
+                ],
+                [
+                    1178.136305,
+                    676.264674
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "\"Terberkatilah yang percaya\" yang menunjuk terutama kepada saat",
+            "points": [
+                [
+                    209.186233,
+                    678.278564
+                ],
+                [
+                    1170.572292,
+                    717.8006049999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "itu ³⁰.",
+            "points": [
+                [
+                    203.135028,
+                    721.576599
+                ],
+                [
+                    281.800747,
+                    751.784549
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Memang, pada Pewartaan malaikat Maria mempercayakan",
+            "points": [
+                [
+                    308.761217,
+                    770.760762
+                ],
+                [
+                    1180.7406139999998,
+                    810.081414
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "dirinya kepada Allah sepenuhnya, dengan “menundukkan akal dan",
+            "points": [
+                [
+                    204.454,
+                    813.918718
+                ],
+                [
+                    1173.504877,
+                    847.701267
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "kehendaknya”, yang menunjukkan “ketaatan iman” kepada Allah,",
+            "points": [
+                [
+                    206.672743,
+                    849.362711
+                ],
+                [
+                    1175.584981,
+                    887.160402
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "yang berbicara kepadanya melalui utusan. ³¹ Maka Dia menjawab",
+            "points": [
+                [
+                    210.000922,
+                    888.12959
+                ],
+                [
+                    1169.34467,
+                    924.542739
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "dengan selurruh keakuannya sebagai manusia dan sebagai wanita,",
+            "points": [
+                [
+                    205.563372,
+                    929.111718
+                ],
+                [
+                    1173.504878,
+                    966.078671
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "dan tanggapan iman ini merangkum baik kerjasama sempurna",
+            "points": [
+                [
+                    207.782178,
+                    967.878566
+                ],
+                [
+                    1175.584981,
+                    1003.46101
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "dengan \"rahmat Allah yang mendahului dan membantu” maupun",
+            "points": [
+                [
+                    201.125821,
+                    1005.537837
+                ],
+                [
+                    1173.504877,
+                    1040.843347
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "keterbukaan penuh kepada karya Roh Kudus, yang “selalu",
+            "points": [
+                [
+                    200.446955,
+                    1043.44503
+                ],
+                [
+                    1168.136319,
+                    1080.8273450000002
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "menyempurnakan iman dan kurnia-kurnia-Nya\"³².",
+            "points": [
+                [
+                    205.489611,
+                    1082.715371
+                ],
+                [
+                    927.978902,
+                    1118.587283
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Sabda Allah yang hidup, dikabarkan kepada Maria oleh",
+            "points": [
+                [
+                    321.471165,
+                    1138.096632
+                ],
+                [
+                    1170.027322,
+                    1177.115186
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "malaikat, menunjuk kepadanya: \"Sesungguhnya engkau akan",
+            "points": [
+                [
+                    197.421338,
+                    1180.387779
+                ],
+                [
+                    1170.027322,
+                    1214.8751229999998
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "mengandung dan akan melahirkan seorang anak laki-laki dan",
+            "points": [
+                [
+                    207.724484,
+                    1217.81392
+                ],
+                [
+                    1174.223813,
+                    1261.371212
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "²⁹ Konstitusi Dogmatik tentang Wahyu Ilahi \"Dei Ferbum\", art. 5.",
+            "points": [
+                [
+                    204.616743,
+                    1297.297838
+                ],
+                [
+                    981.507689,
+                    1330.3465429999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "³⁰ Tema Klasik, yang diucapkan oleh St. Ireneus\" Seperti kelakuan perawan",
+            "points": [
+                [
+                    201.430683,
+                    1332.496901
+                ],
+                [
+                    1185.004521,
+                    1364.592819
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "bengal, maka manusiamendapat kesukarandan setelah tercampak, lalu mati,",
+            "points": [
+                [
+                    204.4563,
+                    1366.732603
+                ],
+                [
+                    1171.767498,
+                    1396.688766
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "demikian dengan jawab Peranan yang tunduk akan Sabda Allah, manusia setelah",
+            "points": [
+                [
+                    208.490437,
+                    1399.961359
+                ],
+                [
+                    1181.222515,
+                    1426.896716
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "lahir kembali, menrrima kehidupan, melalui kehidupan . . . karena Eva memang",
+            "points": [
+                [
+                    201.788626,
+                    1428.143653
+                ],
+                [
+                    1179.941526,
+                    1459.3585190000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "harus kalah dari Maria, sehingga Sang Parawan dengan menjadi pembelaperawan,",
+            "points": [
+                [
+                    207.839831,
+                    1463.3863
+                ],
+                [
+                    1172.377514,
+                    1491.454466
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "akan memecahkan dan menalklukan kebenganlan perawan, dengan ketaatannya",
+            "points": [
+                [
+                    207.339716,
+                    1494.354281
+                ],
+                [
+                    1170.36459,
+                    1522.548341
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "sebagai perawan”: Expotitio doctrinaeapostolicae, 33: S Ch 62, 83 - 86; Adversus",
+            "points": [
+                [
+                    209.356755,
+                    1524.562231
+                ],
+                [
+                    1174.146596,
+                    1552.7562910000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Haereses V 19, 1: S Ch 153,248 - 250.",
+            "points": [
+                [
+                    208.348235,
+                    1554.770181
+                ],
+                [
+                    646.5566799999999,
+                    1582.9642410000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "³² Kons. Ek. Vat. II, Konstitusi Dogmatik tentang Wahyu Ilahi \"Dei Verbum\", art. 5.",
+            "points": [
+                [
+                    208.897853,
+                    1588.303193
+                ],
+                [
+                    1162.593805,
+                    1614.73512
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "³² Ibid. 5 cf Konstitusi Dokmatik tentang Gereja \"Lumen Gentium\"' art. 56.",
+            "points": [
+                [
+                    203.084023,
+                    1616.337882
+                ],
+                [
+                    1150.980871,
+                    1652.587387
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "20",
+            "points": [
+                [
+                    208.20376,
+                    1690.709707
+                ],
+                [
+                    237.565621,
+                    1714.007145
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Seri Dokumen Gerejawi No. 1",
+            "points": [
+                [
+                    868.195075,
+                    1690.907842
+                ],
+                [
+                    1166.432762,
+                    1718.495901
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_BOOKCONTENT_WXD_20250403000052.jpg",
+    "imageData": null,
+    "imageHeight": 1948,
+    "imageWidth": 1378
+}

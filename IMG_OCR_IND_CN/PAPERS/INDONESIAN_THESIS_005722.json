@@ -1,0 +1,314 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "[ Ragam Slang dalam Komunikasi Digital ]",
+            "points": [
+                [
+                    187.944493,
+                    50.081894
+                ],
+                [
+                    401.809845,
+                    67.155403
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "semangat menyala-nyala, atau dengan cara santai,",
+            "points": [
+                [
+                    156.293989,
+                    86.370322
+                ],
+                [
+                    511.491823,
+                    106.080883
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "tenang, dan meyakinkan.",
+            "points": [
+                [
+                    155.653713,
+                    110.521911
+                ],
+                [
+                    335.102026,
+                    129.47771
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Sarana mengacu pada penggunaan bahasa baik",
+            "points": [
+                [
+                    155.511635,
+                    175.722033
+                ],
+                [
+                    512.41752,
+                    194.760859
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "lisan maupun tulis dan mengacu pada variasi",
+            "points": [
+                [
+                    155.531032,
+                    199.875972
+                ],
+                [
+                    512.224675,
+                    220.351159
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "bahasa yang digunakan.",
+            "points": [
+                [
+                    155.81283,
+                    224.146204
+                ],
+                [
+                    327.39847899999995,
+                    244.008745
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "f. Sarana (Instrument)",
+            "points": [
+                [
+                    129.870352,
+                    143.060874
+                ],
+                [
+                    301.585823,
+                    162.69913000000003
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Mengacu pada perilaku peserta percakapan.",
+            "points": [
+                [
+                    155.840056,
+                    290.020153
+                ],
+                [
+                    512.390257,
+                    309.443312
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Misalnya diskusi dan kuliah. Keduanya memiliki",
+            "points": [
+                [
+                    156.033173,
+                    316.543225
+                ],
+                [
+                    512.195961,
+                    334.80053200000003
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "norma yang berbeda. Diskusi perilakunya",
+            "points": [
+                [
+                    156.054449,
+                    343.94912
+                ],
+                [
+                    512.052689,
+                    362.809977
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "cenderung dua arah, sedangkan kuliah cenderung",
+            "points": [
+                [
+                    156.142446,
+                    369.413148
+                ],
+                [
+                    512.185752,
+                    388.559463
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "satu arah walaupun diberi kesempatan untuk",
+            "points": [
+                [
+                    155.904357,
+                    396.5077
+                ],
+                [
+                    515.163425,
+                    415.569101
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "bertanya. Dengan demikian, ada norma diskusi dan",
+            "points": [
+                [
+                    155.759092,
+                    422.049977
+                ],
+                [
+                    514.696148,
+                    441.619683
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "norma kuliah.",
+            "points": [
+                [
+                    155.75881,
+                    447.735216
+                ],
+                [
+                    254.480984,
+                    464.68397799999997
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "g. Norma (Norm)",
+            "points": [
+                [
+                    130.410983,
+                    257.509846
+                ],
+                [
+                    261.588167,
+                    276.540733
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "h. Jenis (Genre)",
+            "points": [
+                [
+                    129.421536,
+                    482.530293
+                ],
+                [
+                    250.468827,
+                    502.648488
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Genre mengacu pada kategori, seperti: sajak, teka-",
+            "points": [
+                [
+                    155.354274,
+                    516.225188
+                ],
+                [
+                    513.203681,
+                    535.625486
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "teki, kuliah, dan doa.",
+            "points": [
+                [
+                    155.137348,
+                    542.486408
+                ],
+                [
+                    304.99843899999996,
+                    560.333529
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "[34]",
+            "points": [
+                [
+                    279.777845,
+                    839.403224
+                ],
+                [
+                    310.084654,
+                    855.7293500000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_THESIS_005722.jpg",
+    "imageData": null,
+    "imageHeight": 906,
+    "imageWidth": 611
+}

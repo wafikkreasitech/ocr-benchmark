@@ -1,0 +1,378 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "PROVINSI JAWA BARAT",
+            "points": [
+                [
+                    460.05475,
+                    20.658812
+                ],
+                [
+                    1013.652879,
+                    71.779977
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "KOTA BEKASI",
+            "points": [
+                [
+                    574.666348,
+                    74.357807
+                ],
+                [
+                    899.199681,
+                    121.619941
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "NIK",
+            "points": [
+                [
+                    48.855003,
+                    136.95857
+                ],
+                [
+                    158.300783,
+                    192.315762
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Alamat",
+            "points": [
+                [
+                    42.411065,
+                    359.055861
+                ],
+                [
+                    165.119506,
+                    397.344582
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Agama",
+            "points": [
+                [
+                    37.405801,
+                    536.198866
+                ],
+                [
+                    162.617319,
+                    578.408732
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pekerjaan",
+            "points": [
+                [
+                    36.832455,
+                    625.23642
+                ],
+                [
+                    210.183139,
+                    667.697903
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Nama",
+            "points": [
+                [
+                    47.214882,
+                    227.918115
+                ],
+                [
+                    146.945858,
+                    262.663653
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ": 3275066005740014",
+            "points": [
+                [
+                    270.225598,
+                    137.742938
+                ],
+                [
+                    940.563973,
+                    202.24400300000002
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ": SRI ATI",
+            "points": [
+                [
+                    337.765989,
+                    227.554687
+                ],
+                [
+                    482.409801,
+                    266.719239
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Gol Darah : -",
+            "points": [
+                [
+                    723.108864,
+                    317.533426
+                ],
+                [
+                    950.419351,
+                    355.47617
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ": KP. RAWA PASUNG",
+            "points": [
+                [
+                    337.455827,
+                    361.379604
+                ],
+                [
+                    688.985861,
+                    398.61643699999996
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ": ISLAM",
+            "points": [
+                [
+                    335.704633,
+                    536.867731
+                ],
+                [
+                    466.033553,
+                    575.3219200000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Tempat/Tgl Lahir : JEMBER, 20-05-1974",
+            "points": [
+                [
+                    43.721485,
+                    272.506842
+                ],
+                [
+                    696.782552,
+                    312.277525
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Jenis Kelamin : PEREMPUAN",
+            "points": [
+                [
+                    43.721485,
+                    316.113954
+                ],
+                [
+                    585.12019,
+                    349.789541
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "RT/RW : 007/003",
+            "points": [
+                [
+                    117.022325,
+                    404.376417
+                ],
+                [
+                    505.263828,
+                    441.964238
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kel/Desa : KALIBARU",
+            "points": [
+                [
+                    116.676747,
+                    446.737125
+                ],
+                [
+                    547.48687,
+                    484.0994
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kecamatan : MEDAN SATRIA",
+            "points": [
+                [
+                    116.367995,
+                    491.262406
+                ],
+                [
+                    626.5767979999999,
+                    529.781779
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Status Perkawinan : KAWIN",
+            "points": [
+                [
+                    36.036316,
+                    582.379872
+                ],
+                [
+                    480.733269,
+                    617.93124
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ": MENGURUS RUMAH TANGGA",
+            "points": [
+                [
+                    334.998308,
+                    623.562465
+                ],
+                [
+                    860.996496,
+                    660.467257
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "KOTA BEKASI",
+            "points": [
+                [
+                    1083.375564,
+                    616.057382
+                ],
+                [
+                    1307.383883,
+                    649.316258
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "09-05-2012",
+            "points": [
+                [
+                    1111.547792,
+                    652.642162
+                ],
+                [
+                    1284.151579,
+                    686.487943
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kewarganegaraan: WNI",
+            "points": [
+                [
+                    37.0281,
+                    667.349441
+                ],
+                [
+                    432.9771,
+                    710.602773
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Berlaku Hingga : 20-05-2017",
+            "points": [
+                [
+                    36.859212,
+                    714.78034
+                ],
+                [
+                    539.80238,
+                    756.759537
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_IDCARD_034415.jpg",
+    "imageData": null,
+    "imageHeight": 924,
+    "imageWidth": 1470
+}

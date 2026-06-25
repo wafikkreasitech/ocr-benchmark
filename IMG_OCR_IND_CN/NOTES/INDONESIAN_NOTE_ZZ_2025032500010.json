@@ -1,0 +1,138 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "d. Dampak pencemaran air",
+            "points": [
+                [
+                    549.728162,
+                    84.868823
+                ],
+                [
+                    3402.5221469999997,
+                    272.421295
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "1. menurunkan jumlah oksigen",
+            "points": [
+                [
+                    387.846225,
+                    353.194085
+                ],
+                [
+                    3464.48049,
+                    581.562814
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2. membunuh biota air",
+            "points": [
+                [
+                    324.410467,
+                    670.372875
+                ],
+                [
+                    2671.533515,
+                    841.649422
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "3. meningkatkan kecepatan reaksi kimia",
+            "points": [
+                [
+                    290.870514,
+                    915.046408
+                ],
+                [
+                    4552.063739,
+                    1129.913094
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "4. mengganggu kehidupan hewan dan tumbuhan",
+            "points": [
+                [
+                    305.379739,
+                    1228.607546
+                ],
+                [
+                    5190.563765,
+                    1433.482264
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "5. menurunkan kesuburan tanah",
+            "points": [
+                [
+                    318.066891,
+                    1507.724881
+                ],
+                [
+                    3576.25054,
+                    1710.277385
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "6. menurunkan produktivitas tumbuhan",
+            "points": [
+                [
+                    272.442438,
+                    1799.529368
+                ],
+                [
+                    4511.640149,
+                    2007.439345
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "e. pencegahan pencemaran air",
+            "points": [
+                [
+                    502.030589,
+                    2091.333855
+                ],
+                [
+                    4047.5506259999997,
+                    2299.504184
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_NOTE_ZZ_2025032500010.jpg",
+    "imageData": null,
+    "imageHeight": 2324,
+    "imageWidth": 5508
+}

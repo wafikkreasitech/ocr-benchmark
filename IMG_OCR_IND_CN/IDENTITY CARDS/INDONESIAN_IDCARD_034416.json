@@ -1,0 +1,506 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "PROVINSI DKI JAKARTA",
+            "points": [
+                [
+                    437.718348,
+                    28.586525
+                ],
+                [
+                    1069.82369,
+                    14.235453
+                ],
+                [
+                    1068.638739,
+                    65.188327
+                ],
+                [
+                    439.824919,
+                    70.71812
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "JAKARTA SELATAN",
+            "points": [
+                [
+                    499.636211,
+                    70.192139
+                ],
+                [
+                    1000.305317,
+                    65.789252
+                ],
+                [
+                    1001.271023,
+                    112.771162
+                ],
+                [
+                    501.798001,
+                    122.61889
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "JAKARTA SELATAN",
+            "points": [
+                [
+                    1094.019974,
+                    658.781145
+                ],
+                [
+                    1093.564778,
+                    626.007074
+                ],
+                [
+                    1398.545715,
+                    620.089534
+                ],
+                [
+                    1401.276887,
+                    652.863605
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "13-01-2012",
+            "points": [
+                [
+                    1158.433787,
+                    665.510436
+                ],
+                [
+                    1318.512377,
+                    660.07202
+                ],
+                [
+                    1319.694641,
+                    688.446364
+                ],
+                [
+                    1160.088957,
+                    694.830591
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "NIK",
+            "points": [
+                [
+                    46.711486,
+                    155.586035
+                ],
+                [
+                    150.861644,
+                    213.321449
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Nama",
+            "points": [
+                [
+                    41.051152,
+                    242.755189
+                ],
+                [
+                    142.93717600000002,
+                    281.245465
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Tempat/Tgl Lahir",
+            "points": [
+                [
+                    41.051152,
+                    285.773733
+                ],
+                [
+                    322.935819,
+                    328.792277
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Jenis Kelamin",
+            "points": [
+                [
+                    40.383635,
+                    333.806529
+                ],
+                [
+                    268.00231199999996,
+                    372.359112
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Alamat",
+            "points": [
+                [
+                    39.3274,
+                    379.752759
+                ],
+                [
+                    158.681973,
+                    414.608519
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "RT/RW",
+            "points": [
+                [
+                    116.432567,
+                    420.417813
+                ],
+                [
+                    237.899611,
+                    460.554749
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kel/Desa",
+            "points": [
+                [
+                    113.791979,
+                    469.00463
+                ],
+                [
+                    269.58666500000004,
+                    505.444743
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kecamatan",
+            "points": [
+                [
+                    111.679509,
+                    512.310272
+                ],
+                [
+                    305.49866099999997,
+                    551.390973
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Agama",
+            "points": [
+                [
+                    33.90472,
+                    558.573624
+                ],
+                [
+                    153.787411,
+                    597.654325
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Status Perkawinan : KAWIN",
+            "points": [
+                [
+                    34.446758,
+                    598.449673
+                ],
+                [
+                    507.111993,
+                    637.002256
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pekerjaan",
+            "points": [
+                [
+                    32.461872,
+                    648.564608
+                ],
+                [
+                    203.043851,
+                    693.98272
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kewarganegaraan : WNI",
+            "points": [
+                [
+                    30.877518,
+                    693.454602
+                ],
+                [
+                    458.652759,
+                    738.344597
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Berlaku Hingga",
+            "points": [
+                [
+                    30.349401,
+                    742.569537
+                ],
+                [
+                    289.655133,
+                    784.818943
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ": 3174051403720004",
+            "points": [
+                [
+                    273.219401,
+                    136.526501
+                ],
+                [
+                    991.074018,
+                    207.121209
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ": CIPTO SUKATNO",
+            "points": [
+                [
+                    360.824882,
+                    233.487906
+                ],
+                [
+                    694.236031,
+                    274.313761
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ": WONOGIRI, 14-03-1972",
+            "points": [
+                [
+                    362.525959,
+                    280.267532
+                ],
+                [
+                    790.346898,
+                    319.39231
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ": LAKI-LAKI",
+            "points": [
+                [
+                    360.824882,
+                    327.047157
+                ],
+                [
+                    560.701464,
+                    366.171935
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ": JL PONDOK PINANG I",
+            "points": [
+                [
+                    359.974343,
+                    369.57409
+                ],
+                [
+                    792.047975,
+                    409.54940600000003
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ": 002 / 002",
+            "points": [
+                [
+                    360.824882,
+                    420.606408
+                ],
+                [
+                    567.505773,
+                    454.627954
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ": PONDOK PINANG",
+            "points": [
+                [
+                    362.525959,
+                    461.432263
+                ],
+                [
+                    704.442494,
+                    503.108657
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ": KEBAYORAN LAMA",
+            "points": [
+                [
+                    359.123804,
+                    505.660273
+                ],
+                [
+                    733.360808,
+                    549.037744
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ": ISLAM",
+            "points": [
+                [
+                    355.72165,
+                    551.58936
+                ],
+                [
+                    502.014297,
+                    589.01306
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ": WIRASWASTA",
+            "points": [
+                [
+                    356.572188,
+                    640.895918
+                ],
+                [
+                    648.306943,
+                    686.825005
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Gol. Darah : -",
+            "points": [
+                [
+                    727.407038,
+                    321.943926
+                ],
+                [
+                    976.6148609999999,
+                    361.06870399999997
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ": 14-03-2016",
+            "points": [
+                [
+                    358.813717,
+                    736.814049
+                ],
+                [
+                    571.0604060000001,
+                    776.182814
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_IDCARD_034416.jpg",
+    "imageData": null,
+    "imageHeight": 928,
+    "imageWidth": 1470
+}

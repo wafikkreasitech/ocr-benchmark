@@ -1,0 +1,538 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "###",
+            "points": [
+                [
+                    835.585073,
+                    131.181799
+                ],
+                [
+                    1006.513881,
+                    166.859984
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "PT. Angin Sepoi",
+            "points": [
+                [
+                    209.030559,
+                    261.634167
+                ],
+                [
+                    507.188534,
+                    301.77081799999996
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Jalan Merdeka no 34, Jakarta Utara",
+            "points": [
+                [
+                    209.283803,
+                    327.69543
+                ],
+                [
+                    866.83358,
+                    364.049283
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "No: INV/2022/2345",
+            "points": [
+                [
+                    1148.985654,
+                    260.251737
+                ],
+                [
+                    1502.0480120000002,
+                    294.941271
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Ditujukan Kepada",
+            "points": [
+                [
+                    207.874896,
+                    520.619346
+                ],
+                [
+                    537.043605,
+                    563.8247269999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "PT. Angin Semilir",
+            "points": [
+                [
+                    208.012763,
+                    587.193539
+                ],
+                [
+                    528.191419,
+                    631.605403
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Jalan Melawai no 34, Balikpapan",
+            "points": [
+                [
+                    207.613633,
+                    650.799669
+                ],
+                [
+                    819.3563079999999,
+                    692.72812
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Jumlah",
+            "points": [
+                [
+                    288.033737,
+                    780.709067
+                ],
+                [
+                    425.504009,
+                    816.451356
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Deskripsi",
+            "points": [
+                [
+                    585.252111,
+                    781.00052
+                ],
+                [
+                    758.486612,
+                    822.3139120000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Satuan",
+            "points": [
+                [
+                    917.120656,
+                    782.27647
+                ],
+                [
+                    1049.609248,
+                    815.216419
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Jumlah",
+            "points": [
+                [
+                    1226.085673,
+                    780.258281
+                ],
+                [
+                    1362.032563,
+                    814.9737680000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "4",
+            "points": [
+                [
+                    345.367908,
+                    906.529921
+                ],
+                [
+                    368.7335,
+                    938.287381
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pembelian",
+            "points": [
+                [
+                    572.352407,
+                    873.139198
+                ],
+                [
+                    766.3483659999999,
+                    908.763914
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "mesin printer",
+            "points": [
+                [
+                    549.956144,
+                    921.192188
+                ],
+                [
+                    791.639516,
+                    961.20774
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "###",
+            "points": [
+                [
+                    609.846973,
+                    972.337895
+                ],
+                [
+                    727.5086090000001,
+                    1014.340975
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Rp3.000.000",
+            "points": [
+                [
+                    864.588582,
+                    902.712283
+                ],
+                [
+                    1102.674517,
+                    944.3973579999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Rp12.000.000",
+            "points": [
+                [
+                    1165.961345,
+                    903.460599
+                ],
+                [
+                    1426.268634,
+                    945.257907
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "-",
+            "points": [
+                [
+                    1285.912573,
+                    1053.275868
+                ],
+                [
+                    1304.0856210000002,
+                    1062.053328
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "-",
+            "points": [
+                [
+                    1287.868344,
+                    1118.22659
+                ],
+                [
+                    1302.22876,
+                    1125.257206
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Tanggal: 12 Desember 2022",
+            "points": [
+                [
+                    1147.555957,
+                    389.590957
+                ],
+                [
+                    1670.2763180000002,
+                    436.165895
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Sub total pajak",
+            "points": [
+                [
+                    843.889392,
+                    1036.323606
+                ],
+                [
+                    1122.610327,
+                    1078.252025
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Total",
+            "points": [
+                [
+                    310.40644,
+                    1169.316729
+                ],
+                [
+                    399.201536,
+                    1203.2577139999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Rp 12.000.000",
+            "points": [
+                [
+                    1165.958974,
+                    1167.041906
+                ],
+                [
+                    1425.603723,
+                    1209.479451
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Terbilang: dua belas juta rupiah",
+            "points": [
+                [
+                    204.410799,
+                    1292.266999
+                ],
+                [
+                    788.659633,
+                    1340.0357609999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Tipe pembayaran:",
+            "points": [
+                [
+                    204.817633,
+                    1423.503319
+                ],
+                [
+                    543.608444,
+                    1471.2720689999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Data rekening:",
+            "points": [
+                [
+                    206.287419,
+                    1488.174877
+                ],
+                [
+                    481.876492,
+                    1538.515803
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Bank",
+            "points": [
+                [
+                    203.347814,
+                    1555.786074
+                ],
+                [
+                    319.83011799999997,
+                    1598.0430430000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Atas nama",
+            "points": [
+                [
+                    205.552526,
+                    1619.756132
+                ],
+                [
+                    411.325689,
+                    1656.868783
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "No. rekening:",
+            "points": [
+                [
+                    206.287453,
+                    1683.692797
+                ],
+                [
+                    458.35958,
+                    1732.931367
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "PT. Angin Sepoi",
+            "points": [
+                [
+                    1142.57074,
+                    1809.300239
+                ],
+                [
+                    1452.45103,
+                    1864.1748739999998
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Materai, cap TTD",
+            "points": [
+                [
+                    1143.646746,
+                    1881.390478
+                ],
+                [
+                    1476.660428,
+                    1930.347227
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Saripah",
+            "points": [
+                [
+                    1146.874666,
+                    2067.533814
+                ],
+                [
+                    1297.510885,
+                    2122.408449
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kepala Finance",
+            "points": [
+                [
+                    1147.155171,
+                    2137.044433
+                ],
+                [
+                    1442.21918,
+                    2190.398477
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_RECEIPT_ZZ_2025041400001.jpg",
+    "imageData": null,
+    "imageHeight": 2260,
+    "imageWidth": 1880
+}

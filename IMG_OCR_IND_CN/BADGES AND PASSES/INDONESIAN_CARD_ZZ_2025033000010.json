@@ -1,0 +1,90 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "VaLent",
+            "points": [
+                [
+                    311.35166,
+                    406.939513
+                ],
+                [
+                    579.450595,
+                    530.516366
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Yonathan",
+            "points": [
+                [
+                    1119.837512,
+                    654.093219
+                ],
+                [
+                    1660.224428,
+                    765.102934
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "082 234 588 565",
+            "points": [
+                [
+                    1285.304823,
+                    892.868833
+                ],
+                [
+                    1668.60252,
+                    947.32643
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "valent_vanilla",
+            "points": [
+                [
+                    1291.588392,
+                    1077.186851
+                ],
+                [
+                    1672.791566,
+                    1140.0225389999998
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "valentvanillaa@gmail.com",
+            "points": [
+                [
+                    1015.111365,
+                    976.649751
+                ],
+                [
+                    1672.7915659999999,
+                    1035.296393
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_CARD_ZZ_2025033000010.jpg",
+    "imageData": null,
+    "imageHeight": 1800,
+    "imageWidth": 1800
+}

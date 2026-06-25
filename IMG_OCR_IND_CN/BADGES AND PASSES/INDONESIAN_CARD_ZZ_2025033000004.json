@@ -1,0 +1,170 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "DACcant",
+            "points": [
+                [
+                    230.497739,
+                    392.717899
+                ],
+                [
+                    690.202907,
+                    510.316896
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "PREMIUIM DESICCANT NATURAL",
+            "points": [
+                [
+                    233.552258,
+                    517.953194
+                ],
+                [
+                    710.057283,
+                    563.7709850000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "BEYOUTA",
+            "points": [
+                [
+                    277.842789,
+                    615.697815
+                ],
+                [
+                    658.130453,
+                    695.115319
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "GROWTH PLANT AND TREES",
+            "points": [
+                [
+                    296.169905,
+                    707.333397
+                ],
+                [
+                    642.8578560000001,
+                    743.98763
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Cahyadi Wijaya",
+            "points": [
+                [
+                    870.419551,
+                    453.808287
+                ],
+                [
+                    1336.2337579999999,
+                    530.171272
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Marketing Manager",
+            "points": [
+                [
+                    948.309795,
+                    533.225791
+                ],
+                [
+                    1275.14337,
+                    575.989062
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "62877-8979-8333",
+            "points": [
+                [
+                    1036.890857,
+                    667.624644
+                ],
+                [
+                    1250.707214,
+                    701.2243569999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "siliconaturals@gmail.com",
+            "points": [
+                [
+                    1018.563741,
+                    751.623928
+                ],
+                [
+                    1333.1792380000002,
+                    783.696382
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "www.zoolitomtb.com",
+            "points": [
+                [
+                    1015.509222,
+                    831.041432
+                ],
+                [
+                    1276.67063,
+                    863.113886
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Zoollte mib",
+            "points": [
+                [
+                    1062.854272,
+                    960.858506
+                ],
+                [
+                    1261.398032,
+                    995.985479
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_CARD_ZZ_2025033000004.jpg",
+    "imageData": null,
+    "imageHeight": 1350,
+    "imageWidth": 1800
+}

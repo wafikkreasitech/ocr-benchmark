@@ -1,0 +1,1018 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "Gambar 3.7",
+            "points": [
+                [
+                    166.826503,
+                    247.219844
+                ],
+                [
+                    328.473723,
+                    276.694701
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Gambar 3.6",
+            "points": [
+                [
+                    170.347509,
+                    154.139915
+                ],
+                [
+                    326.65643,
+                    180.12326000000002
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Penyemprotan Insektisida sebagai Upaya",
+            "points": [
+                [
+                    353.158652,
+                    153.057292
+                ],
+                [
+                    896.994719,
+                    184.995137
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pengendalian Nyamuk Penular Kaki Gajah",
+            "points": [
+                [
+                    352.076946,
+                    196.5409
+                ],
+                [
+                    908.450316,
+                    234.764881
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "25",
+            "points": [
+                [
+                    1021.735849,
+                    203.176261
+                ],
+                [
+                    1054.115006,
+                    227.218073
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Gambar Fogging sebagai Upaya",
+            "points": [
+                [
+                    353.465131,
+                    249.84375
+                ],
+                [
+                    775.059613,
+                    282.205418
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pengendalian Nyamuk Penular Kaki Gajah",
+            "points": [
+                [
+                    354.013398,
+                    295.248933
+                ],
+                [
+                    919.248613,
+                    329.16819000000004
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Gambar 3.8",
+            "points": [
+                [
+                    169.497425,
+                    345.958844
+                ],
+                [
+                    327.57643099999996,
+                    371.794556
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Tanaman Bahan Insektisida Nabati",
+            "points": [
+                [
+                    353.025862,
+                    346.6129
+                ],
+                [
+                    811.655278,
+                    371.38471300000003
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pengendalian Nyamuk Penular Kaki Gajah",
+            "points": [
+                [
+                    353.044324,
+                    393.956965
+                ],
+                [
+                    908.4503159999999,
+                    425.487089
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Gambar 3.9",
+            "points": [
+                [
+                    167.629602,
+                    439.717229
+                ],
+                [
+                    325.350169,
+                    468.537069
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Lotion Penolak Gigitan Nyamuk Penular",
+            "points": [
+                [
+                    354.145667,
+                    443.501891
+                ],
+                [
+                    880.971621,
+                    473.597808
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Gambar 3.10",
+            "points": [
+                [
+                    170.715324,
+                    538.323293
+                ],
+                [
+                    346.367607,
+                    565.702138
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kaki Gajah",
+            "points": [
+                [
+                    353.159908,
+                    490.633386
+                ],
+                [
+                    490.411506,
+                    523.2416509999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Larvasida Upaya Pengendalian Nyamuk Penular",
+            "points": [
+                [
+                    351.724797,
+                    536.098534
+                ],
+                [
+                    986.0504020000001,
+                    568.6473159999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kaki Gajah Stadium Pra Dewasa",
+            "points": [
+                [
+                    353.191014,
+                    585.146696
+                ],
+                [
+                    772.813679,
+                    614.257189
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Gambar 4.1",
+            "points": [
+                [
+                    171.077191,
+                    634.844831
+                ],
+                [
+                    327.139055,
+                    661.518812
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Minum Obat anti filariasis Dietyl Carbamazine",
+            "points": [
+                [
+                    352.966232,
+                    633.744889
+                ],
+                [
+                    966.772963,
+                    661.5188119999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Citrate (DEC)",
+            "points": [
+                [
+                    348.94503,
+                    681.574011
+                ],
+                [
+                    523.542565,
+                    716.56222
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Tahapan Kegiatan POPM Filariasis",
+            "points": [
+                [
+                    353.532919,
+                    731.513808
+                ],
+                [
+                    804.442677,
+                    761.512703
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Gambar 4.2",
+            "points": [
+                [
+                    170.980673,
+                    730.013875
+                ],
+                [
+                    327.84183199999995,
+                    756.512876
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Gambar 4.3",
+            "points": [
+                [
+                    167.983326,
+                    826.510254
+                ],
+                [
+                    326.343158,
+                    851.009326
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Visualisasi oleh Peneliti",
+            "points": [
+                [
+                    347.824162,
+                    775.787614
+                ],
+                [
+                    664.79618,
+                    806.2178329999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Meja Pendaftaran Pelaksanaan POPM",
+            "points": [
+                [
+                    351.321082,
+                    825.01031
+                ],
+                [
+                    855.37495,
+                    855.509157
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Filariasis di Puskesmas Cikaro Kabupaten",
+            "points": [
+                [
+                    354.318429,
+                    872.508534
+                ],
+                [
+                    894.340465,
+                    902.007411
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Bandung Tahun 2013",
+            "points": [
+                [
+                    353.818856,
+                    921.506678
+                ],
+                [
+                    633.637244,
+                    950.773227
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Gambar 4.4",
+            "points": [
+                [
+                    167.983326,
+                    970.004872
+                ],
+                [
+                    327.841832,
+                    995.75389
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pemeriksaan Tekanan Darah di Puskesmas",
+            "points": [
+                [
+                    350.821509,
+                    970.004872
+                ],
+                [
+                    915.321896,
+                    995.75389
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Cikaro Kabupaten Bandung Tahun 2013",
+            "points": [
+                [
+                    351.507292,
+                    1018.671219
+                ],
+                [
+                    878.753807,
+                    1049.962345
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Jenis Obat Filariasis",
+            "points": [
+                [
+                    352.415545,
+                    1065.487656
+                ],
+                [
+                    615.4611930000001,
+                    1096.18135
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Obat Berdasarkan Rentang Usia pada",
+            "points": [
+                [
+                    351.053114,
+                    1112.758593
+                ],
+                [
+                    848.113196,
+                    1142.757466
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pelaksanaan POMP Filariasis di Puskesmas",
+            "points": [
+                [
+                    352.869681,
+                    1162.756722
+                ],
+                [
+                    918.27837,
+                    1189.119361
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Cikaro Kabupaten Bandung Tahun 2013",
+            "points": [
+                [
+                    351.507251,
+                    1210.027681
+                ],
+                [
+                    877.957263,
+                    1241.844661
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pastikan Meminum Obat di Depan Petugas atau",
+            "points": [
+                [
+                    355.137036,
+                    1255.821417
+                ],
+                [
+                    991.5737570000001,
+                    1289.8201250000002
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kejadian Ikutan Setelah Pengobatan",
+            "points": [
+                [
+                    353.687139,
+                    1355.317694
+                ],
+                [
+                    832.626794,
+                    1384.3165740000002
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Perawatan Penderita Kaki Gajah",
+            "points": [
+                [
+                    353.874239,
+                    1400.824826
+                ],
+                [
+                    778.09364,
+                    1432.323643
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Penderita Kaki Gajah Stadium Limfedema",
+            "points": [
+                [
+                    353.374666,
+                    1449.875582
+                ],
+                [
+                    904.137226,
+                    1481.8743949999998
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Stadium 1 (satu)",
+            "points": [
+                [
+                    353.374666,
+                    1497.873779
+                ],
+                [
+                    572.111709,
+                    1530.372566
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Penderita Kaki Gajah Stadium Limfedema",
+            "points": [
+                [
+                    353.374666,
+                    1544.372032
+                ],
+                [
+                    902.638553,
+                    1577.870789
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Stadium 2 (dua)",
+            "points": [
+                [
+                    351.875992,
+                    1593.870173
+                ],
+                [
+                    563.782463,
+                    1625.36899
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Gambar 5.3.",
+            "points": [
+                [
+                    171.036056,
+                    1545.871976
+                ],
+                [
+                    333.891909,
+                    1572.870962
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Gambar 5.2",
+            "points": [
+                [
+                    170.536483,
+                    1452.375473
+                ],
+                [
+                    324.899867,
+                    1475.874575
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Gambar 5.1",
+            "points": [
+                [
+                    170.036932,
+                    1403.377328
+                ],
+                [
+                    324.899867,
+                    1427.126405
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Gambar 4.8",
+            "points": [
+                [
+                    169.037809,
+                    1354.879135
+                ],
+                [
+                    325.649204,
+                    1379.8781809999998
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Gambar 4.7",
+            "points": [
+                [
+                    170.536483,
+                    1257.382797
+                ],
+                [
+                    324.899867,
+                    1285.38173
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Gambar 4.6",
+            "points": [
+                [
+                    169.537382,
+                    1115.388123
+                ],
+                [
+                    326.39854,
+                    1141.387139
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Gambar 4.5",
+            "points": [
+                [
+                    169.087773,
+                    1065.739985
+                ],
+                [
+                    326.248673,
+                    1091.58901
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "26",
+            "points": [
+                [
+                    1021.28004,
+                    299.35284
+                ],
+                [
+                    1055.4322769999999,
+                    323.271573
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "26",
+            "points": [
+                [
+                    1021.28004,
+                    393.448947
+                ],
+                [
+                    1054.52558,
+                    419.46296099999995
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "27",
+            "points": [
+                [
+                    1020.071073,
+                    492.29306
+                ],
+                [
+                    1055.4322769999999,
+                    515.127743
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "27",
+            "points": [
+                [
+                    1022.140828,
+                    587.736897
+                ],
+                [
+                    1054.78194,
+                    610.938268
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "30",
+            "points": [
+                [
+                    1021.28004,
+                    682.628075
+                ],
+                [
+                    1054.52558,
+                    707.129655
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "32",
+            "points": [
+                [
+                    1022.240232,
+                    923.745675
+                ],
+                [
+                    1054.855969,
+                    946.265478
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "32",
+            "points": [
+                [
+                    1022.653065,
+                    1019.609837
+                ],
+                [
+                    1054.236683,
+                    1042.33625
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "33",
+            "points": [
+                [
+                    1021.86334,
+                    1068.862962
+                ],
+                [
+                    1053.65741,
+                    1090.9702579999998
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "34",
+            "points": [
+                [
+                    1022.764435,
+                    1211.695151
+                ],
+                [
+                    1054.347006,
+                    1235.4021659999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "35",
+            "points": [
+                [
+                    1022.591962,
+                    1307.344239
+                ],
+                [
+                    1053.703795,
+                    1330.9019700000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "37",
+            "points": [
+                [
+                    1022.591962,
+                    1355.625939
+                ],
+                [
+                    1054.752508,
+                    1378.483935
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "39",
+            "points": [
+                [
+                    1021.834566,
+                    1404.187541
+                ],
+                [
+                    1054.647637,
+                    1426.765634
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "41",
+            "points": [
+                [
+                    1021.633341,
+                    1500.111966
+                ],
+                [
+                    1054.8512719999999,
+                    1522.1642259999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "42",
+            "points": [
+                [
+                    1021.377192,
+                    1596.378515
+                ],
+                [
+                    1054.0038200000001,
+                    1618.642804
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "31",
+            "points": [
+                [
+                    1021.327868,
+                    780.113862
+                ],
+                [
+                    1054.038398,
+                    803.538642
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kader Kesehatan",
+            "points": [
+                [
+                    355.073356,
+                    1306.917638
+                ],
+                [
+                    578.287837,
+                    1333.727856
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_BOOKCONTENT_WXD_20250403000002.jpg",
+    "imageData": null,
+    "imageHeight": 1786,
+    "imageWidth": 1259
+}

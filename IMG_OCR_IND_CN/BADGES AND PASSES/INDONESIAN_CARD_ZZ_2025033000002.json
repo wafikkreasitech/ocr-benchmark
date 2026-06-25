@@ -1,0 +1,122 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "Yulie",
+            "points": [
+                [
+                    418.962219,
+                    1134.012328
+                ],
+                [
+                    655.630394,
+                    1225.038549
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Andiningtyas, A.Md",
+            "points": [
+                [
+                    426.608422,
+                    1242.879688
+                ],
+                [
+                    1344.1527310000001,
+                    1341.188007
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "082124197935",
+            "points": [
+                [
+                    488.506252,
+                    1577.856182
+                ],
+                [
+                    910.867918,
+                    1647.03611
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Jin.Panyingkiran",
+            "points": [
+                [
+                    495.78835,
+                    1676.164501
+                ],
+                [
+                    1012.817286,
+                    1738.062331
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "No 49 Singaparna",
+            "points": [
+                [
+                    501.604099,
+                    1746.237373
+                ],
+                [
+                    1033.258437,
+                    1805.687539
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "СР",
+            "points": [
+                [
+                    1885.943669,
+                    907.140751
+                ],
+                [
+                    2037.116947,
+                    995.466711
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "CENTRAL IM PARFUME",
+            "points": [
+                [
+                    1470.400512,
+                    1171.028057
+                ],
+                [
+                    2481.053326,
+                    1271.24405
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_CARD_ZZ_2025033000002.jpg",
+    "imageData": null,
+    "imageHeight": 2586,
+    "imageWidth": 2586
+}

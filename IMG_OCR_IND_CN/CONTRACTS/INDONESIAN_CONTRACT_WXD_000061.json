@@ -1,0 +1,586 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "Berita Acara Pemberian Penjelasan Kualifikasi",
+            "points": [
+                [
+                    771.395281,
+                    492.807227
+                ],
+                [
+                    1705.074305,
+                    558.60863
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "PEKERJAAN REVIU DED GEDUNG B RUMAH SAKIT PENDIDIKAN UNIVERSITAS RIAU",
+            "points": [
+                [
+                    345.212317,
+                    570.62887
+                ],
+                [
+                    2111.337385,
+                    625.917606
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Nomor : 478.9/A7.UN19/SATPEL I 2024 #287/LK.00.00/2-3/VII/2024",
+            "points": [
+                [
+                    751.701404,
+                    653.172622
+                ],
+                [
+                    1720.033212,
+                    707.6826550000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pada hari ini, 9 Agustus 2024, telah dibuat Berita Acara Pemberian Penjelasan Kualifikasiuntuk paket pekerjaan:",
+            "points": [
+                [
+                    337.95962,
+                    761.488769
+                ],
+                [
+                    1949.2784310000002,
+                    816.8743790000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "A. Daftar Pertanyaan Peserta Berikut Jawabannya",
+            "points": [
+                [
+                    309.822897,
+                    1330.518461
+                ],
+                [
+                    1065.7203140000001,
+                    1390.7796059999998
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pembukaan",
+            "points": [
+                [
+                    396.41174,
+                    1414.767054
+                ],
+                [
+                    600.597666,
+                    1463.912096
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Selamat Pagi, Salam hormat",
+            "points": [
+                [
+                    371.151376,
+                    1491.88637
+                ],
+                [
+                    787.347851,
+                    1543.404176
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Saat ini Pokja Pemilihan melaksanakan Pemberian Penjelasan Paket Pekerjaan Reviu DED Gedung B Rumah Sakit",
+            "points": [
+                [
+                    375.334077,
+                    1564.396931
+                ],
+                [
+                    2015.728177,
+                    1605.447565
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pendidikan Universitas Riau",
+            "points": [
+                [
+                    370.654324,
+                    1617.505317
+                ],
+                [
+                    777.961047,
+                    1654.338486
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kami Pokja Pemilihan memulai awal ini dari awal kembali dikarenakan terjadinya Ganguan PDN yang berimbas pada paket",
+            "points": [
+                [
+                    375.793828,
+                    1686.032215
+                ],
+                [
+                    2116.377061,
+                    1727.148315
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "pekerjaan ini.",
+            "points": [
+                [
+                    375.793828,
+                    1727.148315
+                ],
+                [
+                    563.47334,
+                    1765.694696
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Demikianlah disampaikan atas perhatiannya diucapkan terima kasih",
+            "points": [
+                [
+                    367.227965,
+                    1787.109351
+                ],
+                [
+                    1345.4494359999999,
+                    1847.070387
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "B. Keterangan Tambahan Lain",
+            "points": [
+                [
+                    312.406432,
+                    1917.310432
+                ],
+                [
+                    777.961046,
+                    1971.275391
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Dalam agenda pemberian penjelasan dihadiri oleh seluruh Personil POKJA dan PPK beserta Tim Teknis.",
+            "points": [
+                [
+                    369.2304,
+                    1989.458764
+                ],
+                [
+                    1856.221622,
+                    2036.181531
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Selama masa waktu penjadwalan penjelasan, peserta calon penyedia tidak ada memberikan pertanyaan.",
+            "points": [
+                [
+                    369.2304,
+                    2061.66673
+                ],
+                [
+                    1851.615681,
+                    2117.728212
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Demikian Berita Acara ini dibuat dan ditandatangani pada Hari, Tanggal dan Bulan sebagaimana tersebut di atas",
+            "points": [
+                [
+                    345.161024,
+                    2159.360165
+                ],
+                [
+                    1942.234165,
+                    2203.2512850000003
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "untukdipergunakan sebagaimana mestinya.",
+            "points": [
+                [
+                    329.586696,
+                    2215.993912
+                ],
+                [
+                    966.009053,
+                    2246.7884759999997
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kementerian Pendidikan dan Kebudayaan",
+            "points": [
+                [
+                    919.994089,
+                    2308.023837
+                ],
+                [
+                    1543.275874,
+                    2364.267891
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "ttd,",
+            "points": [
+                [
+                    1201.358591,
+                    2452.414045
+                ],
+                [
+                    1270.762696,
+                    2496.952211
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "POKJA UKPBJ KEMENDIKBUDRISTEK SATPEL I 2024 #287",
+            "points": [
+                [
+                    793.238232,
+                    2582.686694
+                ],
+                [
+                    1681.063436,
+                    2634.739772
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "1",
+            "points": [
+                [
+                    2089.843882,
+                    3200.173554
+                ],
+                [
+                    2125.1179890000003,
+                    3233.9140039999997
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kode Tender",
+            "points": [
+                [
+                    359.198609,
+                    858.158768
+                ],
+                [
+                    561.287033,
+                    908.170549
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Nama Tender",
+            "points": [
+                [
+                    361.239906,
+                    952.05844
+                ],
+                [
+                    568.431574,
+                    997.987627
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Nilai Total HPS",
+            "points": [
+                [
+                    362.260555,
+                    1040.854869
+                ],
+                [
+                    588.844546,
+                    1081.680813
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Metode Pemilihan",
+            "points": [
+                [
+                    363.281203,
+                    1133.733892
+                ],
+                [
+                    627.629193,
+                    1179.663079
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Metode Evaluasi",
+            "points": [
+                [
+                    359.198609,
+                    1221.509672
+                ],
+                [
+                    611.298815,
+                    1269.480157
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ":",
+            "points": [
+                [
+                    979.752963,
+                    867.344605
+                ],
+                [
+                    1003.227881,
+                    902.046658
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ":",
+            "points": [
+                [
+                    982.814909,
+                    953.079088
+                ],
+                [
+                    1003.2278809999999,
+                    993.905032
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ":",
+            "points": [
+                [
+                    981.79426,
+                    1041.875517
+                ],
+                [
+                    1005.269178,
+                    1087.804704
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ":",
+            "points": [
+                [
+                    978.732314,
+                    1132.713243
+                ],
+                [
+                    1009.351772,
+                    1175.580485
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ":",
+            "points": [
+                [
+                    983.835557,
+                    1223.55097
+                ],
+                [
+                    1007.310475,
+                    1267.43886
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "16956025",
+            "points": [
+                [
+                    1036.909285,
+                    862.241362
+                ],
+                [
+                    1193.068522,
+                    904.087955
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pekerjaan Reviu DED Gedung B Rumah Sakit Pendidikan Universitas Riau",
+            "points": [
+                [
+                    1037.821411,
+                    952.946719
+                ],
+                [
+                    2109.50245,
+                    994.7005260000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Rp. 579.420.000,00",
+            "points": [
+                [
+                    1040.604998,
+                    1043.877232
+                ],
+                [
+                    1330.098058,
+                    1085.631039
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Seleksi",
+            "points": [
+                [
+                    1040.604998,
+                    1133.879882
+                ],
+                [
+                    1151.9484830000001,
+                    1174.705826
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kualitas dan Biaya",
+            "points": [
+                [
+                    1037.821411,
+                    1224.810394
+                ],
+                [
+                    1311.5408109999998,
+                    1269.347788
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_CONTRACT_WXD_000061.jpg",
+    "imageData": null,
+    "imageHeight": 3492,
+    "imageWidth": 2484
+}

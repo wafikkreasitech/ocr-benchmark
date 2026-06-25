@@ -1,0 +1,210 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "SNACKS",
+            "points": [
+                [
+                    88.585984,
+                    97.284186
+                ],
+                [
+                    413.579073,
+                    180.898913
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "ROTI/PISANG",
+            "points": [
+                [
+                    45.045572,
+                    249.663988
+                ],
+                [
+                    523.148269,
+                    346.846387
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "panggang",
+            "points": [
+                [
+                    527.486769,
+                    289.578188
+                ],
+                [
+                    723.586968,
+                    345.110988
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "KEJU 15",
+            "points": [
+                [
+                    126.609371,
+                    378.083587
+                ],
+                [
+                    434.642869,
+                    450.102687
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "COKELAT 15",
+            "points": [
+                [
+                    123.138571,
+                    451.838087
+                ],
+                [
+                    519.677469,
+                    523.857187
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "KeJu - cokelat 18",
+            "points": [
+                [
+                    122.901576,
+                    527.47478
+                ],
+                [
+                    617.172319,
+                    598.000222
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "KENTANG GORENG 20",
+            "points": [
+                [
+                    46.668167,
+                    635.676023
+                ],
+                [
+                    721.4784530000001,
+                    704.397863
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kentang - Sosis 25",
+            "points": [
+                [
+                    49.531576,
+                    712.988093
+                ],
+                [
+                    716.706102,
+                    785.527813
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "MAIN COURSE",
+            "points": [
+                [
+                    48.010397,
+                    814.161912
+                ],
+                [
+                    632.714932,
+                    785.527813
+                ],
+                [
+                    630.36901,
+                    873.190343
+                ],
+                [
+                    48.010397,
+                    893.382922
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "Mie Nyemek 10",
+            "points": [
+                [
+                    52.667487,
+                    905.550438
+                ],
+                [
+                    610.372895,
+                    894.116842
+                ],
+                [
+                    612.913694,
+                    971.611216
+                ],
+                [
+                    57.749085,
+                    989.396809
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "Mie Nyemek Ayam/Baso Sosis 13",
+            "points": [
+                [
+                    30.247563,
+                    1076.776025
+                ],
+                [
+                    34.220582,
+                    996.687843
+                ],
+                [
+                    718.898471,
+                    974.883801
+                ],
+                [
+                    720.069646,
+                    1054.523701
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_WHITEBOARD_ZZ_2025040300020.jpg",
+    "imageData": null,
+    "imageHeight": 1281,
+    "imageWidth": 720
+}

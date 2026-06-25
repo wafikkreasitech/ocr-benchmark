@@ -1,0 +1,658 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "PRUDENTIAL",
+            "points": [
+                [
+                    434.136579,
+                    42.314926
+                ],
+                [
+                    533.185344,
+                    39.744798
+                ],
+                [
+                    532.987642,
+                    51.606925
+                ],
+                [
+                    434.136579,
+                    54.770159
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "Polis Asuransi Jiwa Syariah",
+            "points": [
+                [
+                    117.810074,
+                    101.384678
+                ],
+                [
+                    443.852953,
+                    84.509413
+                ],
+                [
+                    443.852953,
+                    105.523894
+                ],
+                [
+                    118.128475,
+                    123.991165
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "Nomor Polis: 06560046",
+            "points": [
+                [
+                    205.246265,
+                    122.797588
+                ],
+                [
+                    361.826348,
+                    113.505589
+                ],
+                [
+                    361.826348,
+                    123.983801
+                ],
+                [
+                    204.85086,
+                    132.28729
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "PT Prudential Life Assurance",
+            "points": [
+                [
+                    171.095338,
+                    148.24648
+                ],
+                [
+                    391.339046,
+                    138.983881
+                ],
+                [
+                    392.110881,
+                    151.076693
+                ],
+                [
+                    171.159664,
+                    162.719263
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "(Selanjutnya disebut \"Pengelola\")",
+            "points": [
+                [
+                    186.275737,
+                    166.739453
+                ],
+                [
+                    377.027031,
+                    156.029593
+                ],
+                [
+                    377.027031,
+                    171.660199
+                ],
+                [
+                    186.565193,
+                    181.501692
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "keterangan yang disampaikan oleh: ",
+            "points": [
+                [
+                    25.562737,
+                    225.82604
+                ],
+                [
+                    227.703275,
+                    213.386623
+                ],
+                [
+                    227.942494,
+                    224.390723
+                ],
+                [
+                    26.998054,
+                    236.83014
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "MASKUR HIDAYAT",
+            "points": [
+                [
+                    219.056479,
+                    238.877919
+                ],
+                [
+                    355.825735,
+                    231.172609
+                ],
+                [
+                    356.596266,
+                    244.656901
+                ],
+                [
+                    217.515417,
+                    250.821149
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "(Selanjutnya disebut “Pemegang Polis\")",
+            "points": [
+                [
+                    169.742493,
+                    260.452786
+                ],
+                [
+                    400.9018,
+                    249.665353
+                ],
+                [
+                    400.9018,
+                    265.075972
+                ],
+                [
+                    169.186017,
+                    276.163054
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "dengan ini setuju untuk membayarkan Manfaat Asuransi berkenaan dengan diri Peserta",
+            "points": [
+                [
+                    22.243592,
+                    303.683427
+                ],
+                [
+                    554.14501,
+                    278.044008
+                ],
+                [
+                    553.212668,
+                    292.961488
+                ],
+                [
+                    22.709763,
+                    316.736221
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "latau para Peserta) berdasarkan syarat-syarat dan ketentuan-ketentuan sebagaimana",
+            "points": [
+                [
+                    22.337989,
+                    319.755597
+                ],
+                [
+                    554.623525,
+                    295.21072
+                ],
+                [
+                    554.912981,
+                    306.49949
+                ],
+                [
+                    22.440575,
+                    330.56626
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "tercantum di dalam Ringkasan Polis, Ketentuan Umum Polis, Ketentuan Khusus..",
+            "points": [
+                [
+                    20.10843,
+                    333.719364
+                ],
+                [
+                    556.098021,
+                    309.017609
+                ],
+                [
+                    555.779619,
+                    322.708862
+                ],
+                [
+                    20.614328,
+                    345.082754
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "Ketentuan Tambahan dan ketentuan lainnya (apabila diadakan) yang",
+            "points": [
+                [
+                    20.77392,
+                    349.293929
+                ],
+                [
+                    557.279341,
+                    325.061503
+                ],
+                [
+                    556.989886,
+                    339.534286
+                ],
+                [
+                    20.239155,
+                    359.435179
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "dilekatkan/dilampirkan pada Polis ini yang merupakan bagian yang tidak terpisahkan dari",
+            "points": [
+                [
+                    20.111435,
+                    363.139592
+                ],
+                [
+                    558.724785,
+                    341.272026
+                ],
+                [
+                    558.724785,
+                    353.052872
+                ],
+                [
+                    20.123086,
+                    376.380068
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "Polis ini.",
+            "points": [
+                [
+                    19.804685,
+                    379.882482
+                ],
+                [
+                    69.156879,
+                    377.335272
+                ],
+                [
+                    69.156879,
+                    388.160914
+                ],
+                [
+                    19.167883,
+                    389.75292
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "Jakarta, 29 Agustus 2012",
+            "points": [
+                [
+                    210.427492,
+                    405.148786
+                ],
+                [
+                    373.587436,
+                    398.622389
+                ],
+                [
+                    374.105392,
+                    412.400347
+                ],
+                [
+                    210.427492,
+                    418.201581
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "PT Prudential Life Assurance",
+            "points": [
+                [
+                    171.269106,
+                    425.660321
+                ],
+                [
+                    407.151768,
+                    418.201581
+                ],
+                [
+                    407.617939,
+                    432.186718
+                ],
+                [
+                    170.802934,
+                    439.645458
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "###",
+            "points": [
+                [
+                    29.863858,
+                    473.209787
+                ],
+                [
+                    160.391814,
+                    470.878931
+                ],
+                [
+                    156.973177,
+                    526.767724
+                ],
+                [
+                    28.465344,
+                    528.684165
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "Dian Budiani",
+            "points": [
+                [
+                    29.55304,
+                    537.541418
+                ],
+                [
+                    114.396211,
+                    534.744391
+                ],
+                [
+                    113.463868,
+                    548.263357
+                ],
+                [
+                    28.620697,
+                    549.66187
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "Pejabat Berwenangi",
+            "points": [
+                [
+                    28.620697,
+                    554.323583
+                ],
+                [
+                    137.704774,
+                    553.39124
+                ],
+                [
+                    137.704774,
+                    565.977864
+                ],
+                [
+                    28.154526,
+                    567.376378
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "Boa Meas un Rp 6,000 berdasarkan keputusanı",
+            "points": [
+                [
+                    176.39699,
+                    521.225425
+                ],
+                [
+                    378.249149,
+                    515.165199
+                ],
+                [
+                    378.249149,
+                    524.022452
+                ],
+                [
+                    175.930818,
+                    531.015021
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "Kantor Pasinan Pak Tangy 26 2012",
+            "points": [
+                [
+                    185.121045,
+                    530.690034
+                ],
+                [
+                    367.043211,
+                    524.402402
+                ],
+                [
+                    367.676173,
+                    534.314055
+                ],
+                [
+                    184.937035,
+                    539.441938
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "Nomor 5C00720K/WPS OK 12032012",
+            "points": [
+                [
+                    195.910927,
+                    539.133226
+                ],
+                [
+                    358.357341,
+                    534.574782
+                ],
+                [
+                    358.669956,
+                    543.601644
+                ],
+                [
+                    196.442354,
+                    548.729528
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "###",
+            "points": [
+                [
+                    435.588215,
+                    435.916088
+                ],
+                [
+                    527.423955,
+                    436.84843
+                ],
+                [
+                    528.822469,
+                    517.962226
+                ],
+                [
+                    434.655873,
+                    518.894569
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "William Kuan",
+            "points": [
+                [
+                    430.460331,
+                    524.488623
+                ],
+                [
+                    522.296071,
+                    523.09011
+                ],
+                [
+                    522.296071,
+                    533.812048
+                ],
+                [
+                    430.926502,
+                    535.676733
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "Presiden Direktur",
+            "points": [
+                [
+                    432.791188,
+                    541.270788
+                ],
+                [
+                    532.085668,
+                    538.473761
+                ],
+                [
+                    531.619497,
+                    548.729528
+                ],
+                [
+                    432.791188,
+                    552.458898
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "MOHON PELAJARI POLIS INI DENGAN CERMAT",
+            "points": [
+                [
+                    167.056604,
+                    599.227205
+                ],
+                [
+                    421.755634,
+                    591.175157
+                ],
+                [
+                    421.755634,
+                    601.769958
+                ],
+                [
+                    166.632812,
+                    610.66959
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "setelah menerima Surat Pengajuan Asuransi Jiwa beserta semua pernyataan dan",
+            "points": [
+                [
+                    27.199802,
+                    210.615379
+                ],
+                [
+                    546.135884,
+                    177.903326
+                ],
+                [
+                    547.648203,
+                    193.204118
+                ],
+                [
+                    27.821368,
+                    221.907086
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_TRADE_054913.jpg",
+    "imageData": null,
+    "imageHeight": 622,
+    "imageWidth": 600
+}

@@ -1,0 +1,1098 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "PT ABC Konstruksi Raya",
+            "points": [
+                [
+                    305.701654,
+                    12.867287
+                ],
+                [
+                    496.564517,
+                    33.042015
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Jalan Kenari No 55, Yogyakarta",
+            "points": [
+                [
+                    290.869772,
+                    37.45158
+                ],
+                [
+                    516.5875550000001,
+                    59.031125
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "+0274 9876 5678",
+            "points": [
+                [
+                    339.268556,
+                    61.255421
+                ],
+                [
+                    468.81329,
+                    80.103375
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "abckontruksiraya@gmail.com",
+            "points": [
+                [
+                    293.992283,
+                    87.400625
+                ],
+                [
+                    512.7234599999999,
+                    106.794892
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "www.abckonstruksi.com",
+            "points": [
+                [
+                    313.898234,
+                    110.814233
+                ],
+                [
+                    495.86195499999997,
+                    128.92075499999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Tanggal: 21 Juli 2023",
+            "points": [
+                [
+                    77.781293,
+                    154.807787
+                ],
+                [
+                    232.79199400000002,
+                    177.582383
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Nomor Tagihan: 29202345-100",
+            "points": [
+                [
+                    74.262327,
+                    180.021544
+                ],
+                [
+                    304.31509600000004,
+                    198.990497
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kepada,",
+            "points": [
+                [
+                    79.247528,
+                    228.103593
+                ],
+                [
+                    139.363294,
+                    246.22231299999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pemerintah Kabupaten Gunungkidul",
+            "points": [
+                [
+                    78.36779,
+                    252.43781
+                ],
+                [
+                    336.77761000000004,
+                    271.55334300000004
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Jalan Wonosari 22",
+            "points": [
+                [
+                    78.661031,
+                    276.478826
+                ],
+                [
+                    207.19147499999997,
+                    295.30118300000004
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "+6234 8976 5678",
+            "points": [
+                [
+                    73.96907,
+                    299.933491
+                ],
+                [
+                    207.455397,
+                    316.938105
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "pemerintahkabgk@gmail.com",
+            "points": [
+                [
+                    78.36779,
+                    326.906348
+                ],
+                [
+                    293.494257,
+                    343.324594
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Rincian Tagihan Revitalisasi Alun-Alun:",
+            "points": [
+                [
+                    77.886487,
+                    370.273192
+                ],
+                [
+                    364.986308,
+                    389.869836
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "No",
+            "points": [
+                [
+                    89.887067,
+                    401.125074
+                ],
+                [
+                    114.002523,
+                    422.26431199999996
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Deskripsi Layanan",
+            "points": [
+                [
+                    187.034721,
+                    402.839073
+                ],
+                [
+                    321.26986999999997,
+                    420.721719
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Jumlah",
+            "points": [
+                [
+                    392.759103,
+                    401.125074
+                ],
+                [
+                    448.304695,
+                    421.235916
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Harga satuan",
+            "points": [
+                [
+                    484.192204,
+                    401.696407
+                ],
+                [
+                    578.425387,
+                    423.292709
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Total",
+            "points": [
+                [
+                    639.628462,
+                    403.981723
+                ],
+                [
+                    685.916392,
+                    423.80690699999997
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "1.",
+            "points": [
+                [
+                    92.172901,
+                    440.546933
+                ],
+                [
+                    110.402345,
+                    459.800768
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Desain Konseptual",
+            "points": [
+                [
+                    179.605777,
+                    438.261602
+                ],
+                [
+                    322.298492,
+                    460.31496699999997
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "1",
+            "points": [
+                [
+                    413.807392,
+                    441.517156
+                ],
+                [
+                    430.762265,
+                    460.444089
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "50.000.000",
+            "points": [
+                [
+                    484.763647,
+                    436.547619
+                ],
+                [
+                    573.282277,
+                    460.829165
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "50.000.000",
+            "points": [
+                [
+                    621.561455,
+                    441.241295
+                ],
+                [
+                    702.43289,
+                    458.45665099999997
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2.",
+            "points": [
+                [
+                    87.02979,
+                    478.254779
+                ],
+                [
+                    110.916656,
+                    501.45081
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Survey Lokasi",
+            "points": [
+                [
+                    193.892191,
+                    475.39813
+                ],
+                [
+                    316.126759,
+                    500.93661099999997
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "1",
+            "points": [
+                [
+                    414.19273,
+                    481.950181
+                ],
+                [
+                    430.37692699999997,
+                    500.93661099999997
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "20.000.000",
+            "points": [
+                [
+                    485.335152,
+                    473.684116
+                ],
+                [
+                    571.739343,
+                    499.90821600000004
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "20.000.000",
+            "points": [
+                [
+                    621.913298,
+                    480.214948
+                ],
+                [
+                    703.389948,
+                    497.669407
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "3.",
+            "points": [
+                [
+                    88.74415,
+                    518.819304
+                ],
+                [
+                    114.002522,
+                    542.072454
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Perencanaan Teknis",
+            "points": [
+                [
+                    179.605777,
+                    513.677324
+                ],
+                [
+                    327.441602,
+                    541.044058
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "1",
+            "points": [
+                [
+                    412.188659,
+                    521.675953
+                ],
+                [
+                    432.36105299999997,
+                    540.5298600000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "40.000.000",
+            "points": [
+                [
+                    483.049318,
+                    516.533972
+                ],
+                [
+                    574.8252090000001,
+                    539.501463
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "40.000.000",
+            "points": [
+                [
+                    622.518514,
+                    522.29693
+                ],
+                [
+                    702.4328909999999,
+                    538.316775
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "4.",
+            "points": [
+                [
+                    88.74415,
+                    558.812481
+                ],
+                [
+                    111.945278,
+                    579.60891
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pengadaan Material",
+            "points": [
+                [
+                    179.034302,
+                    556.527149
+                ],
+                [
+                    326.92728999999997,
+                    581.665702
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "1",
+            "points": [
+                [
+                    417.331769,
+                    558.812481
+                ],
+                [
+                    428.760875,
+                    576.523722
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "200.000.000",
+            "points": [
+                [
+                    484.434023,
+                    560.939239
+                ],
+                [
+                    574.971748,
+                    577.5090190000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "200.000.000",
+            "points": [
+                [
+                    618.552222,
+                    562.240478
+                ],
+                [
+                    706.2765830000001,
+                    576.523722
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "5.",
+            "points": [
+                [
+                    89.315593,
+                    599.376975
+                ],
+                [
+                    110.916656,
+                    617.659565
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Konstruksi & Pengerjaan",
+            "points": [
+                [
+                    156.747501,
+                    598.805657
+                ],
+                [
+                    341.327999,
+                    620.230554
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "1",
+            "points": [
+                [
+                    414.19273,
+                    599.783569
+                ],
+                [
+                    430.303808,
+                    620.2305550000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "245.000.000",
+            "points": [
+                [
+                    482.477813,
+                    602.804972
+                ],
+                [
+                    578.939698,
+                    618.68796
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "245.000.000",
+            "points": [
+                [
+                    617.34163,
+                    602.233655
+                ],
+                [
+                    708.546078,
+                    618.173763
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "6.",
+            "points": [
+                [
+                    89.315593,
+                    638.227517
+                ],
+                [
+                    110.916656,
+                    659.823803
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Penataan Taman & Lanskap",
+            "points": [
+                [
+                    148.747114,
+                    636.513503
+                ],
+                [
+                    352.642842,
+                    661.366397
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "1",
+            "points": [
+                [
+                    414.474493,
+                    639.370183
+                ],
+                [
+                    430.303809,
+                    655.710219
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "150.000.000",
+            "points": [
+                [
+                    483.620761,
+                    638.798834
+                ],
+                [
+                    575.33952,
+                    657.767011
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "150.000.000",
+            "points": [
+                [
+                    619.168809,
+                    639.935196
+                ],
+                [
+                    707.696712,
+                    658.824267
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "7.",
+            "points": [
+                [
+                    89.104448,
+                    678.071364
+                ],
+                [
+                    113.42676900000001,
+                    699.5080790000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pemasangan Penerangan",
+            "points": [
+                [
+                    161.835303,
+                    676.182673
+                ],
+                [
+                    342.528957,
+                    702.482778
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "1",
+            "points": [
+                [
+                    413.807392,
+                    680.432244
+                ],
+                [
+                    427.964096,
+                    701.05867
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "60.000.000",
+            "points": [
+                [
+                    483.456838,
+                    677.127012
+                ],
+                [
+                    575.456599,
+                    699.933036
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "60.000.000",
+            "points": [
+                [
+                    618.488275,
+                    680.580167
+                ],
+                [
+                    705.6353670000001,
+                    699.3198199999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "8.",
+            "points": [
+                [
+                    87.604946,
+                    720.002011
+                ],
+                [
+                    114.177678,
+                    740.4556630000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Finishing & Penyelesaian",
+            "points": [
+                [
+                    153.322479,
+                    714.288713
+                ],
+                [
+                    346.13195399999995,
+                    739.941464
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "1",
+            "points": [
+                [
+                    413.036716,
+                    720.312492
+                ],
+                [
+                    431.532941,
+                    739.181236
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "70.000.000",
+            "points": [
+                [
+                    485.910292,
+                    714.288713
+                ],
+                [
+                    571.4001870000001,
+                    739.427266
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "70.000.000",
+            "points": [
+                [
+                    621.916994,
+                    721.144677
+                ],
+                [
+                    705.6353660000001,
+                    737.370475
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Subtotal",
+            "points": [
+                [
+                    73.318531,
+                    774.278494
+                ],
+                [
+                    145.55065,
+                    794.960654
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "835.000.000",
+            "points": [
+                [
+                    617.015428,
+                    777.418941
+                ],
+                [
+                    708.2069220000001,
+                    793.932257
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pajak (10%)",
+            "points": [
+                [
+                    76.747266,
+                    798.274381
+                ],
+                [
+                    168.69464599999998,
+                    822.7273469999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "83.500.000",
+            "points": [
+                [
+                    623.631385,
+                    799.988396
+                ],
+                [
+                    711.292788,
+                    820.156358
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Total Tagihan",
+            "points": [
+                [
+                    76.175808,
+                    844.552204
+                ],
+                [
+                    178.466556,
+                    865.919982
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "918.500.000",
+            "points": [
+                [
+                    616.297634,
+                    847.236774
+                ],
+                [
+                    706.739653,
+                    866.3649469999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Tagihan tersebut mohon segera dilunasi dengan tenggat waktu 1 bulan setelah proyek",
+            "points": [
+                [
+                    78.142373,
+                    895.267278
+                ],
+                [
+                    676.391202,
+                    914.863922
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "diselesaikan. Terima kasih.",
+            "points": [
+                [
+                    79.149778,
+                    921.165017
+                ],
+                [
+                    267.442365,
+                    937.393509
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Hormat kami,",
+            "points": [
+                [
+                    77.898384,
+                    967.549837
+                ],
+                [
+                    176.531808,
+                    984.766193
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "PT ABC Konstruksi Raya",
+            "points": [
+                [
+                    79.8926,
+                    991.790794
+                ],
+                [
+                    261.83049,
+                    1009.962559
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_RECEIPT_ZZ_2025041400003.jpg",
+    "imageData": null,
+    "imageHeight": 1024,
+    "imageWidth": 799
+}

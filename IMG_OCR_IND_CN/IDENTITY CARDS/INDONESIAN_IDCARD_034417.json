@@ -1,0 +1,274 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "INDONESIA",
+            "points": [
+                [
+                    423.235792,
+                    147.212504
+                ],
+                [
+                    870.127776,
+                    224.022064
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "SURAT IZIN MENGEMUDI",
+            "points": [
+                [
+                    428.472807,
+                    225.410622
+                ],
+                [
+                    876.009074,
+                    262.535209
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "DRIVING LICENSE",
+            "points": [
+                [
+                    945.337465,
+                    183.714501
+                ],
+                [
+                    1278.6149799999998,
+                    219.82583400000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "BIIUMUM",
+            "points": [
+                [
+                    896.402379,
+                    236.241767
+                ],
+                [
+                    1284.85295,
+                    332.080332
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "8806-1548-1429",
+            "points": [
+                [
+                    822.439017,
+                    334.752037
+                ],
+                [
+                    1278.6149810000002,
+                    387.02761699999996
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "1. TAUFIK",
+            "points": [
+                [
+                    495.172839,
+                    387.092637
+                ],
+                [
+                    673.273967,
+                    425.387081
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2. LAMONGAN, 23-06-1988",
+            "points": [
+                [
+                    491.316992,
+                    429.528618
+                ],
+                [
+                    1011.527192,
+                    472.390181
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "3. -, PRIA",
+            "points": [
+                [
+                    495.744221,
+                    473.653133
+                ],
+                [
+                    675.784851,
+                    513.803585
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "4. DS. KARANGLANGIT",
+            "points": [
+                [
+                    494.808336,
+                    515.004473
+                ],
+                [
+                    903.2443129999999,
+                    553.6910029999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "RT.001 RW.003",
+            "points": [
+                [
+                    541.941475,
+                    558.404416
+                ],
+                [
+                    833.468668,
+                    595.421131
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "LAMONGAN",
+            "points": [
+                [
+                    547.17849,
+                    601.168942
+                ],
+                [
+                    757.291569,
+                    638.4900660000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "LAMONGAN",
+            "points": [
+                [
+                    542.715797,
+                    642.630619
+                ],
+                [
+                    759.009658,
+                    681.3880800000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "5. WIRASWASTA",
+            "points": [
+                [
+                    492.026295,
+                    686.625094
+                ],
+                [
+                    795.040245,
+                    725.459396
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "6. JATIM",
+            "points": [
+                [
+                    493.062664,
+                    727.56366
+                ],
+                [
+                    650.547482,
+                    768.6716690000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "11-09-2028",
+            "points": [
+                [
+                    1065.87392,
+                    729.701419
+                ],
+                [
+                    1266.109586,
+                    766.234428
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "INDO",
+            "points": [
+                [
+                    232.071085,
+                    367.38636
+                ],
+                [
+                    249.662885,
+                    405.768469
+                ],
+                [
+                    340.553852,
+                    372.450666
+                ],
+                [
+                    329.625612,
+                    334.868184
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_IDCARD_034417.jpg",
+    "imageData": null,
+    "imageHeight": 970,
+    "imageWidth": 1440
+}

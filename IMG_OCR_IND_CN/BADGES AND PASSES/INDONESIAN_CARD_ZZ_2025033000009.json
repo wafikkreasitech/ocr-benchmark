@@ -1,0 +1,130 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "our bakeried",
+            "points": [
+                [
+                    237.776747,
+                    81.033395
+                ],
+                [
+                    1302.563389,
+                    101.911565
+                ],
+                [
+                    1292.124304,
+                    279.376005
+                ],
+                [
+                    222.11812,
+                    248.058751
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "made with love.",
+            "points": [
+                [
+                    237.776747,
+                    276.766234
+                ],
+                [
+                    820.476832,
+                    288.304144
+                ],
+                [
+                    814.536178,
+                    375.937539
+                ],
+                [
+                    237.776747,
+                    360.278912
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "@our.bakeried",
+            "points": [
+                [
+                    394.603196,
+                    554.809972
+                ],
+                [
+                    748.158667,
+                    609.718208
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "0831 0775 2224",
+            "points": [
+                [
+                    395.942421,
+                    676.679472
+                ],
+                [
+                    796.370776,
+                    739.62306
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Jalan Candi Lontar 41D/ 12",
+            "points": [
+                [
+                    399.960097,
+                    801.227422
+                ],
+                [
+                    1053.5020279999999,
+                    858.814109
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "MENERIMA PESANAN SEGALA JENIS MASAKAN DAN KUE",
+            "points": [
+                [
+                    419.280529,
+                    1050.213679
+                ],
+                [
+                    1695.02652,
+                    1070.837748
+                ],
+                [
+                    1690.607077,
+                    1129.76366
+                ],
+                [
+                    411.914791,
+                    1100.300704
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_CARD_ZZ_2025033000009.jpg",
+    "imageData": null,
+    "imageHeight": 1266,
+    "imageWidth": 1770
+}

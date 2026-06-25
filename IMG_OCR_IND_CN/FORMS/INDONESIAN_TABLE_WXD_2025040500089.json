@@ -1,0 +1,586 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "C. Perkakas & Perlengkapan RT/ Housing,",
+            "points": [
+                [
+                    94.802367,
+                    6.342245
+                ],
+                [
+                    768.342957,
+                    42.742329
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Tools Equipment & Household",
+            "points": [
+                [
+                    155.37657,
+                    46.910278
+                ],
+                [
+                    626.632685,
+                    79.559212
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Implementation",
+            "points": [
+                [
+                    157.599485,
+                    85.255417
+                ],
+                [
+                    407.81535399999996,
+                    117.070753
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "d. Kesehatan & Pendidikan/Health &",
+            "points": [
+                [
+                    94.802367,
+                    121.377642
+                ],
+                [
+                    689.151923,
+                    155.276952
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Education",
+            "points": [
+                [
+                    158.710921,
+                    159.167042
+                ],
+                [
+                    312.64718100000005,
+                    191.399177
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "e. Trans., Kom., Rek., & Budaya/ Trans.,",
+            "points": [
+                [
+                    95.358107,
+                    198.067942
+                ],
+                [
+                    760.00706,
+                    231.689351
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Com., Recreation & Culture",
+            "points": [
+                [
+                    158.155203,
+                    236.413018
+                ],
+                [
+                    588.426485,
+                    270.590208
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "f. Hotel & Restoran/ Hotel & Restaurant",
+            "points": [
+                [
+                    95.908538,
+                    279.114079
+                ],
+                [
+                    749.5819,
+                    312.179812
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "g. Lainnya/ Others",
+            "points": [
+                [
+                    95.908538,
+                    333.575296
+                ],
+                [
+                    412.672675,
+                    366.36314899999996
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "* Angka sementara/Preliminary Figure",
+            "points": [
+                [
+                    311.184931,
+                    404.700877
+                ],
+                [
+                    781.312219,
+                    432.399965
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "** Angka sangat sementara/Very Preliminary Figure",
+            "points": [
+                [
+                    310.60121,
+                    435.647062
+                ],
+                [
+                    949.4982439999999,
+                    463.664259
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "5,32",
+            "points": [
+                [
+                    833.239947,
+                    46.548314
+                ],
+                [
+                    904.330318,
+                    81.11159699999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "4,34",
+            "points": [
+                [
+                    829.691949,
+                    140.497584
+                ],
+                [
+                    902.2748330000001,
+                    176.501002
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2,06",
+            "points": [
+                [
+                    832.572222,
+                    215.384692
+                ],
+                [
+                    905.155106,
+                    249.227904
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2,76",
+            "points": [
+                [
+                    830.844041,
+                    278.750707
+                ],
+                [
+                    904.435038,
+                    314.03405599999996
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "4,91",
+            "points": [
+                [
+                    830.844041,
+                    332.899856
+                ],
+                [
+                    902.9949009999999,
+                    365.878978
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "4,89",
+            "points": [
+                [
+                    962.76062,
+                    45.448573
+                ],
+                [
+                    1041.248073,
+                    79.72382
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "4,89",
+            "points": [
+                [
+                    965.064848,
+                    140.497584
+                ],
+                [
+                    1039.087869,
+                    174.772842
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2,19",
+            "points": [
+                [
+                    964.488802,
+                    216.536806
+                ],
+                [
+                    1040.528005,
+                    250.380018
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "1,89",
+            "points": [
+                [
+                    965.640894,
+                    280.478889
+                ],
+                [
+                    1039.807937,
+                    313.025965
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "1,89",
+            "points": [
+                [
+                    965.064848,
+                    332.323788
+                ],
+                [
+                    1041.248074,
+                    367.031091
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "4,70",
+            "points": [
+                [
+                    1098.133454,
+                    46.600708
+                ],
+                [
+                    1173.452611,
+                    81.30797799999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "4,27",
+            "points": [
+                [
+                    1098.709521,
+                    140.497606
+                ],
+                [
+                    1174.172678,
+                    174.91686399999998
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "3,78",
+            "points": [
+                [
+                    1098.133454,
+                    216.536828
+                ],
+                [
+                    1172.732542,
+                    251.244109
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2,15",
+            "points": [
+                [
+                    1101.589795,
+                    281.054957
+                ],
+                [
+                    1173.45261,
+                    313.169988
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2,15",
+            "points": [
+                [
+                    1100.437681,
+                    333.475924
+                ],
+                [
+                    1174.172679,
+                    365.734977
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "4,69",
+            "points": [
+                [
+                    1245.603449,
+                    46.600686
+                ],
+                [
+                    1320.778583,
+                    83.18016
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "4,13",
+            "points": [
+                [
+                    1247.907676,
+                    142.225766
+                ],
+                [
+                    1320.778583,
+                    175.34891
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "4,01",
+            "points": [
+                [
+                    1246.755563,
+                    216.536828
+                ],
+                [
+                    1319.3384469999999,
+                    251.67615500000002
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "1,85",
+            "points": [
+                [
+                    1247.331608,
+                    280.478889
+                ],
+                [
+                    1320.778583,
+                    313.602033
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2,71",
+            "points": [
+                [
+                    1247.331608,
+                    331.171718
+                ],
+                [
+                    1321.4986509999999,
+                    366.887091
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "4,02",
+            "points": [
+                [
+                    1417.267746,
+                    48.328857
+                ],
+                [
+                    1489.994652,
+                    81.740024
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "4,30",
+            "points": [
+                [
+                    1416.6917,
+                    139.92156
+                ],
+                [
+                    1490.714721,
+                    173.908773
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2,84",
+            "points": [
+                [
+                    1416.6917,
+                    215.384758
+                ],
+                [
+                    1490.714721,
+                    248.795881
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "3,56",
+            "points": [
+                [
+                    1415.539608,
+                    279.902843
+                ],
+                [
+                    1490.71472,
+                    315.04217
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2,75",
+            "points": [
+                [
+                    1417.267746,
+                    332.899856
+                ],
+                [
+                    1489.994652,
+                    366.887091
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_TABLE_WXD_2025040500089.png",
+    "imageData": null,
+    "imageHeight": 501,
+    "imageWidth": 1541
+}

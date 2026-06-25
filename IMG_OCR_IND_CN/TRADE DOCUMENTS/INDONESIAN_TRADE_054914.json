@@ -1,0 +1,922 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "PT. Bintang Makmur",
+            "points": [
+                [
+                    80.149061,
+                    99.238708
+                ],
+                [
+                    428.337616,
+                    134.975467
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "JI. Pajajaran No 200 Ujungberu Bandung",
+            "points": [
+                [
+                    80.149061,
+                    148.087529
+                ],
+                [
+                    557.943996,
+                    175.082914
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "INVOICE",
+            "points": [
+                [
+                    417.879969,
+                    238.929187
+                ],
+                [
+                    609.889442,
+                    276.89412300000004
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "NO: 426728244",
+            "points": [
+                [
+                    429.023385,
+                    294.633979
+                ],
+                [
+                    604.23199,
+                    320.85805500000004
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kantor",
+            "points": [
+                [
+                    81.006272,
+                    359.765717
+                ],
+                [
+                    162.18165499999998,
+                    387.189602
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Alamat",
+            "points": [
+                [
+                    81.863436,
+                    400.901567
+                ],
+                [
+                    166.038988,
+                    424.211859
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kola",
+            "points": [
+                [
+                    81.863436,
+                    437.752444
+                ],
+                [
+                    136.72325899999998,
+                    462.77671200000003
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Telepon",
+            "points": [
+                [
+                    78.434686,
+                    474.603298
+                ],
+                [
+                    176.06805400000002,
+                    498.256376
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Cilacap, Toko Boku",
+            "points": [
+                [
+                    255.871993,
+                    358.908718
+                ],
+                [
+                    490.05494,
+                    385.647008
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Jl. Cihampelas No 201",
+            "points": [
+                [
+                    255.871993,
+                    401.758567
+                ],
+                [
+                    517.827736,
+                    427.468452
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Bandung",
+            "points": [
+                [
+                    259.300791,
+                    436.895468
+                ],
+                [
+                    368.07752800000003,
+                    463.46233
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "022-87563545",
+            "points": [
+                [
+                    255.871993,
+                    473.746275
+                ],
+                [
+                    419.080017,
+                    499.02767300000005
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Date: 02-Dec-2010",
+            "points": [
+                [
+                    710.180094,
+                    361.479716
+                ],
+                [
+                    950.6204710000001,
+                    387.189602
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "No. 73473244",
+            "points": [
+                [
+                    711.894516,
+                    434.324447
+                ],
+                [
+                    954.477804,
+                    461.234118
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Nama Barang",
+            "points": [
+                [
+                    130.722969,
+                    542.306034
+                ],
+                [
+                    292.559503,
+                    572.300893
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Ballpoint Big",
+            "points": [
+                [
+                    87.863727,
+                    596.296827
+                ],
+                [
+                    239.32831099999999,
+                    624.749092
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pensil 2B",
+            "points": [
+                [
+                    88.720938,
+                    640.860651
+                ],
+                [
+                    199.983517,
+                    665.627835
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pensil HB",
+            "points": [
+                [
+                    88.720938,
+                    683.710477
+                ],
+                [
+                    203.06938300000002,
+                    706.506579
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kertas A4",
+            "points": [
+                [
+                    87.006563,
+                    727.417325
+                ],
+                [
+                    206.926716,
+                    751.241808
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Satuan",
+            "points": [
+                [
+                    378.449477,
+                    544.020032
+                ],
+                [
+                    465.02522,
+                    566.9018130000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Jumlah",
+            "points": [
+                [
+                    529.314036,
+                    544.020032
+                ],
+                [
+                    615.803987,
+                    568.4444070000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Harga",
+            "points": [
+                [
+                    691.322012,
+                    544.020032
+                ],
+                [
+                    763.925565,
+                    569.987001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Total",
+            "points": [
+                [
+                    849.044073,
+                    542.306034
+                ],
+                [
+                    910.5042100000001,
+                    569.215705
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Lusin",
+            "points": [
+                [
+                    382.735392,
+                    594.582828
+                ],
+                [
+                    448.395746,
+                    620.892606
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Lusin",
+            "points": [
+                [
+                    382.735392,
+                    640.860651
+                ],
+                [
+                    448.395746,
+                    664.856538
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Lusin",
+            "points": [
+                [
+                    384.449814,
+                    683.710477
+                ],
+                [
+                    449.167213,
+                    708.82047
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "3",
+            "points": [
+                [
+                    562.744285,
+                    596.296827
+                ],
+                [
+                    581.087993,
+                    617.036121
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "4",
+            "points": [
+                [
+                    563.601449,
+                    641.717674
+                ],
+                [
+                    582.630926,
+                    664.856538
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2",
+            "points": [
+                [
+                    564.458613,
+                    684.5675
+                ],
+                [
+                    581.859459,
+                    705.735282
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "5",
+            "points": [
+                [
+                    563.601449,
+                    729.131324
+                ],
+                [
+                    584.173859,
+                    748.15662
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pcs",
+            "points": [
+                [
+                    399.021887,
+                    727.417325
+                ],
+                [
+                    443.766947,
+                    752.784402
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pcs",
+            "points": [
+                [
+                    404.16506,
+                    771.981149
+                ],
+                [
+                    446.85281299999997,
+                    793.663145
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Paper Clip 100",
+            "points": [
+                [
+                    89.350079,
+                    770.894026
+                ],
+                [
+                    258.89413,
+                    797.8873910000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Cartridge BC-20 Can",
+            "points": [
+                [
+                    88.866219,
+                    813.94798
+                ],
+                [
+                    332.05355299999997,
+                    839.2482140000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Box",
+            "points": [
+                [
+                    399.019609,
+                    815.882982
+                ],
+                [
+                    445.711942,
+                    839.683591
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "10",
+            "points": [
+                [
+                    553.370514,
+                    772.345274
+                ],
+                [
+                    582.014915,
+                    792.662866
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "4",
+            "points": [
+                [
+                    564.983104,
+                    814.915487
+                ],
+                [
+                    583.321334,
+                    837.942082
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "36,000",
+            "points": [
+                [
+                    710.054013,
+                    597.135238
+                ],
+                [
+                    789.784213,
+                    620.655262
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "21,000",
+            "points": [
+                [
+                    710.586244,
+                    641.301827
+                ],
+                [
+                    788.8261729999999,
+                    666.631082
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "18,000",
+            "points": [
+                [
+                    709.521752,
+                    684.936272
+                ],
+                [
+                    789.784213,
+                    708.775582
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "24,000",
+            "points": [
+                [
+                    710.054013,
+                    729.10289
+                ],
+                [
+                    791.2212730000001,
+                    753.740372
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "100,000",
+            "points": [
+                [
+                    697.280135,
+                    772.205191
+                ],
+                [
+                    790.742253,
+                    798.811561
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "1.680,000",
+            "points": [
+                [
+                    676.52261,
+                    816.37178
+                ],
+                [
+                    791.700293,
+                    838.5614879999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "1.680,000",
+            "points": [
+                [
+                    821.293112,
+                    814.775407
+                ],
+                [
+                    934.128936,
+                    840.956062
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "108,000",
+            "points": [
+                [
+                    842.050667,
+                    596.07098
+                ],
+                [
+                    933.969243,
+                    622.570922
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "84,000",
+            "points": [
+                [
+                    854.824515,
+                    640.237568
+                ],
+                [
+                    933.490223,
+                    665.673251
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "36,000",
+            "points": [
+                [
+                    856.421267,
+                    685.468415
+                ],
+                [
+                    933.4902219999999,
+                    708.2966670000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "120,000",
+            "points": [
+                [
+                    844.179651,
+                    729.10286
+                ],
+                [
+                    934.927283,
+                    752.303598
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "100,000",
+            "points": [
+                [
+                    840.453914,
+                    772.205191
+                ],
+                [
+                    933.011203,
+                    797.374817
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Sub Total",
+            "points": [
+                [
+                    674.114417,
+                    969.279338
+                ],
+                [
+                    786.540207,
+                    996.6182200000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Discount",
+            "points": [
+                [
+                    681.198574,
+                    1018.857656
+                ],
+                [
+                    788.452934,
+                    1042.230307
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Grand Total",
+            "points": [
+                [
+                    653.570308,
+                    1069.852502
+                ],
+                [
+                    789.09051,
+                    1094.783298
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2,240.000",
+            "points": [
+                [
+                    830.674655,
+                    970.695866
+                ],
+                [
+                    944.021396,
+                    996.6182200000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "70.000",
+            "points": [
+                [
+                    866.803916,
+                    1017.441128
+                ],
+                [
+                    944.658971,
+                    1043.1510170000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "2.170.000",
+            "points": [
+                [
+                    835.633611,
+                    1069.852502
+                ],
+                [
+                    942.604596,
+                    1092.870992
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "PT. Bintang Makmur",
+            "points": [
+                [
+                    523.221497,
+                    1178.21655
+                ],
+                [
+                    800.566871,
+                    1211.434009
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "(Manager Penjualan)",
+            "points": [
+                [
+                    573.164015,
+                    1354.637129
+                ],
+                [
+                    831.311295,
+                    1380.134552
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_TRADE_054914.jpg",
+    "imageData": null,
+    "imageHeight": 1536,
+    "imageWidth": 1024
+}

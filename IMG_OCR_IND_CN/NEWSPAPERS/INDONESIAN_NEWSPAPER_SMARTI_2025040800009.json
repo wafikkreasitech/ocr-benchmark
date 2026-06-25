@@ -1,0 +1,1042 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "masyarakat yang majemuk.",
+            "points": [
+                [
+                    84.088574,
+                    15.327051
+                ],
+                [
+                    477.891951,
+                    13.563752
+                ],
+                [
+                    480.243016,
+                    39.425466
+                ],
+                [
+                    82.913042,
+                    37.662167
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "Para wali dan kiai lokal ketika",
+            "points": [
+                [
+                    112.674088,
+                    37.794243
+                ],
+                [
+                    536.998448,
+                    40.345755
+                ],
+                [
+                    536.213416,
+                    61.346176
+                ],
+                [
+                    113.94807,
+                    59.776044
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "berdakwah di Jawa juga tidak",
+            "points": [
+                [
+                    79.945065,
+                    61.100836
+                ],
+                [
+                    544.064007,
+                    62.867226
+                ],
+                [
+                    539.746195,
+                    86.860693
+                ],
+                [
+                    79.30721,
+                    84.505502
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "pernah mengharamkan budaya",
+            "points": [
+                [
+                    79.30721,
+                    84.505502
+                ],
+                [
+                    539.746195,
+                    86.860693
+                ],
+                [
+                    537.417007,
+                    111.258535
+                ],
+                [
+                    79.905329,
+                    110.471838
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "lokal, semisal wayang, tahlilan,",
+            "points": [
+                [
+                    79.905329,
+                    110.471838
+                ],
+                [
+                    534.094876,
+                    111.252823
+                ],
+                [
+                    534.04859,
+                    136.55115
+                ],
+                [
+                    80.18611,
+                    135.545892
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "serta tradisi mitoni dan mido-",
+            "points": [
+                [
+                    80.18611,
+                    135.545892
+                ],
+                [
+                    534.04859,
+                    136.55115
+                ],
+                [
+                    534.519401,
+                    160.003056
+                ],
+                [
+                    79.674005,
+                    159.601604
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "dareni.",
+            "points": [
+                [
+                    79.674005,
+                    159.601604
+                ],
+                [
+                    186.058492,
+                    159.6955
+                ],
+                [
+                    184.274613,
+                    182.841227
+                ],
+                [
+                    78.291232,
+                    182.127549
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "Model dakwah dakwah seperti ini",
+            "points": [
+                [
+                    112.542123,
+                    182.35819
+                ],
+                [
+                    530.906331,
+                    185.696
+                ],
+                [
+                    530.906331,
+                    212.994753
+                ],
+                [
+                    112.191637,
+                    211.388944
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "memungkinkan terjadinya sin-",
+            "points": [
+                [
+                    76.909571,
+                    211.042475
+                ],
+                [
+                    540.185464,
+                    213.451188
+                ],
+                [
+                    540.245453,
+                    236.944461
+                ],
+                [
+                    77.712476,
+                    236.066323
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "tesis harmonis. Bahkan, spiritu-",
+            "points": [
+                [
+                    77.712476,
+                    236.066323
+                ],
+                [
+                    532.071565,
+                    236.928943
+                ],
+                [
+                    531.713452,
+                    262.595504
+                ],
+                [
+                    77.626317,
+                    259.91916
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "alisasi budaya. Pada titik ini,",
+            "points": [
+                [
+                    77.626317,
+                    259.91916
+                ],
+                [
+                    531.713452,
+                    262.595504
+                ],
+                [
+                    532.070261,
+                    287.57477
+                ],
+                [
+                    77.578128,
+                    287.275522
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "Nabi dan para wali atau kiai",
+            "points": [
+                [
+                    77.578128,
+                    287.275522
+                ],
+                [
+                    535.755254,
+                    287.971868
+                ],
+                [
+                    534.95235,
+                    313.664812
+                ],
+                [
+                    76.493884,
+                    311.256098
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "lokal sejatinya mengajarkan",
+            "points": [
+                [
+                    76.493884,
+                    311.256098
+                ],
+                [
+                    534.95235,
+                    313.664812
+                ],
+                [
+                    530.519218,
+                    338.618258
+                ],
+                [
+                    74.405293,
+                    338.778004
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "pentingnya bisa menerima ke-",
+            "points": [
+                [
+                    74.405293,
+                    338.778004
+                ],
+                [
+                    534.104074,
+                    338.181276
+                ],
+                [
+                    533.662476,
+                    362.910734
+                ],
+                [
+                    72.634716,
+                    363.352331
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "nyataan pluralitas, mendorong",
+            "points": [
+                [
+                    72.634716,
+                    363.352331
+                ],
+                [
+                    533.662476,
+                    362.910734
+                ],
+                [
+                    532.914949,
+                    389.274103
+                ],
+                [
+                    71.309924,
+                    388.08179
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "hidup secara damai, mutual res-",
+            "points": [
+                [
+                    71.309924,
+                    388.08179
+                ],
+                [
+                    532.914949,
+                    389.274103
+                ],
+                [
+                    528.399397,
+                    413.419622
+                ],
+                [
+                    73.112404,
+                    414.302817
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "pect, dan rukun di tengah per-",
+            "points": [
+                [
+                    73.112404,
+                    414.302817
+                ],
+                [
+                    528.399397,
+                    413.419622
+                ],
+                [
+                    527.9578,
+                    442.123458
+                ],
+                [
+                    72.22921,
+                    438.149081
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "bedaan.",
+            "points": [
+                [
+                    72.22921,
+                    438.149081
+                ],
+                [
+                    201.958566,
+                    439.280442
+                ],
+                [
+                    198.084489,
+                    461.112149
+                ],
+                [
+                    73.554002,
+                    460.670552
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "Model beragama moderat ini,",
+            "points": [
+                [
+                    106.860281,
+                    460.788659
+                ],
+                [
+                    524.098509,
+                    462.943415
+                ],
+                [
+                    525.213237,
+                    488.50335
+                ],
+                [
+                    105.44329,
+                    489.684426
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "pada perkembangan selanjut-",
+            "points": [
+                [
+                    75.766491,
+                    489.693282
+                ],
+                [
+                    529.407529,
+                    488.890378
+                ],
+                [
+                    529.98741,
+                    514.984774
+                ],
+                [
+                    74.160682,
+                    514.984774
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "nya, telah mengilhami sejumlah",
+            "points": [
+                [
+                    74.160682,
+                    514.984774
+                ],
+                [
+                    525.794942,
+                    514.984774
+                ],
+                [
+                    524.568205,
+                    539.389421
+                ],
+                [
+                    74.138784,
+                    537.623031
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "ulama dan pemikir Muslim da-",
+            "points": [
+                [
+                    74.138784,
+                    537.623031
+                ],
+                [
+                    524.568205,
+                    539.389421
+                ],
+                [
+                    525.233545,
+                    565.450795
+                ],
+                [
+                    73.064877,
+                    563.067384
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "lam menghadapi modernisme",
+            "points": [
+                [
+                    73.064877,
+                    563.067384
+                ],
+                [
+                    525.233545,
+                    565.450795
+                ],
+                [
+                    526.57992,
+                    591.894679
+                ],
+                [
+                    71.95756,
+                    587.255669
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "dengan strategi mempertemu-",
+            "points": [
+                [
+                    71.95756,
+                    587.255669
+                ],
+                [
+                    526.57992,
+                    591.894679
+                ],
+                [
+                    526.223112,
+                    614.376017
+                ],
+                [
+                    72.671263,
+                    611.878077
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "kan karakter positif moderatis-",
+            "points": [
+                [
+                    72.671263,
+                    611.878077
+                ],
+                [
+                    526.223112,
+                    614.376017
+                ],
+                [
+                    526.609995,
+                    641.220031
+                ],
+                [
+                    72.206197,
+                    637.785387
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "me dengan nalar Islam.",
+            "points": [
+                [
+                    72.206197,
+                    637.785387
+                ],
+                [
+                    419.059661,
+                    640.407104
+                ],
+                [
+                    417.53542,
+                    662.956443
+                ],
+                [
+                    72.182352,
+                    662.971496
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "Sebuah sikap bijak, daripada",
+            "points": [
+                [
+                    110.182953,
+                    662.96984
+                ],
+                [
+                    524.437061,
+                    663.282266
+                ],
+                [
+                    525.641418,
+                    689.376662
+                ],
+                [
+                    108.503704,
+                    686.573404
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "harus bermusuhan secara fron-",
+            "points": [
+                [
+                    74.70312,
+                    686.573404
+                ],
+                [
+                    525.641418,
+                    689.376662
+                ],
+                [
+                    523.419052,
+                    712.116363
+                ],
+                [
+                    71.664839,
+                    711.233168
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "tal dengan Barat-sebagaimana",
+            "points": [
+                [
+                    71.664839,
+                    711.233168
+                ],
+                [
+                    523.419052,
+                    712.116363
+                ],
+                [
+                    524.752854,
+                    738.795616
+                ],
+                [
+                    75.126338,
+                    736.788355
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "sering ditampilkan sejumlah",
+            "points": [
+                [
+                    68.368271,
+                    736.86328
+                ],
+                [
+                    528.917009,
+                    738.878561
+                ],
+                [
+                    525.705391,
+                    762.564243
+                ],
+                [
+                    67.648377,
+                    760.958435
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "aktivis politik dan intelektual",
+            "points": [
+                [
+                    71.710511,
+                    760.972676
+                ],
+                [
+                    521.700852,
+                    762.550204
+                ],
+                [
+                    523.746914,
+                    788.914579
+                ],
+                [
+                    71.711684,
+                    784.900057
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "Muslim pada abad ke-19 dan",
+            "points": [
+                [
+                    71.711684,
+                    784.900057
+                ],
+                [
+                    523.746914,
+                    788.914579
+                ],
+                [
+                    521.695058,
+                    815.232011
+                ],
+                [
+                    71.711696,
+                    809.16562
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "ke-20.",
+            "points": [
+                [
+                    68.500066,
+                    809.388644
+                ],
+                [
+                    169.874728,
+                    810.488992
+                ],
+                [
+                    168.461675,
+                    833.074326
+                ],
+                [
+                    70.507327,
+                    831.067065
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "Namun, gerakan ulama mo-",
+            "points": [
+                [
+                    106.759063,
+                    831.809928
+                ],
+                [
+                    522.366072,
+                    837.425636
+                ],
+                [
+                    521.96462,
+                    863.118579
+                ],
+                [
+                    104.052831,
+                    859.104057
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "derat, seperti Fazlur Rahman,",
+            "points": [
+                [
+                    67.922129,
+                    859.104057
+                ],
+                [
+                    521.96462,
+                    863.118579
+                ],
+                [
+                    519.957358,
+                    888.008619
+                ],
+                [
+                    68.725033,
+                    881.986835
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "Muhammad Abed Al-Jabairi,",
+            "points": [
+                [
+                    68.725033,
+                    881.986835
+                ],
+                [
+                    519.957358,
+                    888.008619
+                ],
+                [
+                    518.753002,
+                    911.694301
+                ],
+                [
+                    67.520676,
+                    906.475422
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "dan Hasan Hanafi, bisa dikata-",
+            "points": [
+                [
+                    67.520676,
+                    906.475422
+                ],
+                [
+                    518.753002,
+                    911.694301
+                ],
+                [
+                    516.344288,
+                    937.387245
+                ],
+                [
+                    67.922129,
+                    931.365461
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "kan terbukti lebih efektif dan",
+            "points": [
+                [
+                    62.485903,
+                    931.638131
+                ],
+                [
+                    519.33856,
+                    937.258463
+                ],
+                [
+                    519.33856,
+                    961.345597
+                ],
+                [
+                    64.091712,
+                    954.922361
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "berhasil karena bisa menyerap",
+            "points": [
+                [
+                    64.091712,
+                    954.922361
+                ],
+                [
+                    519.33856,
+                    961.345597
+                ],
+                [
+                    517.82199,
+                    987.038541
+                ],
+                [
+                    65.697521,
+                    980.615305
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "ilmu, metodologi, dan pemikir-",
+            "points": [
+                [
+                    65.697521,
+                    980.615305
+                ],
+                [
+                    517.82199,
+                    987.038541
+                ],
+                [
+                    518.242595,
+                    1010.75634
+                ],
+                [
+                    60.988486,
+                    1008.347626
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "an Barat dengan tetap berpijak",
+            "points": [
+                [
+                    60.988486,
+                    1008.347626
+                ],
+                [
+                    518.242595,
+                    1010.75634
+                ],
+                [
+                    518.036936,
+                    1037.504373
+                ],
+                [
+                    62.23745,
+                    1030.159857
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "pada tradisi (Hanafi, 1981 &",
+            "points": [
+                [
+                    62.23745,
+                    1030.159857
+                ],
+                [
+                    518.036936,
+                    1037.504373
+                ],
+                [
+                    517.598587,
+                    1059.392029
+                ],
+                [
+                    61.638024,
+                    1058.861217
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "Simogaki, 1988).",
+            "points": [
+                [
+                    61.638024,
+                    1058.861217
+                ],
+                [
+                    310.272741,
+                    1059.150668
+                ],
+                [
+                    307.772871,
+                    1085.084973
+                ],
+                [
+                    61.54881,
+                    1085.798663
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_NEWSPAPER_SMARTI_2025040800009.jpg",
+    "imageData": null,
+    "imageHeight": 1100,
+    "imageWidth": 550
+}

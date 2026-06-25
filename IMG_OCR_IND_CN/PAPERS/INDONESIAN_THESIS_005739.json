@@ -1,0 +1,330 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "BAB 5",
+            "points": [
+                [
+                    224.565531,
+                    165.043276
+                ],
+                [
+                    405.886802,
+                    214.28581
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Ragam Slang dalam Komunikasi",
+            "points": [
+                [
+                    101.920541,
+                    233.131719
+                ],
+                [
+                    529.297103,
+                    264.173174
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Digital",
+            "points": [
+                [
+                    271.533715,
+                    267.783872
+                ],
+                [
+                    363.33152599999994,
+                    297.572566
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "A. Mengenal Apa Itu Bahasa Slang?",
+            "points": [
+                [
+                    99.001902,
+                    366.731329
+                ],
+                [
+                    388.598848,
+                    384.41663900000003
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Bahasa slang adalah bentuk penggunaan bahasa yang",
+            "points": [
+                [
+                    138.404241,
+                    399.107795
+                ],
+                [
+                    532.455048,
+                    416.793105
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "tidak formal dan biasanya digunakan dalam konteks sehari-",
+            "points": [
+                [
+                    99.16496,
+                    423.425096
+                ],
+                [
+                    533.007714,
+                    440.55773899999997
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "hari, terutama dalam percakapan santai atau di antara",
+            "points": [
+                [
+                    98.612294,
+                    448.295062
+                ],
+                [
+                    531.902382,
+                    465.980372
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "kelompok teman sebaya. Slang adalah bagian penting dari",
+            "points": [
+                [
+                    98.612294,
+                    471.507031
+                ],
+                [
+                    532.455048,
+                    489.745007
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "bahasa dan budaya, dan sering kali mencerminkan identitas",
+            "points": [
+                [
+                    99.16496,
+                    496.376998
+                ],
+                [
+                    531.349716,
+                    513.509642
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "kelompok, ekspresi kreatif, dan perubahan sosial.",
+            "points": [
+                [
+                    99.16496,
+                    520.694299
+                ],
+                [
+                    445.68649700000003,
+                    538.932275
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Bahasa slang merujuk pada penggunaan kata-kata,",
+            "points": [
+                [
+                    138.956907,
+                    553.301589
+                ],
+                [
+                    533.56038,
+                    571.539565
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "frasa, atau ungkapan yang tidak formal atau tidak baku dalam",
+            "points": [
+                [
+                    99.16496,
+                    577.066224
+                ],
+                [
+                    531.902382,
+                    595.3042
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "suatu bahasa. Biasanya, slang digunakan dalam konteks",
+            "points": [
+                [
+                    100.270292,
+                    603.594188
+                ],
+                [
+                    533.007714,
+                    620.7268320000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "informal, seperti percakapan sehari-hari di antara teman",
+            "points": [
+                [
+                    98.612294,
+                    626.806157
+                ],
+                [
+                    532.455048,
+                    645.044133
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "sebaya atau dalam lingkungan yang lebih santai. Karakteristik",
+            "points": [
+                [
+                    99.16496,
+                    652.22879
+                ],
+                [
+                    530.79705,
+                    668.256102
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "utama bahasa slang adalah adanya variasi dalam penggunaan",
+            "points": [
+                [
+                    99.008348,
+                    677.814623
+                ],
+                [
+                    532.298436,
+                    693.841935
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "kata-kata yang berbeda dari penggunaan standar atau formal",
+            "points": [
+                [
+                    99.008348,
+                    699.92126
+                ],
+                [
+                    532.851102,
+                    718.159236
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "dalam bahasa yang sama.",
+            "points": [
+                [
+                    99.008348,
+                    725.343893
+                ],
+                [
+                    279.730106,
+                    742.476537
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Menurut para ahli, bahasa slang dapat didefinisikan",
+            "points": [
+                [
+                    138.800295,
+                    758.503849
+                ],
+                [
+                    532.8511020000001,
+                    774.531161
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "sebagai bentuk penggunaan bahasa yang tidak resmi, tidak",
+            "points": [
+                [
+                    97.903016,
+                    782.821149
+                ],
+                [
+                    532.851101,
+                    798.848461
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_THESIS_005739.jpg",
+    "imageData": null,
+    "imageHeight": 906,
+    "imageWidth": 611
+}

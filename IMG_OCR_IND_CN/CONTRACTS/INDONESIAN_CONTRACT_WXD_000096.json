@@ -1,0 +1,458 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "5) Mitigasi Risiko terhadap Penyelesaian Sengketa di Arbitrase Internasional;",
+            "points": [
+                [
+                    492.52139,
+                    293.091548
+                ],
+                [
+                    2146.565625,
+                    356.17968199999996
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "6) Mitigasi Risiko dalam Penggunaan Dual Language.",
+            "points": [
+                [
+                    494.947873,
+                    361.219657
+                ],
+                [
+                    1656.775104,
+                    419.834364
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "4. NON LITIGASI (ALTERNATIVE PENYELESAIAN SENGKETA)",
+            "points": [
+                [
+                    352.786275,
+                    509.80794
+                ],
+                [
+                    1958.703649,
+                    573.132758
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Menurut Pasal 1 angka 10 UU 30/1999, alternatif penyelesaian sengketa adalah",
+            "points": [
+                [
+                    354.858723,
+                    580.731736
+                ],
+                [
+                    2198.877411,
+                    636.4575749999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "lembaga penyelesaian sengketa atau beda pendapat melalui prosedur yang disepakati",
+            "points": [
+                [
+                    352.786275,
+                    641.523561
+                ],
+                [
+                    2212.002919,
+                    698.7029229999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "para pihak, yakni penyelesaian di luar pengadilan dengan cara :",
+            "points": [
+                [
+                    407.363558,
+                    703.695945
+                ],
+                [
+                    1728.287852,
+                    760.2172700000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "A. Konsultasi: suatu tindakan yang bersifat \"personal\" antara suatu pihak tertentu",
+            "points": [
+                [
+                    434.03325,
+                    769.825895
+                ],
+                [
+                    2199.529164,
+                    824.5784289999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "(klien) dengan pihak lain yang merupakan pihak konsultan, dimana pihak",
+            "points": [
+                [
+                    510.253303,
+                    831.915606
+                ],
+                [
+                    2189.627465,
+                    884.609882
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "konsultan memberikan pendapatnya kepada klien sesuai dengan keperluan dan",
+            "points": [
+                [
+                    512.786295,
+                    893.281092
+                ],
+                [
+                    2197.226442,
+                    949.310448
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "kebutuhan kliennya.",
+            "points": [
+                [
+                    520.385273,
+                    957.267355
+                ],
+                [
+                    963.658996,
+                    1007.7801129999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "B. Negosiasi: suatu upaya penyelesaian sengketa para pihak tanpa melalui proses",
+            "points": [
+                [
+                    418.835294,
+                    1018.714057
+                ],
+                [
+                    2191.930186,
+                    1071.105873
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "pengadilan dengan tujuan mencapai kesepakatan bersama atas dasar kerja sama",
+            "points": [
+                [
+                    525.451259,
+                    1081.383998
+                ],
+                [
+                    2192.160457,
+                    1132.1537270000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "yang lebih harmonis dan kreatif.",
+            "points": [
+                [
+                    522.918266,
+                    1142.122295
+                ],
+                [
+                    1204.293303,
+                    1196.089965
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "C. Mediasi: cara penyelesaian sengketa melalui proses perundingan untuk",
+            "points": [
+                [
+                    419.065565,
+                    1205.18564
+                ],
+                [
+                    2204.825421,
+                    1259.15331
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "D. Konsiliasi: penengah akan bertindak menjadi konsiliator dengan kesepakatan para",
+            "points": [
+                [
+                    413.99958,
+                    1328.886816
+                ],
+                [
+                    2204.825421,
+                    1382.854486
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "pihak dengan mengusahakan solusi yang dapat diterima.",
+            "points": [
+                [
+                    507.72031,
+                    1390.131025
+                ],
+                [
+                    1672.896953,
+                    1444.098695
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "E. Penilaian Ahli: pendapat para ahli untuk suatu hal yang bersifat teknis dan sesuai",
+            "points": [
+                [
+                    419.065565,
+                    1453.733925
+                ],
+                [
+                    2207.358413,
+                    1504.393779
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "dengan bidang keahliannya.",
+            "points": [
+                [
+                    515.319288,
+                    1513.247862
+                ],
+                [
+                    1105.5065880000002,
+                    1568.924417
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "UU Arbitrase dan APS memberi ruang bagi masyarakat untuk menyepakati sebuah",
+            "points": [
+                [
+                    417.039171,
+                    1611.156406
+                ],
+                [
+                    2228.128954,
+                    1661.871683
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "APS di luar Lembaga penyelesaian sengketa yang ada selama ini yakni Pengadilan,",
+            "points": [
+                [
+                    407.547762,
+                    1671.242984
+                ],
+                [
+                    2238.141588,
+                    1725.817032
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "dengan prosedur yang disepakati dan dengan cara yang sudah ditentukan yakni dengan",
+            "points": [
+                [
+                    417.039171,
+                    1733.534575
+                ],
+                [
+                    2211.4112020000002,
+                    1785.903611
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "cara konsultasi, negosiasi, mediasi, konsiliasi, atau penilaian ahli. Namun demikian,",
+            "points": [
+                [
+                    419.593098,
+                    1794.172406
+                ],
+                [
+                    2220.320638,
+                    1847.616384
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "sesuai Pasal 6 ayat (2) UU Arbitrase dan APS, penyelesaian sengketa diselesaikan",
+            "points": [
+                [
+                    421.895818,
+                    1859.129987
+                ],
+                [
+                    2199.596151,
+                    1907.48712
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "dalam pertemuan langsung oleh para pihak dalam waktu paling lama 14 hari dan",
+            "points": [
+                [
+                    408.079495,
+                    1920.960599
+                ],
+                [
+                    2211.109755,
+                    1971.963298
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "hasilnya dituangkan dalam suatu kesepakatan tertulis.",
+            "points": [
+                [
+                    424.749792,
+                    1979.944671
+                ],
+                [
+                    1543.8720230000001,
+                    2035.543463
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "memperoleh kesepakatan para pihak dengan dibantu oleh mediator.",
+            "points": [
+                [
+                    529.5003,
+                    1269.975478
+                ],
+                [
+                    1904.8525359999999,
+                    1318.1232730000002
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "OTIH HANDAYANI, Teknik Penyusunan Kontrak",
+            "points": [
+                [
+                    148.428046,
+                    3209.741267
+                ],
+                [
+                    1130.414699,
+                    3270.639664
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "35",
+            "points": [
+                [
+                    2158.22678,
+                    5.281642
+                ],
+                [
+                    2220.683746,
+                    50.760016
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_CONTRACT_WXD_000096.jpg",
+    "imageData": null,
+    "imageHeight": 3509,
+    "imageWidth": 2482
+}

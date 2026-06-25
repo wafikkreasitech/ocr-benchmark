@@ -1,0 +1,330 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "ВАВ 6",
+            "points": [
+                [
+                    224.643472,
+                    165.161306
+                ],
+                [
+                    408.969976,
+                    214.381107
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pragmatik Ragam Slang dalam",
+            "points": [
+                [
+                    112.804292,
+                    231.990973
+                ],
+                [
+                    520.464862,
+                    265.192117
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Wacana Chatting",
+            "points": [
+                [
+                    203.558274,
+                    268.937794
+                ],
+                [
+                    431.82743600000003,
+                    298.578446
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "A. Maksim Kerja Sama dan Implikatur Percakapan",
+            "points": [
+                [
+                    97.87268,
+                    366.154223
+                ],
+                [
+                    508.062485,
+                    384.967434
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Maksim Kerja Sama adalah salah satu dari empat maksim",
+            "points": [
+                [
+                    137.973186,
+                    398.36554
+                ],
+                [
+                    533.585806,
+                    417.715626
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "yang diajukan oleh ilmuwan pragmatik Paul Grice. Maksim ini",
+            "points": [
+                [
+                    97.881556,
+                    422.737444
+                ],
+                [
+                    533.585806,
+                    441.65741399999996
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "berkaitan dengan usaha untuk menjaga keharmonisan dan",
+            "points": [
+                [
+                    97.881556,
+                    447.968903
+                ],
+                [
+                    533.71406,
+                    466.27477700000003
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "keefektifan percakapan. Dalam konteks percakapan, kerja",
+            "points": [
+                [
+                    98.114934,
+                    472.006856
+                ],
+                [
+                    533.764552,
+                    490.677112
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "sama terjadi ketika semua pihak saling berusaha untuk",
+            "points": [
+                [
+                    98.185524,
+                    495.672724
+                ],
+                [
+                    533.531174,
+                    514.576358
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "berkomunikasi dengan cara yang saling mendukung dan",
+            "points": [
+                [
+                    97.970592,
+                    521.038456
+                ],
+                [
+                    533.442356,
+                    539.9709809999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "memenuhi harapan-harapan yang ada. Berikut adalah",
+            "points": [
+                [
+                    97.970592,
+                    544.93689
+                ],
+                [
+                    533.442356,
+                    563.8694149999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "penjelasan lebih lanjut mengenai Maksim Kerja Sama dan",
+            "points": [
+                [
+                    98.185524,
+                    569.456062
+                ],
+                [
+                    533.60664,
+                    589.009325
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "implikatur percakapan:",
+            "points": [
+                [
+                    98.241008,
+                    593.664864
+                ],
+                [
+                    264.455171,
+                    612.597389
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "1. Maksim Kerja Sama:",
+            "points": [
+                [
+                    113.190334,
+                    626.65653
+                ],
+                [
+                    282.561131,
+                    645.596629
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "● Maksim Kuantitas: Berusaha memberikan informasi",
+            "points": [
+                [
+                    141.450315,
+                    660.579823
+                ],
+                [
+                    534.8658849999999,
+                    676.7388900000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "yang sesuai dan cukup, tidak terlalu banyak atau",
+            "points": [
+                [
+                    166.377063,
+                    684.17091
+                ],
+                [
+                    534.984662,
+                    703.1894010000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "terlalu sedikit.",
+            "points": [
+                [
+                    166.736948,
+                    708.345532
+                ],
+                [
+                    271.46897,
+                    724.4948720000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "● Maksim Kualitas: Berusaha memberikan informasi",
+            "points": [
+                [
+                    141.4751,
+                    742.64818
+                ],
+                [
+                    534.8081,
+                    758.678091
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "yang benar, dapat dipertanggungjawabkan, dan",
+            "points": [
+                [
+                    166.361647,
+                    766.436681
+                ],
+                [
+                    534.845487,
+                    785.7798750000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "berdasarkan kebenaran yang diketahui.",
+            "points": [
+                [
+                    166.629846,
+                    791.666934
+                ],
+                [
+                    447.524131,
+                    810.729792
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_THESIS_005749.jpg",
+    "imageData": null,
+    "imageHeight": 906,
+    "imageWidth": 611
+}

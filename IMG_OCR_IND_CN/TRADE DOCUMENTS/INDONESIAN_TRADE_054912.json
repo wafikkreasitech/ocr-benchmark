@@ -1,0 +1,1858 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "PRUDENTIAL",
+            "points": [
+                [
+                    472.226336,
+                    8.683212
+                ],
+                [
+                    571.088114,
+                    31.615947
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "RINGKASAN POLIS",
+            "points": [
+                [
+                    215.160689,
+                    48.864394
+                ],
+                [
+                    401.954345,
+                    70.670953
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Tanggal Lahir: 02/12/1986",
+            "points": [
+                [
+                    407.254847,
+                    319.018609
+                ],
+                [
+                    541.396749,
+                    332.20245200000005
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Nomor Polis",
+            "points": [
+                [
+                    26.004586,
+                    95.968267
+                ],
+                [
+                    85.687877,
+                    110.81245799999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pemegang Polis",
+            "points": [
+                [
+                    28.640105,
+                    114.441046
+                ],
+                [
+                    105.289481,
+                    130.274847
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Asuransi Dasar",
+            "points": [
+                [
+                    26.224217,
+                    134.233297
+                ],
+                [
+                    100.89696599999999,
+                    147.318178
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Tanggal Mulai Berlakunya Polis",
+            "points": [
+                [
+                    30.397101,
+                    150.287021
+                ],
+                [
+                    183.09188699999999,
+                    165.790952
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Tanggal Acuan Pembayaran Premi",
+            "points": [
+                [
+                    29.319151,
+                    168.102804
+                ],
+                [
+                    200.956657,
+                    184.54136799999998
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "data Uang Polis",
+            "points": [
+                [
+                    27.562139,
+                    188.334889
+                ],
+                [
+                    108.713849,
+                    201.859591
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ": 79047947",
+            "points": [
+                [
+                    236.972573,
+                    93.133949
+                ],
+                [
+                    315.035795,
+                    105.70698
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ": DENNIS",
+            "points": [
+                [
+                    236.972573,
+                    111.228471
+                ],
+                [
+                    301.08407,
+                    125.99679
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ":PRUlink assurance account",
+            "points": [
+                [
+                    237.238316,
+                    130.653468
+                ],
+                [
+                    372.503613,
+                    144.956121
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ":07 September 2011",
+            "points": [
+                [
+                    237.238316,
+                    148.481914
+                ],
+                [
+                    365.195567,
+                    163.915452
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ":07 September 2011",
+            "points": [
+                [
+                    238.301309,
+                    168.439104
+                ],
+                [
+                    364.531199,
+                    182.542163
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ": Rupiah",
+            "points": [
+                [
+                    238.567062,
+                    187.331902
+                ],
+                [
+                    293.51028099999996,
+                    200.902792
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ": Rp.800,000.00",
+            "points": [
+                [
+                    234.846598,
+                    216.868544
+                ],
+                [
+                    343.670053,
+                    230.173338
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ": Rp.800,000.00",
+            "points": [
+                [
+                    233.675193,
+                    231.580827
+                ],
+                [
+                    344.54424700000004,
+                    243.972673
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ": Bulanan",
+            "points": [
+                [
+                    236.924215,
+                    256.186323
+                ],
+                [
+                    301.607377,
+                    269.56951300000003
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": ": Sesuai dengan keinginan Pemegang Polis sepanjang di",
+            "points": [
+                [
+                    236.667967,
+                    274.710502
+                ],
+                [
+                    542.343606,
+                    289.744913
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "dalam rentang yang telah disepakati",
+            "points": [
+                [
+                    254.491885,
+                    290.479617
+                ],
+                [
+                    448.500118,
+                    302.417092
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Premi Berkala &",
+            "points": [
+                [
+                    28.436039,
+                    206.678208
+                ],
+                [
+                    103.822574,
+                    218.77347500000002
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Premi Berkala",
+            "points": [
+                [
+                    55.732575,
+                    233.659148
+                ],
+                [
+                    124.797922,
+                    243.05559499999998
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Top-up Premi Berkala (PRU###)",
+            "points": [
+                [
+                    28.574733,
+                    220.1883
+                ],
+                [
+                    195.490287,
+                    232.78337
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Top-up Premi Berkala (PRU###)",
+            "points": [
+                [
+                    56.327435,
+                    244.37883
+                ],
+                [
+                    216.953712,
+                    256.274177
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Frekuensi Pembayaran",
+            "points": [
+                [
+                    56.726756,
+                    257.77359
+                ],
+                [
+                    171.031967,
+                    268.769287
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Top-up Premi Tunggal",
+            "points": [
+                [
+                    30.571339,
+                    274.367103
+                ],
+                [
+                    135.49254,
+                    292.06017599999996
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "ertanggung Utama:",
+            "points": [
+                [
+                    32.621454,
+                    317.637215
+                ],
+                [
+                    121.948727,
+                    331.667723
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "DENNIS",
+            "points": [
+                [
+                    148.342256,
+                    317.395313
+                ],
+                [
+                    192.31132,
+                    330.458196
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "en###s Asuransi",
+            "points": [
+                [
+                    32.453473,
+                    346.647947
+                ],
+                [
+                    95.628819,
+                    360.92035599999997
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Uang",
+            "points": [
+                [
+                    174.704403,
+                    348.978749
+                ],
+                [
+                    200.52403700000002,
+                    358.838526
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Tanggal Mulai",
+            "points": [
+                [
+                    230.972139,
+                    348.615267
+                ],
+                [
+                    299.53711799999996,
+                    359.15659500000004
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Tanggal Akhir",
+            "points": [
+                [
+                    308.393594,
+                    349.640113
+                ],
+                [
+                    376.309415,
+                    358.689912
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Tanggal Akhir",
+            "points": [
+                [
+                    391.197647,
+                    349.640102
+                ],
+                [
+                    459.03846,
+                    359.553576
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Ketentuan",
+            "points": [
+                [
+                    469.501475,
+                    350.240915
+                ],
+                [
+                    518.703878,
+                    358.61479899999995
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Atas Diri",
+            "points": [
+                [
+                    534.904675,
+                    350.691544
+                ],
+                [
+                    577.056733,
+                    358.84012
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pertanggungan",
+            "points": [
+                [
+                    152.318623,
+                    359.213213
+                ],
+                [
+                    224.110262,
+                    368.918365
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pertanggungan",
+            "points": [
+                [
+                    228.804657,
+                    359.600729
+                ],
+                [
+                    302.527142,
+                    369.626714
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pertanggungan",
+            "points": [
+                [
+                    305.90006,
+                    359.505302
+                ],
+                [
+                    381.027697,
+                    371.54646499999996
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pengenaan",
+            "points": [
+                [
+                    399.251724,
+                    360.250119
+                ],
+                [
+                    451.878259,
+                    369.21892099999997
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "& Manfaat",
+            "points": [
+                [
+                    468.180711,
+                    360.001856
+                ],
+                [
+                    519.629506,
+                    368.722385
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Tertanggung",
+            "points": [
+                [
+                    524.836378,
+                    360.12599
+                ],
+                [
+                    586.760888,
+                    371.701644
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "di",
+            "points": [
+                [
+                    488.264352,
+                    369.560291
+                ],
+                [
+                    500.56866699999995,
+                    377.93945
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Blaya Asuransi",
+            "points": [
+                [
+                    389.890631,
+                    369.649318
+                ],
+                [
+                    460.17107,
+                    378.975816
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "& Administrasi",
+            "points": [
+                [
+                    388.70518,
+                    379.484536
+                ],
+                [
+                    461.01782299999996,
+                    389.150177
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "### Dasar",
+            "points": [
+                [
+                    34.019268,
+                    390.220678
+                ],
+                [
+                    93.497171,
+                    400.059051
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "70,000,000.00",
+            "points": [
+                [
+                    153.660417,
+                    403.518845
+                ],
+                [
+                    228.98659800000001,
+                    413.923861
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "07 Sep 2011",
+            "points": [
+                [
+                    236.791472,
+                    404.064099
+                ],
+                [
+                    301.27250100000003,
+                    414.787171
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "02 Des 2085",
+            "points": [
+                [
+                    321.19311,
+                    404.064099
+                ],
+                [
+                    387.53459399999997,
+                    415.150667
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "07 Nov 2085 UB",
+            "points": [
+                [
+                    411.947546,
+                    404.427594
+                ],
+                [
+                    503.38264,
+                    416.286586
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Utama",
+            "points": [
+                [
+                    538.82227,
+                    404.972841
+                ],
+                [
+                    572.991309,
+                    415.695913
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "150,000,000.00",
+            "points": [
+                [
+                    147.998799,
+                    437.68781
+                ],
+                [
+                    229.644655,
+                    447.693893
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "150,000,000.00......",
+            "points": [
+                [
+                    129.184032,
+                    448.886616
+                ],
+                [
+                    229.150044,
+                    458.700953
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "5 Unit",
+            "points": [
+                [
+                    198.15741,
+                    461.972399
+                ],
+                [
+                    228.469386,
+                    470.96888
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "70,000,000.00",
+            "points": [
+                [
+                    153.869243,
+                    472.877222
+                ],
+                [
+                    229.37693000000002,
+                    483.918357
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "750,000.00",
+            "points": [
+                [
+                    168.934485,
+                    509.044897
+                ],
+                [
+                    228.2425,
+                    518.6774829999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "07 Sep 2011",
+            "points": [
+                [
+                    237.181518,
+                    438.82474
+                ],
+                [
+                    301.30964900000004,
+                    448.144225
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "07 Sep 2011",
+            "points": [
+                [
+                    236.499667,
+                    449.88523
+                ],
+                [
+                    301.821038,
+                    460.433658
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "07 Sep 2011",
+            "points": [
+                [
+                    236.499667,
+                    461.901564
+                ],
+                [
+                    300.79826099999997,
+                    471.869659
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "07 Sep 2011",
+            "points": [
+                [
+                    236.636035,
+                    473.78135
+                ],
+                [
+                    300.627798,
+                    484.50046499999996
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "02 Des 2051",
+            "points": [
+                [
+                    322.140215,
+                    439.097845
+                ],
+                [
+                    386.506993,
+                    448.861111
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "02 Des 2051",
+            "points": [
+                [
+                    322.003847,
+                    451.114176
+                ],
+                [
+                    386.677456,
+                    460.809171
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "02 Des 2046...",
+            "points": [
+                [
+                    309.594146,
+                    474.737206
+                ],
+                [
+                    388.041158,
+                    484.363917
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "02 Des 2051...",
+            "points": [
+                [
+                    309.730514,
+                    462.58431
+                ],
+                [
+                    387.35930700000006,
+                    471.903798
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "07 Nov 2051 CB",
+            "points": [
+                [
+                    413.017483,
+                    439.687808
+                ],
+                [
+                    502.42185,
+                    449.000468
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "07 Nov 2051 CX",
+            "points": [
+                [
+                    412.717473,
+                    451.103329
+                ],
+                [
+                    503.17188699999997,
+                    460.64129199999996
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "07 Nov 2051.... HB",
+            "points": [
+                [
+                    396.366666,
+                    463.269866
+                ],
+                [
+                    503.171887,
+                    472.28211699999997
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "07 Nov 2046.... PD",
+            "points": [
+                [
+                    396.366666,
+                    474.8356
+                ],
+                [
+                    502.984378,
+                    485.424982
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Utama",
+            "points": [
+                [
+                    540.973729,
+                    440.739241
+                ],
+                [
+                    573.7503290000001,
+                    449.300878
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Utama",
+            "points": [
+                [
+                    541.573761,
+                    452.455169
+                ],
+                [
+                    574.8753839999999,
+                    461.129457
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Utama",
+            "points": [
+                [
+                    541.193996,
+                    464.543267
+                ],
+                [
+                    574.210771,
+                    472.596696
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Utama",
+            "points": [
+                [
+                    541.296451,
+                    476.238693
+                ],
+                [
+                    574.082699,
+                    485.67711
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Utama",
+            "points": [
+                [
+                    542.218566,
+                    500.039917
+                ],
+                [
+                    573.800941,
+                    508.811488
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Utama",
+            "points": [
+                [
+                    542.423477,
+                    512.14571
+                ],
+                [
+                    573.9290120000001,
+                    520.865986
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "07 Sep 2011",
+            "points": [
+                [
+                    236.870937,
+                    498.095327
+                ],
+                [
+                    300.491628,
+                    507.490142
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "07 Sep 2011",
+            "points": [
+                [
+                    236.983643,
+                    510.057496
+                ],
+                [
+                    301.336899,
+                    520.467964
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "02 Des 2051",
+            "points": [
+                [
+                    321.96151,
+                    498.65958
+                ],
+                [
+                    386.173888,
+                    507.856903
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "02 Des 2061...",
+            "points": [
+                [
+                    310.015018,
+                    510.396042
+                ],
+                [
+                    387.441793,
+                    520.693662
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "07 Nov 2051 WM",
+            "points": [
+                [
+                    413.008405,
+                    499.25768
+                ],
+                [
+                    506.360074,
+                    507.792009
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "07 Nov 2061 HG",
+            "points": [
+                [
+                    397.263833,
+                    511.298852
+                ],
+                [
+                    504.500479,
+                    520.8262560000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "### Tambahan",
+            "points": [
+                [
+                    33.797574,
+                    423.756156
+                ],
+                [
+                    114.03274499999999,
+                    433.587018
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "###",
+            "points": [
+                [
+                    33.797574,
+                    435.321875
+                ],
+                [
+                    116.714126,
+                    444.94620899999995
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "###",
+            "points": [
+                [
+                    34.127597,
+                    446.226702
+                ],
+                [
+                    118.15794600000001,
+                    456.511931
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "###",
+            "points": [
+                [
+                    34.57777,
+                    457.666812
+                ],
+                [
+                    60.403714,
+                    465.84869199999997
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "###",
+            "points": [
+                [
+                    34.325781,
+                    468.427983
+                ],
+                [
+                    123.022829,
+                    479.910533
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "###",
+            "points": [
+                [
+                    34.776593,
+                    480.503001
+                ],
+                [
+                    83.43599499999999,
+                    489.6439
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "###",
+            "points": [
+                [
+                    34.889294,
+                    491.56237
+                ],
+                [
+                    78.223494,
+                    500.787899
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "###",
+            "points": [
+                [
+                    56.166615,
+                    584.701668
+                ],
+                [
+                    135.290863,
+                    592.596578
+                ],
+                [
+                    135.497123,
+                    583.922287
+                ],
+                [
+                    56.293252,
+                    574.834934
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "untuk sementara sesuai dengan Ketentuan Umum Polis butir 15.7",
+            "points": [
+                [
+                    136.920927,
+                    584.367917
+                ],
+                [
+                    416.339607,
+                    588.587501
+                ],
+                [
+                    416.29254,
+                    600.12063
+                ],
+                [
+                    137.036998,
+                    592.82722
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "###",
+            "points": [
+                [
+                    55.930536,
+                    587.09238
+                ],
+                [
+                    133.355448,
+                    595.253065
+                ],
+                [
+                    133.122591,
+                    602.947426
+                ],
+                [
+                    55.697679,
+                    595.71939
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "PRUhospital & surgical 75",
+            "points": [
+                [
+                    134.653998,
+                    594.692985
+                ],
+                [
+                    239.040666,
+                    597.376826
+                ],
+                [
+                    239.040666,
+                    606.225341
+                ],
+                [
+                    134.918714,
+                    604.045272
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "adalah Tanggal Akhir",
+            "points": [
+                [
+                    55.47438,
+                    597.632141
+                ],
+                [
+                    151.246083,
+                    606.583246
+                ],
+                [
+                    151.246083,
+                    615.175282
+                ],
+                [
+                    55.961049,
+                    606.198528
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "Pertanggungan maksimal Asuransi Tambahan yang dapat diberikan PT Prudential Life Assurance",
+            "points": [
+                [
+                    155.88126,
+                    606.262027
+                ],
+                [
+                    580.560196,
+                    611.635532
+                ],
+                [
+                    580.565102,
+                    620.638603
+                ],
+                [
+                    155.881824,
+                    615.506468
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "### kepada Pemegang Polls",
+            "points": [
+                [
+                    56.236002,
+                    608.170794
+                ],
+                [
+                    184.934634,
+                    618.665946
+                ],
+                [
+                    184.934634,
+                    627.071747
+                ],
+                [
+                    55.83645,
+                    616.848475
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "mengingat Asuransi Tambahan ini secara otomatis diperpanjang pada setiap Ulang Tahun",
+            "points": [
+                [
+                    188.768922,
+                    619.05204
+                ],
+                [
+                    582.039083,
+                    622.70727
+                ],
+                [
+                    582.32084,
+                    632.15851
+                ],
+                [
+                    188.346075,
+                    628.169169
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "### Mulai Pertanggungan",
+            "points": [
+                [
+                    56.562108,
+                    618.057148
+                ],
+                [
+                    175.847404,
+                    628.11976
+                ],
+                [
+                    175.945823,
+                    638.016278
+                ],
+                [
+                    56.245096,
+                    627.968405
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "Asuransi Tambahan ini untuk masa 1 (satu) tahun berikutnya, kecuali Pemegang Polis atau",
+            "points": [
+                [
+                    179.982728,
+                    629.24884
+                ],
+                [
+                    579.567036,
+                    633.973416
+                ],
+                [
+                    579.653119,
+                    642.940053
+                ],
+                [
+                    179.553792,
+                    638.525032
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "###",
+            "points": [
+                [
+                    55.428244,
+                    629.399126
+                ],
+                [
+                    172.818386,
+                    638.965782
+                ],
+                [
+                    172.818386,
+                    648.711973
+                ],
+                [
+                    55.475368,
+                    637.939711
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "Tambahan ini dengan pemberitahuan kepada Kami atau Pemegang Polis seku ###",
+            "points": [
+                [
+                    174.519438,
+                    639.471523
+                ],
+                [
+                    581.424944,
+                    645.707669
+                ],
+                [
+                    581.530788,
+                    654.292286
+                ],
+                [
+                    174.932248,
+                    649.256127
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "###",
+            "points": [
+                [
+                    56.087991,
+                    639.231367
+                ],
+                [
+                    174.05538,
+                    651.011783
+                ],
+                [
+                    174.05538,
+                    659.546112
+                ],
+                [
+                    55.661165,
+                    647.598052
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "Ulang Tahun Tanggal Mulai Pertanggungan Asuransi Tambahan ini berikutnya yang terdekat.",
+            "points": [
+                [
+                    176.199734,
+                    650.750533
+                ],
+                [
+                    571.300276,
+                    655.548512
+                ],
+                [
+                    571.40612,
+                    664.345096
+                ],
+                [
+                    176.14394,
+                    660.127707
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "adalah Tanggal Akhir Pengenaan",
+            "points": [
+                [
+                    55.953023,
+                    648.757307
+                ],
+                [
+                    197.128085,
+                    663.30956
+                ],
+                [
+                    197.128085,
+                    670.951198
+                ],
+                [
+                    56.04619,
+                    657.939761
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "Biaya Asuransi dan Biaya Administrasi dengan asumsi Asuransi Tambahan berakhir pada",
+            "points": [
+                [
+                    198.772096,
+                    662.557154
+                ],
+                [
+                    580.225532,
+                    666.200665
+                ],
+                [
+                    580.225532,
+                    675.039211
+                ],
+                [
+                    198.715323,
+                    671.84092
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "### Akhir Pertanggungan maksimal",
+            "points": [
+                [
+                    56.364838,
+                    659.230925
+                ],
+                [
+                    213.374423,
+                    674.26555
+                ],
+                [
+                    212.999405,
+                    684.216577
+                ],
+                [
+                    55.866726,
+                    669.571669
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "###",
+            "points": [
+                [
+                    56.325244,
+                    670.502571
+                ],
+                [
+                    122.835975,
+                    680.004301
+                ],
+                [
+                    121.708948,
+                    686.493212
+                ],
+                [
+                    56.482244,
+                    678.734732
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "###",
+            "points": [
+                [
+                    131.035092,
+                    679.524696
+                ],
+                [
+                    166.959086,
+                    681.781708
+                ],
+                [
+                    166.395573,
+                    687.283176
+                ],
+                [
+                    131.035092,
+                    686.15467
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "polygon",
+            "flags": {}
+        },
+        {
+            "label": "### 75**",
+            "points": [
+                [
+                    34.776585,
+                    502.844097
+                ],
+                [
+                    129.133423,
+                    517.63559
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_TRADE_054912.jpg",
+    "imageData": null,
+    "imageHeight": 686,
+    "imageWidth": 600
+}

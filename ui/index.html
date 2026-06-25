@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>OCR Benchmark · ai4db × Indonesian documents</title>
+<link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="dot"></span>
+    <span class="title">OCR BENCHMARK</span>
+    <span class="sub">ai4db × Indonesian documents</span>
+  </div>
+  <div class="actions">
+    <span id="last-run" class="last-run" title="When the last benchmark finished">last run: –</span>
+    <button id="btn-run" class="primary">Run benchmark</button>
+    <span id="status" class="status">idle</span>
+  </div>
+</header>
+
+<main id="root" class="container">
+  <section id="corrector-banner" class="panel hidden">
+    <div class="banner-inner">
+      <div class="banner-icon" id="cb-icon">⚡</div>
+      <div class="banner-text">
+        <div class="banner-title">SymSpell + KBBI corrector: <span id="cb-state">–</span></div>
+        <div class="banner-sub" id="cb-sub">–</div>
+      </div>
+      <div class="banner-delta" id="cb-delta"></div>
+    </div>
+  </section>
+
+  <section class="cards">
+    <div class="card metric" title="Harmonic mean of detection precision and recall. 1.0 = every GT line found with no extras.">
+      <div class="label">Detection F1</div>
+      <div class="value" id="m-f1">–</div>
+      <div class="hint" id="m-f1-hint"></div>
+    </div>
+    <div class="card metric" title="Character Error Rate on matched line pairs. Edit distance / GT length. 0.0 = identical.">
+      <div class="label">CER (raw)</div>
+      <div class="value" id="m-cer">–</div>
+      <div class="hint" id="m-cer-hint">raw OCR</div>
+    </div>
+    <div class="card metric" title="Character Error Rate after SymSpell + KBBI correction.">
+      <div class="label">CER (corrected)</div>
+      <div class="value" id="m-cer-c">–</div>
+      <div class="hint" id="m-cer-c-hint">after corrector</div>
+    </div>
+    <div class="card metric" title="Word Error Rate on matched line pairs. Same as CER but at the word level.">
+      <div class="label">WER (raw)</div>
+      <div class="value" id="m-wer">–</div>
+      <div class="hint" id="m-wer-hint">raw OCR</div>
+    </div>
+    <div class="card metric" title="Word Error Rate after SymSpell + KBBI correction.">
+      <div class="label">WER (corrected)</div>
+      <div class="value" id="m-wer-c">–</div>
+      <div class="hint" id="m-wer-c-hint">after corrector</div>
+    </div>
+    <div class="card metric" title="Total images processed across all categories in this run.">
+      <div class="label">Images</div>
+      <div class="value" id="m-imgs">–</div>
+      <div class="hint" id="m-lines-hint"></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <header class="panel-head">
+      <h2>By category</h2>
+      <div class="legend">
+        <span class="lg lg-f1">detection F1</span>
+        <span class="lg lg-cer">CER</span>
+      </div>
+    </header>
+    <div class="table-wrap">
+      <table id="cat-table">
+        <thead>
+          <tr>
+            <th class="sortable" data-key="category">category</th>
+            <th class="num sortable" data-key="n_images">imgs</th>
+            <th class="num sortable" data-key="n_lines">lines</th>
+            <th class="num sortable" data-key="f1">F1</th>
+            <th class="num sortable" data-key="cer">CER</th>
+            <th class="num sortable" data-key="wer">WER</th>
+            <th class="num sortable" data-key="conf">conf</th>
+            <th class="num sortable" data-key="ms">ms/img</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="cat-tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel">
+    <header class="panel-head">
+      <h2>Glossary</h2>
+      <span class="muted">what the numbers mean</span>
+    </header>
+    <dl class="glossary">
+      <div><dt>GT</dt><dd><b>G</b>round <b>T</b>ruth — the human-labeled text + polygon from the labelme JSON sidecar. This is the reference, not what OCR produced.</dd></div>
+      <div><dt>PR / Predicted</dt><dd>What the OCR engine actually returned: polygon, text, and a confidence score.</dd></div>
+      <div><dt>TP / FP / FN</dt><dd>Detection outcomes after matching predicted lines to GT lines by polygon overlap (IoU ≥ 0.5). <b>TP</b> = predicted line that overlaps a GT line. <b>FP</b> = predicted line with no matching GT (extra / spurious). <b>FN</b> = GT line the engine missed.</dd></div>
+      <div><dt>Detection F1</dt><dd>Harmonic mean of detection precision (TP / (TP+FP)) and recall (TP / (TP+FN)). 1.0 = every line found with no extras; 0.0 = nothing found or everything wrong.</dd></div>
+      <div><dt>CER (matched)</dt><dd><b>C</b>haracter <b>E</b>rror <b>R</b>ate on matched line pairs. Edit distance between predicted and GT characters, divided by GT length. 0.0 = identical, 1.0 = every character wrong.</dd></div>
+      <div><dt>WER (matched)</dt><dd><b>W</b>ord <b>E</b>rror <b>R</b>ate on matched line pairs. Same idea as CER but at the word level.</dd></div>
+      <div><dt>Joined-page CER</dt><dd>Coarse CER computed by joining all GT lines into one string and all predicted lines into another, then comparing. No alignment — order matters. Useful as a smoke check; noisier than per-line CER.</dd></div>
+      <div><dt>Mean conf</dt><dd>Average OCR confidence score on matched lines. High conf + high CER means the engine is confidently wrong.</dd></div>
+      <div><dt>IoU</dt><dd><b>I</b>ntersection-over-<b>U</b>nion of two polygons, via their axis-aligned bounding boxes. ≥ 0.5 counts as a match.</dd></div>
+      <div><dt>Missed</dt><dd>In the drill-down: a GT line the OCR did not detect. Drawn dashed red.</dd></div>
+      <div><dt>Spurious</dt><dd>In the drill-down: a predicted line with no matching GT. Drawn dashed amber.</dd></div>
+      <div><dt>Matched</dt><dd>In the drill-down: a predicted line that overlaps a GT line. Drawn indigo.</dd></div>
+    </dl>
+  </section>
+
+  <section id="detail" class="panel detail hidden">
+    <header class="panel-head">
+      <button id="back" class="ghost">‹ back</button>
+      <h2 id="detail-title">–</h2>
+      <span id="detail-sub" class="muted"></span>
+    </header>
+    <div class="detail-grid">
+      <div class="image-card">
+        <div class="image-frame" id="image-frame">
+          <img id="detail-img" alt="" />
+          <svg id="overlay" preserveAspectRatio="none"></svg>
+        </div>
+      </div>
+      <div class="side">
+        <div class="kv">
+          <div title="Number of GT (human-labeled) text lines in this image"><span class="k">GT lines</span><span id="d-gt" class="v">–</span></div>
+          <div title="Number of text lines the OCR engine returned"><span class="k">Predicted</span><span id="d-pr" class="v">–</span></div>
+          <div title="TP = matched, FP = spurious, FN = missed (see Glossary)"><span class="k">TP / FP / FN</span><span id="d-det" class="v">–</span></div>
+          <div title="Harmonic mean of detection precision and recall (IoU ≥ 0.5)"><span class="k">Detection F1</span><span id="d-f1" class="v">–</span></div>
+          <div title="Character Error Rate on matched pairs in this image"><span class="k">Matched CER</span><span id="d-cer" class="v">–</span></div>
+          <div title="Coarse CER from joining all GT vs all predicted text. No alignment."><span class="k">Joined-page CER</span><span id="d-jcer" class="v">–</span></div>
+          <div title="Character Error Rate after SymSpell + KBBI correction."><span class="k">CER (corrected)</span><span id="d-cer-c" class="v">–</span></div>
+          <div title="Joined-page CER after correction."><span class="k">Joined-page CER (c)</span><span id="d-jcer-c" class="v">–</span></div>
+          <div title="How many matched lines fell into each correction bucket"><span class="k">Correction status</span><span id="d-cstatus" class="v">–</span></div>
+          <div title="Average OCR confidence on matched lines. High + high CER = confidently wrong."><span class="k">Mean conf</span><span id="d-conf" class="v">–</span></div>
+          <div title="Time the engine took to process this image, in milliseconds"><span class="k">Latency</span><span id="d-ms" class="v">–</span></div>
+          <div title="When this image was processed in the current benchmark run"><span class="k">Processed at</span><span id="d-when" class="v">–</span></div>
+        </div>
+        <div class="samples">
+          <div class="samples-head">Sample comparison (first 8 lines)</div>
+          <ul id="samples"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <span>model: rapidocr-onnxruntime==1.4.4 (matches ai4db)</span>
+  <span>·</span>
+  <span>dataset: IMG_OCR_IND_CN · 11 categories · 55 images</span>
+  <span>·</span>
+  <span id="when">directional · n=55</span>
+</footer>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

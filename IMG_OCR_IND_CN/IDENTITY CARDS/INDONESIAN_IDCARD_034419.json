@@ -1,0 +1,234 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "TENTARA NASIONAL INDONESIA",
+            "points": [
+                [
+                    531.918268,
+                    156.93949
+                ],
+                [
+                    1049.405806,
+                    185.76530300000002
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "KARTU TANDA PRAJURIT TNI",
+            "points": [
+                [
+                    534.281157,
+                    207.889504
+                ],
+                [
+                    1049.1399959999999,
+                    239.278042
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "No. 04/###-074 ###/2020",
+            "points": [
+                [
+                    691.600497,
+                    247.387446
+                ],
+                [
+                    1157.209277,
+                    301.32219200000003
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Nama : Pendi Sm Sirait",
+            "points": [
+                [
+                    467.575023,
+                    317.674162
+                ],
+                [
+                    921.2533619999999,
+                    353.056442
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pangkat / Korps : Sersan Satu",
+            "points": [
+                [
+                    469.693846,
+                    364.840066
+                ],
+                [
+                    875.2819999999999,
+                    404.589947
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "NRP/NBI : 21090107160287",
+            "points": [
+                [
+                    469.314475,
+                    413.9244
+                ],
+                [
+                    919.153315,
+                    450.83283
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Jabatan : Bati Tuud",
+            "points": [
+                [
+                    467.038252,
+                    466.824495
+                ],
+                [
+                    836.654582,
+                    501.03075
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kesatuan : Kodim 0302",
+            "points": [
+                [
+                    470.687662,
+                    513.535098
+                ],
+                [
+                    869.828132,
+                    549.7514219999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Berlaku s/d : Kolom Mutasi Habis",
+            "points": [
+                [
+                    469.604561,
+                    565.785538
+                ],
+                [
+                    984.8464319999999,
+                    601.387294
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Dikeluarkan : Padang, 28 Maret 2020",
+            "points": [
+                [
+                    469.467082,
+                    613.428142
+                ],
+                [
+                    1018.113702,
+                    647.98506
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Komandan ### 071/WK",
+            "points": [
+                [
+                    735.630582,
+                    654.008244
+                ],
+                [
+                    1107.408611,
+                    686.95848
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Agung Laksono, S.LP",
+            "points": [
+                [
+                    754.961492,
+                    743.282494
+                ],
+                [
+                    1066.259963,
+                    775.051197
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kolonel Inf NRP 119600534500672",
+            "points": [
+                [
+                    673.558731,
+                    771.566232
+                ],
+                [
+                    1144.952861,
+                    800.313742
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Sidik ibu jari tangan",
+            "points": [
+                [
+                    142.092926,
+                    748.053572
+                ],
+                [
+                    396.18917899999997,
+                    778.2065180000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_IDCARD_034419.jpg",
+    "imageData": null,
+    "imageHeight": 902,
+    "imageWidth": 1384
+}

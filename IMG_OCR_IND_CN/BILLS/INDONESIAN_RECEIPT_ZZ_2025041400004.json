@@ -1,0 +1,634 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "Total price",
+            "points": [
+                [
+                    2148.673584,
+                    1822.0354
+                ],
+                [
+                    2426.265381,
+                    1885.732055
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Description",
+            "points": [
+                [
+                    457.403198,
+                    1825.677002
+                ],
+                [
+                    756.9425659999999,
+                    1883.7288819999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Unit price",
+            "points": [
+                [
+                    1785.3125,
+                    1820.892578
+                ],
+                [
+                    2046.0448000000001,
+                    1886.7684319999998
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "PT ABC",
+            "points": [
+                [
+                    452.762756,
+                    385.288879
+                ],
+                [
+                    789.278901,
+                    481.666259
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Due date",
+            "points": [
+                [
+                    1673.78833,
+                    1464.302856
+                ],
+                [
+                    1913.990356,
+                    1528.170166
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Project",
+            "points": [
+                [
+                    1167.380127,
+                    1467.232056
+                ],
+                [
+                    1363.5441899999998,
+                    1529.81836
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Qty",
+            "points": [
+                [
+                    1565.030762,
+                    1825.330566
+                ],
+                [
+                    1662.007569,
+                    1887.088623
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "PT Lima Dasar",
+            "points": [
+                [
+                    461.735931,
+                    1380.977539
+                ],
+                [
+                    776.9219969999999,
+                    1431.977173
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Invoice",
+            "points": [
+                [
+                    465.892866,
+                    863.226848
+                ],
+                [
+                    999.080735,
+                    989.536621
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Invoice for",
+            "points": [
+                [
+                    459.6521,
+                    1202.506836
+                ],
+                [
+                    746.732422,
+                    1259.784058
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Rp500,000",
+            "points": [
+                [
+                    1808.586792,
+                    2056.317139
+                ],
+                [
+                    2043.893066,
+                    2106.6069340000004
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "01234 456 789",
+            "points": [
+                [
+                    459.580414,
+                    664.372681
+                ],
+                [
+                    786.241582,
+                    714.5743409999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "10",
+            "points": [
+                [
+                    1600.609131,
+                    1962.27832
+                ],
+                [
+                    1667.739746,
+                    2014.9349359999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Rp227,550,000",
+            "points": [
+                [
+                    1759.712402,
+                    2539.261475
+                ],
+                [
+                    2416.663086,
+                    2646.3818359999996
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kevin",
+            "points": [
+                [
+                    1163.990479,
+                    1293.731812
+                ],
+                [
+                    1290.039185,
+                    1347.440552
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Rp20,000,000",
+            "points": [
+                [
+                    1737.778076,
+                    1960.083374
+                ],
+                [
+                    2041.68518,
+                    2014.672607
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "03/01/2022",
+            "points": [
+                [
+                    1669.538696,
+                    1553.527466
+                ],
+                [
+                    1934.0391840000002,
+                    1606.330933
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Payable to",
+            "points": [
+                [
+                    1167.321899,
+                    1201.452759
+                ],
+                [
+                    1445.274292,
+                    1261.691895
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "123456",
+            "points": [
+                [
+                    1678.340942,
+                    1293.7052
+                ],
+                [
+                    1843.414062,
+                    1346.991577
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Invoice #",
+            "points": [
+                [
+                    1681.040039,
+                    1203.330444
+                ],
+                [
+                    1915.550781,
+                    1256.852173
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "10",
+            "points": [
+                [
+                    1600.188843,
+                    2057.250732
+                ],
+                [
+                    1664.3776859999998,
+                    2103.379638
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "PPN 11%",
+            "points": [
+                [
+                    453.073883,
+                    2242.896973
+                ],
+                [
+                    664.049805,
+                    2294.290772
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Rp227,550,000",
+            "points": [
+                [
+                    2088.885986,
+                    2358.661621
+                ],
+                [
+                    2427.0761719999996,
+                    2412.843017
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Notes:",
+            "points": [
+                [
+                    460.211487,
+                    2363.508789
+                ],
+                [
+                    601.332092,
+                    2412.577393
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pembelian Komputer",
+            "points": [
+                [
+                    1178.880127,
+                    1554.284668
+                ],
+                [
+                    1629.4938969999998,
+                    1606.9021
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Submitted on 01/01/2022",
+            "points": [
+                [
+                    439.048157,
+                    1034.598511
+                ],
+                [
+                    1129.775635,
+                    1104.4260259999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Total",
+            "points": [
+                [
+                    1932.431519,
+                    2359.7771
+                ],
+                [
+                    2047.545899,
+                    2408.831543
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Iwan",
+            "points": [
+                [
+                    461.417908,
+                    1298.322632
+                ],
+                [
+                    567.678467,
+                    1346.435181
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Rp 5,000,000",
+            "points": [
+                [
+                    2153.992432,
+                    2042.029175
+                ],
+                [
+                    2423.205078,
+                    2096.8156639999997
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Rp22,550,000",
+            "points": [
+                [
+                    2129.758301,
+                    2231.189697
+                ],
+                [
+                    2426.071533,
+                    2293.4364769999997
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Jl. Terang Benderang",
+            "points": [
+                [
+                    462.130084,
+                    515.029724
+                ],
+                [
+                    920.6457700000001,
+                    569.633362
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Rp200,000,000",
+            "points": [
+                [
+                    2104.37085,
+                    1947.730957
+                ],
+                [
+                    2421.062012,
+                    2004.936779
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Blok 30H nomor B10, Gotham City",
+            "points": [
+                [
+                    462.767161,
+                    591.273071
+                ],
+                [
+                    1184.130306,
+                    645.319397
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Set Komputer",
+            "points": [
+                [
+                    458.387512,
+                    1948.586304
+                ],
+                [
+                    758.8496700000001,
+                    1998.55774
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Subtotal",
+            "points": [
+                [
+                    460.019653,
+                    2138.799072
+                ],
+                [
+                    640.162536,
+                    2183.8278809999997
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Kota Batu, Indonesia, 10111",
+            "points": [
+                [
+                    464.622625,
+                    1555.521815
+                ],
+                [
+                    1055.591395,
+                    1616.730677
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Set speaker",
+            "points": [
+                [
+                    455.315491,
+                    2046.494385
+                ],
+                [
+                    711.239685,
+                    2091.168946
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Rp205,000,000",
+            "points": [
+                [
+                    2104.093018,
+                    2139.603516
+                ],
+                [
+                    2420.320313,
+                    2190.532126
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Jl. Kemuning Gading No. 10",
+            "points": [
+                [
+                    465.099945,
+                    1468.539917
+                ],
+                [
+                    1051.833862,
+                    1522.567139
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_RECEIPT_ZZ_2025041400004.jpg",
+    "imageData": null,
+    "imageHeight": 4096,
+    "imageWidth": 2892
+}

@@ -1,0 +1,506 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "4",
+            "points": [
+                [
+                    2168.38259,
+                    6.211381
+                ],
+                [
+                    2259.2444600000003,
+                    63.072720000000004
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "pacta sunt servanda dapat disimpulkan dalam Pasal 1338 ayat (1) KUH Perdata,",
+            "points": [
+                [
+                    516.411233,
+                    299.423752
+                ],
+                [
+                    2186.035166,
+                    356.35534099999995
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "yang berbunyi: “perjanjian yang dibuat secara sah berlaku sebagai undang-",
+            "points": [
+                [
+                    512.885154,
+                    357.679345
+                ],
+                [
+                    2186.035166,
+                    418.141572
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "undang.\"",
+            "points": [
+                [
+                    526.989672,
+                    419.465577
+                ],
+                [
+                    724.893853,
+                    468.894549
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "D. ASAS IKTIKAD BAIK",
+            "points": [
+                [
+                    433.547164,
+                    468.894548
+                ],
+                [
+                    1022.4113150000001,
+                    526.267477
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Asas iktikad baik dapat disimpulkan dari Pasal 1338 ayat (3) KUH Perdata. Pasal",
+            "points": [
+                [
+                    521.700486,
+                    532.446175
+                ],
+                [
+                    2183.831333,
+                    585.8470580000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "1338 ayat (3) KUH Perdata berbunyi: \"Perjanjian harus dilaksanakan dengan",
+            "points": [
+                [
+                    532.278858,
+                    587.171062
+                ],
+                [
+                    2186.035166,
+                    645.426638
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "iktikad baik\". Asas iktikad baik merupakan asas bahwa para pihak, yaitu pihak",
+            "points": [
+                [
+                    519.937379,
+                    647.191999
+                ],
+                [
+                    2186.0351650000002,
+                    707.212869
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "kreditur dan debitur harus melaksanakan substansi kontrak berdasarkan",
+            "points": [
+                [
+                    523.463526,
+                    705.447576
+                ],
+                [
+                    2188.238999,
+                    757.965846
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "kepercayaan atau keyakinan yang teguh atau kemauan baik para pihak. Asas",
+            "points": [
+                [
+                    523.944382,
+                    762.762109
+                ],
+                [
+                    2189.022179,
+                    807.6246140000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "iktikad baik dibagi menjadi 2 macam, yaitu iktikad baik nisbi dan mutlak. Pada",
+            "points": [
+                [
+                    528.31561,
+                    819.660904
+                ],
+                [
+                    2185.37948,
+                    865.9823299999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "iktikad baik nisbi, orang memperhatikan sikap dan tingkah laku yang nyata dari",
+            "points": [
+                [
+                    531.22978,
+                    872.182826
+                ],
+                [
+                    2183.55813,
+                    927.987403
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "subjek. Pada iktikad baik yang mutlak, penilaian terletak pada akal sehat dan",
+            "points": [
+                [
+                    526.858497,
+                    934.917415
+                ],
+                [
+                    2183.55813,
+                    982.697761
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "keadilan, dibuat ukuran yang objektif untuk menilai keadaan (penilaian tidak",
+            "points": [
+                [
+                    529.772667,
+                    994.734162
+                ],
+                [
+                    2187.200829,
+                    1041.055476
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "memihak) menurut norma-norma yang objektif.",
+            "points": [
+                [
+                    526.858497,
+                    1051.632846
+                ],
+                [
+                    1495.087971,
+                    1101.236871
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "E. ASAS KEPRIBADIAN",
+            "points": [
+                [
+                    442.347885,
+                    1104.154879
+                ],
+                [
+                    1023.358417,
+                    1155.9472289999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Asas kepribadian merupakan asas yang menentukan bahwa seseorang yang akan",
+            "points": [
+                [
+                    531.22978,
+                    1166.889301
+                ],
+                [
+                    2185.37948,
+                    1217.952302
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "melakukan dan atau membuat kontrak hanya untuk kepentingan perseorangan saja.",
+            "points": [
+                [
+                    528.31561,
+                    1223.788096
+                ],
+                [
+                    2183.55813,
+                    1272.662661
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Hal ini dapat dilihat pada Pasal 1315 KUHPerdata berbunyi: “Pada umumnya",
+            "points": [
+                [
+                    532.686838,
+                    1279.22797
+                ],
+                [
+                    2187.2008299999998,
+                    1331.020376
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "seseorang tidak dapat mengadakan perikatan atau perjanjian selain dengan dirinya",
+            "points": [
+                [
+                    528.297374,
+                    1343.009293
+                ],
+                [
+                    2189.987494,
+                    1390.6729030000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "sendiri\". Pasal 1340 KUH Perdata berbunyi: “Perjanjian hanya berlaku antar pihak",
+            "points": [
+                [
+                    528.297374,
+                    1397.734214
+                ],
+                [
+                    2187.783661,
+                    1450.252484
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "yang membuatnya\". Namun, ketentuan itu ada pengecualiannya, dalam Pasal 1317",
+            "points": [
+                [
+                    532.836974,
+                    1456.740621
+                ],
+                [
+                    2191.722194,
+                    1504.8857249999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "KUH Perdata, yang berbunyi: “Dapat pula perjanjian diadakan untuk kepentingan",
+            "points": [
+                [
+                    531.379861,
+                    1510.721519
+                ],
+                [
+                    2184.436795,
+                    1561.419762
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "pihak ketiga, bila suatu perjanjian yang dibuat untuk dirinya sendiri, atau suatu",
+            "points": [
+                [
+                    524.094463,
+                    1571.997132
+                ],
+                [
+                    2184.436796,
+                    1616.130121
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "pemberian orang lain, mengandung suatu syarat semacam itu”. Pasal ini",
+            "points": [
+                [
+                    529.922804,
+                    1630.354792
+                ],
+                [
+                    2184.436796,
+                    1672.664158
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "mengkonstruksikan bahwa seseorang dapat mengadakan perjanjian untuk",
+            "points": [
+                [
+                    527.506969,
+                    1686.315575
+                ],
+                [
+                    2186.640628,
+                    1730.9781050000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "kepentingan pihak ketiga, dengan suatu syarat yang ditentukan. Pasal 1318 KUH",
+            "points": [
+                [
+                    525.567626,
+                    1738.745547
+                ],
+                [
+                    2186.640629,
+                    1794.088328
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Perdata, tidak hanya mengatur perjanjian untuk diri sendiri, tetapi juga untuk",
+            "points": [
+                [
+                    519.749447,
+                    1800.884783
+                ],
+                [
+                    2189.064845,
+                    1849.916601
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "kepentingan ahli warisnya dan untuk orang-orang yang memperoleh hak",
+            "points": [
+                [
+                    521.688865,
+                    1857.198549
+                ],
+                [
+                    2184.2164119999998,
+                    1910.599506
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "daripadanya.",
+            "points": [
+                [
+                    527.506969,
+                    1917.395962
+                ],
+                [
+                    804.837305,
+                    1973.709728
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "OTIH HANDAYANI, Teknik Penyusunan Kontrak",
+            "points": [
+                [
+                    153.154162,
+                    3207.440472
+                ],
+                [
+                    1130.113353,
+                    3275.890819
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_CONTRACT_WXD_000067.jpg",
+    "imageData": null,
+    "imageHeight": 3509,
+    "imageWidth": 2482
+}

@@ -1,0 +1,24 @@
+# generated
+reports/per_category/
+reports/summary.csv
+reports/summary.json
+
+# secrets
+.env
+
+# python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+dist/
+build/
+
+# editor
+.vscode/
+.idea/
+
+# cache
+.ruff_cache/
+.pytest_cache/
+.mypy_cache/

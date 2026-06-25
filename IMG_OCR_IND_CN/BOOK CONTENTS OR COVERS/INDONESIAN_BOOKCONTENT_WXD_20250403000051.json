@@ -1,0 +1,634 @@
+{
+    "version": "4.5.6",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "Ibunda Sang Penebus",
+            "points": [
+                [
+                    568.391265,
+                    106.475254
+                ],
+                [
+                    811.466448,
+                    135.201142
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Pewartaan, Gabriel secara khusus menyebut Elisabeth; dalam usia",
+            "points": [
+                [
+                    211.846831,
+                    173.160356
+                ],
+                [
+                    1163.65654,
+                    207.015856
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "tua dia ini mengandung seorang putera dari suaminya Zakaria,",
+            "points": [
+                [
+                    211.846831,
+                    215.223264
+                ],
+                [
+                    1168.779305,
+                    248.052836
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "melalui kuasa Allah: \"Dan sesungguhnya, Elisabeth, sanakmu itu,",
+            "points": [
+                [
+                    209.797717,
+                    252.15653
+                ],
+                [
+                    1167.498614,
+                    289.089816
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "iapun sedang mengandung seorang anak laki-laki pada hari tuanya",
+            "points": [
+                [
+                    211.846831,
+                    292.167581
+                ],
+                [
+                    1163.65654,
+                    324.997172
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "dan inilah bulan keenam bagi dia, yang disebut mandul itu. Sebab",
+            "points": [
+                [
+                    214.920482,
+                    332.178652
+                ],
+                [
+                    1164.9372309999999,
+                    363.469341
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "bagi Allah tidak ada yang mustahil\" (Luk. 1:36 -37). Utusan Allah",
+            "points": [
+                [
+                    212.871368,
+                    369.111918
+                ],
+                [
+                    1166.217922,
+                    403.22391500000003
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "telah mengatakan apa yang terpenuhi dalam Elisabeth untuk",
+            "points": [
+                [
+                    211.846831,
+                    410.148897
+                ],
+                [
+                    1170.059997,
+                    441.696083
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "menjawab pertanyaan Maria: \"Bagaimana hal itu mungkin terjadi,",
+            "points": [
+                [
+                    215.945019,
+                    449.134059
+                ],
+                [
+                    1164.9372309999999,
+                    480.168251
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "karena aku belum bersuami?\" (Luk. 1:34). Hal ini untuk tepat",
+            "points": [
+                [
+                    211.846831,
+                    487.093234
+                ],
+                [
+                    1167.498614,
+                    519.922825
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "memenuhi “kuasa Yang Mahatinggi\", seperti yang terjadi dalam",
+            "points": [
+                [
+                    212.871368,
+                    525.052526
+                ],
+                [
+                    1168.779305,
+                    556.8561699999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Elisabeth dan lain sebagainya.",
+            "points": [
+                [
+                    209.797717,
+                    560.959883
+                ],
+                [
+                    637.2924390000001,
+                    597.893149
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Karena kasih sayangnya, maka Maria mengunjungi rumah",
+            "points": [
+                [
+                    316.351244,
+                    618.411639
+                ],
+                [
+                    1166.217922,
+                    653.036591
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "saudara sepupunya. Ketika Maria masuk, Elisabeth menjawab",
+            "points": [
+                [
+                    214.920482,
+                    659.448619
+                ],
+                [
+                    1166.2179230000002,
+                    694.073571
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "salamnya dan merasa anaknya melonjak dalam kandungannya dan",
+            "points": [
+                [
+                    213.895905,
+                    696.381885
+                ],
+                [
+                    1164.937231,
+                    731.263333
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "\"digerakkan oleh Roh Kudus\" dia menyapa Maria dengan suara",
+            "points": [
+                [
+                    211.782156,
+                    733.691825
+                ],
+                [
+                    1169.739207,
+                    766.41879
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "nyaring: \"Diberkatilah engkau di antara semua perempuan dan",
+            "points": [
+                [
+                    210.655165,
+                    777.70396
+                ],
+                [
+                    1169.739207,
+                    807.32753
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "diberkatilah buah rahimmu” (bdk. Luk. 1:40-42). Seruan atau",
+            "points": [
+                [
+                    210.655165,
+                    813.816554
+                ],
+                [
+                    1169.739207,
+                    845.414977
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "aklamasi Elisabeth akhirnya menjadi bagian doa Salam Maria,",
+            "points": [
+                [
+                    210.655165,
+                    852.186061
+                ],
+                [
+                    1168.330447,
+                    883.502423
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "sebagai kelanjutan salam dari malaikat, yang menjadi salah satu",
+            "points": [
+                [
+                    214.036138,
+                    892.812739
+                ],
+                [
+                    1165.231156,
+                    923.000515
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "doa Gereja yang paling sering digunakan. Tetapi yang lebih",
+            "points": [
+                [
+                    211.558735,
+                    928.930812
+                ],
+                [
+                    1169.515786,
+                    963.0684239999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "menarik lagi kata-kata Elisabeth dalam pertanyaan berikut:",
+            "points": [
+                [
+                    211.558735,
+                    967.300362
+                ],
+                [
+                    1166.698265,
+                    996.9239319999999
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "\"Siapakah aku ini sampai ibu Tuhanku datang mengunjungi aku?\"",
+            "points": [
+                [
+                    212.685726,
+                    1005.669956
+                ],
+                [
+                    1174.023923,
+                    1045.168048
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "(Luk. 1:43). Elisabeth memberikan kesaksian tentang Maria: dia",
+            "points": [
+                [
+                    212.685726,
+                    1046.296548
+                ],
+                [
+                    1165.289505,
+                    1080.1520560000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "menyatakan bahwa di depannya berdiri Bunda Tuhan, Bunda",
+            "points": [
+                [
+                    211.558735,
+                    1085.794641
+                ],
+                [
+                    1169.515786,
+                    1119.650149
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Messias. Putera yang dikandung Elisabeth juga memberikan",
+            "points": [
+                [
+                    214.939795,
+                    1121.907278
+                ],
+                [
+                    1168.1070260000001,
+                    1157.737596
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "kesaksian:\"Sebab sesungguhnya, ketika salammu sampai kepada",
+            "points": [
+                [
+                    210.431744,
+                    1162.533784
+                ],
+                [
+                    1166.698265,
+                    1195.825042
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "telingaku, anak yang di dalam rahimku melonjak kegirangan\" (Luk.",
+            "points": [
+                [
+                    212.685726,
+                    1203.16042
+                ],
+                [
+                    1168.107025,
+                    1235.323136
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "1:44). Anak tersebut nantinya adalah Yohanes Pembabtis, yang di",
+            "points": [
+                [
+                    216.066786,
+                    1239.272927
+                ],
+                [
+                    1165.289505,
+                    1274.821228
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "tepi Sungai Yordan akan menunjuk kepada Yesus, sebagai Messias.",
+            "points": [
+                [
+                    212.685726,
+                    1279.899606
+                ],
+                [
+                    1152.610661,
+                    1314.319321
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Tiap kata sapaan Elisabeth itu penuh arti, namun",
+            "points": [
+                [
+                    322.508254,
+                    1333.815939
+                ],
+                [
+                    1165.944336,
+                    1367.270782
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "nampaknya kata-kata penutupnya memiliki arti mendasar: \"Dan",
+            "points": [
+                [
+                    210.686533,
+                    1367.270782
+                ],
+                [
+                    1165.944336,
+                    1404.822183
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "berbahagialah ia, yang telah percaya, sebab apa yang dikatakan",
+            "points": [
+                [
+                    214.085116,
+                    1409.210626
+                ],
+                [
+                    1166.491613,
+                    1445.210288
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "kepadanya dari Tuhan, akan terlaksana\" (Luk. 1:45) ²⁸. Kata-kata",
+            "points": [
+                [
+                    212.845425,
+                    1452.658481
+                ],
+                [
+                    1168.041249,
+                    1484.003058
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "ini dapat dihubungkan dengan sebutan “penuh rahmat” dalam",
+            "points": [
+                [
+                    207.88657,
+                    1487.41684
+                ],
+                [
+                    1169.590886,
+                    1522.7958270000001
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "sapaan malaikat. Dua nas tersebut mewahyukan isi Mariologi yang",
+            "points": [
+                [
+                    207.88657,
+                    1524.657899
+                ],
+                [
+                    1169.590886,
+                    1563.140308
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "²⁸ St. Agustinus, \"De Sancta Virginitate\" III, 3:PL 40,398; Sermo 25,7:PL 46,937f.",
+            "points": [
+                [
+                    209.622146,
+                    1619.064006
+                ],
+                [
+                    1141.69743,
+                    1655.932613
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Seri Dokumen Gerejawi No. 1",
+            "points": [
+                [
+                    209.7523,
+                    1690.825755
+                ],
+                [
+                    507.128783,
+                    1719.551555
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "19",
+            "points": [
+                [
+                    1145.169255,
+                    1691.851585
+                ],
+                [
+                    1168.733849,
+                    1716.473867
+                ]
+            ],
+            "group_id": null,
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "imagePath": "INDONESIAN_BOOKCONTENT_WXD_20250403000051.jpg",
+    "imageData": null,
+    "imageHeight": 1948,
+    "imageWidth": 1378
+}
