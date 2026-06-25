@@ -32,8 +32,12 @@ class PagePrediction:
     elapsed_ms: float
 
 
-def _preprocess(img: np.ndarray, min_side: int) -> np.ndarray:
-    """Grayscale + CLAHE + 2x upscale for short side. Helps faint/low-contrast text.
+def _preprocess(img: np.ndarray, min_side: int) -> tuple[np.ndarray, float]:
+    """Grayscale + CLAHE + 2x upscale for short side. Returns (image, scale).
+
+    ``scale`` is the geometric multiplier applied to the input. OCR polygons
+    returned in this image's coordinate space must be divided by ``scale`` to
+    map back to the original image space (used by the IoU matcher).
 
     ponytail: keep it simple — one fixed pipeline behind one toggle. Add per-op
     knobs only when measurements show the fixed pipeline hurts some category.
@@ -51,7 +55,9 @@ def _preprocess(img: np.ndarray, min_side: int) -> np.ndarray:
         enhanced = cv2.resize(
             enhanced, (int(w * scale), int(h * scale)), interpolation=cv2.INTER_CUBIC
         )
-    return enhanced
+    else:
+        scale = 1.0
+    return enhanced, scale
 
 
 class BenchEngine:
@@ -66,17 +72,26 @@ class BenchEngine:
 
     def predict(self, image_path: Path) -> PagePrediction:
         t0 = time.perf_counter()
+        scale = 1.0
         if self._enable_preprocessing:
             img = cv2.imread(str(image_path), cv2.IMREAD_COLOR)
             if img is not None:
-                img = _preprocess(img, self._preproc_upscale_min_side)
+                img, scale = _preprocess(img, self._preproc_upscale_min_side)
                 result, _ = self._ocr(img)
             else:
                 result, _ = self._ocr(str(image_path))
         else:
             result, _ = self._ocr(str(image_path))
+
+        # Remap polygons from preprocessed image space back to original image
+        # space so the IoU matcher compares them on equal footing with GT.
+        def _unscale(poly: list[list[float]]) -> list[list[float]]:
+            if scale == 1.0:
+                return poly
+            return [[p[0] / scale, p[1] / scale] for p in poly]
+
         lines = [
-            LinePrediction(polygon=poly, text=txt, score=sc)
+            LinePrediction(polygon=_unscale(poly), text=txt, score=sc)
             for (poly, txt, sc) in (result or [])
         ]
         return PagePrediction(
