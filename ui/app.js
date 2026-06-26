@@ -1,46 +1,144 @@
-/* OCR Benchmark dashboard — vanilla JS, no build step */
+/* OCR Benchmark dashboard — vanilla JS, calm design */
 
 const $ = (s) => document.querySelector(s);
+const $$ = (s) => document.querySelectorAll(s);
 const fmt = (n, d = 3) => (n === null || n === undefined || Number.isNaN(n)) ? "–" : Number(n).toFixed(d);
-const pct = (n) => n === null || n === undefined ? "–" : `${(Number(n) * 100).toFixed(1)}%`;
 
-// Browser's local timezone (e.g. "Asia/Jakarta") — used for formatting all
-// timestamps so users see their own wall-clock, not UTC. ponytail: one source
-// of truth, no per-call Intl calls elsewhere.
 const LOCAL_TZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 let summaryData = null;
 let currentSort = { key: "f1", dir: "asc" };
+let modelConfig = null;
+let selectedModel = { ocr_version: null, model_type: null };
+
+/* ─── API helpers ────────────────────────────────────────── */
+
+async function fetchModels() {
+  try {
+    const r = await fetch("/api/models");
+    if (!r.ok) return null;
+    return await r.json();
+  } catch { return null; }
+}
 
 async function fetchSummary() {
-  const r = await fetch("/api/summary");
-  if (!r.ok) {
-    setStatus("no reports — click Run benchmark");
-    return null;
-  }
-  return await r.json();
+  try {
+    const r = await fetch("/api/summary");
+    if (!r.ok) { setStatus("no reports — click Run benchmark"); return null; }
+    return await r.json();
+  } catch { return null; }
 }
+
+/* ─── Model Selector (card-based) ────────────────────────── */
+
+function initModelSelector(data) {
+  modelConfig = data;
+  selectedModel = { ...data.current };
+  const grid = $("#model-grid");
+  grid.innerHTML = "";
+
+  for (const [ver, info] of Object.entries(data.available)) {
+    const card = document.createElement("div");
+    card.className = "model-card" + (ver === selectedModel.ocr_version ? " selected" : "");
+    card.dataset.version = ver;
+
+    const chips = info.model_types.map(t =>
+      `<span class="size-chip${t === selectedModel.model_type && ver === selectedModel.ocr_version ? " active" : ""}" data-type="${t}">${t}</span>`
+    ).join("");
+
+    card.innerHTML = `
+      <div class="model-card-head">
+        <span class="model-card-name">${ver}</span>
+        ${ver === "PP-OCRv6" ? '<span class="model-card-badge">latest</span>' : ""}
+      </div>
+      <div class="model-card-desc">${info.desc}</div>
+      <div class="model-card-sizes">${chips}</div>
+    `;
+    grid.appendChild(card);
+  }
+
+  grid.addEventListener("click", (e) => {
+    const chip = e.target.closest(".size-chip");
+    const card = e.target.closest(".model-card");
+    if (!card) return;
+
+    const ver = card.dataset.version;
+
+    if (chip) {
+      selectedModel.ocr_version = ver;
+      selectedModel.model_type = chip.dataset.type;
+    } else {
+      selectedModel.ocr_version = ver;
+      const firstChip = card.querySelector(".size-chip");
+      if (firstChip) selectedModel.model_type = firstChip.dataset.type;
+    }
+
+    // Update UI
+    $$(".model-card").forEach(c => c.classList.toggle("selected", c.dataset.version === selectedModel.ocr_version));
+    $$(".model-card").forEach(c => {
+      c.querySelectorAll(".size-chip").forEach(ch => {
+        ch.classList.toggle("active",
+          c.dataset.version === selectedModel.ocr_version && ch.dataset.type === selectedModel.model_type
+        );
+      });
+    });
+
+    // Update badge
+    updateModelBadge();
+  });
+
+  updateModelBadge();
+}
+
+function updateModelBadge() {
+  const badge = $("#model-badge-text");
+  if (badge && selectedModel.ocr_version) {
+    badge.textContent = `${selectedModel.ocr_version} · ${selectedModel.model_type}`;
+  }
+}
+
+/* ─── Status ─────────────────────────────────────────────── */
 
 function setStatus(msg) {
-  $("#status").textContent = msg;
+  const el = $("#status");
+  if (el) el.textContent = msg;
 }
 
+/* ─── Score Ring ─────────────────────────────────────────── */
+
+function updateRing(f1) {
+  const circ = 2 * Math.PI * 50; // r=50
+  const offset = circ * (1 - (f1 || 0));
+  const fill = $("#ring-fill");
+  if (fill) fill.style.strokeDashoffset = offset;
+  const val = $("#ring-value");
+  if (val) val.textContent = fmt(f1);
+  const sub = $("#ring-sub");
+  if (sub) sub.textContent = `P ${fmt(summaryData?.overall?.detection_precision)} · R ${fmt(summaryData?.overall?.detection_recall)}`;
+}
+
+/* ─── Render Overview Metrics ────────────────────────────── */
+
 function renderOverall(o) {
-  $("#m-f1").textContent = fmt(o.detection_f1);
-  $("#m-f1-hint").textContent = `P ${fmt(o.detection_precision)} · R ${fmt(o.detection_recall)}`;
+  updateRing(o.detection_f1);
+
   $("#m-cer").textContent = fmt(o.cer_mean);
-  $("#m-cer-hint").textContent = "raw OCR";
   $("#m-wer").textContent = fmt(o.wer_mean);
-  $("#m-wer-hint").textContent = "raw OCR";
+  $("#m-pr").textContent = `${fmt(o.detection_precision, 2)} / ${fmt(o.detection_recall, 2)}`;
+  $("#m-pr-hint").textContent = "precision · recall";
   $("#m-imgs").textContent = o.n_images;
   $("#m-lines-hint").textContent = `${o.n_lines} GT lines · ${o.n_categories} categories`;
+
+  // Bars — CER/WER max at 1.0
+  setBar("bar-cer", o.cer_mean);
+  setBar("bar-wer", o.wer_mean);
 
   const correctorOn = o.corrector_enabled === true;
   if (correctorOn) {
     $("#m-cer-c").textContent = fmt(o.cer_corrected_mean);
     $("#m-wer-c").textContent = fmt(o.wer_corrected_mean);
-    $("#m-cer-c-hint").textContent = "after corrector";
-    $("#m-wer-c-hint").textContent = "after corrector";
+    setBar("bar-cer-c", o.cer_corrected_mean);
+    setBar("bar-wer-c", o.wer_corrected_mean);
     $("#corrector-banner").classList.remove("hidden");
     $("#cb-state").textContent = "ON";
     $("#cb-sub").textContent = "SymSpell + KBBI post-processing active";
@@ -59,15 +157,62 @@ function renderOverall(o) {
   } else {
     $("#m-cer-c").textContent = "off";
     $("#m-wer-c").textContent = "off";
-    $("#m-cer-c-hint").textContent = "set ENABLE_SYMSPELL_CORRECTION=true in .env";
-    $("#m-wer-c-hint").textContent = "set ENABLE_SYMSPELL_CORRECTION=true in .env";
+    setBar("bar-cer-c", 0);
+    setBar("bar-wer-c", 0);
     $("#corrector-banner").classList.remove("hidden");
     $("#cb-state").textContent = "OFF";
-    $("#cb-sub").textContent = "Enable in .env (ENABLE_SYMSPELL_CORRECTION=true) and restart.";
-    $("#cb-delta").textContent = "no delta";
+    $("#cb-sub").textContent = "Enable in .env (ENABLE_SYMSPELL_CORRECTION=true)";
+    $("#cb-delta").textContent = "–";
     $("#cb-delta").className = "banner-delta delta-zero";
   }
 }
+
+function setBar(id, val) {
+  const el = document.getElementById(id);
+  if (el) el.style.width = `${Math.min(100, (val || 0) * 100).toFixed(1)}%`;
+}
+
+/* ─── Category Bar Chart ─────────────────────────────────── */
+
+function renderChart(cats) {
+  const area = $("#chart-area");
+  if (!cats || !cats.length) {
+    area.innerHTML = '<div class="muted">run a benchmark to see results</div>';
+    return;
+  }
+
+  const maxF1 = 1;
+  const rows = cats.map(c => {
+    const f1 = c.detection?.f1 ?? 0;
+    const cer = c.cer_mean ?? 0;
+    const wer = c.wer_mean ?? 0;
+    return `<div class="chart-row">
+      <div class="chart-cat" data-cat="${escapeHtml(c.category)}">${escapeHtml(c.category)}</div>
+      <div class="chart-bars">
+        <div class="chart-bar-row">
+          <span class="chart-bar-label">F1</span>
+          <div class="chart-bar-bg"><div class="chart-bar-fill f1" style="width:${(f1/maxF1*100).toFixed(1)}%"></div></div>
+        </div>
+        <div class="chart-bar-row">
+          <span class="chart-bar-label">CER</span>
+          <div class="chart-bar-bg"><div class="chart-bar-fill cer" style="width:${Math.min(100, cer*100).toFixed(1)}%"></div></div>
+        </div>
+        <div class="chart-bar-row">
+          <span class="chart-bar-label">WER</span>
+          <div class="chart-bar-bg"><div class="chart-bar-fill wer" style="width:${Math.min(100, wer*100).toFixed(1)}%"></div></div>
+        </div>
+      </div>
+      <div class="chart-f1-val">${fmt(f1)}</div>
+    </div>`;
+  });
+  area.innerHTML = rows.join("");
+
+  area.querySelectorAll(".chart-cat").forEach(el => {
+    el.addEventListener("click", () => openCategory(el.dataset.cat));
+  });
+}
+
+/* ─── Category Table ─────────────────────────────────────── */
 
 function renderTable(cats) {
   const tbody = $("#cat-tbody");
@@ -76,12 +221,11 @@ function renderTable(cats) {
     category: c.category,
     n_images: c.n_images,
     n_lines: c.n_lines,
-    f1: c.detection.f1,
+    f1: c.detection?.f1 ?? 0,
     cer: c.cer_mean,
     wer: c.wer_mean,
     conf: c.mean_confidence,
     ms: c.mean_ms_per_image,
-    raw: c,
   }));
   const { key, dir } = currentSort;
   rows.sort((a, b) => {
@@ -97,8 +241,8 @@ function renderTable(cats) {
       <td>${escapeHtml(r.category)}</td>
       <td class="num">${r.n_images}</td>
       <td class="num">${r.n_lines}</td>
-      <td class="num"><span class="bar" style="width:${Math.round(r.f1 * 40)}px"></span>${fmt(r.f1)}</td>
-      <td class="num"><span class="bar cer" style="width:${Math.round(r.cer * 40)}px"></span>${fmt(r.cer)}</td>
+      <td class="num"><span class="mini-bar f1" style="width:${Math.round(r.f1 * 30)}px"></span>${fmt(r.f1)}</td>
+      <td class="num"><span class="mini-bar cer" style="width:${Math.round(r.cer * 30)}px"></span>${fmt(r.cer)}</td>
       <td class="num">${fmt(r.wer)}</td>
       <td class="num">${fmt(r.conf, 2)}</td>
       <td class="num">${fmt(r.ms, 0)}</td>
@@ -113,25 +257,18 @@ function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 }
 
+/* ─── Category Detail ────────────────────────────────────── */
+
 async function openCategory(category) {
   setStatus(`loading ${category}…`);
   const r = await fetch(`/api/results/${encodeURIComponent(category)}`);
-  if (!r.ok) {
-    setStatus("failed to load category");
-    return;
-  }
+  if (!r.ok) { setStatus("failed to load category"); return; }
   const data = await r.json();
   const images = data.images || [];
-  if (!images.length) {
-    setStatus("no images in category");
-    return;
-  }
-  // First image by default
+  if (!images.length) { setStatus("no images in category"); return; }
   showImageDetail(category, images[0], data.summary);
   $("#detail").classList.remove("hidden");
   $("#detail").scrollIntoView({ behavior: "smooth", block: "start" });
-
-  // Stash for drill-down navigation
   window.__categoryData = data;
   window.__currentImageIdx = 0;
   setStatus(`${category} · ${images.length} images`);
@@ -139,37 +276,32 @@ async function openCategory(category) {
 
 function showImageDetail(category, img, summary) {
   $("#detail-title").textContent = img.image;
-  $("#detail-sub").textContent = `${category} · ${summary.detection.f1 >= 0 ? "category F1 " + fmt(summary.detection.f1) : ""}`;
+  $("#detail-sub").textContent = `${category} · F1 ${fmt(summary.detection?.f1)}`;
   $("#d-gt").textContent = img.n_gt;
   $("#d-pr").textContent = img.n_pred;
   $("#d-det").textContent = `${img.detection.tp} / ${img.detection.fp} / ${img.detection.fn}`;
   $("#d-f1").textContent = fmt(_f1(img.detection));
   $("#d-cer").textContent = img.matched_cer_mean === null ? "–" : fmt(img.matched_cer_mean);
-  $("#d-cer-c").textContent = img.matched_cer_corrected_mean === null || img.matched_cer_corrected_mean === undefined ? "off" : fmt(img.matched_cer_corrected_mean);
+  $("#d-cer-c").textContent = img.matched_cer_corrected_mean == null ? "off" : fmt(img.matched_cer_corrected_mean);
   $("#d-jcer").textContent = fmt(img.joined_cer);
-  $("#d-jcer-c").textContent = img.joined_cer_corrected === undefined ? "off" : fmt(img.joined_cer_corrected);
+  $("#d-jcer-c").textContent = img.joined_cer_corrected == null ? "off" : fmt(img.joined_cer_corrected);
   $("#d-conf").textContent = img.mean_confidence === null ? "–" : fmt(img.mean_confidence, 2);
   $("#d-ms").textContent = `${Math.round(img.elapsed_ms)} ms`;
-  $("#d-when").textContent = summaryData?.overall?.last_run ? formatRunDate(summaryData.overall.last_run) : "–";
 
-  // Render correction status counts
   const cs = img.correction_status || {};
   const csEl = $("#d-cstatus");
   if (Object.keys(cs).length) {
-    csEl.textContent = `${cs.unchanged || 0} unchanged · ${cs.corrected || 0} corrected · ${cs.not_found || 0} not_found`;
+    csEl.textContent = `${cs.unchanged || 0} ok · ${cs.corrected || 0} fixed · ${cs.not_found || 0} miss`;
   } else {
     csEl.textContent = "off";
   }
 
-  // Image + overlay
   const imgEl = $("#detail-img");
   imgEl.src = `/api/image/${encodeURIComponent(category)}/${encodeURIComponent(img.image)}`;
   imgEl.onload = () => drawOverlay(img);
-  // If cached, onload may not fire
   if (imgEl.complete) drawOverlay(img);
 
-  // Sample comparison
-  const samples = (img.overlays || []).slice(0, 8);
+  const samples = img.overlays || [];
   const ul = $("#samples");
   ul.innerHTML = "";
   const correctorOn = img.correction_enabled === true;
@@ -180,11 +312,11 @@ function showImageDetail(category, img, summary) {
       const corrected = o.pr_text_corrected;
       const correctedOk = corrected !== undefined && _normalize(o.gt_text) === _normalize(corrected);
       let cls = ok ? "match" : "diff";
-      if (correctedOk && !ok) cls = "match";  // correction fixed it
-      if (!correctedOk && ok) cls = "diff";    // correction broke it
+      if (correctedOk && !ok) cls = "match";
+      if (!correctedOk && ok) cls = "diff";
       const mark = correctedOk && !ok ? "✓*" : (ok ? "✓" : "≠");
       const correctedLine = (correctorOn && corrected !== undefined && corrected !== o.pr_text)
-        ? `<span><span class="lbl">FIX</span><span class="pr" style="color: var(--accent)">${escapeHtml(corrected)}${o.correction_status === "corrected" ? " ⚡" : ""}</span></span>`
+        ? `<span><span class="lbl">FIX</span><span class="pr" style="color:var(--accent)">${escapeHtml(corrected)}</span></span>`
         : "";
       li.className = cls;
       li.innerHTML = `
@@ -200,22 +332,17 @@ function showImageDetail(category, img, summary) {
     } else if (o.status === "spurious") {
       const corrected = o.pr_text_corrected;
       const correctedLine = (correctorOn && corrected !== undefined && corrected !== o.pr_text)
-        ? `<span><span class="lbl">FIX</span><span class="pr" style="color: var(--accent)">${escapeHtml(corrected)}</span></span>`
+        ? `<span><span class="lbl">FIX</span><span class="pr" style="color:var(--accent)">${escapeHtml(corrected)}</span></span>`
         : "";
       li.className = "spur";
       li.innerHTML = `<span class="mark">+</span><span><span class="lbl">EXTRA</span><span class="pr">${escapeHtml(o.pr_text || "")}</span></span>${correctedLine ? `<span></span>` : ""}`;
-      if (correctedLine) {
-        li.innerHTML += correctedLine;
-      }
+      if (correctedLine) li.innerHTML += correctedLine;
     }
     ul.appendChild(li);
   }
 }
 
-function _normalize(s) {
-  return (s || "").normalize("NFKC").toLowerCase().replace(/\s+/g, " ").trim();
-}
-
+function _normalize(s) { return (s || "").normalize("NFKC").toLowerCase().replace(/\s+/g, " ").trim(); }
 function _f1(d) {
   const p = d.tp / (d.tp + d.fp) || 0;
   const r = d.tp / (d.tp + d.fn) || 0;
@@ -234,8 +361,7 @@ function drawOverlay(img) {
     if (!poly) continue;
     const pts = poly.map((p) => `${p[0]},${p[1]}`).join(" ");
     const cls = o.status === "matched" ? (o.gt_polygon && o.pr_polygon ? "box-pr" : "box-gt")
-              : o.status === "missed" ? "box-missed"
-              : "box-spurious";
+              : o.status === "missed" ? "box-missed" : "box-spurious";
     const el = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
     el.setAttribute("points", pts);
     el.setAttribute("class", cls);
@@ -243,16 +369,22 @@ function drawOverlay(img) {
   }
 }
 
+/* ─── Run Benchmark ──────────────────────────────────────── */
+
 async function runBenchmark() {
   const btn = $("#btn-run");
   btn.disabled = true;
   setStatus("starting…");
   try {
-    const r = await fetch("/api/run", { method: "POST" });
+    const params = new URLSearchParams();
+    if (selectedModel.ocr_version) params.set("ocr_version", selectedModel.ocr_version);
+    if (selectedModel.model_type) params.set("model_type", selectedModel.model_type);
+    const url = "/api/run" + (params.toString() ? "?" + params : "");
+    const r = await fetch(url, { method: "POST" });
     if (!r.ok) throw new Error("run failed");
     const started = await r.json();
     if (!started.started) {
-      setStatus("already running — see progress panel below");
+      setStatus("already running");
       $("#progress-panel").classList.remove("hidden");
     } else {
       $("#progress-panel").classList.remove("hidden");
@@ -267,15 +399,13 @@ async function runBenchmark() {
 }
 
 async function pollProgress() {
-  // Poll /api/progress until the run finishes. Show partial summary in
-  // between so the dashboard reflects per-category completion.
   while (true) {
     const r = await fetch("/api/progress");
     if (!r.ok) break;
     const p = await r.json();
     renderProgress(p);
     if (!p.running) break;
-    await loadAndRender();  // partial — shows categories as they land
+    await loadAndRender();
     await new Promise((res) => setTimeout(res, 800));
   }
   setStatus("done");
@@ -285,68 +415,54 @@ async function pollProgress() {
 
 function renderProgress(p) {
   const fill = $("#progress-fill");
-  const summary = $("#progress-summary");
-  const currentEl = $("#progress-current");
-  const etaEl = $("#progress-eta");
-  const elapsedEl = $("#progress-elapsed");
-  const list = $("#progress-list");
-
   const total = p.total || 0;
   const done = (p.completed || []).length;
   const inFlight = p.current ? 1 : 0;
   const fraction = total ? (done + inFlight * 0.5) / total : 0;
   fill.style.width = `${Math.min(100, fraction * 100).toFixed(1)}%`;
 
-  summary.textContent = total
-    ? `${done} of ${total} categories${inFlight ? " · 1 in progress" : ""}`
+  $("#progress-summary").textContent = total
+    ? `${done} / ${total} categories${inFlight ? " · running…" : ""}`
     : "preparing…";
 
   if (p.current) {
     const cur = p.current;
-    const pctImg = cur.total_images
-      ? `${Math.round((cur.done_images / cur.total_images) * 100)}%`
-      : "0%";
-    currentEl.textContent = `⚙️ ${cur.name} · image ${cur.done_images}/${cur.total_images} (${pctImg})`;
+    const pctImg = cur.total_images ? `${Math.round((cur.done_images / cur.total_images) * 100)}%` : "0%";
+    $("#progress-current").textContent = `${cur.name} · ${cur.done_images}/${cur.total_images} (${pctImg})`;
   } else {
-    currentEl.textContent = done >= total && total ? "✅ finalizing…" : "⏸ waiting…";
+    $("#progress-current").textContent = done >= total && total ? "finalizing…" : "waiting…";
   }
 
   const avg = (p.completed || []).reduce((a, c) => a + (c.elapsed_s || 0), 0) / Math.max(1, done);
   const remaining = total - done - inFlight;
   const eta = remaining > 0 && avg > 0 ? Math.round(remaining * avg + (inFlight ? avg * 0.5 : 0)) : 0;
-  etaEl.textContent = eta > 0 ? `ETA ≈ ${formatDuration(eta)}` : "";
-  elapsedEl.textContent = p.started_at
-    ? `started ${formatRunDate(p.started_at)}`
-    : "";
+  $("#progress-eta").textContent = eta > 0 ? `ETA ≈ ${fmtDuration(eta)}` : "";
+  $("#progress-elapsed").textContent = p.started_at ? `started ${fmtDate(p.started_at)}` : "";
 
+  const list = $("#progress-list");
   list.innerHTML = "";
-  const completed = p.completed || [];
-  for (const c of completed) {
+  for (const c of (p.completed || [])) {
     const li = document.createElement("li");
     li.className = "prog-done";
-    li.textContent = `✅ ${c.name} · ${c.elapsed_s.toFixed(1)}s`;
+    li.textContent = `✓ ${c.name} · ${c.elapsed_s.toFixed(1)}s`;
     list.appendChild(li);
   }
   if (p.current) {
     const li = document.createElement("li");
     li.className = "prog-now";
-    const cur = p.current;
-    li.textContent = `⏳ ${cur.name} · ${cur.done_images}/${cur.total_images}`;
+    li.textContent = `… ${p.current.name} · ${p.current.done_images}/${p.current.total_images}`;
     list.appendChild(li);
   }
 }
 
-function formatDuration(s) {
+function fmtDuration(s) {
   if (s < 60) return `${s}s`;
   const m = Math.floor(s / 60);
-  const sec = s % 60;
-  return `${m}m ${sec.toString().padStart(2, "0")}s`;
+  return `${m}m ${(s % 60).toString().padStart(2, "0")}s`;
 }
 
-function formatRunDate(iso) {
+function fmtDate(iso) {
   if (!iso) return "–";
-  // Server stamps UTC with trailing Z; parse and render in the client's
-  // local timezone via Intl.DateTimeFormat (one locale string, no manual fields).
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return iso;
   const stamp = new Intl.DateTimeFormat(undefined, {
@@ -359,34 +475,47 @@ function formatRunDate(iso) {
   }).formatToParts(d).find((p) => p.type === "timeZoneName")?.value || "";
   const ageS = (Date.now() - d.getTime()) / 1000;
   let rel = "";
-  if (ageS < 60) rel = " (just now)";
+  if (ageS < 60) rel = " (now)";
   else if (ageS < 3600) rel = ` (${Math.floor(ageS / 60)}m ago)`;
   else if (ageS < 86400) rel = ` (${Math.floor(ageS / 3600)}h ago)`;
-  else if (ageS < 7 * 86400) rel = ` (${Math.floor(ageS / 86400)}d ago)`;
   return `${stamp}${tzShort ? " " + tzShort : ""}${rel}`;
 }
 
 function renderLastRun(iso) {
   const el = $("#last-run");
-  el.textContent = `last run: ${formatRunDate(iso)}`;
-  // Highlight "fresh" if within last 5 minutes
+  el.textContent = iso ? fmtDate(iso) : "–";
   const ts = iso ? Date.parse(iso) : NaN;
   if (ts && Date.now() - ts < 5 * 60 * 1000) el.classList.add("fresh");
   else el.classList.remove("fresh");
 }
+
+/* ─── Load & Render ──────────────────────────────────────── */
 
 async function loadAndRender() {
   const data = await fetchSummary();
   if (!data) return;
   summaryData = data;
   renderOverall(data.overall);
+  renderChart(data.per_category);
   renderTable(data.per_category);
   renderLastRun(data.overall.last_run);
+  const ov = data.overall;
+  const ml = $("#model-label");
+  if (ml && ov.ocr_version) {
+    ml.textContent = `${ov.ocr_version} · ${ov.model_type || ""}`.trim();
+  }
+  const mb = $("#model-badge-text");
+  if (mb && ov.ocr_version) {
+    mb.textContent = `${ov.ocr_version} · ${ov.model_type || ""}`;
+  }
   setStatus(`loaded · ${data.overall.n_images} imgs · ${data.overall.n_lines} lines`);
 }
 
-// Sort handlers
-document.querySelectorAll("thead th.sortable").forEach((th) => {
+/* ─── Init ───────────────────────────────────────────────── */
+
+fetchModels().then((d) => { if (d) initModelSelector(d); });
+
+$$("thead th.sortable").forEach((th) => {
   th.addEventListener("click", () => {
     const key = th.dataset.key;
     if (currentSort.key === key) currentSort.dir = currentSort.dir === "asc" ? "desc" : "asc";

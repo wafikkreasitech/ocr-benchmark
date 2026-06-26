@@ -5,7 +5,8 @@ description = "Standalone OCR benchmark for the ai4db backend on Indonesian docu
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-  "rapidocr-onnxruntime==1.4.4",  # LOCKED — same as ai4db so model pack is byte-identical (see docs/plan.md §4)
+  "rapidocr>=3.9.0",              # v3 with PP-OCRv6 models (was rapidocr-onnxruntime==1.4.4)
+  "onnxruntime>=1.17",            # engine backend for rapidocr
   "opencv-python>=4.9",
   "numpy>=1.26",
   "pillow>=10",

@@ -23,7 +23,7 @@ See `docs/plan.md` for the full design rationale.
 ## Quick start
 
 ```bash
-# 1. Install deps (includes rapidocr-onnxruntime==1.4.4 — same as ai4db)
+# 1. Install deps
 uv sync
 
 # 2. Run benchmark (~2 minutes for 55 images)
@@ -41,6 +41,54 @@ restrict to specific categories:
 uv run python scripts/run_benchmark.py --category "IDENTITY CARDS" --category NEWSPAPERS
 ```
 
+## OCR Models
+
+The benchmark uses **`rapidocr` v3.9.0+** (replaces the old `rapidocr-onnxruntime`).
+Models are selectable from the dashboard or via `.env`.
+
+### Available models
+
+| OCR Version | model_type | Speed | Accuracy | Notes |
+|---|---|---|---|---|
+| **PP-OCRv6** | `tiny` | fastest | good | no japan support |
+| | `small` | fast | better | **default** |
+| | `medium` | slow | best | recommended for accuracy |
+| **PP-OCRv5** | `mobile` | fast | good | per-language rec models |
+| | `server` | slow | better | larger models |
+| **PP-OCRv4** | `mobile` | fast | good | legacy, stable |
+| | `server` | slow | better | legacy, larger |
+
+### Configuring the model
+
+**Option 1 — `.env` file:**
+```env
+OCR_VERSION=PP-OCRv6
+MODEL_TYPE=small
+```
+
+**Option 2 — Dashboard:**
+Use the model card selector at the top of the page. Click a version card,
+then click a size chip (tiny/small/medium). The selection is sent with each
+benchmark run.
+
+**Option 3 — CLI:**
+```bash
+uv run python scripts/run_benchmark.py
+# Uses OCR_VERSION and MODEL_TYPE from .env
+```
+
+### Model auto-download
+
+Models are downloaded automatically on first use from ModelScope and cached
+in `.venv/lib/.../rapidocr/models/`. First run with a new model may take
+~10s extra for the download.
+
+### Switching models mid-session
+
+Change the model in the dashboard and click "Run benchmark". The engine
+reinitializes with the new model. Previous results remain in `reports/`
+until overwritten.
+
 ## Outputs
 
 After a run, the following are written (gitignored):
@@ -48,7 +96,7 @@ After a run, the following are written (gitignored):
 ```
 reports/
 ├── summary.csv              ← one row per category + OVERALL row
-├── summary.json             ← same data as JSON
+├── summary.json             ← same data as JSON (includes ocr_version, model_type)
 └── per_category/
     ├── identity_cards.json  ← per-image detail + overlay polygons
     ├── newspapers.json
@@ -62,17 +110,19 @@ predicted text, confidence, IoU, and status (`matched` / `missed` /
 ## Why standalone
 
 The whole point of this repo is **moving OCR benchmarking to a different
-device with zero ai4db footprint**. We pin the same library ai4db uses:
+device with zero ai4db footprint**. We pin the same OCR backend:
 
 | | ai4db | ocr-benchmark |
 |---|---|---|
-| OCR library | `rapidocr-onnxruntime>=1.4` (resolves to 1.4.4) | `rapidocr-onnxruntime==1.4.4` (locked) |
-| Init | `RapidOCR()` no-args | `RapidOCR()` no-args |
-| Model pack | PP-OCRv4 (default in wheel) | PP-OCRv4 (default in wheel) |
+| OCR library | `rapidocr-onnxruntime>=1.4` | `rapidocr>=3.9.0` |
+| Init | `RapidOCR()` no-args | `RapidOCR(params={...})` with model selection |
+| Default model | PP-OCRv4 (old default) | PP-OCRv6 small (v3.9.0 default) |
 | Backend deps | fastapi, piper-tts, sounddevice, scipy, … | minimal: cv2, numpy, pillow, fastapi |
 
-**Result**: same library version → same model pack → same OCR behavior.
-Numbers you see in the dashboard represent what ai4db produces on these images.
+> **Note**: ai4db still uses `rapidocr-onnxruntime` (PP-OCRv4). This benchmark
+> upgraded to `rapidocr` v3 (PP-OCRv6) for better accuracy. If you need to
+> mirror ai4db exactly, set `OCR_VERSION=PP-OCRv4` and `MODEL_TYPE=mobile`
+> in `.env`.
 
 ## Deploy on a new device
 
@@ -84,16 +134,16 @@ uv run python scripts/run_benchmark.py
 uv run ocr-bench-serve
 ```
 
-No ai4db checkout, no Python 3.13 required, no external model download
-(model pack ships inside the `rapidocr-onnxruntime` wheel).
+No ai4db checkout, no Python 3.13 required. Models download automatically
+on first run.
 
 ## Version drift — when ai4db updates its OCR backend
 
 1. `cd …/ai4db && uv pip show rapidocr-onnxruntime` → note new version
-2. Edit `pyproject.toml` → bump pin to the new version
-3. `uv lock && uv sync` → new model pack downloaded
+2. If ai4db upgrades to `rapidocr` v3+: update `OCR_VERSION` / `MODEL_TYPE` in `.env`
+3. If ai4db stays on `rapidocr-onnxruntime`: set `OCR_VERSION=PP-OCRv4` here
 4. `uv run python scripts/run_benchmark.py` → re-baseline numbers
-5. Commit the new pin + refreshed `reports/summary.csv`
+5. Commit the new config + refreshed `reports/summary.csv`
 
 ## Dataset
 
@@ -114,14 +164,15 @@ src/ocr_bench/
 ├── metrics.py     ← CER/WER via jiwer, detection P/R/F1
 ├── runner.py      ← orchestrator, writes reports/
 ├── api.py         ← FastAPI app (this is what `ocr-bench-serve` runs)
+├── config.py      ← pydantic-settings (.env loader)
 └── paths.py       ← shared paths
 
 scripts/
 └── run_benchmark.py   ← CLI entrypoint
 
 ui/
-├── index.html     ← dashboard
-├── style.css      ← design tokens, dark glass
+├── index.html     ← dashboard (warm stone theme)
+├── style.css      ← DM Sans + JetBrains Mono, calm palette
 └── app.js         ← vanilla JS, no build
 
 reports/           ← generated, gitignored
@@ -136,6 +187,10 @@ docs/plan.md       ← design doc
   boxes are tight rectangles; upgrade path noted if slanted text appears.
 * **One engine only** — multi-engine comparison is intentionally out of scope.
 * **No persistence** beyond JSON files.
+* **PP-OCRv6 tiny does not support Japanese** text. Use `small` or `medium`
+  if your dataset contains Japanese characters.
+* **First run with a new model** downloads ~50-150 MB from ModelScope.
+  Subsequent runs use the cached model.
 
 ## Post-processing (SymSpell + KBBI)
 

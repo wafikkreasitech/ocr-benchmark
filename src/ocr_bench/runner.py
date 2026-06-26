@@ -141,7 +141,8 @@ def _serialize_page_metrics(pm: PageMetrics, page: GroundTruthPage, pred: PagePr
     }
 
 
-def run(root: Path | None = None, only_categories: list[str] | None = None, verbose: bool = True) -> dict:
+def run(root: Path | None = None, only_categories: list[str] | None = None, verbose: bool = True,
+        ocr_version: str | None = None, model_type: str | None = None) -> dict:
     cats = list_categories(root)
     if only_categories:
         only_set = set(only_categories)
@@ -157,6 +158,8 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
     engine = BenchEngine(
         enable_preprocessing=settings.enable_preprocessing,
         preproc_upscale_min_side=settings.preproc_upscale_min_side,
+        ocr_version=ocr_version or settings.ocr_version,
+        model_type=model_type or settings.model_type,
     )
     corrector = get_corrector()  # lazy-loads dict if enabled
 
@@ -251,6 +254,8 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
     overall_dict["total_elapsed_s"] = round(time.perf_counter() - overall_start, 2)
     overall_dict["last_run"] = _now_iso()
     overall_dict["corrector_enabled"] = corrector.enabled
+    overall_dict["ocr_version"] = ocr_version or settings.ocr_version
+    overall_dict["model_type"] = model_type or settings.model_type
 
     _write_summary_csv(overall, overall_dict)
     _write_overall_json(overall, overall_dict)

@@ -1,7 +1,7 @@
 """Standalone OCR wrapper.
 
 Mirrors ``ai4db.ocr.pipeline.OCRPipeline`` (which uses
-``rapidocr_onnxruntime.RapidOCR``) but preserves bounding boxes + scores so
+``rapidocr.RapidOCR``) but preserves bounding boxes + scores so
 the benchmark can compute IoU-matched CER/WER and detection F1.
 
 If ai4db ever changes its OCR backend, mirror it here — typically a version
@@ -15,7 +15,8 @@ from pathlib import Path
 
 import cv2
 import numpy as np
-from rapidocr_onnxruntime import RapidOCR
+from rapidocr import RapidOCR
+from rapidocr.utils.typings import ModelType, OCRVersion
 
 
 @dataclass
@@ -63,10 +64,17 @@ def _preprocess(img: np.ndarray, min_side: int) -> tuple[np.ndarray, float]:
 class BenchEngine:
     """Same backend ai4db uses. Preserves polygons for IoU + CER/WER scoring."""
 
-    def __init__(self, *, enable_preprocessing: bool = False, preproc_upscale_min_side: int = 800) -> None:
-        # ponytail: no-args = default config shipped in the wheel (PP-OCRv4).
-        # Matches ai4db's ``RapidOCR()`` initialization exactly.
-        self._ocr = RapidOCR()
+    def __init__(self, *, enable_preprocessing: bool = False, preproc_upscale_min_side: int = 800,
+                 ocr_version: str = "PP-OCRv6", model_type: str = "small") -> None:
+        ver = OCRVersion(ocr_version)
+        mtype = ModelType(model_type)
+        params = {
+            "Det.ocr_version": ver,
+            "Det.model_type": mtype,
+            "Rec.ocr_version": ver,
+            "Rec.model_type": mtype,
+        }
+        self._ocr = RapidOCR(params=params)
         self._enable_preprocessing = enable_preprocessing
         self._preproc_upscale_min_side = preproc_upscale_min_side
 
@@ -77,11 +85,11 @@ class BenchEngine:
             img = cv2.imread(str(image_path), cv2.IMREAD_COLOR)
             if img is not None:
                 img, scale = _preprocess(img, self._preproc_upscale_min_side)
-                result, _ = self._ocr(img)
+                result = self._ocr(img)
             else:
-                result, _ = self._ocr(str(image_path))
+                result = self._ocr(str(image_path))
         else:
-            result, _ = self._ocr(str(image_path))
+            result = self._ocr(str(image_path))
 
         # Remap polygons from preprocessed image space back to original image
         # space so the IoU matcher compares them on equal footing with GT.
@@ -90,9 +98,19 @@ class BenchEngine:
                 return poly
             return [[p[0] / scale, p[1] / scale] for p in poly]
 
+        # rapidocr v3 returns RapidOCROutput (boxes/txts/scores attrs) or None.
+        if result is None:
+            boxes, txts, scores = [], [], []
+        else:
+            boxes, txts, scores = result.boxes, result.txts, result.scores
+
         lines = [
-            LinePrediction(polygon=_unscale(poly), text=txt, score=sc)
-            for (poly, txt, sc) in (result or [])
+            LinePrediction(
+                polygon=_unscale([[float(c) for c in pt] for pt in box.tolist()]),
+                text=txt,
+                score=float(sc),
+            )
+            for box, txt, sc in zip(boxes, txts, scores)
         ]
         return PagePrediction(
             image=image_path.name,

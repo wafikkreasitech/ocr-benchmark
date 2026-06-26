@@ -6,6 +6,8 @@ Endpoints:
   GET  /api/summary             aggregated metrics (overall + per-category)
   GET  /api/results/<category>  per-image detail incl. overlay data
   GET  /api/image/<cat>/<file>  raw image bytes
+  GET  /api/models              available OCR model combinations
+  GET  /api/config              current runtime config
   GET  /                        dashboard (ui/index.html)
 """
 from __future__ import annotations
@@ -21,22 +23,31 @@ from fastapi.staticfiles import StaticFiles
 from .paths import DEFAULT_DATASET_ROOT, REPORTS_ROOT, UI_ROOT
 from .runner import RUN_STATUS_PATH, run as run_benchmark
 
+AVAILABLE_MODELS = {
+    "PP-OCRv6": {"model_types": ["tiny", "small", "medium"], "default": "small",
+                 "desc": "Latest, best accuracy"},
+    "PP-OCRv5": {"model_types": ["mobile", "server"], "default": "mobile",
+                 "desc": "Per-language rec models"},
+    "PP-OCRv4": {"model_types": ["mobile", "server"], "default": "mobile",
+                 "desc": "Legacy, stable"},
+}
+
 
 def create_app() -> FastAPI:
     app = FastAPI(title="OCR Benchmark", version="0.1.0")
 
     @app.post("/api/run")
-    def api_run(background: BackgroundTasks, category: str | None = None):
-        # Fire-and-forget so the dashboard can poll /api/progress while running.
+    def api_run(background: BackgroundTasks, category: str | None = None,
+                ocr_version: str | None = None, model_type: str | None = None):
         if RUN_STATUS_PATH.exists():
             try:
                 current = json.loads(RUN_STATUS_PATH.read_text(encoding="utf-8"))
                 if current.get("running"):
                     return {"ok": False, "already_running": True}
             except (json.JSONDecodeError, OSError):
-                pass  # stale sidecar — allow starting a new run
+                pass
         only = [category] if category else None
-        background.add_task(run_benchmark, None, only, False)
+        background.add_task(run_benchmark, None, only, False, ocr_version, model_type)
         return {"ok": True, "started": True}
 
     @app.get("/api/progress")
@@ -54,15 +65,22 @@ def create_app() -> FastAPI:
         if not path.exists():
             raise HTTPException(404, "no reports yet — run POST /api/run or scripts/run_benchmark.py")
         data = json.loads(path.read_text(encoding="utf-8"))
-        # Backfill last_run from file mtime if missing (older reports)
         if "last_run" not in data.get("overall", {}):
             ts = datetime.fromtimestamp(path.stat().st_mtime, tz=timezone.utc)
             data.setdefault("overall", {})["last_run"] = ts.strftime("%Y-%m-%dT%H:%M:%SZ")
         return JSONResponse(data)
 
+    @app.get("/api/models")
+    def api_models():
+        from .config import get_settings
+        s = get_settings()
+        return {
+            "available": AVAILABLE_MODELS,
+            "current": {"ocr_version": s.ocr_version, "model_type": s.model_type},
+        }
+
     @app.get("/api/config")
     def api_config():
-        """Expose current runtime config (feature flag state) to the dashboard."""
         from .config import get_settings
         from .corrector import get_corrector
         s = get_settings()
@@ -75,6 +93,8 @@ def create_app() -> FastAPI:
             "kbbi_size": len(c._kbbi_set) if c._kbbi_set else 0,
             "iou_threshold": s.iou_threshold,
             "enable_preprocessing": s.enable_preprocessing,
+            "ocr_version": s.ocr_version,
+            "model_type": s.model_type,
         }
 
     @app.get("/api/results/{category}")

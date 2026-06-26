@@ -18,6 +18,10 @@ class Settings(BaseSettings):
     kbbi_top_n: int = 0                          # 0 = load all 194k; >0 = cap (for edge devices)
     kbbi_csv_path: str = "kbbi/kbbi_v6.1.0_full.csv"
 
+    # OCR model selection
+    ocr_version: str = "PP-OCRv6"      # PP-OCRv4 / PP-OCRv5 / PP-OCRv6
+    model_type: str = "small"          # tiny / small / medium (v6); mobile / server (v4/v5)
+
     # Runner
     iou_threshold: float = 0.5                    # detection match threshold
     enable_preprocessing: bool = False            # grayscale + CLAHE + 2x upscale (helps faint/low-contrast text)
