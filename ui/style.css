@@ -790,6 +790,32 @@ tbody tr:hover { background: var(--surface-alt); }
   margin-bottom: 12px;
 }
 .compare-head h3 { font-size: 13px; font-weight: 600; }
+
+/* Run detail — metric cards */
+.rd-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 10px;
+}
+.rd-card {
+  padding: 10px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+}
+.rd-k {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+.rd-v {
+  margin-top: 4px;
+  font-family: var(--mono);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+}
 .compare-table {
   width: 100%;
   border-collapse: collapse;

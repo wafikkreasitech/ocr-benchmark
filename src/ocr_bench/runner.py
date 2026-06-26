@@ -27,6 +27,22 @@ from .paths import HISTORY_ROOT, REPORTS_ROOT
 
 log = logging.getLogger(__name__)
 
+# Generation counter — each run() bumps it. A running loop bails the moment a
+# newer run starts (e.g. user clicks Restart), so two runs never race on the
+# same report files. ponytail: in-process counter; fine because BackgroundTasks
+# run in this same process. Becomes a shared store only if runs ever go remote.
+_RUN_GEN = 0
+
+
+def _next_gen() -> int:
+    global _RUN_GEN
+    _RUN_GEN += 1
+    return _RUN_GEN
+
+
+class _Superseded(Exception):
+    """Raised inside the loop when a newer run has started."""
+
 
 def _evaluate_page(page: GroundTruthPage, pred: PagePrediction) -> PageMetrics:
     gt_lines = page.lines
@@ -177,6 +193,8 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
     overall = []
     overall_start = time.perf_counter()
 
+    gen = _next_gen()  # claim this run; older loops will see a newer gen and bail
+
     # Progress sidecar — read by /api/progress for the dashboard.
     started_at = _now_iso()
     completed: list[dict] = []
@@ -191,25 +209,34 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
     try:
         return _run_categories(cats, engine, corrector, settings, ocr_version,
                                 model_type, started_at, completed, overall,
-                                overall_start, per_cat_dir, verbose)
+                                overall_start, per_cat_dir, verbose, gen)
+    except _Superseded:
+        log.info("Run %d superseded by a newer run; bailing without touching status", gen)
+        return {}
     except BaseException as e:  # incl. SystemExit/KeyboardInterrupt — never strand the lock
         log.exception("Benchmark failed; clearing run status")
-        _write_status({
-            "running": False,
-            "started_at": started_at,
-            "finished_at": _now_iso(),
-            "total": len(cats),
-            "completed": completed,
-            "current": None,
-            "error": f"{type(e).__name__}: {e}",
-        })
+        if gen == _RUN_GEN:  # only clear if we still own the lock
+            _write_status({
+                "running": False,
+                "started_at": started_at,
+                "finished_at": _now_iso(),
+                "total": len(cats),
+                "completed": completed,
+                "current": None,
+                "error": f"{type(e).__name__}: {e}",
+            })
         raise
 
 
 def _run_categories(cats, engine, corrector, settings, ocr_version, model_type,
                     started_at, completed, overall, overall_start, per_cat_dir,
-                    verbose) -> dict:
+                    verbose, gen) -> dict:
+    def _check_superseded():
+        if gen != _RUN_GEN:
+            raise _Superseded()
+
     for cat_idx, cat_dir in enumerate(cats, 1):
+        _check_superseded()
         pages = load_category(cat_dir)
         if not pages:
             log.warning("[%d/%d] %s: no images, skipping", cat_idx, len(cats), cat_dir.name)
@@ -231,6 +258,7 @@ def _run_categories(cats, engine, corrector, settings, ocr_version, model_type,
         cat_start = time.perf_counter()
 
         for img_idx, page in enumerate(pages, 1):
+            _check_superseded()
             print(f"  [{cat_idx}/{len(cats)}] img {img_idx}/{len(pages)}: {page.image_path.name} — OCR start",
                   flush=True)
             t_img = time.perf_counter()
@@ -313,6 +341,7 @@ def _run_categories(cats, engine, corrector, settings, ocr_version, model_type,
              overall_dict["n_images"], total_elapsed,
              overall_dict["detection_f1"], overall_dict["cer_mean"])
 
+    _check_superseded()  # don't clobber a newer run's reports/status
     _write_summary_csv(overall, overall_dict)
     _write_overall_json(overall, overall_dict)
     _save_to_history(overall_dict, overall)
@@ -470,6 +499,7 @@ def _save_to_history(overall: dict, per_cat: list[CategorySummary]) -> None:
         "f1": overall.get("detection_f1", 0),
         "cer": overall.get("cer_mean", 0),
         "wer": overall.get("wer_mean", 0),
+        "total_elapsed_s": overall.get("total_elapsed_s", 0),
     })
     # Keep last 50 runs
     index = index[-50:]

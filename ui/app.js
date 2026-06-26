@@ -544,6 +544,7 @@ function renderHistory() {
 
   for (const run of historyRuns) {
     const tr = document.createElement("tr");
+    tr.dataset.id = run.id;
     const checked = selectedHistoryIds.has(run.id) ? "checked" : "";
     const ts = run.timestamp ? fmtDateShort(run.timestamp) : run.id;
     tr.innerHTML = `
@@ -554,18 +555,26 @@ function renderHistory() {
       <td class="num">${fmt(run.cer)}</td>
       <td class="num">${fmt(run.wer)}</td>
       <td class="num">${run.n_images || 0}</td>
-      <td class="num">${run.timestamp ? fmtDateAge(run.timestamp) : "–"}</td>
+      <td class="num">${run.total_elapsed_s ? fmtDuration(Math.round(run.total_elapsed_s)) : "–"}</td>
+      <td class="num muted">${run.timestamp ? fmtDateAge(run.timestamp) : "–"}</td>
+      <td class="num muted">›</td>
     `;
     tbody.appendChild(tr);
   }
 
-  // Checkbox handlers
+  // Checkbox handlers (stop row-click when toggling)
   tbody.querySelectorAll("input[type=checkbox]").forEach(cb => {
+    cb.addEventListener("click", (e) => e.stopPropagation());
     cb.addEventListener("change", () => {
       if (cb.checked) selectedHistoryIds.add(cb.dataset.id);
       else selectedHistoryIds.delete(cb.dataset.id);
       updateCompareBtn();
     });
+  });
+
+  // Row click → open run detail
+  tbody.querySelectorAll("tr").forEach(tr => {
+    tr.addEventListener("click", () => openRunDetail(tr.dataset.id));
   });
 
   updateCompareBtn();
@@ -674,6 +683,59 @@ async function showComparison() {
   content.innerHTML = html;
 }
 
+async function openRunDetail(id) {
+  const panel = $("#run-detail-panel");
+  const content = $("#run-detail-content");
+  panel.classList.remove("hidden");
+  content.innerHTML = '<div class="muted">loading…</div>';
+  panel.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  let run;
+  try {
+    const r = await fetch(`/api/history/${encodeURIComponent(id)}`);
+    if (!r.ok) throw new Error("not found");
+    run = await r.json();
+  } catch {
+    content.innerHTML = '<div class="muted">failed to load run</div>';
+    return;
+  }
+
+  const o = run.overall || {};
+  const dur = run.total_elapsed_s ? fmtDuration(Math.round(run.total_elapsed_s)) : "–";
+  const cards = [
+    ["F1", fmt(o.detection_f1)],
+    ["CER", fmt(o.cer_mean)],
+    ["WER", fmt(o.wer_mean)],
+    ["Precision", fmt(o.detection_precision, 2)],
+    ["Recall", fmt(o.detection_recall, 2)],
+    ["Images", o.n_images ?? "–"],
+    ["GT lines", o.n_lines ?? "–"],
+    ["Duration", dur],
+  ].map(([k, v]) => `<div class="rd-card"><div class="rd-k">${k}</div><div class="rd-v">${v}</div></div>`).join("");
+
+  $("#run-detail-title").textContent = `${run.ocr_version || "?"} · ${run.model_type || "?"}`;
+  $("#run-detail-sub").textContent = `${run.timestamp ? fmtDate(run.timestamp) : run.id} · corrector ${run.corrector_enabled ? "ON" : "OFF"}`;
+
+  const cats = run.per_category || [];
+  let catRows = cats.map(c => `
+    <tr>
+      <td>${escapeHtml(c.category)}</td>
+      <td class="num">${c.n_images ?? "–"}</td>
+      <td class="num"><span class="mini-bar f1" style="width:${Math.round((c.f1 || 0) * 30)}px"></span>${fmt(c.f1)}</td>
+      <td class="num">${fmt(c.cer)}</td>
+      <td class="num">${fmt(c.wer)}</td>
+      <td class="num">${fmt(c.mean_conf, 2)}</td>
+      <td class="num">${fmt(c.ms_per_img, 0)}</td>
+    </tr>`).join("");
+
+  content.innerHTML = `
+    <div class="rd-cards">${cards}</div>
+    <table class="compare-table" style="margin-top:16px">
+      <thead><tr><th>Category</th><th class="num">Imgs</th><th class="num">F1</th><th class="num">CER</th><th class="num">WER</th><th class="num">Conf</th><th class="num">ms/img</th></tr></thead>
+      <tbody>${catRows || '<tr><td colspan="7" class="muted">no per-category data</td></tr>'}</tbody>
+    </table>`;
+}
+
 /* ─── Load & Render ──────────────────────────────────────── */
 
 async function loadAndRender() {
@@ -732,6 +794,9 @@ $("#back").addEventListener("click", () => {
 $("#btn-compare").addEventListener("click", showComparison);
 $("#btn-compare-close").addEventListener("click", () => {
   $("#compare-panel").classList.add("hidden");
+});
+$("#btn-run-detail-close").addEventListener("click", () => {
+  $("#run-detail-panel").classList.add("hidden");
 });
 
 loadAndRender().then(() => {
