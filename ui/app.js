@@ -378,9 +378,10 @@ function drawOverlay(img) {
 
 /* ─── Run Benchmark ──────────────────────────────────────── */
 
+let runActive = false;   // true while a run is in flight (drives button state)
+let lastRunning = false; // edge-detect run→done to refresh results once
+
 async function runBenchmark(force = false) {
-  const btn = $("#btn-run");
-  btn.disabled = true;
   setStatus(force ? "restarting…" : "starting…");
   try {
     const params = new URLSearchParams();
@@ -391,38 +392,72 @@ async function runBenchmark(force = false) {
     const r = await fetch(url, { method: "POST" });
     if (!r.ok) throw new Error("run failed");
     const started = await r.json();
-    if (!started.started) {
-      setStatus("already running");
-      $("#progress-panel").classList.remove("hidden");
-    } else {
-      $("#progress-panel").classList.remove("hidden");
-      renderProgress({ running: true, total: 0, completed: [], current: null });
-    }
-    await pollProgress();
+    $("#progress-panel").classList.remove("hidden");
+    if (!started.started) setStatus("already running");
+    else renderProgress({ running: true, total: 0, completed: [], current: null });
+    // SSE stream (already connected) will drive progress + button from here.
+    setRunActive(true);
   } catch (e) {
     setStatus(`error: ${e.message}`);
-  } finally {
-    btn.disabled = false;
   }
 }
 
-async function pollProgress() {
-  while (true) {
-    const r = await fetch("/api/progress");
-    if (!r.ok) break;
-    const p = await r.json();
-    renderProgress(p);
-    if (p.stale) {
-      setStatus("run looks stuck — restart below");
-      return; // leave panel visible with the stalled notice
-    }
-    if (!p.running) break;
-    await loadAndRender();
-    await new Promise((res) => setTimeout(res, 800));
+function setRunActive(active) {
+  runActive = active;
+  const btn = $("#btn-run");
+  if (btn) {
+    btn.disabled = active;
+    btn.classList.toggle("running", active);
   }
-  setStatus("done");
-  $("#progress-panel").classList.add("hidden");
-  await loadAndRender();
+}
+
+/* Persistent SSE subscription — survives page refresh (EventSource reconnects),
+   so a background run is always reflected and the Run button stays disabled. */
+function subscribeProgress() {
+  let es;
+  try {
+    es = new EventSource("/api/progress/stream");
+  } catch {
+    return pollProgressFallback(); // EventSource unsupported
+  }
+  es.onmessage = (ev) => {
+    let p;
+    try { p = JSON.parse(ev.data); } catch { return; }
+    handleProgress(p);
+  };
+  es.onerror = () => { /* EventSource auto-reconnects; nothing to do */ };
+}
+
+function handleProgress(p) {
+  if (p.running) {
+    $("#progress-panel").classList.remove("hidden");
+    renderProgress(p);
+    setRunActive(true);
+    setStatus(p.stale ? "run looks stuck — restart below"
+                      : "benchmark running — leave this open");
+  } else {
+    if (lastRunning) {
+      // just finished — refresh results + history once
+      $("#progress-panel").classList.add("hidden");
+      setStatus("done");
+      loadAndRender();
+    } else if (runActive) {
+      $("#progress-panel").classList.add("hidden");
+    }
+    setRunActive(false);
+  }
+  lastRunning = !!p.running;
+}
+
+async function pollProgressFallback() {
+  // Minimal polling for browsers without EventSource.
+  while (true) {
+    try {
+      const r = await fetch("/api/progress");
+      if (r.ok) handleProgress(await r.json());
+    } catch {}
+    await new Promise((res) => setTimeout(res, 1500));
+  }
 }
 
 function renderProgress(p) {
@@ -430,8 +465,10 @@ function renderProgress(p) {
   const fill = $("#progress-fill");
   const total = p.total || 0;
   const done = (p.completed || []).length;
-  const inFlight = p.current ? 1 : 0;
-  const fraction = total ? (done + inFlight * 0.5) / total : 0;
+  const cur = p.current;
+  // Per-image granularity: a slow category still advances the bar image by image.
+  const curFrac = cur && cur.total_images ? (cur.done_images / cur.total_images) : 0;
+  const fraction = total ? (done + curFrac) / total : 0;
   fill.style.width = `${Math.min(100, fraction * 100).toFixed(1)}%`;
 
   panel.classList.toggle("stalled", !!p.stale);
@@ -440,11 +477,10 @@ function renderProgress(p) {
   $("#progress-summary").textContent = p.stale
     ? `stalled at ${done} / ${total} categories`
     : total
-      ? `${done} / ${total} categories${inFlight ? " · running…" : ""}`
+      ? `${done} / ${total} categories · ${Math.round(fraction * 100)}%${cur ? " · running…" : ""}`
       : "preparing…";
 
-  if (p.current) {
-    const cur = p.current;
+  if (cur) {
     const pctImg = cur.total_images ? `${Math.round((cur.done_images / cur.total_images) * 100)}%` : "0%";
     $("#progress-current").textContent = `${cur.name} · ${cur.done_images}/${cur.total_images} (${pctImg})`;
   } else {
@@ -452,8 +488,8 @@ function renderProgress(p) {
   }
 
   const avg = (p.completed || []).reduce((a, c) => a + (c.elapsed_s || 0), 0) / Math.max(1, done);
-  const remaining = total - done - inFlight;
-  const eta = remaining > 0 && avg > 0 ? Math.round(remaining * avg + (inFlight ? avg * 0.5 : 0)) : 0;
+  const remaining = total - done - curFrac;
+  const eta = remaining > 0 && avg > 0 ? Math.round(remaining * avg) : 0;
   $("#progress-eta").textContent = eta > 0 ? `ETA ≈ ${fmtDuration(eta)}` : "";
   $("#progress-elapsed").textContent = p.started_at ? `started ${fmtDate(p.started_at)}` : "";
 
@@ -740,21 +776,7 @@ async function openRunDetail(id) {
 
 async function loadAndRender() {
   const data = await fetchSummary();
-  if (!data) {
-    // No summary yet — check if benchmark is running
-    try {
-      const r = await fetch("/api/progress");
-      if (r.ok) {
-        const p = await r.json();
-        if (p.running) {
-          $("#progress-panel").classList.remove("hidden");
-          renderProgress(p);
-          setStatus("benchmark running — waiting for results…");
-        }
-      }
-    } catch {}
-    return;
-  }
+  if (!data) return;  // no results yet; SSE drives the progress panel
   summaryData = data;
   renderOverall(data.overall);
   renderChart(data.per_category);
@@ -786,7 +808,7 @@ $$("thead th.sortable").forEach((th) => {
   });
 });
 
-$("#btn-run").addEventListener("click", runBenchmark);
+$("#btn-run").addEventListener("click", () => runBenchmark(false));
 $("#back").addEventListener("click", () => {
   $("#detail").classList.add("hidden");
   setStatus("idle");
@@ -799,24 +821,6 @@ $("#btn-run-detail-close").addEventListener("click", () => {
   $("#run-detail-panel").classList.add("hidden");
 });
 
-loadAndRender().then(() => {
-  // If no summary, start polling progress in case a run is active
-  if (!summaryData) pollProgressOnLoad();
-});
-
-async function pollProgressOnLoad() {
-  try {
-    const r = await fetch("/api/progress");
-    if (!r.ok) return;
-    const p = await r.json();
-    if (p.running) {
-      $("#progress-panel").classList.remove("hidden");
-      renderProgress(p);
-      setStatus("benchmark running…");
-      await pollProgress();
-      await loadAndRender();
-    }
-  } catch {}
-}
-
+loadAndRender();
 loadHistory();
+subscribeProgress();  // always-on: reflects any background run, survives refresh

@@ -236,6 +236,16 @@ body {
 .btn-run:hover { background: var(--accent-hover); }
 .btn-run:active { transform: scale(0.98); }
 .btn-run:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-run.running { opacity: 0.7; }
+.btn-run.running::after {
+  content: "";
+  width: 12px; height: 12px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
 .status { color: var(--text-muted); font-size: 12px; font-family: var(--mono); }
 
 /* ─── Overview Row (ring + metrics) ──────────────────────── */

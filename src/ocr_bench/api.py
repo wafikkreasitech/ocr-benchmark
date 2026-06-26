@@ -12,13 +12,14 @@ Endpoints:
 """
 from __future__ import annotations
 
+import asyncio
 import json
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
 from fastapi import BackgroundTasks, FastAPI, HTTPException
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 
 from .paths import DEFAULT_DATASET_ROOT, HISTORY_ROOT, REPORTS_ROOT, UI_ROOT
@@ -70,17 +71,44 @@ def create_app() -> FastAPI:
         background.add_task(run_benchmark, None, only, False, ocr_version, model_type)
         return {"ok": True, "started": True}
 
-    @app.get("/api/progress")
-    def api_progress():
+    def _read_status() -> dict:
+        idle = {"running": False, "total": 0, "completed": [], "current": None}
         if not RUN_STATUS_PATH.exists():
-            return {"running": False, "total": 0, "completed": [], "current": None}
+            return idle
         try:
             status = json.loads(RUN_STATUS_PATH.read_text(encoding="utf-8"))
         except (json.JSONDecodeError, OSError):
-            return {"running": False, "total": 0, "completed": [], "current": None}
+            return idle
         if status.get("running") and _is_stale(status):
             status["stale"] = True  # UI shows a calm "looks stuck" notice + re-run
-        return JSONResponse(status)
+        return status
+
+    @app.get("/api/progress")
+    def api_progress():
+        return JSONResponse(_read_status())
+
+    @app.get("/api/progress/stream")
+    async def api_progress_stream():
+        """Server-Sent Events: push run status as it changes.
+
+        EventSource auto-reconnects on page refresh, so a run that started in
+        the background stays visible without the user re-triggering anything.
+        ponytail: poll the sidecar file every 1s and emit on change — no pub/sub
+        needed for a single-process app; revisit if runs ever go multi-worker.
+        """
+        async def gen():
+            last = None
+            while True:
+                status = _read_status()
+                payload = json.dumps(status)
+                if payload != last:
+                    yield f"data: {payload}\n\n"
+                    last = payload
+                await asyncio.sleep(1.0)
+
+        return StreamingResponse(gen(), media_type="text/event-stream",
+                                 headers={"Cache-Control": "no-cache",
+                                          "X-Accel-Buffering": "no"})
 
     @app.get("/api/summary")
     def api_summary():
