@@ -38,6 +38,7 @@ RUN mkdir -p /app/reports /app/IMG_OCR_IND_CN && chown -R bench:bench /app
 USER bench
 
 ENV PATH="/app/.venv/bin:$PATH"
+ENV PYTHONPATH="/app/src:$PYTHONPATH"
 ENV PYTHONUNBUFFERED=1
 
 EXPOSE 8765
