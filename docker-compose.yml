@@ -1,0 +1,13 @@
+services:
+  ocr-bench:
+    build: .
+    container_name: ocr-benchmark
+    ports:
+      - "8765:8765"
+    volumes:
+      - ./IMG_OCR_IND_CN:/app/IMG_OCR_IND_CN:ro
+      - ./reports:/app/reports
+      - ./.env:/app/.env:ro
+    restart: unless-stopped
+    environment:
+      - PYTHONUNBUFFERED=1

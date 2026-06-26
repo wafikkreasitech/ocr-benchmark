@@ -9,6 +9,7 @@ bump + a config tweak. See docs/plan.md §4.
 """
 from __future__ import annotations
 
+import logging
 import time
 from dataclasses import dataclass
 from pathlib import Path
@@ -17,6 +18,8 @@ import cv2
 import numpy as np
 from rapidocr import RapidOCR
 from rapidocr.utils.typings import ModelType, OCRVersion
+
+log = logging.getLogger(__name__)
 
 
 @dataclass
@@ -77,16 +80,22 @@ class BenchEngine:
         self._ocr = RapidOCR(params=params)
         self._enable_preprocessing = enable_preprocessing
         self._preproc_upscale_min_side = preproc_upscale_min_side
+        log.info("Engine initialized: %s %s (preprocessing=%s)", ocr_version, model_type, enable_preprocessing)
 
     def predict(self, image_path: Path) -> PagePrediction:
         t0 = time.perf_counter()
+        log.debug("OCR start: %s", image_path.name)
         scale = 1.0
         if self._enable_preprocessing:
             img = cv2.imread(str(image_path), cv2.IMREAD_COLOR)
             if img is not None:
+                h, w = img.shape[:2]
+                log.debug("  image loaded: %dx%d", w, h)
                 img, scale = _preprocess(img, self._preproc_upscale_min_side)
+                log.debug("  preprocessed: scale=%.2f", scale)
                 result = self._ocr(img)
             else:
+                log.warning("  cv2.imread failed, passing path directly: %s", image_path)
                 result = self._ocr(str(image_path))
         else:
             result = self._ocr(str(image_path))
@@ -112,10 +121,12 @@ class BenchEngine:
             )
             for box, txt, sc in zip(boxes, txts, scores)
         ]
+        elapsed = (time.perf_counter() - t0) * 1000
+        log.info("OCR done: %s → %d lines in %.0fms", image_path.name, len(lines), elapsed)
         return PagePrediction(
             image=image_path.name,
             lines=lines,
-            elapsed_ms=(time.perf_counter() - t0) * 1000,
+            elapsed_ms=elapsed,
         )
 
 

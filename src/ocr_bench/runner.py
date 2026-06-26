@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import csv
 import json
+import logging
 import sys
 import time
 from dataclasses import asdict
@@ -23,6 +24,8 @@ from .metrics import (
     wer,
 )
 from .paths import HISTORY_ROOT, REPORTS_ROOT
+
+log = logging.getLogger(__name__)
 
 
 def _evaluate_page(page: GroundTruthPage, pred: PagePrediction) -> PageMetrics:
@@ -156,11 +159,18 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
     per_cat_dir.mkdir(parents=True, exist_ok=True)
 
     settings = get_settings()
+    ver = ocr_version or settings.ocr_version
+    mtype = model_type or settings.model_type
+    log.info("=== Benchmark start: %s %s, %d categories ===", ver, mtype, len(cats))
+    log.info("Config: preprocessing=%s, iou=%.2f, corrector=%s",
+             settings.enable_preprocessing, settings.iou_threshold,
+             settings.enable_symspell_correction)
+
     engine = BenchEngine(
         enable_preprocessing=settings.enable_preprocessing,
         preproc_upscale_min_side=settings.preproc_upscale_min_side,
-        ocr_version=ocr_version or settings.ocr_version,
-        model_type=model_type or settings.model_type,
+        ocr_version=ver,
+        model_type=mtype,
     )
     corrector = get_corrector()  # lazy-loads dict if enabled
 
@@ -178,12 +188,14 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
         "current": None,
     })
 
-    for cat_dir in cats:
+    for cat_idx, cat_dir in enumerate(cats, 1):
         pages = load_category(cat_dir)
         if not pages:
+            log.warning("[%d/%d] %s: no images, skipping", cat_idx, len(cats), cat_dir.name)
             continue
+        tag = " [corrector ON]" if corrector.enabled else ""
+        log.info("[%d/%d] %s: %d images%s", cat_idx, len(cats), cat_dir.name, len(pages), tag)
         if verbose:
-            tag = " [corrector ON]" if corrector.enabled else ""
             print(f"[{cat_dir.name}] {len(pages)} images{tag}", flush=True)
 
         _write_status({
@@ -198,9 +210,19 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
         per_image_payload = []
         cat_start = time.perf_counter()
 
-        for page in pages:
+        for img_idx, page in enumerate(pages, 1):
+            log.info("  [%d/%d] img %d/%d: %s — starting OCR...",
+                     cat_idx, len(cats), img_idx, len(pages), page.image_path.name)
             pred = engine.predict(page.image_path)
+            log.info("  [%d/%d] img %d/%d: %s — OCR done, %d lines, %.0fms",
+                     cat_idx, len(cats), img_idx, len(pages),
+                     page.image_path.name, len(pred.lines), pred.elapsed_ms)
             pm = _evaluate_page(page, pred)
+            log.info("  [%d/%d] img %d/%d: %s — metrics: GT=%d PR=%d TP=%d FP=%d FN=%d CER=%.3f",
+                     cat_idx, len(cats), img_idx, len(pages),
+                     page.image_path.name, pm.n_gt, pm.n_pred,
+                     pm.detection.tp, pm.detection.fp, pm.detection.fn,
+                     pm.joined_cer)
             cat_pages.append(pm)
             per_image_payload.append(_serialize_page_metrics(pm, page, pred))
             _write_status({
@@ -225,12 +247,16 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
                     flush=True,
                 )
 
+        cat_elapsed = round(time.perf_counter() - cat_start, 2)
         summary = aggregate_category(cat_dir.name, cat_pages)
         overall.append(summary)
         completed.append({
             "name": cat_dir.name,
-            "elapsed_s": round(time.perf_counter() - cat_start, 2),
+            "elapsed_s": cat_elapsed,
         })
+        log.info("[%d/%d] %s: done in %.1fs, F1=%.3f CER=%.3f",
+                 cat_idx, len(cats), cat_dir.name, cat_elapsed,
+                 summary.detection.f1, summary.matched_cer_mean)
 
         out_file = per_cat_dir / f"{_slug(cat_dir.name)}.json"
         out_file.write_text(
@@ -251,12 +277,17 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
             encoding="utf-8",
         )
 
+    total_elapsed = round(time.perf_counter() - overall_start, 2)
     overall_dict = aggregate_overall(overall)
-    overall_dict["total_elapsed_s"] = round(time.perf_counter() - overall_start, 2)
+    overall_dict["total_elapsed_s"] = total_elapsed
     overall_dict["last_run"] = _now_iso()
     overall_dict["corrector_enabled"] = corrector.enabled
     overall_dict["ocr_version"] = ocr_version or settings.ocr_version
     overall_dict["model_type"] = model_type or settings.model_type
+
+    log.info("=== Benchmark done: %d images in %.1fs, F1=%.3f CER=%.3f ===",
+             overall_dict["n_images"], total_elapsed,
+             overall_dict["detection_f1"], overall_dict["cer_mean"])
 
     _write_summary_csv(overall, overall_dict)
     _write_overall_json(overall, overall_dict)

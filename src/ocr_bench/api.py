@@ -13,6 +13,7 @@ Endpoints:
 from __future__ import annotations
 
 import json
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -154,8 +155,19 @@ app = create_app()
 
 def serve() -> None:
     """Entry point for ``ocr-bench-serve`` console script."""
+    import logging
     import uvicorn
     from .config import get_settings
+
+    # Configure logging so benchmark progress appears in journalctl
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s %(name)s %(levelname)s %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
+        stream=sys.stderr,
+    )
+    logging.getLogger("ocr_bench").setLevel(logging.INFO)
+
     s = get_settings()
     uvicorn.run(app, host=s.serve_host, port=s.serve_port, log_level="warning")
 
