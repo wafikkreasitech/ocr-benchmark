@@ -26,7 +26,7 @@ async function fetchModels() {
 async function fetchSummary() {
   try {
     const r = await fetch("/api/summary");
-    if (!r.ok) { setStatus("no reports — click Run benchmark"); return null; }
+    if (!r.ok) return null;
     return await r.json();
   } catch { return null; }
 }
@@ -652,7 +652,21 @@ async function showComparison() {
 
 async function loadAndRender() {
   const data = await fetchSummary();
-  if (!data) return;
+  if (!data) {
+    // No summary yet — check if benchmark is running
+    try {
+      const r = await fetch("/api/progress");
+      if (r.ok) {
+        const p = await r.json();
+        if (p.running) {
+          $("#progress-panel").classList.remove("hidden");
+          renderProgress(p);
+          setStatus("benchmark running — waiting for results…");
+        }
+      }
+    } catch {}
+    return;
+  }
   summaryData = data;
   renderOverall(data.overall);
   renderChart(data.per_category);
@@ -694,5 +708,24 @@ $("#btn-compare-close").addEventListener("click", () => {
   $("#compare-panel").classList.add("hidden");
 });
 
-loadAndRender();
+loadAndRender().then(() => {
+  // If no summary, start polling progress in case a run is active
+  if (!summaryData) pollProgressOnLoad();
+});
+
+async function pollProgressOnLoad() {
+  try {
+    const r = await fetch("/api/progress");
+    if (!r.ok) return;
+    const p = await r.json();
+    if (p.running) {
+      $("#progress-panel").classList.remove("hidden");
+      renderProgress(p);
+      setStatus("benchmark running…");
+      await pollProgress();
+      await loadAndRender();
+    }
+  } catch {}
+}
+
 loadHistory();
