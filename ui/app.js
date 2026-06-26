@@ -413,7 +413,15 @@ function setRunActive(active) {
 
 /* Persistent SSE subscription — survives page refresh (EventSource reconnects),
    so a background run is always reflected and the Run button stays disabled. */
-function subscribeProgress() {
+async function subscribeProgress() {
+  // 1) Immediate plain GET — always reflects current state on (re)load, even
+  //    behind a proxy that buffers SSE. This is what makes refresh-mid-run work.
+  try {
+    const r = await fetch("/api/progress");
+    if (r.ok) handleProgress(await r.json());
+  } catch {}
+
+  // 2) Live updates via SSE.
   let es;
   try {
     es = new EventSource("/api/progress/stream");
@@ -423,10 +431,18 @@ function subscribeProgress() {
   es.onmessage = (ev) => {
     let p;
     try { p = JSON.parse(ev.data); } catch { return; }
+    sseSeen = true;
     handleProgress(p);
   };
-  es.onerror = () => { /* EventSource auto-reconnects; nothing to do */ };
+  es.onerror = () => {
+    // If SSE never delivered a message (proxy strips/buffers it), fall back to
+    // polling so progress still updates live.
+    if (!sseSeen && !polling) { polling = true; es.close(); pollProgressFallback(); }
+  };
 }
+
+let sseSeen = false;
+let polling = false;
 
 function handleProgress(p) {
   if (p.running) {
