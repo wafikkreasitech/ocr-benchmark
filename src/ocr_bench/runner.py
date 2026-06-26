@@ -194,9 +194,8 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
             log.warning("[%d/%d] %s: no images, skipping", cat_idx, len(cats), cat_dir.name)
             continue
         tag = " [corrector ON]" if corrector.enabled else ""
+        print(f"[{cat_idx}/{len(cats)}] {cat_dir.name}: {len(pages)} images{tag}", flush=True)
         log.info("[%d/%d] %s: %d images%s", cat_idx, len(cats), cat_dir.name, len(pages), tag)
-        if verbose:
-            print(f"[{cat_dir.name}] {len(pages)} images{tag}", flush=True)
 
         _write_status({
             "running": True,
@@ -211,9 +210,13 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
         cat_start = time.perf_counter()
 
         for img_idx, page in enumerate(pages, 1):
-            log.info("  [%d/%d] img %d/%d: %s — starting OCR...",
-                     cat_idx, len(cats), img_idx, len(pages), page.image_path.name)
+            print(f"  [{cat_idx}/{len(cats)}] img {img_idx}/{len(pages)}: {page.image_path.name} — OCR start",
+                  flush=True)
+            t_img = time.perf_counter()
             pred = engine.predict(page.image_path)
+            img_ms = (time.perf_counter() - t_img) * 1000
+            print(f"  [{cat_idx}/{len(cats)}] img {img_idx}/{len(pages)}: {page.image_path.name} — "
+                  f"OCR done, {len(pred.lines)} lines, {img_ms:.0f}ms", flush=True)
             log.info("  [%d/%d] img %d/%d: %s — OCR done, %d lines, %.0fms",
                      cat_idx, len(cats), img_idx, len(pages),
                      page.image_path.name, len(pred.lines), pred.elapsed_ms)

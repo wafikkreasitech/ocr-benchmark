@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import logging
 import time
+import threading
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -80,11 +81,41 @@ class BenchEngine:
         self._ocr = RapidOCR(params=params)
         self._enable_preprocessing = enable_preprocessing
         self._preproc_upscale_min_side = preproc_upscale_min_side
+        self._timeout_s = 300  # 5 min per image
         log.info("Engine initialized: %s %s (preprocessing=%s)", ocr_version, model_type, enable_preprocessing)
 
     def predict(self, image_path: Path) -> PagePrediction:
         t0 = time.perf_counter()
         log.debug("OCR start: %s", image_path.name)
+        result_holder = [None, None]  # [result, error]
+
+        def _run():
+            try:
+                result_holder[0] = self._do_ocr(image_path)
+            except Exception as e:
+                result_holder[1] = e
+
+        thread = threading.Thread(target=_run, daemon=True)
+        thread.start()
+        thread.join(timeout=self._timeout_s)
+
+        if thread.is_alive():
+            log.error("OCR TIMEOUT: %s after %ds", image_path.name, self._timeout_s)
+            print(f"  !! OCR TIMEOUT: {image_path.name} after {self._timeout_s}s — skipping", flush=True)
+            return PagePrediction(image=image_path.name, lines=[], elapsed_ms=self._timeout_s * 1000)
+
+        if result_holder[1]:
+            log.error("OCR ERROR: %s — %s", image_path.name, result_holder[1])
+            print(f"  !! OCR ERROR: {image_path.name} — {result_holder[1]}", flush=True)
+            return PagePrediction(image=image_path.name, lines=[], elapsed_ms=(time.perf_counter() - t0) * 1000)
+
+        pred = result_holder[0]
+        elapsed = (time.perf_counter() - t0) * 1000
+        log.info("OCR done: %s → %d lines in %.0fms", image_path.name, len(pred.lines), elapsed)
+        return pred
+
+    def _do_ocr(self, image_path: Path) -> PagePrediction:
+        t0 = time.perf_counter()
         scale = 1.0
         if self._enable_preprocessing:
             img = cv2.imread(str(image_path), cv2.IMREAD_COLOR)
@@ -122,7 +153,6 @@ class BenchEngine:
             for box, txt, sc in zip(boxes, txts, scores)
         ]
         elapsed = (time.perf_counter() - t0) * 1000
-        log.info("OCR done: %s → %d lines in %.0fms", image_path.name, len(lines), elapsed)
         return PagePrediction(
             image=image_path.name,
             lines=lines,
