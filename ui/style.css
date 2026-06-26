@@ -671,6 +671,117 @@ tbody tr:hover { background: var(--surface-alt); }
 .box-missed { fill: rgba(192, 57, 43, 0.06); stroke: var(--bad); stroke-width: 1.5; stroke-dasharray: 4 3; }
 .box-spurious { fill: rgba(184, 134, 11, 0.06); stroke: var(--warn); stroke-width: 1.5; stroke-dasharray: 4 3; }
 
+/* ─── History ─────────────────────────────────────────────── */
+.history-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.btn-compare {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: var(--radius-xs);
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 120ms;
+}
+.btn-compare:hover { background: var(--accent-hover); }
+.btn-compare:disabled { opacity: 0.4; cursor: not-allowed; }
+.history-table-wrap { overflow-x: auto; }
+#history-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+#history-table thead th {
+  text-align: left;
+  font-weight: 500;
+  color: var(--text-muted);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 6px 10px;
+  border-bottom: 2px solid var(--border);
+  white-space: nowrap;
+}
+#history-table thead th.num { text-align: right; }
+#history-table tbody td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border-light);
+  font-family: var(--mono);
+  font-size: 11px;
+}
+#history-table tbody td.num { text-align: right; }
+#history-table tbody tr { transition: background 100ms; }
+#history-table tbody tr:hover { background: var(--surface-alt); }
+.history-table-wrap input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+.history-model {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  color: var(--accent);
+  background: var(--accent-light);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-weight: 500;
+}
+.history-f1 {
+  font-weight: 600;
+}
+.compare-panel {
+  margin-top: 16px;
+  padding: 16px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.compare-panel.hidden { display: none; }
+.compare-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.compare-head h3 { font-size: 13px; font-weight: 600; }
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.compare-table th {
+  text-align: left;
+  font-weight: 500;
+  color: var(--text-muted);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+}
+.compare-table th.num { text-align: right; }
+.compare-table td {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border-light);
+  font-family: var(--mono);
+  font-size: 11px;
+}
+.compare-table td.num { text-align: right; }
+.compare-table td.best { color: var(--good); font-weight: 600; }
+.compare-table td.worse { color: var(--bad); }
+.compare-delta {
+  font-size: 10px;
+  margin-left: 4px;
+}
+.compare-delta.up { color: var(--bad); }
+.compare-delta.down { color: var(--good); }
+
 /* ─── Glossary ───────────────────────────────────────────── */
 .glossary {
   margin: 0;

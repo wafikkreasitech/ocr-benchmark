@@ -20,7 +20,7 @@ from fastapi import BackgroundTasks, FastAPI, HTTPException
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
-from .paths import DEFAULT_DATASET_ROOT, REPORTS_ROOT, UI_ROOT
+from .paths import DEFAULT_DATASET_ROOT, HISTORY_ROOT, REPORTS_ROOT, UI_ROOT
 from .runner import RUN_STATUS_PATH, run as run_benchmark
 
 AVAILABLE_MODELS = {
@@ -104,6 +104,25 @@ def create_app() -> FastAPI:
             if data.get("category") == category:
                 return JSONResponse(data)
         raise HTTPException(404, f"category not found: {category}")
+
+    @app.get("/api/history")
+    def api_history():
+        index_path = HISTORY_ROOT / "index.json"
+        if not index_path.exists():
+            return {"runs": []}
+        try:
+            runs = json.loads(index_path.read_text(encoding="utf-8"))
+            return {"runs": list(reversed(runs))}  # newest first
+        except (json.JSONDecodeError, OSError):
+            return {"runs": []}
+
+    @app.get("/api/history/{run_id}")
+    def api_history_detail(run_id: str):
+        safe = "".join(c if c.isalnum() or c in "_-" else "" for c in run_id)
+        path = HISTORY_ROOT / f"{safe}.json"
+        if not path.exists():
+            raise HTTPException(404, f"run not found: {run_id}")
+        return JSONResponse(json.loads(path.read_text(encoding="utf-8")))
 
     @app.get("/api/image/{category}/{filename}")
     def api_image(category: str, filename: str):

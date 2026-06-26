@@ -10,6 +10,7 @@ from pathlib import Path
 PACKAGE_ROOT = Path(__file__).resolve().parent.parent.parent
 DATASET_ROOT = PACKAGE_ROOT / "IMG_OCR_IND_CN"
 REPORTS_ROOT = PACKAGE_ROOT / "reports"
+HISTORY_ROOT = REPORTS_ROOT / "history"
 UI_ROOT = PACKAGE_ROOT / "ui"
 
 # Lazy: read env var so tests / CI can override

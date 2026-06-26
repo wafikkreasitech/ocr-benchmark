@@ -163,6 +163,42 @@
     </div>
   </section>
 
+  <!-- ─── Run History ─────────────────────────────────────── -->
+  <section class="panel">
+    <header class="panel-head">
+      <h2>Run history</h2>
+      <span class="muted">compare past benchmark runs</span>
+    </header>
+    <div class="history-controls">
+      <button id="btn-compare" class="btn-compare" disabled>Compare selected</button>
+      <span id="history-count" class="muted"></span>
+    </div>
+    <div class="history-table-wrap">
+      <table id="history-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Time</th>
+            <th>Model</th>
+            <th class="num">F1</th>
+            <th class="num">CER</th>
+            <th class="num">WER</th>
+            <th class="num">Imgs</th>
+            <th class="num">Time</th>
+          </tr>
+        </thead>
+        <tbody id="history-tbody"></tbody>
+      </table>
+    </div>
+    <div id="compare-panel" class="compare-panel hidden">
+      <div class="compare-head">
+        <h3>Comparison</h3>
+        <button id="btn-compare-close" class="btn-back">close</button>
+      </div>
+      <div id="compare-content"></div>
+    </div>
+  </section>
+
   <!-- ─── Category Table ──────────────────────────────────── -->
   <section class="panel">
     <header class="panel-head">

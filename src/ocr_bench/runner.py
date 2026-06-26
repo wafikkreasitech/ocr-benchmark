@@ -22,7 +22,7 @@ from .metrics import (
     cer,
     wer,
 )
-from .paths import REPORTS_ROOT
+from .paths import HISTORY_ROOT, REPORTS_ROOT
 
 
 def _evaluate_page(page: GroundTruthPage, pred: PagePrediction) -> PageMetrics:
@@ -259,6 +259,7 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
 
     _write_summary_csv(overall, overall_dict)
     _write_overall_json(overall, overall_dict)
+    _save_to_history(overall_dict, overall)
     _write_status({
         "running": False,
         "started_at": started_at,
@@ -354,6 +355,64 @@ def _write_overall_json(per_cat: list[CategorySummary], overall: dict) -> None:
         ],
     }
     (REPORTS_ROOT / "summary.json").write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def _save_to_history(overall: dict, per_cat: list[CategorySummary]) -> None:
+    """Save a snapshot of this run to reports/history/ for comparison."""
+    HISTORY_ROOT.mkdir(parents=True, exist_ok=True)
+
+    run_id = overall["last_run"].replace(":", "-").replace("T", "_").replace("Z", "")
+    snapshot = {
+        "id": run_id,
+        "timestamp": overall["last_run"],
+        "ocr_version": overall.get("ocr_version", ""),
+        "model_type": overall.get("model_type", ""),
+        "corrector_enabled": overall.get("corrector_enabled", False),
+        "total_elapsed_s": overall.get("total_elapsed_s", 0),
+        "overall": overall,
+        "per_category": [
+            {
+                "category": c.category,
+                "n_images": c.n_images,
+                "n_lines": c.n_lines_total,
+                "f1": c.detection.f1,
+                "cer": c.matched_cer_mean,
+                "wer": c.matched_wer_mean,
+                "mean_conf": c.mean_confidence,
+                "ms_per_img": c.mean_ms_per_image,
+            }
+            for c in per_cat
+        ],
+    }
+
+    out_file = HISTORY_ROOT / f"{run_id}.json"
+    out_file.write_text(json.dumps(snapshot, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    # Update index
+    index_path = HISTORY_ROOT / "index.json"
+    if index_path.exists():
+        try:
+            index = json.loads(index_path.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            index = []
+    else:
+        index = []
+
+    # Remove duplicate if same timestamp
+    index = [e for e in index if e.get("id") != run_id]
+    index.append({
+        "id": run_id,
+        "timestamp": overall["last_run"],
+        "ocr_version": overall.get("ocr_version", ""),
+        "model_type": overall.get("model_type", ""),
+        "n_images": overall.get("n_images", 0),
+        "f1": overall.get("detection_f1", 0),
+        "cer": overall.get("cer_mean", 0),
+        "wer": overall.get("wer_mean", 0),
+    })
+    # Keep last 50 runs
+    index = index[-50:]
+    index_path.write_text(json.dumps(index, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
 def _print_overall(overall: dict, per_cat: list[CategorySummary]) -> None:

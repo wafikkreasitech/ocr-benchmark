@@ -10,6 +10,8 @@ let summaryData = null;
 let currentSort = { key: "f1", dir: "asc" };
 let modelConfig = null;
 let selectedModel = { ocr_version: null, model_type: null };
+let historyRuns = [];
+let selectedHistoryIds = new Set();
 
 /* ─── API helpers ────────────────────────────────────────── */
 
@@ -489,6 +491,158 @@ function renderLastRun(iso) {
   else el.classList.remove("fresh");
 }
 
+/* ─── History ─────────────────────────────────────────────── */
+
+async function loadHistory() {
+  try {
+    const r = await fetch("/api/history");
+    if (!r.ok) return;
+    const data = await r.json();
+    historyRuns = data.runs || [];
+    renderHistory();
+  } catch {}
+}
+
+function renderHistory() {
+  const tbody = $("#history-tbody");
+  if (!tbody) return;
+  tbody.innerHTML = "";
+
+  const countEl = $("#history-count");
+  if (countEl) countEl.textContent = `${historyRuns.length} runs`;
+
+  for (const run of historyRuns) {
+    const tr = document.createElement("tr");
+    const checked = selectedHistoryIds.has(run.id) ? "checked" : "";
+    const ts = run.timestamp ? fmtDateShort(run.timestamp) : run.id;
+    tr.innerHTML = `
+      <td><input type="checkbox" data-id="${run.id}" ${checked} /></td>
+      <td>${ts}</td>
+      <td><span class="history-model">${run.ocr_version || "?"} · ${run.model_type || "?"}</span></td>
+      <td class="num history-f1">${fmt(run.f1)}</td>
+      <td class="num">${fmt(run.cer)}</td>
+      <td class="num">${fmt(run.wer)}</td>
+      <td class="num">${run.n_images || 0}</td>
+      <td class="num">${run.timestamp ? fmtDateAge(run.timestamp) : "–"}</td>
+    `;
+    tbody.appendChild(tr);
+  }
+
+  // Checkbox handlers
+  tbody.querySelectorAll("input[type=checkbox]").forEach(cb => {
+    cb.addEventListener("change", () => {
+      if (cb.checked) selectedHistoryIds.add(cb.dataset.id);
+      else selectedHistoryIds.delete(cb.dataset.id);
+      updateCompareBtn();
+    });
+  });
+
+  updateCompareBtn();
+}
+
+function updateCompareBtn() {
+  const btn = $("#btn-compare");
+  if (btn) btn.disabled = selectedHistoryIds.size < 2;
+}
+
+function fmtDateShort(iso) {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return iso;
+  return new Intl.DateTimeFormat(undefined, {
+    day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit", hour12: false, timeZone: LOCAL_TZ,
+  }).format(d);
+}
+
+function fmtDateAge(iso) {
+  const ageS = (Date.now() - new Date(iso).getTime()) / 1000;
+  if (ageS < 60) return "now";
+  if (ageS < 3600) return `${Math.floor(ageS / 60)}m ago`;
+  if (ageS < 86400) return `${Math.floor(ageS / 3600)}h ago`;
+  return `${Math.floor(ageS / 86400)}d ago`;
+}
+
+async function showComparison() {
+  const ids = [...selectedHistoryIds];
+  const runs = [];
+  for (const id of ids) {
+    try {
+      const r = await fetch(`/api/history/${encodeURIComponent(id)}`);
+      if (r.ok) runs.push(await r.json());
+    } catch {}
+  }
+  if (runs.length < 2) return;
+
+  const panel = $("#compare-panel");
+  const content = $("#compare-content");
+  panel.classList.remove("hidden");
+
+  // Overall comparison table
+  const metrics = [
+    { key: "detection_f1", label: "F1", fmt: fmt, better: "up" },
+    { key: "cer_mean", label: "CER", fmt: fmt, better: "down" },
+    { key: "wer_mean", label: "WER", fmt: fmt, better: "down" },
+    { key: "n_images", label: "Images", fmt: (v) => v, better: null },
+    { key: "total_elapsed_s", label: "Time (s)", fmt: (v) => v?.toFixed(1), better: "down" },
+  ];
+
+  // Find best/worst for each metric
+  const best = {};
+  const worst = {};
+  for (const m of metrics) {
+    const vals = runs.map(r => r.overall?.[m.key] ?? 0);
+    if (m.better === "up") { best[m.key] = Math.max(...vals); worst[m.key] = Math.min(...vals); }
+    else if (m.better === "down") { best[m.key] = Math.min(...vals.filter(v => v > 0)); worst[m.key] = Math.max(...vals); }
+  }
+
+  let html = `<table class="compare-table"><thead><tr><th>Metric</th>`;
+  for (const r of runs) {
+    html += `<th class="num">${r.ocr_version || "?"} ${r.model_type || "?"}<br><span style="font-weight:400;color:var(--text-muted)">${fmtDateShort(r.timestamp)}</span></th>`;
+  }
+  html += `<th class="num">Δ</th></tr></thead><tbody>`;
+
+  for (const m of metrics) {
+    html += `<tr><td>${m.label}</td>`;
+    const vals = runs.map(r => r.overall?.[m.key] ?? null);
+    for (const v of vals) {
+      const isBest = m.better && v !== null && v === best[m.key];
+      const isWorse = m.better && v !== null && v === worst[m.key] && best[m.key] !== worst[m.key];
+      const cls = isBest ? "best" : isWorse ? "worse" : "";
+      html += `<td class="num ${cls}">${v !== null ? m.fmt(v) : "–"}</td>`;
+    }
+    // Delta column (first vs last)
+    if (vals.length >= 2 && vals[0] !== null && vals[1] !== null) {
+      const d = vals[0] - vals[1];
+      const pct = vals[1] !== 0 ? ((d / Math.abs(vals[1])) * 100).toFixed(1) : "–";
+      const arrow = d > 0 ? (m.better === "up" ? "down" : "up") : (m.better === "up" ? "up" : "down");
+      const cls = (m.better === "up" && d > 0) || (m.better === "down" && d < 0) ? "down" : "up";
+      html += `<td class="num"><span class="compare-delta ${cls}">${d > 0 ? "+" : ""}${pct}%</span></td>`;
+    } else {
+      html += `<td class="num">–</td>`;
+    }
+    html += `</tr>`;
+  }
+  html += `</tbody></table>`;
+
+  // Per-category comparison
+  const cats0 = runs[0].per_category || [];
+  const cats1 = runs[1].per_category || [];
+  if (cats0.length && cats1.length) {
+    html += `<div style="margin-top:16px;font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);font-weight:500">Per-category F1</div>`;
+    html += `<table class="compare-table" style="margin-top:6px"><thead><tr><th>Category</th><th class="num">${runs[0].model_type}</th><th class="num">${runs[1].model_type}</th><th class="num">Δ</th></tr></thead><tbody>`;
+    const catMap1 = Object.fromEntries(cats1.map(c => [c.category, c]));
+    for (const c0 of cats0) {
+      const c1 = catMap1[c0.category];
+      if (!c1) continue;
+      const d = (c0.f1 || 0) - (c1.f1 || 0);
+      const cls = d > 0.01 ? "down" : d < -0.01 ? "up" : "";
+      html += `<tr><td>${escapeHtml(c0.category)}</td><td class="num">${fmt(c0.f1)}</td><td class="num">${fmt(c1.f1)}</td><td class="num"><span class="compare-delta ${cls}">${d > 0 ? "+" : ""}${d.toFixed(3)}</span></td></tr>`;
+    }
+    html += `</tbody></table>`;
+  }
+
+  content.innerHTML = html;
+}
+
 /* ─── Load & Render ──────────────────────────────────────── */
 
 async function loadAndRender() {
@@ -509,6 +663,7 @@ async function loadAndRender() {
     mb.textContent = `${ov.ocr_version} · ${ov.model_type || ""}`;
   }
   setStatus(`loaded · ${data.overall.n_images} imgs · ${data.overall.n_lines} lines`);
+  loadHistory();
 }
 
 /* ─── Init ───────────────────────────────────────────────── */
@@ -529,5 +684,10 @@ $("#back").addEventListener("click", () => {
   $("#detail").classList.add("hidden");
   setStatus("idle");
 });
+$("#btn-compare").addEventListener("click", showComparison);
+$("#btn-compare-close").addEventListener("click", () => {
+  $("#compare-panel").classList.add("hidden");
+});
 
 loadAndRender();
+loadHistory();
