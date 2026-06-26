@@ -5,13 +5,21 @@ RUN pip install --no-cache-dir uv
 
 WORKDIR /build
 
-# Copy dependency files first (cache layer)
 COPY pyproject.toml uv.lock ./
 RUN uv sync --frozen --no-dev --no-install-project
 
-# Copy source and install project
 COPY . .
 RUN uv sync --frozen --no-dev
+
+# Remove full opencv + reinstall headless only (headless needs no libGL)
+RUN uv pip uninstall opencv-python opencv-python-headless; \
+    uv pip install --no-cache --reinstall opencv-python-headless==4.13.0.92
+
+# Clean caches
+RUN find .venv -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null; \
+    find .venv -name "*.pyc" -delete 2>/dev/null; \
+    rm -rf .venv/lib/python*/site-packages/*/tests 2>/dev/null; \
+    true
 
 # ─── Stage 2: runtime ───────────────────────────────────────
 FROM python:3.11-slim AS runtime
@@ -20,13 +28,11 @@ RUN groupadd -r bench && useradd -r -g bench -m bench
 
 WORKDIR /app
 
-# Copy only what's needed from builder
 COPY --from=builder /build/.venv /app/.venv
 COPY --from=builder /build/src /app/src
 COPY --from=builder /build/ui /app/ui
 COPY --from=builder /build/pyproject.toml /app/pyproject.toml
 
-# Dataset and reports will be mounted as volumes
 RUN mkdir -p /app/reports /app/IMG_OCR_IND_CN && chown -R bench:bench /app
 
 USER bench
