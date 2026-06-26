@@ -96,6 +96,7 @@ def _serialize_page_metrics(pm: PageMetrics, page: GroundTruthPage, pred: PagePr
             "gt_polygon": g.polygon, "gt_text": g.text,
             "pr_polygon": p.polygon, "pr_text": p.text,
             "pr_score": p.score, "iou": iou_val, "status": "matched",
+            "line_cer": cer(g.text, p.text),
         }
         if enabled:
             r = corrector.correct(p.text)

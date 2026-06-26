@@ -321,11 +321,16 @@ function showImageDetail(category, img, summary) {
         ? `<span><span class="lbl">FIX</span><span class="pr" style="color:var(--accent)">${escapeHtml(corrected)}</span></span>`
         : "";
       li.className = cls;
+      const cerVal = o.line_cer != null ? o.line_cer : null;
+      const cerLabel = cerVal !== null
+        ? `<span class="lbl">CER</span><span class="line-cer ${cerVal < 0.01 ? "cer-ok" : cerVal < 0.1 ? "cer-low" : "cer-high"}">${(cerVal * 100).toFixed(0)}%</span>`
+        : "";
       li.innerHTML = `
         <span class="mark">${mark}</span>
         <span>
           <span><span class="lbl">GT</span><span class="gt">${escapeHtml(o.gt_text || "")}</span></span>
-          <span><span class="lbl">PR</span><span class="pr">${escapeHtml(o.pr_text || "")}${o.pr_score ? ` · ${(o.pr_score*100).toFixed(0)}%` : ""}</span></span>
+          <span><span class="lbl">PR</span><span class="pr">${escapeHtml(o.pr_text || "")}${o.pr_score ? ` · conf ${(o.pr_score*100).toFixed(0)}%` : ""}</span></span>
+          ${cerLabel}
           ${correctedLine}
         </span>`;
     } else if (o.status === "missed") {

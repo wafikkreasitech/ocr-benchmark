@@ -664,6 +664,17 @@ tbody tr:hover { background: var(--surface-alt); }
   text-transform: uppercase;
   font-weight: 600;
 }
+.line-cer {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 5px;
+  border-radius: 3px;
+  margin-left: 6px;
+}
+.cer-ok { color: var(--good); background: var(--good-bg); }
+.cer-low { color: var(--warn); background: var(--warn-bg); }
+.cer-high { color: var(--bad); background: var(--bad-bg); }
 
 /* Overlay boxes */
 .box-gt { fill: rgba(90, 138, 90, 0.06); stroke: var(--good); stroke-width: 1.5; }
