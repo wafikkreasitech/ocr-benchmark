@@ -4,6 +4,11 @@ const $ = (s) => document.querySelector(s);
 const fmt = (n, d = 3) => (n === null || n === undefined || Number.isNaN(n)) ? "–" : Number(n).toFixed(d);
 const pct = (n) => n === null || n === undefined ? "–" : `${(Number(n) * 100).toFixed(1)}%`;
 
+// Browser's local timezone (e.g. "Asia/Jakarta") — used for formatting all
+// timestamps so users see their own wall-clock, not UTC. ponytail: one source
+// of truth, no per-call Intl calls elsewhere.
+const LOCAL_TZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
 let summaryData = null;
 let currentSort = { key: "f1", dir: "asc" };
 
@@ -241,12 +246,19 @@ function drawOverlay(img) {
 async function runBenchmark() {
   const btn = $("#btn-run");
   btn.disabled = true;
-  setStatus("running benchmark…");
+  setStatus("starting…");
   try {
     const r = await fetch("/api/run", { method: "POST" });
     if (!r.ok) throw new Error("run failed");
-    setStatus("done");
-    await loadAndRender();
+    const started = await r.json();
+    if (!started.started) {
+      setStatus("already running — see progress panel below");
+      $("#progress-panel").classList.remove("hidden");
+    } else {
+      $("#progress-panel").classList.remove("hidden");
+      renderProgress({ running: true, total: 0, completed: [], current: null });
+    }
+    await pollProgress();
   } catch (e) {
     setStatus(`error: ${e.message}`);
   } finally {
@@ -254,21 +266,104 @@ async function runBenchmark() {
   }
 }
 
+async function pollProgress() {
+  // Poll /api/progress until the run finishes. Show partial summary in
+  // between so the dashboard reflects per-category completion.
+  while (true) {
+    const r = await fetch("/api/progress");
+    if (!r.ok) break;
+    const p = await r.json();
+    renderProgress(p);
+    if (!p.running) break;
+    await loadAndRender();  // partial — shows categories as they land
+    await new Promise((res) => setTimeout(res, 800));
+  }
+  setStatus("done");
+  $("#progress-panel").classList.add("hidden");
+  await loadAndRender();
+}
+
+function renderProgress(p) {
+  const fill = $("#progress-fill");
+  const summary = $("#progress-summary");
+  const currentEl = $("#progress-current");
+  const etaEl = $("#progress-eta");
+  const elapsedEl = $("#progress-elapsed");
+  const list = $("#progress-list");
+
+  const total = p.total || 0;
+  const done = (p.completed || []).length;
+  const inFlight = p.current ? 1 : 0;
+  const fraction = total ? (done + inFlight * 0.5) / total : 0;
+  fill.style.width = `${Math.min(100, fraction * 100).toFixed(1)}%`;
+
+  summary.textContent = total
+    ? `${done} of ${total} categories${inFlight ? " · 1 in progress" : ""}`
+    : "preparing…";
+
+  if (p.current) {
+    const cur = p.current;
+    const pctImg = cur.total_images
+      ? `${Math.round((cur.done_images / cur.total_images) * 100)}%`
+      : "0%";
+    currentEl.textContent = `⚙️ ${cur.name} · image ${cur.done_images}/${cur.total_images} (${pctImg})`;
+  } else {
+    currentEl.textContent = done >= total && total ? "✅ finalizing…" : "⏸ waiting…";
+  }
+
+  const avg = (p.completed || []).reduce((a, c) => a + (c.elapsed_s || 0), 0) / Math.max(1, done);
+  const remaining = total - done - inFlight;
+  const eta = remaining > 0 && avg > 0 ? Math.round(remaining * avg + (inFlight ? avg * 0.5 : 0)) : 0;
+  etaEl.textContent = eta > 0 ? `ETA ≈ ${formatDuration(eta)}` : "";
+  elapsedEl.textContent = p.started_at
+    ? `started ${formatRunDate(p.started_at)}`
+    : "";
+
+  list.innerHTML = "";
+  const completed = p.completed || [];
+  for (const c of completed) {
+    const li = document.createElement("li");
+    li.className = "prog-done";
+    li.textContent = `✅ ${c.name} · ${c.elapsed_s.toFixed(1)}s`;
+    list.appendChild(li);
+  }
+  if (p.current) {
+    const li = document.createElement("li");
+    li.className = "prog-now";
+    const cur = p.current;
+    li.textContent = `⏳ ${cur.name} · ${cur.done_images}/${cur.total_images}`;
+    list.appendChild(li);
+  }
+}
+
+function formatDuration(s) {
+  if (s < 60) return `${s}s`;
+  const m = Math.floor(s / 60);
+  const sec = s % 60;
+  return `${m}m ${sec.toString().padStart(2, "0")}s`;
+}
+
 function formatRunDate(iso) {
   if (!iso) return "–";
-  // "2026-06-25T14:32:07Z" → "25 Jun 2026 · 14:32:07 UTC"
-  const m = iso.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})Z$/);
-  if (!m) return iso;
-  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-  const [, y, mo, d, hh, mm, ss] = m;
-  const ageMs = Date.now() - Date.UTC(+y, +mo - 1, +d, +hh, +mm, +ss);
-  const ageS = ageMs / 1000;
+  // Server stamps UTC with trailing Z; parse and render in the client's
+  // local timezone via Intl.DateTimeFormat (one locale string, no manual fields).
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return iso;
+  const stamp = new Intl.DateTimeFormat(undefined, {
+    day: "2-digit", month: "short", year: "numeric",
+    hour: "2-digit", minute: "2-digit", second: "2-digit",
+    hour12: false, timeZone: LOCAL_TZ,
+  }).format(d);
+  const tzShort = new Intl.DateTimeFormat(undefined, {
+    timeZone: LOCAL_TZ, timeZoneName: "short",
+  }).formatToParts(d).find((p) => p.type === "timeZoneName")?.value || "";
+  const ageS = (Date.now() - d.getTime()) / 1000;
   let rel = "";
   if (ageS < 60) rel = " (just now)";
   else if (ageS < 3600) rel = ` (${Math.floor(ageS / 60)}m ago)`;
   else if (ageS < 86400) rel = ` (${Math.floor(ageS / 3600)}h ago)`;
   else if (ageS < 7 * 86400) rel = ` (${Math.floor(ageS / 86400)}d ago)`;
-  return `${d} ${months[+mo - 1]} ${y} · ${hh}:${mm}:${ss} UTC${rel}`;
+  return `${stamp}${tzShort ? " " + tzShort : ""}${rel}`;
 }
 
 function renderLastRun(iso) {

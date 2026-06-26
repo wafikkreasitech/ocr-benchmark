@@ -1,7 +1,8 @@
 """FastAPI: serves dashboard + JSON endpoints.
 
 Endpoints:
-  POST /api/run                 run benchmark (writes reports)
+  POST /api/run                 run benchmark (background; poll /api/progress)
+  GET  /api/progress            live run status (running, completed, current)
   GET  /api/summary             aggregated metrics (overall + per-category)
   GET  /api/results/<category>  per-image detail incl. overlay data
   GET  /api/image/<cat>/<file>  raw image bytes
@@ -13,22 +14,39 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException
+from fastapi import BackgroundTasks, FastAPI, HTTPException
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
 from .paths import DEFAULT_DATASET_ROOT, REPORTS_ROOT, UI_ROOT
-from .runner import run as run_benchmark
+from .runner import RUN_STATUS_PATH, run as run_benchmark
 
 
 def create_app() -> FastAPI:
     app = FastAPI(title="OCR Benchmark", version="0.1.0")
 
     @app.post("/api/run")
-    def api_run(category: str | None = None):
+    def api_run(background: BackgroundTasks, category: str | None = None):
+        # Fire-and-forget so the dashboard can poll /api/progress while running.
+        if RUN_STATUS_PATH.exists():
+            try:
+                current = json.loads(RUN_STATUS_PATH.read_text(encoding="utf-8"))
+                if current.get("running"):
+                    return {"ok": False, "already_running": True}
+            except (json.JSONDecodeError, OSError):
+                pass  # stale sidecar — allow starting a new run
         only = [category] if category else None
-        run_benchmark(root=None, only_categories=only, verbose=False)
-        return {"ok": True}
+        background.add_task(run_benchmark, None, only, False)
+        return {"ok": True, "started": True}
+
+    @app.get("/api/progress")
+    def api_progress():
+        if not RUN_STATUS_PATH.exists():
+            return {"running": False, "total": 0, "completed": [], "current": None}
+        try:
+            return JSONResponse(json.loads(RUN_STATUS_PATH.read_text(encoding="utf-8")))
+        except (json.JSONDecodeError, OSError):
+            return {"running": False, "total": 0, "completed": [], "current": None}
 
     @app.get("/api/summary")
     def api_summary():

@@ -163,6 +163,17 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
     overall = []
     overall_start = time.perf_counter()
 
+    # Progress sidecar — read by /api/progress for the dashboard.
+    started_at = _now_iso()
+    completed: list[dict] = []
+    _write_status({
+        "running": True,
+        "started_at": started_at,
+        "total": len(cats),
+        "completed": completed,
+        "current": None,
+    })
+
     for cat_dir in cats:
         pages = load_category(cat_dir)
         if not pages:
@@ -171,14 +182,34 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
             tag = " [corrector ON]" if corrector.enabled else ""
             print(f"[{cat_dir.name}] {len(pages)} images{tag}", flush=True)
 
+        _write_status({
+            "running": True,
+            "started_at": started_at,
+            "total": len(cats),
+            "completed": completed,
+            "current": {"name": cat_dir.name, "total_images": len(pages), "done_images": 0},
+        })
+
         cat_pages: list[PageMetrics] = []
         per_image_payload = []
+        cat_start = time.perf_counter()
 
         for page in pages:
             pred = engine.predict(page.image_path)
             pm = _evaluate_page(page, pred)
             cat_pages.append(pm)
             per_image_payload.append(_serialize_page_metrics(pm, page, pred))
+            _write_status({
+                "running": True,
+                "started_at": started_at,
+                "total": len(cats),
+                "completed": completed,
+                "current": {
+                    "name": cat_dir.name,
+                    "total_images": len(pages),
+                    "done_images": len(cat_pages),
+                },
+            })
             if verbose:
                 cer_c = (
                     f" CER_c={pm.joined_cer_corrected:.3f}" if corrector.enabled else ""
@@ -192,6 +223,10 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
 
         summary = aggregate_category(cat_dir.name, cat_pages)
         overall.append(summary)
+        completed.append({
+            "name": cat_dir.name,
+            "elapsed_s": round(time.perf_counter() - cat_start, 2),
+        })
 
         out_file = per_cat_dir / f"{_slug(cat_dir.name)}.json"
         out_file.write_text(
@@ -219,6 +254,14 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
 
     _write_summary_csv(overall, overall_dict)
     _write_overall_json(overall, overall_dict)
+    _write_status({
+        "running": False,
+        "started_at": started_at,
+        "finished_at": _now_iso(),
+        "total": len(cats),
+        "completed": completed,
+        "current": None,
+    })
 
     if verbose:
         _print_overall(overall_dict, overall)
@@ -228,6 +271,17 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
 
 def _slug(name: str) -> str:
     return "".join(c if c.isalnum() else "_" for c in name).strip("_").lower()
+
+
+RUN_STATUS_PATH = REPORTS_ROOT / ".run_status.json"
+
+
+def _write_status(status: dict) -> None:
+    """Atomically write the progress sidecar. Read by /api/progress."""
+    REPORTS_ROOT.mkdir(parents=True, exist_ok=True)
+    tmp = RUN_STATUS_PATH.with_suffix(".json.tmp")
+    tmp.write_text(json.dumps(status, ensure_ascii=False), encoding="utf-8")
+    tmp.replace(RUN_STATUS_PATH)
 
 
 def _now_iso() -> str:

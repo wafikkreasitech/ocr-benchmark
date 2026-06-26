@@ -2,6 +2,7 @@
 reports/per_category/
 reports/summary.csv
 reports/summary.json
+reports/.run_status.json
 
 # secrets
 .env

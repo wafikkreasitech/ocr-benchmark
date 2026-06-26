@@ -32,6 +32,20 @@
     </div>
   </section>
 
+  <section id="progress-panel" class="panel hidden">
+    <header class="panel-head">
+      <h2>Benchmark in progress</h2>
+      <span id="progress-summary" class="muted">starting…</span>
+    </header>
+    <div class="progress-bar"><div id="progress-fill"></div></div>
+    <div class="progress-meta">
+      <span id="progress-current"></span>
+      <span id="progress-eta"></span>
+      <span id="progress-elapsed"></span>
+    </div>
+    <ul id="progress-list" class="progress-list"></ul>
+  </section>
+
   <section class="cards">
     <div class="card metric" title="Harmonic mean of detection precision and recall. 1.0 = every GT line found with no extras.">
       <div class="label">Detection F1</div>
