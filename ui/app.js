@@ -378,14 +378,15 @@ function drawOverlay(img) {
 
 /* ─── Run Benchmark ──────────────────────────────────────── */
 
-async function runBenchmark() {
+async function runBenchmark(force = false) {
   const btn = $("#btn-run");
   btn.disabled = true;
-  setStatus("starting…");
+  setStatus(force ? "restarting…" : "starting…");
   try {
     const params = new URLSearchParams();
     if (selectedModel.ocr_version) params.set("ocr_version", selectedModel.ocr_version);
     if (selectedModel.model_type) params.set("model_type", selectedModel.model_type);
+    if (force) params.set("force", "true");
     const url = "/api/run" + (params.toString() ? "?" + params : "");
     const r = await fetch(url, { method: "POST" });
     if (!r.ok) throw new Error("run failed");
@@ -411,6 +412,10 @@ async function pollProgress() {
     if (!r.ok) break;
     const p = await r.json();
     renderProgress(p);
+    if (p.stale) {
+      setStatus("run looks stuck — restart below");
+      return; // leave panel visible with the stalled notice
+    }
     if (!p.running) break;
     await loadAndRender();
     await new Promise((res) => setTimeout(res, 800));
@@ -421,6 +426,7 @@ async function pollProgress() {
 }
 
 function renderProgress(p) {
+  const panel = $("#progress-panel");
   const fill = $("#progress-fill");
   const total = p.total || 0;
   const done = (p.completed || []).length;
@@ -428,9 +434,14 @@ function renderProgress(p) {
   const fraction = total ? (done + inFlight * 0.5) / total : 0;
   fill.style.width = `${Math.min(100, fraction * 100).toFixed(1)}%`;
 
-  $("#progress-summary").textContent = total
-    ? `${done} / ${total} categories${inFlight ? " · running…" : ""}`
-    : "preparing…";
+  panel.classList.toggle("stalled", !!p.stale);
+  renderStaleNotice(p);
+
+  $("#progress-summary").textContent = p.stale
+    ? `stalled at ${done} / ${total} categories`
+    : total
+      ? `${done} / ${total} categories${inFlight ? " · running…" : ""}`
+      : "preparing…";
 
   if (p.current) {
     const cur = p.current;
@@ -459,6 +470,21 @@ function renderProgress(p) {
     li.className = "prog-now";
     li.textContent = `… ${p.current.name} · ${p.current.done_images}/${p.current.total_images}`;
     list.appendChild(li);
+  }
+}
+
+function renderStaleNotice(p) {
+  let notice = $("#progress-stale");
+  if (!p.stale) { if (notice) notice.remove(); return; }
+  if (!notice) {
+    notice = document.createElement("div");
+    notice.id = "progress-stale";
+    notice.className = "stale-notice";
+    notice.innerHTML = `
+      <span>This run hasn't reported progress in a while — it likely stalled. Partial results are kept.</span>
+      <button id="btn-restart" class="btn-restart">Restart run</button>`;
+    $("#progress-panel").appendChild(notice);
+    notice.querySelector("#btn-restart").addEventListener("click", () => runBenchmark(true));
   }
 }
 

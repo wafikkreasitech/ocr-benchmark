@@ -37,13 +37,32 @@ AVAILABLE_MODELS = {
 def create_app() -> FastAPI:
     app = FastAPI(title="OCR Benchmark", version="0.1.0")
 
+    # A run with no status update for this long is assumed dead (the per-image
+    # OCR timeout is 5 min; give it margin before declaring the lock stale).
+    STALE_AFTER_S = 420
+
+    def _parse_iso(ts: str | None) -> datetime | None:
+        if not ts:
+            return None
+        try:
+            return datetime.strptime(ts, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+        except (ValueError, TypeError):
+            return None
+
+    def _is_stale(status: dict) -> bool:
+        last = _parse_iso(status.get("updated_at") or status.get("started_at"))
+        if last is None:
+            return False
+        return (datetime.now(timezone.utc) - last).total_seconds() > STALE_AFTER_S
+
     @app.post("/api/run")
     def api_run(background: BackgroundTasks, category: str | None = None,
-                ocr_version: str | None = None, model_type: str | None = None):
+                ocr_version: str | None = None, model_type: str | None = None,
+                force: bool = False):
         if RUN_STATUS_PATH.exists():
             try:
                 current = json.loads(RUN_STATUS_PATH.read_text(encoding="utf-8"))
-                if current.get("running"):
+                if current.get("running") and not force and not _is_stale(current):
                     return {"ok": False, "already_running": True}
             except (json.JSONDecodeError, OSError):
                 pass
@@ -56,9 +75,12 @@ def create_app() -> FastAPI:
         if not RUN_STATUS_PATH.exists():
             return {"running": False, "total": 0, "completed": [], "current": None}
         try:
-            return JSONResponse(json.loads(RUN_STATUS_PATH.read_text(encoding="utf-8")))
+            status = json.loads(RUN_STATUS_PATH.read_text(encoding="utf-8"))
         except (json.JSONDecodeError, OSError):
             return {"running": False, "total": 0, "completed": [], "current": None}
+        if status.get("running") and _is_stale(status):
+            status["stale"] = True  # UI shows a calm "looks stuck" notice + re-run
+        return JSONResponse(status)
 
     @app.get("/api/summary")
     def api_summary():

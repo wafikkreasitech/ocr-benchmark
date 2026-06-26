@@ -558,6 +558,35 @@ tbody tr:hover { background: var(--surface-alt); }
 .progress-list .prog-done { color: var(--good); }
 .progress-list .prog-now { color: var(--accent); font-weight: 600; }
 
+#progress-panel.stalled #progress-fill { background: var(--warn); }
+.stale-notice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: var(--warn-bg);
+  border: 1px solid var(--warn);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.btn-restart {
+  flex-shrink: 0;
+  padding: 6px 14px;
+  border: 1px solid var(--warn);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--warn);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-restart:hover { background: var(--warn); color: #fff; }
+
 /* ─── Detail View ────────────────────────────────────────── */
 .detail-grid {
   display: grid;

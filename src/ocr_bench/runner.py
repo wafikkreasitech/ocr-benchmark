@@ -188,6 +188,27 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
         "current": None,
     })
 
+    try:
+        return _run_categories(cats, engine, corrector, settings, ocr_version,
+                                model_type, started_at, completed, overall,
+                                overall_start, per_cat_dir, verbose)
+    except BaseException as e:  # incl. SystemExit/KeyboardInterrupt — never strand the lock
+        log.exception("Benchmark failed; clearing run status")
+        _write_status({
+            "running": False,
+            "started_at": started_at,
+            "finished_at": _now_iso(),
+            "total": len(cats),
+            "completed": completed,
+            "current": None,
+            "error": f"{type(e).__name__}: {e}",
+        })
+        raise
+
+
+def _run_categories(cats, engine, corrector, settings, ocr_version, model_type,
+                    started_at, completed, overall, overall_start, per_cat_dir,
+                    verbose) -> dict:
     for cat_idx, cat_dir in enumerate(cats, 1):
         pages = load_category(cat_dir)
         if not pages:
@@ -318,8 +339,13 @@ RUN_STATUS_PATH = REPORTS_ROOT / ".run_status.json"
 
 
 def _write_status(status: dict) -> None:
-    """Atomically write the progress sidecar. Read by /api/progress."""
+    """Atomically write the progress sidecar. Read by /api/progress.
+
+    Stamps ``updated_at`` on every write so the UI can tell a live run from a
+    dead one (a crashed process leaves a stale ``running:true`` file behind).
+    """
     REPORTS_ROOT.mkdir(parents=True, exist_ok=True)
+    status = {**status, "updated_at": _now_iso()}
     tmp = RUN_STATUS_PATH.with_suffix(".json.tmp")
     tmp.write_text(json.dumps(status, ensure_ascii=False), encoding="utf-8")
     tmp.replace(RUN_STATUS_PATH)
