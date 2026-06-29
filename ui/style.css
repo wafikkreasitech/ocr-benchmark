@@ -843,12 +843,17 @@ tbody tr:hover { background: var(--surface-alt); }
 #history-table tbody td.num { text-align: right; }
 #history-table tbody tr { transition: background 100ms; }
 #history-table tbody tr:hover { background: var(--surface-alt); }
+#history-table tbody tr.selected-for-compare { background: var(--accent-light); }
 .history-table-wrap input[type="checkbox"] {
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   accent-color: var(--accent);
   cursor: pointer;
+  pointer-events: auto;
 }
+/* Make the whole first cell a click target for the checkbox, so users
+   don't accidentally hit the row and open detail instead of toggling compare. */
+#history-table tbody td:first-child { cursor: pointer; padding: 8px 12px; }
 .history-model {
   display: inline-flex;
   align-items: center;

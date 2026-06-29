@@ -71,7 +71,9 @@ class BenchEngine:
     def __init__(self, *, enable_preprocessing: bool = False, preproc_upscale_min_side: int = 800,
                  ocr_version: str = "PP-OCRv6", model_type: str = "tiny",
                  det_box_thresh: float = 0.5, det_unclip_ratio: float = 1.6,
-                 det_limit_side_len: int = 736,
+                 det_thresh: float = 0.3,
+                 det_limit_side_len: int = 1536,
+                 use_angle_cls: bool = False,
                  rec_batch_num: int = 6, rec_img_width: int = 320) -> None:
         ver = OCRVersion(ocr_version)
         mtype = ModelType(model_type)
@@ -79,6 +81,7 @@ class BenchEngine:
             "Det.ocr_version": ver,
             "Det.model_type": mtype,
             "Det.box_thresh": det_box_thresh,
+            "Det.thresh": det_thresh,
             "Det.unclip_ratio": det_unclip_ratio,
             "Det.limit_side_len": det_limit_side_len,
             "Rec.ocr_version": ver,
@@ -86,13 +89,19 @@ class BenchEngine:
             "Rec.rec_batch_num": rec_batch_num,
             "Rec.rec_img_shape": [3, 48, rec_img_width],
         }
+        # ponytail: rapidocr v3 hard-runs the Cls (angle) stage — no on/off toggle
+        # exists in its config schema. ``use_angle_cls`` is preserved as a setting
+        # for parity with the env knob; if you ever need to disable it, swap
+        # RapidOCR for a pipeline that accepts the flag.
+        self._use_angle_cls = use_angle_cls
         self._ocr = RapidOCR(params=params)
         self._enable_preprocessing = enable_preprocessing
         self._preproc_upscale_min_side = preproc_upscale_min_side
         self._timeout_s = 300  # 5 min per image
         log.info(
-            "Engine initialized: %s %s (preprocessing=%s, box_thresh=%.2f, unclip=%.2f)",
+            "Engine initialized: %s %s (preprocessing=%s, box_thresh=%.2f, unclip=%.2f, side=%d, angle_cls=%s)",
             ocr_version, model_type, enable_preprocessing, det_box_thresh, det_unclip_ratio,
+            det_limit_side_len, use_angle_cls,
         )
 
     def predict(self, image_path: Path) -> PagePrediction:

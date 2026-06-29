@@ -656,12 +656,14 @@ function renderHistory() {
   for (const run of historyRuns) {
     const tr = document.createElement("tr");
     tr.dataset.id = run.id;
-    const checked = selectedHistoryIds.has(run.id) ? "checked" : "";
+    const isSelected = selectedHistoryIds.has(run.id);
+    if (isSelected) tr.classList.add("selected-for-compare");
+    const checked = isSelected ? "checked" : "";
     const ts = run.timestamp ? fmtDateShort(run.timestamp) : run.id;
     tr.innerHTML = `
       <td><input type="checkbox" data-id="${run.id}" ${checked} /></td>
       <td>${ts}</td>
-      <td><span class="history-model">${run.ocr_version || "?"} · ${run.model_type || "?"}</span></td>
+      <td><span class="history-model">${modelLabel(run)}</span></td>
       <td class="num history-f1">${fmt(run.f1)}</td>
       <td class="num">${fmt(run.cer)}</td>
       <td class="num">${fmt(run.wer)}</td>
@@ -673,19 +675,43 @@ function renderHistory() {
     tbody.appendChild(tr);
   }
 
-  // Checkbox handlers (stop row-click when toggling)
+  // Checkbox handlers — checked runs feed the Compare button. Row click
+  // opens the detail panel; the checkbox click must NOT also trigger that.
   tbody.querySelectorAll("input[type=checkbox]").forEach(cb => {
     cb.addEventListener("click", (e) => e.stopPropagation());
     cb.addEventListener("change", () => {
       if (cb.checked) selectedHistoryIds.add(cb.dataset.id);
       else selectedHistoryIds.delete(cb.dataset.id);
       updateCompareBtn();
+      // Re-render to apply the selected-for-compare row highlight.
+      renderHistory();
     });
   });
 
-  // Row click → open run detail
+  // Click the first cell (where the checkbox lives) — toggle compare
+  // selection without opening detail. The actual <input> change event still
+  // fires because we don't preventDefault; this is belt-and-braces so the
+  // checkbox cell is a generous click target.
+  tbody.querySelectorAll("tr").forEach((tr) => {
+    const firstCell = tr.querySelector("td:first-child");
+    if (!firstCell) return;
+    firstCell.addEventListener("click", (e) => {
+      if (e.target.tagName === "INPUT") return; // native change already fires
+      const cb = firstCell.querySelector("input[type=checkbox]");
+      if (!cb) return;
+      e.stopPropagation();
+      cb.checked = !cb.checked;
+      cb.dispatchEvent(new Event("change", { bubbles: true }));
+    });
+  });
+
+  // Row click → open run detail (skip if the click target is the checkbox
+  // cell or the chevron column).
   tbody.querySelectorAll("tr").forEach(tr => {
-    tr.addEventListener("click", () => openRunDetail(tr.dataset.id));
+    tr.addEventListener("click", (e) => {
+      if (e.target.closest("td:first-child") || e.target.closest('input[type="checkbox"]')) return;
+      openRunDetail(tr.dataset.id);
+    });
   });
 
   updateCompareBtn();
@@ -693,7 +719,21 @@ function renderHistory() {
 
 function updateCompareBtn() {
   const btn = $("#btn-compare");
-  if (btn) btn.disabled = selectedHistoryIds.size < 2;
+  if (!btn) return;
+  const n = selectedHistoryIds.size;
+  btn.disabled = n < 2;
+  // Reflect selection state in the label so a disabled button is informative.
+  if (n === 0) btn.textContent = "Compare selected";
+  else if (n === 1) btn.textContent = "Compare selected (pick one more)";
+  else btn.textContent = `Compare ${n} selected`;
+}
+
+// Old history rows store ocr_version/model_type at the top level; new rows
+// nest them under ``config``. Read both shapes so nothing renders "?".
+function modelLabel(run) {
+  const v = run.ocr_version ?? run.config?.ocr_version ?? null;
+  const t = run.model_type ?? run.config?.model_type ?? null;
+  return `${v || "?"} · ${t || "?"}`;
 }
 
 function fmtDateShort(iso) {
@@ -714,17 +754,27 @@ function fmtDateAge(iso) {
 
 async function showComparison() {
   const ids = [...selectedHistoryIds];
+  console.log("[compare] clicked, selectedHistoryIds =", ids);
   const runs = [];
   for (const id of ids) {
     try {
       const r = await fetch(`/api/history/${encodeURIComponent(id)}`);
       if (r.ok) runs.push(await r.json());
-    } catch {}
+      else console.warn("[compare] fetch failed for", id, r.status);
+    } catch (e) {
+      console.error("[compare] fetch error", id, e);
+    }
   }
-  if (runs.length < 2) return;
+  console.log("[compare] fetched runs =", runs.length);
 
   const panel = $("#compare-panel");
   const content = $("#compare-content");
+  if (runs.length < 2) {
+    panel.classList.remove("hidden");
+    content.innerHTML = `<div class="muted">Pick at least 2 runs to compare (currently ${runs.length}).</div>`;
+    panel.scrollIntoView({ behavior: "smooth", block: "start" });
+    return;
+  }
   panel.classList.remove("hidden");
 
   // Overall comparison table
@@ -747,7 +797,7 @@ async function showComparison() {
 
   let html = `<table class="compare-table"><thead><tr><th>Metric</th>`;
   for (const r of runs) {
-    html += `<th class="num">${r.ocr_version || "?"} ${r.model_type || "?"}<br><span style="font-weight:400;color:var(--text-muted)">${fmtDateShort(r.timestamp)}</span></th>`;
+    html += `<th class="num">${modelLabel(r)}<br><span style="font-weight:400;color:var(--text-muted)">${fmtDateShort(r.timestamp)}</span></th>`;
   }
   html += `<th class="num">Δ</th></tr></thead><tbody>`;
 
@@ -774,19 +824,30 @@ async function showComparison() {
   }
   html += `</tbody></table>`;
 
-  // Per-category comparison
-  const cats0 = runs[0].per_category || [];
-  const cats1 = runs[1].per_category || [];
-  if (cats0.length && cats1.length) {
+  // Per-category F1 — works for 2+ runs. Rows sorted by biggest absolute delta
+  // first so the meaningful wins/losses are at the top, not in arbitrary order.
+  const allCats = new Set();
+  for (const r of runs) for (const c of (r.per_category || [])) allCats.add(c.category);
+  if (allCats.size) {
+    const headers = runs.map(r => modelLabel(r)).map(s => `<th class="num">${s}</th>`).join("");
     html += `<div style="margin-top:16px;font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);font-weight:500">Per-category F1</div>`;
-    html += `<table class="compare-table" style="margin-top:6px"><thead><tr><th>Category</th><th class="num">${runs[0].model_type}</th><th class="num">${runs[1].model_type}</th><th class="num">Δ</th></tr></thead><tbody>`;
-    const catMap1 = Object.fromEntries(cats1.map(c => [c.category, c]));
-    for (const c0 of cats0) {
-      const c1 = catMap1[c0.category];
-      if (!c1) continue;
-      const d = (c0.f1 || 0) - (c1.f1 || 0);
+    html += `<table class="compare-table" style="margin-top:6px"><thead><tr><th>Category</th>${headers}<th class="num">Δ (max−min)</th></tr></thead><tbody>`;
+    const rows = [];
+    for (const cat of allCats) {
+      const vals = runs.map(r => (r.per_category || []).find(c => c.category === cat)?.f1 ?? null);
+      const numeric = vals.filter(v => v !== null);
+      if (numeric.length < 2) continue;
+      const d = Math.max(...numeric) - Math.min(...numeric);
+      rows.push({ cat, vals, d });
+    }
+    rows.sort((a, b) => b.d - a.d);
+    for (const { cat, vals, d } of rows) {
+      html += `<tr><td>${escapeHtml(cat)}</td>`;
+      for (const v of vals) {
+        html += `<td class="num">${v !== null ? fmt(v) : "–"}</td>`;
+      }
       const cls = d > 0.01 ? "down" : d < -0.01 ? "up" : "";
-      html += `<tr><td>${escapeHtml(c0.category)}</td><td class="num">${fmt(c0.f1)}</td><td class="num">${fmt(c1.f1)}</td><td class="num"><span class="compare-delta ${cls}">${d > 0 ? "+" : ""}${d.toFixed(3)}</span></td></tr>`;
+      html += `<td class="num"><span class="compare-delta ${cls}">${d.toFixed(3)}</span></td></tr>`;
     }
     html += `</tbody></table>`;
   }
@@ -824,7 +885,7 @@ async function openRunDetail(id) {
     ["Duration", dur],
   ].map(([k, v]) => `<div class="rd-card"><div class="rd-k">${k}</div><div class="rd-v">${v}</div></div>`).join("");
 
-  $("#run-detail-title").textContent = `${run.ocr_version || "?"} · ${run.model_type || "?"}`;
+  $("#run-detail-title").textContent = modelLabel(run);
   $("#run-detail-sub").textContent = `${run.timestamp ? fmtDate(run.timestamp) : run.id} · corrector ${run.corrector_enabled ? "ON" : "OFF"}`;
 
   const cats = run.per_category || [];

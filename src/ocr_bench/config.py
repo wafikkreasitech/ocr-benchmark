@@ -25,9 +25,16 @@ class Settings(BaseSettings):
     # Detection knobs — tune when det merges adjacent words into one box
     # (e.g. "KakiGajah" instead of "Kaki Gajah"). Lower unclip_ratio → tighter
     # boxes → adjacent words stay separate. Higher box_thresh → fewer weak boxes.
-    det_box_thresh: float = 0.5
+    # det_thresh = binarization threshold inside the det model (default 0.3);
+    # higher = only accept strongly-textured pixels as text.
+    det_box_thresh: float = 0.5        # confidence filter on resulting boxes
+    det_thresh: float = 0.3            # binarization threshold inside the det model
     det_unclip_ratio: float = 1.6
-    det_limit_side_len: int = 736
+    det_limit_side_len: int = 1536     # 1536/2048 keeps small text sharp after resize; 736 blurs it
+
+    # Angle classifier — corrects skewed text (cards, handwritten notes) before rec.
+    # Costs ~5-10% time but helps documents photographed at an angle.
+    use_angle_cls: bool = False
 
     # Recognition knobs
     rec_batch_num: int = 6

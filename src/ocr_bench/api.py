@@ -60,8 +60,10 @@ def create_app() -> FastAPI:
     def api_run(background: BackgroundTasks, category: str | None = None,
                 ocr_version: str | None = None, model_type: str | None = None,
                 det_box_thresh: float | None = None,
+                det_thresh: float | None = None,
                 det_unclip_ratio: float | None = None,
                 det_limit_side_len: int | None = None,
+                use_angle_cls: bool | None = None,
                 rec_batch_num: int | None = None,
                 rec_img_width: int | None = None,
                 force: bool = False):
@@ -76,8 +78,10 @@ def create_app() -> FastAPI:
         overrides = {
             k: v for k, v in {
                 "det_box_thresh": det_box_thresh,
+                "det_thresh": det_thresh,
                 "det_unclip_ratio": det_unclip_ratio,
                 "det_limit_side_len": det_limit_side_len,
+                "use_angle_cls": use_angle_cls,
                 "rec_batch_num": rec_batch_num,
                 "rec_img_width": rec_img_width,
             }.items() if v is not None
@@ -113,13 +117,18 @@ def create_app() -> FastAPI:
         """
         async def gen():
             last = None
-            while True:
-                status = _read_status()
-                payload = json.dumps(status)
-                if payload != last:
-                    yield f"data: {payload}\n\n"
-                    last = payload
-                await asyncio.sleep(1.0)
+            try:
+                while True:
+                    status = _read_status()
+                    payload = json.dumps(status)
+                    if payload != last:
+                        yield f"data: {payload}\n\n"
+                        last = payload
+                    await asyncio.sleep(1.0)
+            except asyncio.CancelledError:
+                # Client disconnected (page refresh / Ctrl+C). Quiet exit; the
+                # CancelledError trace otherwise drowns the user's terminal.
+                return
 
         return StreamingResponse(gen(), media_type="text/event-stream",
                                  headers={"Cache-Control": "no-cache",
@@ -162,8 +171,10 @@ def create_app() -> FastAPI:
             "ocr_version": s.ocr_version,
             "model_type": s.model_type,
             "det_box_thresh": s.det_box_thresh,
+            "det_thresh": s.det_thresh,
             "det_unclip_ratio": s.det_unclip_ratio,
             "det_limit_side_len": s.det_limit_side_len,
+            "use_angle_cls": s.use_angle_cls,
             "rec_batch_num": s.rec_batch_num,
             "rec_img_width": s.rec_img_width,
         }
@@ -183,9 +194,65 @@ def create_app() -> FastAPI:
             return {"runs": []}
         try:
             runs = json.loads(index_path.read_text(encoding="utf-8"))
-            return {"runs": list(reversed(runs))}  # newest first
         except (json.JSONDecodeError, OSError):
             return {"runs": []}
+        # Backfill flat keys from nested config for rows written by code paths
+        # that didn't keep the top-level fields (e.g. before the recent saver
+        # change). Idempotent — only fills when missing.
+        for r in runs:
+            cfg = r.get("config") or {}
+            if not r.get("ocr_version") and cfg.get("ocr_version"):
+                r["ocr_version"] = cfg["ocr_version"]
+            if not r.get("model_type") and cfg.get("model_type"):
+                r["model_type"] = cfg["model_type"]
+        return {"runs": list(reversed(runs))}  # newest first
+
+    @app.get("/api/history/best")
+    def api_history_best(metric: str = "f1"):
+        """Per-category best run across history. ``metric`` ∈ {f1, cer, wer}.
+
+        For F1 higher is better; for CER/WER lower is better.
+        """
+        index_path = HISTORY_ROOT / "index.json"
+        if not index_path.exists():
+            return {"best": {}, "runs": []}
+        try:
+            index = json.loads(index_path.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            return {"best": {}, "runs": []}
+
+        # Load every per-run file once; index alone doesn't carry per-cat metrics.
+        runs: list[dict] = []
+        for entry in index:
+            path = HISTORY_ROOT / f"{entry['id']}.json"
+            if not path.exists():
+                continue
+            try:
+                runs.append(json.loads(path.read_text(encoding="utf-8")))
+            except (json.JSONDecodeError, OSError):
+                continue
+
+        # Best per-category by selected metric.
+        # ponytail: O(runs × cats) is fine; runs is capped at 50 by the saver.
+        minimize = metric in ("cer", "wer")
+        best: dict[str, dict] = {}
+        for run in runs:
+            for cat in run.get("per_category", []):
+                name = cat["category"]
+                score = cat.get(metric)
+                if score is None:
+                    continue
+                cur = best.get(name)
+                if cur is None or (minimize and score < cur["score"]) or (not minimize and score > cur["score"]):
+                    best[name] = {
+                        "category": name,
+                        "score": score,
+                        "metric": metric,
+                        "run_id": run["id"],
+                        "timestamp": run["timestamp"],
+                        "config": run.get("config", {}),
+                    }
+        return {"best": best, "metric": metric, "n_runs": len(runs)}
 
     @app.get("/api/history/{run_id}")
     def api_history_detail(run_id: str):
@@ -215,7 +282,17 @@ def create_app() -> FastAPI:
         return FileResponse(idx, media_type="text/html")
 
     if UI_ROOT.exists():
-        app.mount("/static", StaticFiles(directory=str(UI_ROOT)), name="static")
+        # ponytail: disable caching so JS/CSS edits land without a hard refresh.
+        # Default Starlette StaticFiles sends Cache-Control: max-age=3600 which
+        # makes a 1-hour window where old UI code keeps running.
+        class _NoCacheStaticFiles(StaticFiles):
+            def file_response(self, *args, **kwargs):
+                resp = super().file_response(*args, **kwargs)
+                resp.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+                resp.headers["Pragma"] = "no-cache"
+                resp.headers["Expires"] = "0"
+                return resp
+        app.mount("/static", _NoCacheStaticFiles(directory=str(UI_ROOT)), name="static")
 
     return app
 

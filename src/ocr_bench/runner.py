@@ -180,8 +180,10 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
     mtype = model_type or settings.model_type
     overrides = det_overrides or {}
     box_thresh = overrides.get("det_box_thresh", settings.det_box_thresh)
+    det_thresh = overrides.get("det_thresh", settings.det_thresh)
     unclip = overrides.get("det_unclip_ratio", settings.det_unclip_ratio)
     limit_side = overrides.get("det_limit_side_len", settings.det_limit_side_len)
+    use_angle_cls = overrides.get("use_angle_cls", settings.use_angle_cls)
     rec_batch = overrides.get("rec_batch_num", settings.rec_batch_num)
     rec_width = overrides.get("rec_img_width", settings.rec_img_width)
     log.info("=== Benchmark start: %s %s, %d categories ===", ver, mtype, len(cats))
@@ -195,8 +197,10 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
         ocr_version=ver,
         model_type=mtype,
         det_box_thresh=box_thresh,
+        det_thresh=det_thresh,
         det_unclip_ratio=unclip,
         det_limit_side_len=limit_side,
+        use_angle_cls=use_angle_cls,
         rec_batch_num=rec_batch,
         rec_img_width=rec_width,
     )
@@ -222,10 +226,17 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
         "ocr_version": ver,
         "model_type": mtype,
         "det_box_thresh": box_thresh,
+        "det_thresh": det_thresh,
         "det_unclip_ratio": unclip,
         "det_limit_side_len": limit_side,
+        "use_angle_cls": use_angle_cls,
         "rec_batch_num": rec_batch,
         "rec_img_width": rec_width,
+        "enable_preprocessing": settings.enable_preprocessing,
+        "preproc_upscale_min_side": settings.preproc_upscale_min_side,
+        "iou_threshold": settings.iou_threshold,
+        "enable_symspell_correction": settings.enable_symspell_correction,
+        "enable_word_segmentation": settings.enable_word_segmentation,
     }
 
     try:
@@ -359,7 +370,16 @@ def _run_categories(cats, engine, corrector, settings, run_settings,
     overall_dict["ocr_version"] = run_settings["ocr_version"]
     overall_dict["model_type"] = run_settings["model_type"]
     overall_dict["det_box_thresh"] = run_settings["det_box_thresh"]
+    overall_dict["det_thresh"] = run_settings["det_thresh"]
     overall_dict["det_unclip_ratio"] = run_settings["det_unclip_ratio"]
+    overall_dict["det_limit_side_len"] = run_settings["det_limit_side_len"]
+    overall_dict["use_angle_cls"] = run_settings["use_angle_cls"]
+    overall_dict["rec_batch_num"] = run_settings["rec_batch_num"]
+    overall_dict["rec_img_width"] = run_settings["rec_img_width"]
+    overall_dict["enable_preprocessing"] = run_settings["enable_preprocessing"]
+    overall_dict["iou_threshold"] = run_settings["iou_threshold"]
+    overall_dict["enable_symspell_correction"] = run_settings["enable_symspell_correction"]
+    overall_dict["enable_word_segmentation"] = run_settings["enable_word_segmentation"]
 
     log.info("=== Benchmark done: %d images in %.1fs, F1=%.3f CER=%.3f ===",
              overall_dict["n_images"], total_elapsed,
@@ -496,17 +516,33 @@ def _write_overall_json(per_cat: list[CategorySummary], overall: dict) -> None:
 
 
 def _save_to_history(overall: dict, per_cat: list[CategorySummary]) -> None:
-    """Save a snapshot of this run to reports/history/ for comparison."""
+    """Save a snapshot of this run to reports/history/ for comparison.
+
+    Stores every knob that influenced the run so future runs can be diffed
+    against the best-known config per category.
+    """
     HISTORY_ROOT.mkdir(parents=True, exist_ok=True)
 
     run_id = overall["last_run"].replace(":", "-").replace("T", "_").replace("Z", "")
     snapshot = {
         "id": run_id,
         "timestamp": overall["last_run"],
-        "ocr_version": overall.get("ocr_version", ""),
-        "model_type": overall.get("model_type", ""),
-        "det_box_thresh": overall.get("det_box_thresh", 0.5),
-        "det_unclip_ratio": overall.get("det_unclip_ratio", 1.6),
+        # Config snapshot — all knobs, so we can diff against the best run later.
+        "config": {
+            "ocr_version": overall.get("ocr_version", ""),
+            "model_type": overall.get("model_type", ""),
+            "det_box_thresh": overall.get("det_box_thresh", 0.5),
+            "det_thresh": overall.get("det_thresh", 0.3),
+            "det_unclip_ratio": overall.get("det_unclip_ratio", 1.6),
+            "det_limit_side_len": overall.get("det_limit_side_len", 1536),
+            "use_angle_cls": overall.get("use_angle_cls", False),
+            "rec_batch_num": overall.get("rec_batch_num", 6),
+            "rec_img_width": overall.get("rec_img_width", 320),
+            "enable_preprocessing": overall.get("enable_preprocessing", False),
+            "iou_threshold": overall.get("iou_threshold", 0.5),
+            "enable_symspell_correction": overall.get("enable_symspell_correction", False),
+            "enable_word_segmentation": overall.get("enable_word_segmentation", False),
+        },
         "corrector_enabled": overall.get("corrector_enabled", False),
         "total_elapsed_s": overall.get("total_elapsed_s", 0),
         "overall": overall,
@@ -540,17 +576,20 @@ def _save_to_history(overall: dict, per_cat: list[CategorySummary]) -> None:
 
     # Remove duplicate if same timestamp
     index = [e for e in index if e.get("id") != run_id]
+    cfg = snapshot["config"]
     index.append({
         "id": run_id,
         "timestamp": overall["last_run"],
-        "ocr_version": overall.get("ocr_version", ""),
-        "model_type": overall.get("model_type", ""),
-        "det_box_thresh": overall.get("det_box_thresh", 0.5),
-        "det_unclip_ratio": overall.get("det_unclip_ratio", 1.6),
+        # Flat keys preserved for UI backward-compat (history table reads these).
+        "ocr_version": cfg["ocr_version"],
+        "model_type": cfg["model_type"],
+        "config": cfg,  # nested block — full snapshot for /api/history/best etc.
         "n_images": overall.get("n_images", 0),
         "f1": overall.get("detection_f1", 0),
         "cer": overall.get("cer_mean", 0),
         "wer": overall.get("wer_mean", 0),
+        "cer_corrected": overall.get("cer_corrected_mean", 0),
+        "wer_corrected": overall.get("wer_corrected_mean", 0),
         "total_elapsed_s": overall.get("total_elapsed_s", 0),
     })
     # Keep last 50 runs
