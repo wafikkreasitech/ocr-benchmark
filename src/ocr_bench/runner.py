@@ -162,7 +162,8 @@ def _serialize_page_metrics(pm: PageMetrics, page: GroundTruthPage, pred: PagePr
 
 
 def run(root: Path | None = None, only_categories: list[str] | None = None, verbose: bool = True,
-        ocr_version: str | None = None, model_type: str | None = None) -> dict:
+        ocr_version: str | None = None, model_type: str | None = None,
+        det_overrides: dict | None = None) -> dict:
     cats = list_categories(root)
     if only_categories:
         only_set = set(only_categories)
@@ -177,16 +178,27 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
     settings = get_settings()
     ver = ocr_version or settings.ocr_version
     mtype = model_type or settings.model_type
+    overrides = det_overrides or {}
+    box_thresh = overrides.get("det_box_thresh", settings.det_box_thresh)
+    unclip = overrides.get("det_unclip_ratio", settings.det_unclip_ratio)
+    limit_side = overrides.get("det_limit_side_len", settings.det_limit_side_len)
+    rec_batch = overrides.get("rec_batch_num", settings.rec_batch_num)
+    rec_width = overrides.get("rec_img_width", settings.rec_img_width)
     log.info("=== Benchmark start: %s %s, %d categories ===", ver, mtype, len(cats))
-    log.info("Config: preprocessing=%s, iou=%.2f, corrector=%s",
+    log.info("Config: preprocessing=%s, iou=%.2f, corrector=%s, box_thresh=%.2f, unclip=%.2f",
              settings.enable_preprocessing, settings.iou_threshold,
-             settings.enable_symspell_correction)
+             settings.enable_symspell_correction, box_thresh, unclip)
 
     engine = BenchEngine(
         enable_preprocessing=settings.enable_preprocessing,
         preproc_upscale_min_side=settings.preproc_upscale_min_side,
         ocr_version=ver,
         model_type=mtype,
+        det_box_thresh=box_thresh,
+        det_unclip_ratio=unclip,
+        det_limit_side_len=limit_side,
+        rec_batch_num=rec_batch,
+        rec_img_width=rec_width,
     )
     corrector = get_corrector()  # lazy-loads dict if enabled
 
@@ -206,9 +218,19 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
         "current": None,
     })
 
+    run_settings = {
+        "ocr_version": ver,
+        "model_type": mtype,
+        "det_box_thresh": box_thresh,
+        "det_unclip_ratio": unclip,
+        "det_limit_side_len": limit_side,
+        "rec_batch_num": rec_batch,
+        "rec_img_width": rec_width,
+    }
+
     try:
-        return _run_categories(cats, engine, corrector, settings, ocr_version,
-                                model_type, started_at, completed, overall,
+        return _run_categories(cats, engine, corrector, settings, run_settings,
+                                started_at, completed, overall,
                                 overall_start, per_cat_dir, verbose, gen)
     except _Superseded:
         log.info("Run %d superseded by a newer run; bailing without touching status", gen)
@@ -228,7 +250,7 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
         raise
 
 
-def _run_categories(cats, engine, corrector, settings, ocr_version, model_type,
+def _run_categories(cats, engine, corrector, settings, run_settings,
                     started_at, completed, overall, overall_start, per_cat_dir,
                     verbose, gen) -> dict:
     def _check_superseded():
@@ -334,8 +356,10 @@ def _run_categories(cats, engine, corrector, settings, ocr_version, model_type,
     overall_dict["total_elapsed_s"] = total_elapsed
     overall_dict["last_run"] = _now_iso()
     overall_dict["corrector_enabled"] = corrector.enabled
-    overall_dict["ocr_version"] = ocr_version or settings.ocr_version
-    overall_dict["model_type"] = model_type or settings.model_type
+    overall_dict["ocr_version"] = run_settings["ocr_version"]
+    overall_dict["model_type"] = run_settings["model_type"]
+    overall_dict["det_box_thresh"] = run_settings["det_box_thresh"]
+    overall_dict["det_unclip_ratio"] = run_settings["det_unclip_ratio"]
 
     log.info("=== Benchmark done: %d images in %.1fs, F1=%.3f CER=%.3f ===",
              overall_dict["n_images"], total_elapsed,
@@ -372,12 +396,36 @@ def _write_status(status: dict) -> None:
 
     Stamps ``updated_at`` on every write so the UI can tell a live run from a
     dead one (a crashed process leaves a stale ``running:true`` file behind).
+
+    ``os.replace`` on Windows can fail with WinError 5 when the target is briefly
+    held by an AV scanner or a reader; retry a few times before falling back.
     """
+    import os
+    import time
+
     REPORTS_ROOT.mkdir(parents=True, exist_ok=True)
     status = {**status, "updated_at": _now_iso()}
+    payload = json.dumps(status, ensure_ascii=False)
     tmp = RUN_STATUS_PATH.with_suffix(".json.tmp")
-    tmp.write_text(json.dumps(status, ensure_ascii=False), encoding="utf-8")
-    tmp.replace(RUN_STATUS_PATH)
+    tmp.write_text(payload, encoding="utf-8")
+
+    last_err: Exception | None = None
+    for attempt in range(8):
+        try:
+            os.replace(tmp, RUN_STATUS_PATH)
+            return
+        except PermissionError as e:
+            last_err = e
+            time.sleep(0.05 * (attempt + 1))
+    # ponytail: best-effort direct write if rename keeps losing the race on Windows.
+    RUN_STATUS_PATH.write_text(payload, encoding="utf-8")
+    try:
+        tmp.unlink()
+    except OSError:
+        pass
+    if last_err is not None:
+        import warnings
+        warnings.warn(f"_write_status fell back to non-atomic write: {last_err}")
 
 
 def _now_iso() -> str:
@@ -457,6 +505,8 @@ def _save_to_history(overall: dict, per_cat: list[CategorySummary]) -> None:
         "timestamp": overall["last_run"],
         "ocr_version": overall.get("ocr_version", ""),
         "model_type": overall.get("model_type", ""),
+        "det_box_thresh": overall.get("det_box_thresh", 0.5),
+        "det_unclip_ratio": overall.get("det_unclip_ratio", 1.6),
         "corrector_enabled": overall.get("corrector_enabled", False),
         "total_elapsed_s": overall.get("total_elapsed_s", 0),
         "overall": overall,
@@ -495,6 +545,8 @@ def _save_to_history(overall: dict, per_cat: list[CategorySummary]) -> None:
         "timestamp": overall["last_run"],
         "ocr_version": overall.get("ocr_version", ""),
         "model_type": overall.get("model_type", ""),
+        "det_box_thresh": overall.get("det_box_thresh", 0.5),
+        "det_unclip_ratio": overall.get("det_unclip_ratio", 1.6),
         "n_images": overall.get("n_images", 0),
         "f1": overall.get("detection_f1", 0),
         "cer": overall.get("cer_mean", 0),

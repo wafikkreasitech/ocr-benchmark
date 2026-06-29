@@ -59,6 +59,11 @@ def create_app() -> FastAPI:
     @app.post("/api/run")
     def api_run(background: BackgroundTasks, category: str | None = None,
                 ocr_version: str | None = None, model_type: str | None = None,
+                det_box_thresh: float | None = None,
+                det_unclip_ratio: float | None = None,
+                det_limit_side_len: int | None = None,
+                rec_batch_num: int | None = None,
+                rec_img_width: int | None = None,
                 force: bool = False):
         if RUN_STATUS_PATH.exists():
             try:
@@ -68,7 +73,17 @@ def create_app() -> FastAPI:
             except (json.JSONDecodeError, OSError):
                 pass
         only = [category] if category else None
-        background.add_task(run_benchmark, None, only, False, ocr_version, model_type)
+        overrides = {
+            k: v for k, v in {
+                "det_box_thresh": det_box_thresh,
+                "det_unclip_ratio": det_unclip_ratio,
+                "det_limit_side_len": det_limit_side_len,
+                "rec_batch_num": rec_batch_num,
+                "rec_img_width": rec_img_width,
+            }.items() if v is not None
+        }
+        background.add_task(run_benchmark, None, only, False,
+                            ocr_version, model_type, overrides)
         return {"ok": True, "started": True}
 
     def _read_status() -> dict:
@@ -146,6 +161,11 @@ def create_app() -> FastAPI:
             "enable_preprocessing": s.enable_preprocessing,
             "ocr_version": s.ocr_version,
             "model_type": s.model_type,
+            "det_box_thresh": s.det_box_thresh,
+            "det_unclip_ratio": s.det_unclip_ratio,
+            "det_limit_side_len": s.det_limit_side_len,
+            "rec_batch_num": s.rec_batch_num,
+            "rec_img_width": s.rec_img_width,
         }
 
     @app.get("/api/results/{category}")

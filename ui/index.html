@@ -49,6 +49,36 @@
     <div class="model-grid" id="model-grid">
       <div class="model-loading muted">loading models…</div>
     </div>
+
+    <details class="knobs" id="knobs">
+      <summary>Tuning knobs <span class="muted" id="knobs-summary">defaults</span></summary>
+      <div class="knobs-grid">
+        <label class="knob">
+          <span class="knob-label">det box_thresh <span class="knob-hint">drop weak boxes</span></span>
+          <input type="number" id="knob-box-thresh" step="0.05" min="0" max="0.9" value="0.5">
+        </label>
+        <label class="knob">
+          <span class="knob-label">det unclip_ratio <span class="knob-hint">merge nearby</span></span>
+          <input type="number" id="knob-unclip" step="0.1" min="0.5" max="3.0" value="1.6">
+        </label>
+        <label class="knob">
+          <span class="knob-label">det limit_side_len <span class="knob-hint">det input size</span></span>
+          <input type="number" id="knob-limit-side" step="32" min="256" max="2048" value="736">
+        </label>
+        <label class="knob">
+          <span class="knob-label">rec batch_num</span>
+          <input type="number" id="knob-rec-batch" step="1" min="1" max="32" value="6">
+        </label>
+        <label class="knob">
+          <span class="knob-label">rec img_width <span class="knob-hint">wider = longer lines</span></span>
+          <input type="number" id="knob-rec-width" step="32" min="64" max="1024" value="320">
+        </label>
+      </div>
+      <div class="knobs-actions">
+        <button type="button" id="knobs-reset" class="btn-ghost">Reset to .env</button>
+      </div>
+    </details>
+
     <div class="model-actions">
       <button id="btn-run" class="btn-run">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 2.5L13 8L4 13.5V2.5Z" fill="currentColor"/></svg>

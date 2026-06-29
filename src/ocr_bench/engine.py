@@ -69,20 +69,31 @@ class BenchEngine:
     """Same backend ai4db uses. Preserves polygons for IoU + CER/WER scoring."""
 
     def __init__(self, *, enable_preprocessing: bool = False, preproc_upscale_min_side: int = 800,
-                 ocr_version: str = "PP-OCRv6", model_type: str = "small") -> None:
+                 ocr_version: str = "PP-OCRv6", model_type: str = "tiny",
+                 det_box_thresh: float = 0.5, det_unclip_ratio: float = 1.6,
+                 det_limit_side_len: int = 736,
+                 rec_batch_num: int = 6, rec_img_width: int = 320) -> None:
         ver = OCRVersion(ocr_version)
         mtype = ModelType(model_type)
         params = {
             "Det.ocr_version": ver,
             "Det.model_type": mtype,
+            "Det.box_thresh": det_box_thresh,
+            "Det.unclip_ratio": det_unclip_ratio,
+            "Det.limit_side_len": det_limit_side_len,
             "Rec.ocr_version": ver,
             "Rec.model_type": mtype,
+            "Rec.rec_batch_num": rec_batch_num,
+            "Rec.rec_img_shape": [3, 48, rec_img_width],
         }
         self._ocr = RapidOCR(params=params)
         self._enable_preprocessing = enable_preprocessing
         self._preproc_upscale_min_side = preproc_upscale_min_side
         self._timeout_s = 300  # 5 min per image
-        log.info("Engine initialized: %s %s (preprocessing=%s)", ocr_version, model_type, enable_preprocessing)
+        log.info(
+            "Engine initialized: %s %s (preprocessing=%s, box_thresh=%.2f, unclip=%.2f)",
+            ocr_version, model_type, enable_preprocessing, det_box_thresh, det_unclip_ratio,
+        )
 
     def predict(self, image_path: Path) -> PagePrediction:
         t0 = time.perf_counter()

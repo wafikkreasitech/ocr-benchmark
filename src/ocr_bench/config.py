@@ -20,7 +20,18 @@ class Settings(BaseSettings):
 
     # OCR model selection
     ocr_version: str = "PP-OCRv6"      # PP-OCRv4 / PP-OCRv5 / PP-OCRv6
-    model_type: str = "small"          # tiny / small / medium (v6); mobile / server (v4/v5)
+    model_type: str = "tiny"           # tiny / small / medium (v6); mobile / server (v4/v5)
+
+    # Detection knobs — tune when det merges adjacent words into one box
+    # (e.g. "KakiGajah" instead of "Kaki Gajah"). Lower unclip_ratio → tighter
+    # boxes → adjacent words stay separate. Higher box_thresh → fewer weak boxes.
+    det_box_thresh: float = 0.5
+    det_unclip_ratio: float = 1.6
+    det_limit_side_len: int = 736
+
+    # Recognition knobs
+    rec_batch_num: int = 6
+    rec_img_width: int = 320           # height is fixed at 48 by the model
 
     # Runner
     iou_threshold: float = 0.5                    # detection match threshold

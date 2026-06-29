@@ -381,12 +381,71 @@ function drawOverlay(img) {
 let runActive = false;   // true while a run is in flight (drives button state)
 let lastRunning = false; // edge-detect run→done to refresh results once
 
+/* Tuning knobs — populated from /api/config on load. When a knob differs from
+   the server default, we send it as a query param to /api/run. */
+const KNOB_FIELDS = [
+  { id: "knob-box-thresh", param: "det_box_thresh",     float: true },
+  { id: "knob-unclip",      param: "det_unclip_ratio",   float: true },
+  { id: "knob-limit-side",  param: "det_limit_side_len", float: false },
+  { id: "knob-rec-batch",   param: "rec_batch_num",      float: false },
+  { id: "knob-rec-width",   param: "rec_img_width",      float: false },
+];
+let knobDefaults = null; // server-provided .env defaults
+
+function readKnobs() {
+  const out = {};
+  for (const f of KNOB_FIELDS) {
+    const el = document.getElementById(f.id);
+    if (!el) continue;
+    const v = f.float ? parseFloat(el.value) : parseInt(el.value, 10);
+    if (!Number.isNaN(v)) out[f.param] = v;
+  }
+  return out;
+}
+
+function applyKnobDefaults(d) {
+  knobDefaults = d;
+  const set = (id, val) => { const el = document.getElementById(id); if (el && val !== undefined && val !== null) el.value = val; };
+  set("knob-box-thresh", d.det_box_thresh);
+  set("knob-unclip",      d.det_unclip_ratio);
+  set("knob-limit-side",  d.det_limit_side_len);
+  set("knob-rec-batch",   d.rec_batch_num);
+  set("knob-rec-width",   d.rec_img_width);
+  updateKnobsSummary();
+}
+
+function updateKnobsSummary() {
+  const el = document.getElementById("knobs-summary");
+  if (!el || !knobDefaults) return;
+  const k = readKnobs();
+  const diff = KNOB_FIELDS.filter(f => k[f.param] !== knobDefaults[f.param]);
+  el.textContent = diff.length ? `${diff.length} override${diff.length > 1 ? "s" : ""}` : "defaults";
+}
+
+async function fetchConfig() {
+  try {
+    const r = await fetch("/api/config");
+    if (!r.ok) return null;
+    return await r.json();
+  } catch { return null; }
+}
+
 async function runBenchmark(force = false) {
   setStatus(force ? "restarting…" : "starting…");
   try {
     const params = new URLSearchParams();
     if (selectedModel.ocr_version) params.set("ocr_version", selectedModel.ocr_version);
     if (selectedModel.model_type) params.set("model_type", selectedModel.model_type);
+    // Send knob overrides only when they differ from server defaults — keeps
+    // run history clean when the user hasn't tweaked anything.
+    if (knobDefaults) {
+      const k = readKnobs();
+      for (const f of KNOB_FIELDS) {
+        if (k[f.param] !== knobDefaults[f.param]) {
+          params.set(f.param, String(k[f.param]));
+        }
+      }
+    }
     if (force) params.set("force", "true");
     const url = "/api/run" + (params.toString() ? "?" + params : "");
     const r = await fetch(url, { method: "POST" });
@@ -814,6 +873,16 @@ async function loadAndRender() {
 /* ─── Init ───────────────────────────────────────────────── */
 
 fetchModels().then((d) => { if (d) initModelSelector(d); });
+fetchConfig().then((d) => { if (d) applyKnobDefaults(d); });
+
+document.addEventListener("input", (e) => {
+  if (e.target.closest(".knobs")) updateKnobsSummary();
+});
+document.addEventListener("click", (e) => {
+  if (e.target && e.target.id === "knobs-reset") {
+    fetchConfig().then((d) => { if (d) applyKnobDefaults(d); });
+  }
+});
 
 $$("thead th.sortable").forEach((th) => {
   th.addEventListener("click", () => {
