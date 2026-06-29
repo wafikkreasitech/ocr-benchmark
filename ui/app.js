@@ -384,11 +384,18 @@ let lastRunning = false; // edge-detect run→done to refresh results once
 /* Tuning knobs — populated from /api/config on load. When a knob differs from
    the server default, we send it as a query param to /api/run. */
 const KNOB_FIELDS = [
-  { id: "knob-box-thresh", param: "det_box_thresh",     float: true },
-  { id: "knob-unclip",      param: "det_unclip_ratio",   float: true },
-  { id: "knob-limit-side",  param: "det_limit_side_len", float: false },
-  { id: "knob-rec-batch",   param: "rec_batch_num",      float: false },
-  { id: "knob-rec-width",   param: "rec_img_width",      float: false },
+  // Detection
+  { id: "knob-box-thresh",  param: "det_box_thresh",        float: true,  min: 0.10, max: 0.90, step: 0.05, dec: 2 },
+  { id: "knob-det-thresh",  param: "det_thresh",            float: true,  min: 0.10, max: 0.70, step: 0.05, dec: 2 },
+  { id: "knob-unclip",      param: "det_unclip_ratio",      float: true,  min: 0.80, max: 2.60, step: 0.10, dec: 2 },
+  { id: "knob-limit-side",  param: "det_limit_side_len",    float: false, min: 320,  max: 2048, step: 32,   dec: 0 },
+  // Recognition
+  { id: "knob-rec-batch",   param: "rec_batch_num",         float: false, min: 1,    max: 32,   step: 1,    dec: 0 },
+  { id: "knob-rec-width",   param: "rec_img_width",         float: false, min: 64,   max: 1024, step: 32,   dec: 0 },
+  // Pipeline / runtime
+  { id: "knob-angle-cls",   param: "use_angle_cls",         bool: true },
+  { id: "knob-preprocessing", param: "enable_preprocessing", bool: true },
+  { id: "knob-iou",         param: "iou_threshold",         float: true,  min: 0.10, max: 0.90, step: 0.05, dec: 2 },
 ];
 let knobDefaults = null; // server-provided .env defaults
 
@@ -397,8 +404,15 @@ function readKnobs() {
   for (const f of KNOB_FIELDS) {
     const el = document.getElementById(f.id);
     if (!el) continue;
-    const v = f.float ? parseFloat(el.value) : parseInt(el.value, 10);
-    if (!Number.isNaN(v)) out[f.param] = v;
+    if (f.bool) {
+      out[f.param] = el.checked;
+    } else if (f.float) {
+      const v = parseFloat(el.value);
+      if (!Number.isNaN(v)) out[f.param] = v;
+    } else {
+      const v = parseInt(el.value, 10);
+      if (!Number.isNaN(v)) out[f.param] = v;
+    }
   }
   return out;
 }
@@ -407,19 +421,191 @@ function applyKnobDefaults(d) {
   knobDefaults = d;
   const set = (id, val) => { const el = document.getElementById(id); if (el && val !== undefined && val !== null) el.value = val; };
   set("knob-box-thresh", d.det_box_thresh);
-  set("knob-unclip",      d.det_unclip_ratio);
-  set("knob-limit-side",  d.det_limit_side_len);
-  set("knob-rec-batch",   d.rec_batch_num);
-  set("knob-rec-width",   d.rec_img_width);
+  set("knob-det-thresh", d.det_thresh);
+  set("knob-unclip",     d.det_unclip_ratio);
+  set("knob-limit-side", d.det_limit_side_len);
+  set("knob-rec-batch",  d.rec_batch_num);
+  set("knob-rec-width",  d.rec_img_width);
+  set("knob-iou",        d.iou_threshold);
+  const angleEl = document.getElementById("knob-angle-cls");
+  if (angleEl) angleEl.checked = !!d.use_angle_cls;
+  const preEl = document.getElementById("knob-preprocessing");
+  if (preEl) preEl.checked = !!d.enable_preprocessing;
   updateKnobsSummary();
+  refreshKnobVisuals();
 }
 
 function updateKnobsSummary() {
   const el = document.getElementById("knobs-summary");
-  if (!el || !knobDefaults) return;
+  if (!el) return;
+  if (!knobDefaults) { el.textContent = "defaults"; el.classList.remove("has-overrides"); return; }
   const k = readKnobs();
   const diff = KNOB_FIELDS.filter(f => k[f.param] !== knobDefaults[f.param]);
-  el.textContent = diff.length ? `${diff.length} override${diff.length > 1 ? "s" : ""}` : "defaults";
+  if (diff.length === 0) {
+    el.textContent = "defaults";
+    el.classList.remove("has-overrides");
+  } else {
+    el.textContent = `${diff.length} override${diff.length > 1 ? "s" : ""}`;
+    el.classList.add("has-overrides");
+  }
+}
+
+/* Live-update knob visuals: numeric value readout, range-track fill,
+   override-highlight border, delta-from-default pill, and the config
+   preview line. Cheap — runs on every input event. */
+function refreshKnobVisuals() {
+  for (const f of KNOB_FIELDS) {
+    const el = document.getElementById(f.id);
+    if (!el) continue;
+    const card = document.querySelector(`.knob[data-knob="${f.param}"]`);
+    if (!card) continue;
+
+    const valEl = document.getElementById(`knob-val-${f.param}`);
+    const deltaEl = document.getElementById(`knob-delta-${f.param}`);
+
+    let cur;
+    let isOverridden = false;
+    if (f.bool) {
+      cur = el.checked;
+      if (valEl) valEl.textContent = cur ? "on" : "off";
+      if (knobDefaults) isOverridden = cur !== !!knobDefaults[f.param];
+      if (deltaEl) {
+        if (isOverridden) {
+          const def = !!knobDefaults[f.param] ? "on" : "off";
+          deltaEl.textContent = `was ${def}`;
+        } else {
+          deltaEl.textContent = "";
+        }
+      }
+    } else {
+      cur = f.float ? parseFloat(el.value) : parseInt(el.value, 10);
+      if (valEl && Number.isFinite(cur)) valEl.textContent = cur.toFixed(f.dec ?? 2);
+      if (el.type === "range") {
+        const min = parseFloat(el.min);
+        const max = parseFloat(el.max);
+        const pct = ((cur - min) / (max - min)) * 100;
+        el.style.setProperty("--p", `${Math.max(0, Math.min(100, pct))}%`);
+      }
+      if (knobDefaults) {
+        const def = knobDefaults[f.param];
+        isOverridden = Number.isFinite(def) && Math.abs(cur - def) > 1e-9;
+        if (deltaEl) {
+          if (isOverridden) {
+            const d = cur - def;
+            const sign = d > 0 ? "+" : "−";
+            deltaEl.textContent = `${sign}${Math.abs(d).toFixed(f.dec ?? 2)}`;
+          } else {
+            deltaEl.textContent = "";
+          }
+        }
+      }
+    }
+
+    card.classList.toggle("is-overridden", isOverridden);
+  }
+  refreshConfigPreview();
+}
+
+/* Render the effective config block (env-style lines). Override rows
+   show first and bold so the user sees what would change vs. .env. */
+function refreshConfigPreview() {
+  const body = document.getElementById("knobs-preview-body");
+  if (!body) return;
+  if (!knobDefaults) { body.textContent = "(loading defaults…)"; return; }
+  const k = readKnobs();
+  const lines = KNOB_FIELDS.map(f => {
+    const def = knobDefaults[f.param];
+    const cur = k[f.param];
+    const overridden = f.bool
+      ? cur !== def
+      : Math.abs(Number(cur) - Number(def)) > 1e-9;
+    const display = f.bool ? (cur ? "true" : "false") : cur;
+    const tag = overridden ? "★ " : "  ";
+    return `${tag}<span class="knobs-preview-key">${f.param.toUpperCase()}</span><span class="knobs-preview-eq">=</span><span class="knobs-preview-val">${display}</span>`;
+  });
+  body.innerHTML = lines.join("\n");
+}
+
+function wireKnobInputs() {
+  for (const f of KNOB_FIELDS) {
+    const el = document.getElementById(f.id);
+    if (!el) continue;
+    el.addEventListener("input", () => { refreshKnobVisuals(); updateKnobsSummary(); });
+  }
+}
+
+/* ─── Recent runs strip ─────────────────────────────────────────
+   Shows the last 5 history rows with the knobs they actually used,
+   so users can spot what changed between A/B runs without scrolling. */
+async function refreshKnobsHistory() {
+  const list = document.getElementById("knobs-history-list");
+  if (!list) return;
+  try {
+    const r = await fetch("/api/history");
+    if (!r.ok) return;
+    const data = await r.json();
+    const runs = (data.runs || []).slice(0, 5);
+    if (runs.length === 0) {
+      list.innerHTML = `<div class="knobs-history-row muted">No runs yet.</div>`;
+      return;
+    }
+    list.innerHTML = runs.map(run => {
+      const cfg = run.config || {};
+      const ml = `${run.ocr_version ?? cfg.ocr_version ?? "?"} · ${run.model_type ?? cfg.model_type ?? "?"}`;
+      const ts = fmtDateShort(run.timestamp);
+      // Show only the knobs that differ from the current server defaults —
+      // the rest are noise. Falls back to listing box_thresh + limit_side_len
+      // when we don't have defaults yet (first paint).
+      const compareAgainst = knobDefaults || {
+        det_box_thresh: cfg.det_box_thresh, det_unclip_ratio: cfg.det_unclip_ratio,
+        det_limit_side_len: cfg.det_limit_side_len, rec_batch_num: cfg.rec_batch_num,
+        rec_img_width: cfg.rec_img_width, det_thresh: cfg.det_thresh,
+        use_angle_cls: cfg.use_angle_cls, enable_preprocessing: cfg.enable_preprocessing,
+        iou_threshold: cfg.iou_threshold,
+      };
+      const interesting = [];
+      for (const [k, v] of Object.entries(cfg)) {
+        if (["ocr_version", "model_type"].includes(k)) continue;
+        if (compareAgainst[k] !== v && v !== undefined && v !== null) {
+          const display = typeof v === "boolean" ? (v ? "on" : "off") : v;
+          interesting.push(`<span class="knobs-history-delta">${k}=<strong>${display}</strong></span>`);
+        }
+      }
+      const deltas = interesting.length
+        ? `<span class="knobs-history-deltas">${interesting.slice(0, 4).join("")}${interesting.length > 4 ? `<span class="knobs-history-delta">+${interesting.length - 4}</span>` : ""}</span>`
+        : `<span class="knobs-history-delta muted">defaults</span>`;
+      return `<div class="knobs-history-row" data-run-id="${run.id}">
+        <span class="knobs-history-time">${ts}</span>
+        <span class="knobs-history-model">${ml}</span>
+        ${deltas}
+      </div>`;
+    }).join("");
+    // Click a recent run row → load those knob values into the form.
+    list.querySelectorAll(".knobs-history-row[data-run-id]").forEach(row => {
+      row.addEventListener("click", async () => {
+        const id = row.dataset.runId;
+        try {
+          const r = await fetch(`/api/history/${encodeURIComponent(id)}`);
+          if (!r.ok) return;
+          const run = await r.json();
+          const cfg = run.config || {};
+          const set = (id, val) => { const el = document.getElementById(id); if (el && val !== undefined && val !== null) el.value = val; };
+          const setBool = (id, val) => { const el = document.getElementById(id); if (el && val !== undefined && val !== null) el.checked = !!val; };
+          set("knob-box-thresh", cfg.det_box_thresh);
+          set("knob-det-thresh", cfg.det_thresh);
+          set("knob-unclip", cfg.det_unclip_ratio);
+          set("knob-limit-side", cfg.det_limit_side_len);
+          set("knob-rec-batch", cfg.rec_batch_num);
+          set("knob-rec-width", cfg.rec_img_width);
+          set("knob-iou", cfg.iou_threshold);
+          setBool("knob-angle-cls", cfg.use_angle_cls);
+          setBool("knob-preprocessing", cfg.enable_preprocessing);
+          refreshKnobVisuals();
+          updateKnobsSummary();
+        } catch {}
+      });
+    });
+  } catch {}
 }
 
 async function fetchConfig() {
@@ -516,6 +702,8 @@ function handleProgress(p) {
       $("#progress-panel").classList.add("hidden");
       setStatus("done");
       loadAndRender();
+      loadHistory();
+      refreshKnobsHistory();
     } else if (runActive) {
       $("#progress-panel").classList.add("hidden");
     }
@@ -731,8 +919,12 @@ function updateCompareBtn() {
 // Old history rows store ocr_version/model_type at the top level; new rows
 // nest them under ``config``. Read both shapes so nothing renders "?".
 function modelLabel(run) {
-  const v = run.ocr_version ?? run.config?.ocr_version ?? null;
-  const t = run.model_type ?? run.config?.model_type ?? null;
+  // Run files come in three flavors: top-level (old), nested config (recent
+  // runs with overrides), and overall (always). Try them all.
+  const o = run.overall || {};
+  const cfg = run.config || {};
+  const v = run.ocr_version ?? cfg.ocr_version ?? o.ocr_version ?? null;
+  const t = run.model_type ?? cfg.model_type ?? o.model_type ?? null;
   return `${v || "?"} · ${t || "?"}`;
 }
 
@@ -970,3 +1162,5 @@ $("#btn-run-detail-close").addEventListener("click", () => {
 loadAndRender();
 loadHistory();
 subscribeProgress();  // always-on: reflects any background run, survives refresh
+wireKnobInputs();
+refreshKnobsHistory();

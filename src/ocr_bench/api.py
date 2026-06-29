@@ -66,6 +66,12 @@ def create_app() -> FastAPI:
                 use_angle_cls: bool | None = None,
                 rec_batch_num: int | None = None,
                 rec_img_width: int | None = None,
+                enable_preprocessing: bool | None = None,
+                iou_threshold: float | None = None,
+                enable_symspell_correction: bool | None = None,
+                enable_word_segmentation: bool | None = None,
+                symspell_max_edit_distance: int | None = None,
+                kbbi_top_n: int | None = None,
                 force: bool = False):
         if RUN_STATUS_PATH.exists():
             try:
@@ -84,6 +90,12 @@ def create_app() -> FastAPI:
                 "use_angle_cls": use_angle_cls,
                 "rec_batch_num": rec_batch_num,
                 "rec_img_width": rec_img_width,
+                "enable_preprocessing": enable_preprocessing,
+                "iou_threshold": iou_threshold,
+                "enable_symspell_correction": enable_symspell_correction,
+                "enable_word_segmentation": enable_word_segmentation,
+                "symspell_max_edit_distance": symspell_max_edit_distance,
+                "kbbi_top_n": kbbi_top_n,
             }.items() if v is not None
         }
         background.add_task(run_benchmark, None, only, False,
@@ -162,6 +174,7 @@ def create_app() -> FastAPI:
         c = get_corrector()
         return {
             "enable_symspell_correction": s.enable_symspell_correction,
+            "enable_word_segmentation": s.enable_word_segmentation,
             "symspell_max_edit_distance": s.symspell_max_edit_distance,
             "kbbi_top_n": s.kbbi_top_n,
             "kbbi_loaded": c._loaded,
@@ -260,7 +273,15 @@ def create_app() -> FastAPI:
         path = HISTORY_ROOT / f"{safe}.json"
         if not path.exists():
             raise HTTPException(404, f"run not found: {run_id}")
-        return JSONResponse(json.loads(path.read_text(encoding="utf-8")))
+        data = json.loads(path.read_text(encoding="utf-8"))
+        # Backfill: per-run files written without top-level ocr_version/model_type.
+        cfg = data.get("config") or {}
+        ov = data.get("overall") or {}
+        if not data.get("ocr_version"):
+            data["ocr_version"] = cfg.get("ocr_version") or ov.get("ocr_version") or ""
+        if not data.get("model_type"):
+            data["model_type"] = cfg.get("model_type") or ov.get("model_type") or ""
+        return JSONResponse(data)
 
     @app.get("/api/image/{category}/{filename}")
     def api_image(category: str, filename: str):

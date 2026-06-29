@@ -50,34 +50,266 @@
       <div class="model-loading muted">loading models…</div>
     </div>
 
-    <details class="knobs" id="knobs">
-      <summary>Tuning knobs <span class="muted" id="knobs-summary">defaults</span></summary>
-      <div class="knobs-grid">
-        <label class="knob">
-          <span class="knob-label">det box_thresh <span class="knob-hint">drop weak boxes</span></span>
-          <input type="number" id="knob-box-thresh" step="0.05" min="0" max="0.9" value="0.5">
-        </label>
-        <label class="knob">
-          <span class="knob-label">det unclip_ratio <span class="knob-hint">merge nearby</span></span>
-          <input type="number" id="knob-unclip" step="0.1" min="0.5" max="3.0" value="1.6">
-        </label>
-        <label class="knob">
-          <span class="knob-label">det limit_side_len <span class="knob-hint">det input size</span></span>
-          <input type="number" id="knob-limit-side" step="32" min="256" max="2048" value="736">
-        </label>
-        <label class="knob">
-          <span class="knob-label">rec batch_num</span>
-          <input type="number" id="knob-rec-batch" step="1" min="1" max="32" value="6">
-        </label>
-        <label class="knob">
-          <span class="knob-label">rec img_width <span class="knob-hint">wider = longer lines</span></span>
-          <input type="number" id="knob-rec-width" step="32" min="64" max="1024" value="320">
-        </label>
+    <section class="knobs" id="knobs" open>
+      <header class="knobs-head">
+        <div class="knobs-title-block">
+          <div class="knobs-title">
+            <span class="knobs-title-meta">9 parameters · 11 categories</span>
+          </div>
+          <p class="knobs-sub">Edit any value — overrides persist into run history so each run remembers what produced its score.</p>
+        </div>
+        <div class="knobs-head-right">
+          <span id="knobs-summary" class="knobs-summary">defaults</span>
+          <button type="button" id="knobs-reset" class="btn-ghost">Reset to .env</button>
+        </div>
+      </header>
+
+      <div class="knob-cards">
+        <!-- Card 01 — Detection -->
+        <article class="knob-card knob-card-detection">
+          <header class="knob-card-head">
+            <div class="knob-card-mark">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+                <circle cx="11" cy="11" r="9" stroke="currentColor" stroke-width="1.4" opacity="0.4"/>
+                <circle cx="11" cy="11" r="5.5" stroke="currentColor" stroke-width="1.4" opacity="0.7"/>
+                <circle cx="11" cy="11" r="2" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="knob-card-title-block">
+              <span class="knob-card-index">CARD 01</span>
+              <h4 class="knob-card-title">Detection</h4>
+            </div>
+            <span class="knob-card-tally">4 parameters</span>
+          </header>
+          <div class="knob-card-body knob-card-2x2">
+            <div class="knob knob-range" data-knob="det_box_thresh">
+              <div class="knob-row">
+                <span class="knob-name">box_thresh</span>
+                <span class="knob-value-wrap">
+                  <span class="knob-delta" id="knob-delta-det_box_thresh"></span>
+                  <span class="knob-value" id="knob-val-det_box_thresh">0.50</span>
+                </span>
+              </div>
+              <div class="knob-track-wrap">
+                <input type="range" id="knob-box-thresh" min="0.10" max="0.90" step="0.05" value="0.50">
+              </div>
+              <div class="knob-ticks"><span>0.1</span><span>0.5</span><span>0.9</span></div>
+              <div class="knob-meta">
+                <span class="knob-affects">affects</span>
+                <span class="chip chip-card">CARDS</span>
+                <span class="chip chip-whiteboard">WHITEBOARD</span>
+              </div>
+              <div class="knob-hint">higher → fewer weak boxes</div>
+            </div>
+
+            <div class="knob knob-range" data-knob="det_thresh">
+              <div class="knob-row">
+                <span class="knob-name">thresh</span>
+                <span class="knob-value-wrap">
+                  <span class="knob-delta" id="knob-delta-det_thresh"></span>
+                  <span class="knob-value" id="knob-val-det_thresh">0.30</span>
+                </span>
+              </div>
+              <div class="knob-track-wrap">
+                <input type="range" id="knob-det-thresh" min="0.10" max="0.70" step="0.05" value="0.30">
+              </div>
+              <div class="knob-ticks"><span>0.1</span><span>0.4</span><span>0.7</span></div>
+              <div class="knob-meta">
+                <span class="knob-affects">affects</span>
+                <span class="chip chip-card">CARDS</span>
+                <span class="chip chip-whiteboard">WHITEBOARD</span>
+              </div>
+              <div class="knob-hint">binarization inside det model</div>
+            </div>
+
+            <div class="knob knob-range" data-knob="det_unclip_ratio">
+              <div class="knob-row">
+                <span class="knob-name">unclip_ratio</span>
+                <span class="knob-value-wrap">
+                  <span class="knob-delta" id="knob-delta-det_unclip_ratio"></span>
+                  <span class="knob-value" id="knob-val-det_unclip_ratio">1.60</span>
+                </span>
+              </div>
+              <div class="knob-track-wrap">
+                <input type="range" id="knob-unclip" min="0.8" max="2.6" step="0.10" value="1.60">
+              </div>
+              <div class="knob-ticks"><span>0.8</span><span>1.6</span><span>2.6</span></div>
+              <div class="knob-meta">
+                <span class="knob-affects">affects</span>
+                <span class="chip chip-bills">BILLS</span>
+                <span class="chip chip-trade">TRADE</span>
+              </div>
+              <div class="knob-hint">lower → fewer merged words</div>
+            </div>
+
+            <div class="knob knob-range" data-knob="det_limit_side_len">
+              <div class="knob-row">
+                <span class="knob-name">limit_side_len</span>
+                <span class="knob-value-wrap">
+                  <span class="knob-delta" id="knob-delta-det_limit_side_len"></span>
+                  <span class="knob-value" id="knob-val-det_limit_side_len">736</span>
+                </span>
+              </div>
+              <div class="knob-track-wrap">
+                <input type="range" id="knob-limit-side" min="320" max="2048" step="32" value="736">
+              </div>
+              <div class="knob-ticks"><span>320</span><span>1024</span><span>2048</span></div>
+              <div class="knob-meta">
+                <span class="knob-affects">affects</span>
+                <span class="chip chip-bills">BILLS</span>
+                <span class="chip chip-trade">TRADE</span>
+              </div>
+              <div class="knob-hint">higher → sharper small text</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 02 — Recognition -->
+        <article class="knob-card knob-card-recognition">
+          <header class="knob-card-head">
+            <div class="knob-card-mark">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+                <line x1="3" y1="6" x2="19" y2="6" stroke="currentColor" stroke-width="1.6" opacity="0.5"/>
+                <line x1="3" y1="11" x2="19" y2="11" stroke="currentColor" stroke-width="1.6" opacity="0.85"/>
+                <line x1="3" y1="16" x2="19" y2="16" stroke="currentColor" stroke-width="1.6"/>
+              </svg>
+            </div>
+            <div class="knob-card-title-block">
+              <span class="knob-card-index">CARD 02</span>
+              <h4 class="knob-card-title">Recognition</h4>
+            </div>
+            <span class="knob-card-tally">2 parameters</span>
+          </header>
+          <div class="knob-card-body knob-card-1x2">
+            <div class="knob knob-num" data-knob="rec_batch_num">
+              <div class="knob-row">
+                <span class="knob-name">batch_num</span>
+                <span class="knob-value-wrap">
+                  <span class="knob-delta" id="knob-delta-rec_batch_num"></span>
+                  <span class="knob-value" id="knob-val-rec_batch_num">6</span>
+                </span>
+              </div>
+              <input type="number" id="knob-rec-batch" step="1" min="1" max="32" value="6">
+              <div class="knob-meta">
+                <span class="knob-affects">affects</span>
+                <span class="chip chip-throughput">THROUGHPUT</span>
+              </div>
+              <div class="knob-hint">higher = faster, more VRAM</div>
+            </div>
+
+            <div class="knob knob-num" data-knob="rec_img_width">
+              <div class="knob-row">
+                <span class="knob-name">img_width</span>
+                <span class="knob-value-wrap">
+                  <span class="knob-delta" id="knob-delta-rec_img_width"></span>
+                  <span class="knob-value" id="knob-val-rec_img_width">320</span>
+                </span>
+              </div>
+              <input type="number" id="knob-rec-width" step="32" min="64" max="1024" value="320">
+              <div class="knob-meta">
+                <span class="knob-affects">affects</span>
+                <span class="chip chip-papers">PAPERS</span>
+                <span class="chip chip-newspaper">NEWSPAPERS</span>
+              </div>
+              <div class="knob-hint">wider = longer lines</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 03 — Pipeline -->
+        <article class="knob-card knob-card-pipeline">
+          <header class="knob-card-head">
+            <div class="knob-card-mark">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+                <rect x="3" y="9" width="6" height="4" rx="1" stroke="currentColor" stroke-width="1.4"/>
+                <rect x="13" y="9" width="6" height="4" rx="1" stroke="currentColor" stroke-width="1.4"/>
+                <line x1="9" y1="11" x2="13" y2="11" stroke="currentColor" stroke-width="1.4" opacity="0.6"/>
+              </svg>
+            </div>
+            <div class="knob-card-title-block">
+              <span class="knob-card-index">CARD 03</span>
+              <h4 class="knob-card-title">Pipeline</h4>
+            </div>
+            <span class="knob-card-tally">3 parameters</span>
+          </header>
+          <div class="knob-card-body knob-card-mixed">
+            <div class="knob knob-toggle" data-knob="use_angle_cls">
+              <div class="knob-row">
+                <span class="knob-name">angle_cls</span>
+                <span class="knob-value-wrap">
+                  <span class="knob-delta" id="knob-delta-use_angle_cls"></span>
+                  <span class="knob-value" id="knob-val-use_angle_cls">off</span>
+                </span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="knob-angle-cls">
+                <span class="switch-slider"></span>
+              </label>
+              <div class="knob-meta">
+                <span class="knob-affects">affects</span>
+                <span class="chip chip-card">CARDS</span>
+                <span class="chip chip-notes">NOTES</span>
+              </div>
+              <div class="knob-hint">straightens rotated text</div>
+            </div>
+
+            <div class="knob knob-toggle" data-knob="enable_preprocessing">
+              <div class="knob-row">
+                <span class="knob-name">preprocessing</span>
+                <span class="knob-value-wrap">
+                  <span class="knob-delta" id="knob-delta-enable_preprocessing"></span>
+                  <span class="knob-value" id="knob-val-enable_preprocessing">off</span>
+                </span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="knob-preprocessing">
+                <span class="switch-slider"></span>
+              </label>
+              <div class="knob-meta">
+                <span class="knob-affects">affects</span>
+                <span class="chip chip-whiteboard">WHITEBOARD</span>
+                <span class="chip chip-notes">NOTES</span>
+              </div>
+              <div class="knob-hint">grayscale + CLAHE + 2× upscale</div>
+            </div>
+
+            <div class="knob knob-range" data-knob="iou_threshold">
+              <div class="knob-row">
+                <span class="knob-name">iou_threshold</span>
+                <span class="knob-value-wrap">
+                  <span class="knob-delta" id="knob-delta-iou_threshold"></span>
+                  <span class="knob-value" id="knob-val-iou_threshold">0.50</span>
+                </span>
+              </div>
+              <div class="knob-track-wrap">
+                <input type="range" id="knob-iou" min="0.10" max="0.90" step="0.05" value="0.50">
+              </div>
+              <div class="knob-ticks"><span>0.1</span><span>0.5</span><span>0.9</span></div>
+              <div class="knob-meta">
+                <span class="knob-affects">affects</span>
+                <span class="chip chip-scoring">SCORING</span>
+              </div>
+              <div class="knob-hint">det-vs-GT match threshold</div>
+            </div>
+          </div>
+        </article>
       </div>
-      <div class="knobs-actions">
-        <button type="button" id="knobs-reset" class="btn-ghost">Reset to .env</button>
+
+      <!-- Live config preview — env-style lines that will be sent to /api/run. -->
+      <div class="knobs-preview" id="knobs-preview">
+        <div class="knobs-preview-label">effective config (next run)</div>
+        <div id="knobs-preview-body"></div>
       </div>
-    </details>
+
+      <!-- Recent runs ledger -->
+      <div class="knobs-history" id="knobs-history">
+        <div class="knobs-history-head">
+          <span class="knobs-history-title">Recent runs</span>
+          <span class="knobs-history-hint">click a row to load its knobs back</span>
+        </div>
+        <div class="knobs-history-list" id="knobs-history-list"></div>
+      </div>
+    </section>
 
     <div class="model-actions">
       <button id="btn-run" class="btn-run">

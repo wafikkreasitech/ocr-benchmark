@@ -249,11 +249,620 @@ body {
 .status { color: var(--text-muted); font-size: 12px; font-family: var(--mono); }
 
 /* ─── Tuning Knobs (det / rec) ───────────────────────────── */
+/* ─── Knobs panel (engineering logbook) ─────────────────────
+   Information-dense, monospace-led, tactile. Designed to be read
+   like a spec sheet — category chips, delta-from-default, recent
+   runs ledger at the bottom. */
 .knobs {
-  margin-top: 14px;
+  position: relative;
+  margin-top: 18px;
   border-top: 1px solid var(--border);
-  padding-top: 12px;
+  padding: 22px 22px 16px;
+  background:
+    /* Faint horizontal rule texture — like a notebook ruling. */
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 27px,
+      rgba(154, 144, 130, 0.045) 27px,
+      rgba(154, 144, 130, 0.045) 28px
+    ),
+    var(--surface-alt);
+  border-radius: var(--radius-sm);
+  margin-left: -6px;
+  margin-right: -6px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
 }
+/* Eyebrow index mark — anchors the section visually. */
+.knobs::before {
+  content: "§02";
+  position: absolute;
+  top: -8px;
+  left: 16px;
+  background: var(--surface-alt);
+  padding: 0 8px;
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+}
+.knobs-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--border);
+}
+.knobs-title-block { display: flex; flex-direction: column; gap: 3px; }
+.knobs-title {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.005em;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.knobs-title::before {
+  content: "Tuning knobs";
+}
+.knobs-title-meta {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-weight: 400;
+  font-family: var(--mono);
+  letter-spacing: 0;
+}
+.knobs-sub {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-family: var(--mono);
+  font-style: italic;
+  max-width: 480px;
+  line-height: 1.5;
+}
+.knobs-head-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.knobs-summary {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  background: var(--surface);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.knobs-summary.has-overrides {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-light);
+  font-weight: 600;
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+/* ─── Three control cards — instrument-panel aesthetic ─────────
+   Detection (4 knobs), Recognition (2), Pipeline (3). Each card
+   has a glyph mark, a CARD 0X index, a tally, and an internal
+   layout tuned to the knob count. */
+.knob-cards {
+  display: grid;
+  grid-template-columns: 1.7fr 1fr 1fr;
+  gap: 14px;
+}
+@media (max-width: 920px) {
+  .knob-cards { grid-template-columns: 1fr; }
+}
+.knob-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 160ms, box-shadow 160ms;
+}
+.knob-card::before {
+  /* Top accent trim — colored stripe that names the card. */
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--card-accent, var(--accent));
+}
+.knob-card-detection    { --card-accent: #5a7a6a; --card-mark: #5a7a6a; }
+.knob-card-recognition  { --card-accent: #b8741a; --card-mark: #b8741a; }
+.knob-card-pipeline     { --card-accent: #6a4a8a; --card-mark: #6a4a8a; }
+.knob-card:hover {
+  border-color: var(--card-accent);
+  box-shadow: 0 1px 0 var(--card-accent), 0 4px 12px rgba(0,0,0,0.04);
+}
+.knob-card-head {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px 10px;
+  border-bottom: 1px dashed var(--border-light);
+}
+.knob-card-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-xs);
+  background: color-mix(in srgb, var(--card-mark) 10%, var(--surface));
+  color: var(--card-mark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid color-mix(in srgb, var(--card-mark) 25%, transparent);
+}
+.knob-card-title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+.knob-card-index {
+  font-family: var(--mono);
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--card-accent);
+  text-transform: uppercase;
+}
+.knob-card-title {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.005em;
+  margin: 0;
+}
+.knob-card-tally {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--text-muted);
+  background: var(--bg-warm);
+  padding: 3px 7px;
+  border-radius: 3px;
+  border: 1px solid var(--border-light);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+.knob-card-body {
+  padding: 8px;
+  display: grid;
+  gap: 1px;
+  background: var(--border-light);
+}
+.knob-card-2x2 {
+  grid-template-columns: 1fr 1fr;
+}
+.knob-card-1x2 {
+  grid-template-columns: 1fr 1fr;
+}
+.knob-card-mixed {
+  grid-template-columns: 1fr;
+}
+/* On narrower cards (recognition), collapse to single column. */
+@media (max-width: 1200px) {
+  .knob-card-recognition .knob-card-body { grid-template-columns: 1fr; }
+}
+.knob-card-1x2 .knob, .knob-card-mixed .knob {
+  /* Internal knob cell inside a card — softer borders, no left tape. */
+  background: var(--surface);
+  border-radius: 0;
+  padding: 10px 12px 12px;
+  border: none;
+  position: relative;
+}
+.knob-card-1x2 .knob::before, .knob-card-mixed .knob::before { display: none; }
+.knob-card-1x2 .knob.is-overridden, .knob-card-mixed .knob.is-overridden {
+  background: var(--accent-light);
+}
+.knob {
+  background: var(--surface);
+  padding: 12px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  transition: background 160ms;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xs);
+  margin: 0;
+}
+/* When nested inside a knob-card-body (the 1px gap grid), drop the outer
+   border so the cells tile seamlessly. The card itself carries the chrome. */
+.knob-card-body > .knob {
+  border: none;
+  border-radius: 0;
+}
+/* Left "tape" indicator — feels like a tab marker, very subtle when default. */
+.knob::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: transparent;
+  border-radius: 0 2px 2px 0;
+  transition: background 160ms;
+}
+.knob.is-overridden::before { background: var(--accent); }
+.knob.is-overridden { background: linear-gradient(90deg, var(--accent-light) 0%, var(--surface) 12%); }
+.knob:hover { background: var(--surface-alt); }
+.knob.is-overridden:hover { background: linear-gradient(90deg, var(--accent-light) 0%, var(--surface-alt) 12%); }
+/* When nested in a card-body grid, the gradient is the whole row — let it
+   fill the cell instead of hugging the left edge. */
+.knob-card-body > .knob.is-overridden {
+  background: var(--accent-light);
+}
+.knob-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+.knob-name {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: -0.005em;
+}
+.knob-value-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.knob-value {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+.knob.is-overridden .knob-value { color: var(--accent); }
+.knob-delta {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  color: var(--accent);
+  font-weight: 500;
+  background: var(--accent-light);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-variant-numeric: tabular-nums;
+}
+/* Range slider — refined, monochrome with center-tick on the thumb */
+.knob-track-wrap {
+  position: relative;
+  padding: 4px 0;
+}
+.knob input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 18px; /* Larger hit area */
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+/* Visible track (custom, behind the input) */
+.knob-track-wrap::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  top: 50%;
+  height: 3px;
+  transform: translateY(-50%);
+  background: linear-gradient(
+    to right,
+    var(--accent) 0%,
+    var(--accent) var(--p, 50%),
+    var(--border) var(--p, 50%),
+    var(--border) 100%
+  );
+  border-radius: 99px;
+  z-index: 1;
+}
+.knob input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--accent);
+  cursor: grab;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  transition: transform 100ms, box-shadow 100ms;
+  margin-top: -7px; /* center thumb on the 18px hit area */
+}
+.knob input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.12);
+  box-shadow: 0 2px 5px rgba(90,122,106,0.25);
+}
+.knob input[type="range"]::-webkit-slider-thumb:active { cursor: grabbing; transform: scale(1.18); }
+.knob input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--accent);
+  cursor: grab;
+}
+.knob input[type="range"]::-moz-range-track { background: transparent; height: 3px; }
+.knob-ticks {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--text-muted);
+  margin-top: 2px;
+  padding: 0 4px;
+  letter-spacing: 0.02em;
+}
+.knob input[type="number"] {
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  background: var(--surface-alt);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 12.5px;
+  font-weight: 500;
+  width: 100%;
+  transition: border-color 120ms, background 120ms;
+}
+.knob input[type="number"]:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: var(--surface);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+/* Toggle switch — refined with on/off labels */
+.switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  cursor: pointer;
+}
+.switch input { opacity: 0; width: 0; height: 0; position: absolute; }
+.switch-slider {
+  position: relative;
+  width: 34px;
+  height: 18px;
+  background: var(--border);
+  border-radius: 99px;
+  transition: background 200ms;
+  flex-shrink: 0;
+}
+.switch-slider::before {
+  content: "";
+  position: absolute;
+  height: 12px;
+  width: 12px;
+  left: 3px;
+  top: 3px;
+  background: var(--surface);
+  border-radius: 50%;
+  transition: transform 200ms cubic-bezier(0.4, 0.0, 0.2, 1);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+.switch input:checked + .switch-slider { background: var(--accent); }
+.switch input:checked + .switch-slider::before { transform: translateX(16px); }
+.switch input:focus-visible + .switch-slider {
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+/* Category chips — refined, monochromatic per category for cohesion */
+.knob-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
+  padding-top: 6px;
+  border-top: 1px dotted var(--border-light);
+}
+.knob-affects {
+  font-family: var(--mono);
+  color: var(--text-muted);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  margin-right: 2px;
+}
+.chip {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 2px 7px;
+  border-radius: 3px;
+  border: 1px solid;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.chip-card       { color: #5a3e7a; border-color: #c8b4e0; background: #efe6f7; }
+.chip-bills      { color: #8a4f0e; border-color: #e8c690; background: #f7ecdc; }
+.chip-trade      { color: #6a4218; border-color: #dcc098; background: #f2e4cc; }
+.chip-whiteboard { color: #1a4a6a; border-color: #a8c8dc; background: #dfe9f2; }
+.chip-notes      { color: #3e5e2e; border-color: #b0c898; background: #e4ecdc; }
+.chip-papers     { color: #4a4a4a; border-color: #c0c0c0; background: #ececec; }
+.chip-newspaper  { color: #5a2e2e; border-color: #d4a8a8; background: #f0dcdc; }
+.chip-all        { color: var(--text-muted); border-color: var(--border); background: var(--bg-warm); }
+.chip-throughput { color: #4a3e5a; border-color: #b8a8c8; background: #e8e2ee; }
+.chip-scoring    { color: #3e5a5a; border-color: #a8c0c0; background: #dce8e8; }
+.knob-hint {
+  font-family: var(--mono);
+  color: var(--text-muted);
+  font-size: 10px;
+  font-style: italic;
+  letter-spacing: 0;
+  margin-top: 2px;
+  padding-left: 0;
+}
+/* When .knob-hint is a flex child of .knob-meta, push it to the right. */
+.knob-meta .knob-hint { margin-left: auto; margin-top: 0; }
+/* Recent-runs ledger */
+.knobs-history {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--border);
+}
+.knobs-history-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+.knobs-history-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+.knobs-history-hint {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+.knobs-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.knobs-history-row {
+  display: grid;
+  grid-template-columns: 92px 180px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  transition: border-color 120ms, background 120ms;
+  font-family: var(--mono);
+  font-size: 10.5px;
+}
+.knobs-history-row:hover {
+  background: var(--accent-light);
+  border-color: var(--accent);
+}
+.knobs-history-time {
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+.knobs-history-model {
+  color: var(--text);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.knobs-history-model::before {
+  content: "";
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+.knobs-history-deltas {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.knobs-history-delta {
+  font-size: 9.5px;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-family: var(--mono);
+  letter-spacing: 0.01em;
+}
+.knobs-history-delta strong {
+  color: var(--accent);
+  margin-left: 3px;
+  font-weight: 600;
+}
+.knobs-history-load {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0;
+  transition: opacity 120ms;
+}
+.knobs-history-row:hover .knobs-history-load { opacity: 1; }
+/* Live config preview — shows the env-style line that will be sent */
+.knobs-preview {
+  margin-top: 14px;
+  padding: 10px 12px;
+  background: var(--bg);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xs);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-height: 120px;
+  overflow-y: auto;
+}
+.knobs-preview-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.knobs-preview-label::before {
+  content: "$";
+  color: var(--accent);
+  font-weight: 600;
+}
+.knobs-preview-key { color: var(--accent); font-weight: 600; }
+.knobs-preview-eq { color: var(--text-muted); }
+.knobs-preview-val { color: var(--text); }
+.knobs-preview-default { color: var(--text-muted); opacity: 0.7; }
+.knobs-preview-override { color: var(--accent); }
+.knobs-preview-override .knobs-preview-val { color: var(--accent); font-weight: 600; }
+/* Compatibility with legacy details element (collapsed state) */
 .knobs > summary {
   cursor: pointer;
   font-size: 13px;
@@ -273,58 +882,22 @@ body {
 }
 .knobs[open] > summary::before { transform: rotate(90deg); }
 .knobs > summary::-webkit-details-marker { display: none; }
-.knobs-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 10px 14px;
-  margin-top: 12px;
-}
-.knob {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.knob-label {
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--text-muted);
-  font-family: var(--mono);
-  display: flex;
-  justify-content: space-between;
-  gap: 6px;
-}
-.knob-hint { font-weight: 400; color: var(--text-muted); opacity: 0.7; }
-.knob input[type="number"] {
-  padding: 6px 8px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--mono);
-  font-size: 13px;
-  width: 100%;
-  box-sizing: border-box;
-}
-.knob input[type="number"]:focus {
-  outline: none;
-  border-color: var(--accent);
-}
-.knobs-actions {
-  margin-top: 10px;
-  display: flex;
-  justify-content: flex-end;
-}
 .btn-ghost {
   background: transparent;
   border: 1px solid var(--border);
   color: var(--text-muted);
-  font-size: 12px;
-  padding: 4px 10px;
-  border-radius: 6px;
+  font-size: 11px;
+  padding: 5px 10px;
+  border-radius: var(--radius-xs);
   cursor: pointer;
   font-family: var(--mono);
+  transition: color 120ms, border-color 120ms, background 120ms;
 }
-.btn-ghost:hover { color: var(--text); border-color: var(--accent); }
+.btn-ghost:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-light);
+}
 
 /* ─── Overview Row (ring + metrics) ──────────────────────── */
 .overview-row {

@@ -102,9 +102,10 @@ def _evaluate_page(page: GroundTruthPage, pred: PagePrediction) -> PageMetrics:
     )
 
 
-def _serialize_page_metrics(pm: PageMetrics, page: GroundTruthPage, pred: PagePrediction) -> dict:
+def _serialize_page_metrics(pm: PageMetrics, page: GroundTruthPage, pred: PagePrediction,
+                            iou_threshold: float = 0.5) -> dict:
     """Per-image JSON: includes overlay data (polygons) for the UI."""
-    matches, unmatched_gt, unmatched_pr = match(page.lines, pred.lines)
+    matches, unmatched_gt, unmatched_pr = match(page.lines, pred.lines, iou_threshold=iou_threshold)
 
     corrector = get_corrector()
     enabled = corrector.enabled
@@ -186,13 +187,21 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
     use_angle_cls = overrides.get("use_angle_cls", settings.use_angle_cls)
     rec_batch = overrides.get("rec_batch_num", settings.rec_batch_num)
     rec_width = overrides.get("rec_img_width", settings.rec_img_width)
+    # Pre / post overrides — previously hardcoded from settings, now overridable
+    # per-run so the UI toggles / sliders actually take effect.
+    enable_preprocessing = overrides.get("enable_preprocessing", settings.enable_preprocessing)
+    iou_threshold = overrides.get("iou_threshold", settings.iou_threshold)
+    enable_symspell_correction = overrides.get("enable_symspell_correction", settings.enable_symspell_correction)
+    enable_word_segmentation = overrides.get("enable_word_segmentation", settings.enable_word_segmentation)
+    symspell_max_edit_distance = overrides.get("symspell_max_edit_distance", settings.symspell_max_edit_distance)
+    kbbi_top_n = overrides.get("kbbi_top_n", settings.kbbi_top_n)
     log.info("=== Benchmark start: %s %s, %d categories ===", ver, mtype, len(cats))
     log.info("Config: preprocessing=%s, iou=%.2f, corrector=%s, box_thresh=%.2f, unclip=%.2f",
-             settings.enable_preprocessing, settings.iou_threshold,
-             settings.enable_symspell_correction, box_thresh, unclip)
+             enable_preprocessing, iou_threshold,
+             enable_symspell_correction, box_thresh, unclip)
 
     engine = BenchEngine(
-        enable_preprocessing=settings.enable_preprocessing,
+        enable_preprocessing=enable_preprocessing,
         preproc_upscale_min_side=settings.preproc_upscale_min_side,
         ocr_version=ver,
         model_type=mtype,
@@ -204,7 +213,26 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
         rec_batch_num=rec_batch,
         rec_img_width=rec_width,
     )
-    corrector = get_corrector()  # lazy-loads dict if enabled
+    # Build a per-run corrector when any override differs from .env so the UI
+    # toggles/sliders actually take effect. The singleton is reused when
+    # nothing was overridden.
+    from .corrector import Corrector
+    corrector_overridden = (
+        enable_symspell_correction != settings.enable_symspell_correction
+        or enable_word_segmentation != settings.enable_word_segmentation
+        or symspell_max_edit_distance != settings.symspell_max_edit_distance
+        or kbbi_top_n != settings.kbbi_top_n
+    )
+    if corrector_overridden:
+        run_settings_obj = settings.model_copy(update={
+            "enable_symspell_correction": enable_symspell_correction,
+            "enable_word_segmentation": enable_word_segmentation,
+            "symspell_max_edit_distance": symspell_max_edit_distance,
+            "kbbi_top_n": kbbi_top_n,
+        })
+        corrector = Corrector(run_settings_obj)
+    else:
+        corrector = get_corrector()  # reuse singleton — no override differs
 
     overall = []
     overall_start = time.perf_counter()
@@ -232,17 +260,20 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
         "use_angle_cls": use_angle_cls,
         "rec_batch_num": rec_batch,
         "rec_img_width": rec_width,
-        "enable_preprocessing": settings.enable_preprocessing,
+        "enable_preprocessing": enable_preprocessing,
         "preproc_upscale_min_side": settings.preproc_upscale_min_side,
-        "iou_threshold": settings.iou_threshold,
-        "enable_symspell_correction": settings.enable_symspell_correction,
-        "enable_word_segmentation": settings.enable_word_segmentation,
+        "iou_threshold": iou_threshold,
+        "enable_symspell_correction": enable_symspell_correction,
+        "enable_word_segmentation": enable_word_segmentation,
+        "symspell_max_edit_distance": symspell_max_edit_distance,
+        "kbbi_top_n": kbbi_top_n,
     }
 
     try:
         return _run_categories(cats, engine, corrector, settings, run_settings,
                                 started_at, completed, overall,
-                                overall_start, per_cat_dir, verbose, gen)
+                                overall_start, per_cat_dir, verbose, gen,
+                                iou_threshold=iou_threshold)
     except _Superseded:
         log.info("Run %d superseded by a newer run; bailing without touching status", gen)
         return {}
@@ -263,7 +294,7 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
 
 def _run_categories(cats, engine, corrector, settings, run_settings,
                     started_at, completed, overall, overall_start, per_cat_dir,
-                    verbose, gen) -> dict:
+                    verbose, gen, iou_threshold: float = 0.5) -> dict:
     def _check_superseded():
         if gen != _RUN_GEN:
             raise _Superseded()
@@ -309,7 +340,7 @@ def _run_categories(cats, engine, corrector, settings, run_settings,
                      pm.detection.tp, pm.detection.fp, pm.detection.fn,
                      pm.joined_cer)
             cat_pages.append(pm)
-            per_image_payload.append(_serialize_page_metrics(pm, page, pred))
+            per_image_payload.append(_serialize_page_metrics(pm, page, pred, iou_threshold=iou_threshold))
             _write_status({
                 "running": True,
                 "started_at": started_at,
@@ -352,8 +383,8 @@ def _run_categories(cats, engine, corrector, settings, run_settings,
                     "images": per_image_payload,
                     "corrector_enabled": corrector.enabled,
                     "corrector_settings": {
-                        "max_edit_distance": settings.symspell_max_edit_distance,
-                        "kbbi_top_n": settings.kbbi_top_n,
+                        "max_edit_distance": run_settings["symspell_max_edit_distance"],
+                        "kbbi_top_n": run_settings["kbbi_top_n"],
                     },
                 },
                 ensure_ascii=False,
@@ -380,6 +411,8 @@ def _run_categories(cats, engine, corrector, settings, run_settings,
     overall_dict["iou_threshold"] = run_settings["iou_threshold"]
     overall_dict["enable_symspell_correction"] = run_settings["enable_symspell_correction"]
     overall_dict["enable_word_segmentation"] = run_settings["enable_word_segmentation"]
+    overall_dict["symspell_max_edit_distance"] = run_settings["symspell_max_edit_distance"]
+    overall_dict["kbbi_top_n"] = run_settings["kbbi_top_n"]
 
     log.info("=== Benchmark done: %d images in %.1fs, F1=%.3f CER=%.3f ===",
              overall_dict["n_images"], total_elapsed,
@@ -542,6 +575,8 @@ def _save_to_history(overall: dict, per_cat: list[CategorySummary]) -> None:
             "iou_threshold": overall.get("iou_threshold", 0.5),
             "enable_symspell_correction": overall.get("enable_symspell_correction", False),
             "enable_word_segmentation": overall.get("enable_word_segmentation", False),
+            "symspell_max_edit_distance": overall.get("symspell_max_edit_distance", 1),
+            "kbbi_top_n": overall.get("kbbi_top_n", 0),
         },
         "corrector_enabled": overall.get("corrector_enabled", False),
         "total_elapsed_s": overall.get("total_elapsed_s", 0),
