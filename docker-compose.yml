@@ -6,6 +6,7 @@ services:
       - "8766:8765"
     volumes:
       - ./IMG_OCR_IND_CN:/app/IMG_OCR_IND_CN:ro
+      - ./dataset:/app/dataset:ro
       - ocr-reports:/app/reports
       - ./.env:/app/.env:ro
     restart: unless-stopped
