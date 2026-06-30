@@ -22,7 +22,7 @@ from fastapi import BackgroundTasks, FastAPI, HTTPException
 from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 
-from .paths import DEFAULT_DATASET_ROOT, HISTORY_ROOT, REPORTS_ROOT, UI_ROOT
+from .paths import DATASETS, DEFAULT_DATASET_ROOT, HISTORY_ROOT, REPORTS_ROOT, UI_ROOT, resolve_dataset_root
 from .runner import RUN_STATUS_PATH, run as run_benchmark
 
 AVAILABLE_MODELS = {
@@ -33,6 +33,46 @@ AVAILABLE_MODELS = {
     "PP-OCRv4": {"model_types": ["mobile", "server"], "default": "mobile",
                  "desc": "Legacy, stable"},
 }
+
+# Display labels for the dataset registry. Keep keys in sync with paths.DATASETS.
+_DATASET_LABELS: dict[str, str] = {
+    "ind_cn": "IMG_OCR_IND_CN (labelme)",
+    "new":    "FUNSD-form (testing + training)",
+}
+
+
+def _quick_load(cat_dir):
+    """Cheap load: only parses each sidecar JSON once. Cached by mtime."""
+    from .dataset import load_category
+    return load_category(cat_dir)
+
+
+def _image_root_for_category(category: str, filename: str):
+    """Find which dataset root contains ``<category>/<filename>``.
+
+    Order:
+      1. If the latest run's summary.json stamps a ``dataset`` and that root
+         contains the file, use it (avoids guessing when both datasets happen
+         to have a ``TRAINING DATA`` category).
+      2. Otherwise scan all DATASETS roots and return the first match.
+    """
+    # 1. honour the most recent run's dataset stamp
+    summary = REPORTS_ROOT / "summary.json"
+    if summary.exists():
+        try:
+            data = json.loads(summary.read_text(encoding="utf-8"))
+            ds = (data.get("overall") or {}).get("dataset") or ""
+            if ds and ds in DATASETS:
+                root = DATASETS[ds]
+                if (root / category / filename).exists() or (root / category / "images" / filename).exists():
+                    return root
+        except (json.JSONDecodeError, OSError):
+            pass
+    # 2. fall back to scanning every registered dataset
+    for root in DATASETS.values():
+        if (root / category / filename).exists() or (root / category / "images" / filename).exists():
+            return root
+    return None
 
 
 def create_app() -> FastAPI:
@@ -72,6 +112,7 @@ def create_app() -> FastAPI:
                 enable_word_segmentation: bool | None = None,
                 symspell_max_edit_distance: int | None = None,
                 kbbi_top_n: int | None = None,
+                dataset: str | None = None,
                 force: bool = False):
         if RUN_STATUS_PATH.exists():
             try:
@@ -99,11 +140,13 @@ def create_app() -> FastAPI:
             }.items() if v is not None
         }
         background.add_task(run_benchmark, None, only, False,
-                            ocr_version, model_type, overrides)
+                            ocr_version, model_type, overrides, dataset)
         return {"ok": True, "started": True}
 
     def _read_status() -> dict:
-        idle = {"running": False, "total": 0, "completed": [], "current": None}
+        active_key, _ = resolve_dataset_root()
+        idle = {"running": False, "total": 0, "completed": [], "current": None,
+                "dataset": active_key}
         if not RUN_STATUS_PATH.exists():
             return idle
         try:
@@ -172,7 +215,15 @@ def create_app() -> FastAPI:
         from .corrector import get_corrector
         s = get_settings()
         c = get_corrector()
+        active_key, _ = resolve_dataset_root()
+        # Lightweight: just expose the active key + available keys. The UI
+        # calls /api/datasets for full counts so this stays small on every
+        # page load.
         return {
+            "dataset": active_key,
+            "dataset_keys": [
+                {"key": k, "label": _DATASET_LABELS.get(k, k)} for k in DATASETS
+            ],
             "enable_symspell_correction": s.enable_symspell_correction,
             "enable_word_segmentation": s.enable_word_segmentation,
             "symspell_max_edit_distance": s.symspell_max_edit_distance,
@@ -199,6 +250,53 @@ def create_app() -> FastAPI:
             if data.get("category") == category:
                 return JSONResponse(data)
         raise HTTPException(404, f"category not found: {category}")
+
+    @app.get("/api/datasets")
+    def api_datasets():
+        """List every registered dataset with image/line counts.
+
+        Powers the Datasets page and the Run-panel dataset dropdown.
+        """
+        from .dataset import list_categories
+        active_key, _ = resolve_dataset_root()
+        out = []
+        for key, root in DATASETS.items():
+            cats = list_categories(root)
+            pages = []
+            for cat in cats:
+                pages.extend(_quick_load(cat))
+            out.append({
+                "key": key,
+                "label": _DATASET_LABELS.get(key, key),
+                "format": "funsd" if key == "new" else "labelme",
+                "root": str(root),
+                "n_categories": len(cats),
+                "n_images": len(pages),
+                "n_lines": sum(len(p.lines) for p in pages),
+                "active": key == active_key,
+            })
+        return JSONResponse({"datasets": out, "active": active_key})
+
+    @app.get("/api/datasets/{key}/categories")
+    def api_dataset_categories(key: str):
+        """Categories for a specific dataset — populates the Category dropdown."""
+        if key not in DATASETS:
+            raise HTTPException(404, f"unknown dataset: {key}")
+        from .dataset import list_categories
+        root = DATASETS[key]
+        cats = list_categories(root)
+        out = [{"name": "All", "n_images": 0, "n_lines": 0}]
+        for cat in cats:
+            pages = _quick_load(cat)
+            out.append({
+                "name": cat.name,
+                "n_images": len(pages),
+                "n_lines": sum(len(p.lines) for p in pages),
+            })
+        # "All" gets the totals across this dataset
+        out[0]["n_images"] = sum(c["n_images"] for c in out[1:])
+        out[0]["n_lines"] = sum(c["n_lines"] for c in out[1:])
+        return JSONResponse({"dataset": key, "categories": out})
 
     @app.get("/api/history")
     def api_history():
@@ -285,12 +383,22 @@ def create_app() -> FastAPI:
 
     @app.get("/api/image/{category}/{filename}")
     def api_image(category: str, filename: str):
-        # category is the dir name; resolve safely
+        # category is the dir name; resolve safely.
+        # Pick the root by reading the latest summary.json's dataset key — that
+        # way the URL works whether the user ran ind_cn or new.
         safe_cat = "".join(c if c.isalnum() or c in " _-" else "_" for c in category)
         safe_name = Path(filename).name  # strip any path traversal
-        path = DEFAULT_DATASET_ROOT / safe_cat / safe_name
-        if not path.exists():
+        root = _image_root_for_category(safe_cat, safe_name)
+        if root is None:
             raise HTTPException(404, f"image not found: {category}/{filename}")
+        path = root / safe_cat / safe_name
+        if not path.exists():
+            # FUNSD images live in <root>/<cat>/images/<name>, not <root>/<cat>/<name>
+            alt = root / safe_cat / "images" / safe_name
+            if alt.exists():
+                path = alt
+            else:
+                raise HTTPException(404, f"image not found: {category}/{filename}")
         suffix = path.suffix.lower()
         media = "image/png" if suffix == ".png" else "image/jpeg"
         return FileResponse(path, media_type=media)
@@ -301,6 +409,13 @@ def create_app() -> FastAPI:
         if not idx.exists():
             raise HTTPException(404, "ui/index.html not found")
         return FileResponse(idx, media_type="text/html")
+
+    @app.get("/datasets.html")
+    def datasets_page():
+        page = UI_ROOT / "datasets.html"
+        if not page.exists():
+            raise HTTPException(404, "ui/datasets.html not found")
+        return FileResponse(page, media_type="text/html")
 
     if UI_ROOT.exists():
         # ponytail: disable caching so JS/CSS edits land without a hard refresh.

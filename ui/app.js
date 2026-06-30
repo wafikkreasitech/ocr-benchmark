@@ -10,6 +10,8 @@ let summaryData = null;
 let currentSort = { key: "f1", dir: "asc" };
 let modelConfig = null;
 let selectedModel = { ocr_version: null, model_type: null };
+let selectedDataset = { key: null, category: null };  // category = null → "All"
+let datasetsCache = [];
 let historyRuns = [];
 let selectedHistoryIds = new Set();
 
@@ -29,6 +31,208 @@ async function fetchSummary() {
     if (!r.ok) return null;
     return await r.json();
   } catch { return null; }
+}
+
+/* ─── Dataset Selector ─────────────────────────────────────── */
+
+async function fetchDatasets() {
+  try {
+    const r = await fetch("/api/datasets");
+    if (!r.ok) return [];
+    const j = await r.json();
+    return j.datasets || [];
+  } catch { return []; }
+}
+
+async function fetchDatasetCategories(key) {
+  try {
+    const r = await fetch(`/api/datasets/${encodeURIComponent(key)}/categories`);
+    if (!r.ok) return [];
+    const j = await r.json();
+    return j.categories || [];
+  } catch { return []; }
+}
+
+function updateDatasetBadge() {
+  const el = $("#dataset-badge-text");
+  if (!el) return;
+  const ds = datasetsCache.find(d => d.key === selectedDataset.key);
+  el.textContent = ds ? ds.label : (selectedDataset.key || "–");
+}
+
+function setDatasetSummary() {
+  const el = $("#dataset-summary");
+  if (!el) return;
+  const ds = datasetsCache.find(d => d.key === selectedDataset.key);
+  if (!ds) { el.textContent = "–"; return; }
+  el.textContent = `${ds.n_categories} categories · ${ds.n_images} images · ${ds.n_lines.toLocaleString()} GT lines · ${ds.format}`;
+}
+
+async function initDatasetSelector() {
+  // 1. Pull the registry once.
+  datasetsCache = await fetchDatasets();
+  const sel = $("#dataset-select");
+  const catSel = $("#category-select");
+  if (!sel || !catSel) return;
+
+  sel.innerHTML = "";
+  for (const ds of datasetsCache) {
+    const opt = document.createElement("option");
+    opt.value = ds.key;
+    opt.textContent = ds.label;
+    sel.appendChild(opt);
+  }
+  // Honour the active dataset from the server (falls back to first).
+  const active = datasetsCache.find(d => d.active) || datasetsCache[0];
+  if (active) selectedDataset.key = active.key;
+  sel.value = selectedDataset.key || "";
+
+  // 2. Populate the Category dropdown for the active dataset.
+  await refreshCategories();
+
+  // 3. Update the badge + summary line.
+  updateDatasetBadge();
+  setDatasetSummary();
+
+  // 4. Listeners.
+  sel.addEventListener("change", async () => {
+    selectedDataset.key = sel.value;
+    selectedDataset.category = null;  // reset on dataset change
+    await refreshCategories();
+    updateDatasetBadge();
+    setDatasetSummary();
+    // Fire a global event so the Datasets page (if open) can sync its card.
+    window.dispatchEvent(new CustomEvent("dataset-changed", { detail: { key: selectedDataset.key } }));
+  });
+  catSel.addEventListener("change", () => {
+    selectedDataset.category = catSel.value || null;
+  });
+
+  // 5. Listen for changes initiated from the Datasets page.
+  window.addEventListener("dataset-changed", async (e) => {
+    if (!e.detail || e.detail.key === selectedDataset.key) return;
+    sel.value = e.detail.key;
+    selectedDataset.key = e.detail.key;
+    selectedDataset.category = null;
+    await refreshCategories();
+    updateDatasetBadge();
+    setDatasetSummary();
+  });
+}
+
+async function refreshCategories() {
+  const catSel = $("#category-select");
+  if (!catSel || !selectedDataset.key) return;
+  const cats = await fetchDatasetCategories(selectedDataset.key);
+  catSel.innerHTML = "";
+  for (const c of cats) {
+    const opt = document.createElement("option");
+    opt.value = c.name === "All" ? "" : c.name;
+    opt.textContent = c.name === "All"
+      ? `All · ${c.n_images} images`
+      : `${c.name} · ${c.n_images} images`;
+    catSel.appendChild(opt);
+  }
+  catSel.value = "";  // default to All
+  selectedDataset.category = null;
+}
+
+/* ─── Datasets page ────────────────────────────────────────── */
+
+async function initDatasetsPage() {
+  const grid = $("#datasets-grid");
+  if (!grid) return;  // not the Datasets page
+  datasetsCache = await fetchDatasets();
+  renderDatasetCards(datasetsCache);
+  // Re-render cards when the dataset changes from any source (incl. main page).
+  window.addEventListener("dataset-changed", async () => {
+    datasetsCache = await fetchDatasets();
+    renderDatasetCards(datasetsCache);
+  });
+}
+
+function renderDatasetCards(datasets) {
+  const grid = $("#datasets-grid");
+  if (!grid) return;
+  grid.innerHTML = "";
+  for (const ds of datasets) {
+    const card = document.createElement("div");
+    card.className = "dataset-card" + (ds.active ? " is-active" : "");
+    card.dataset.key = ds.key;
+    card.innerHTML = `
+      <div class="dataset-card-head">
+        <div>
+          <div class="dataset-card-name">${escapeHtml(ds.label)}</div>
+          <div class="dataset-card-key">${escapeHtml(ds.key)} · ${escapeHtml(ds.format)}</div>
+        </div>
+        ${ds.active ? '<span class="dataset-card-badge">Active</span>' : ""}
+      </div>
+      <div class="dataset-card-stats">
+        <div><span>${ds.n_categories}</span><label>categories</label></div>
+        <div><span>${ds.n_images}</span><label>images</label></div>
+        <div><span>${ds.n_lines.toLocaleString()}</span><label>GT lines</label></div>
+      </div>
+      <div class="dataset-card-actions">
+        <button type="button" class="btn-primary btn-run-dataset" data-key="${escapeHtml(ds.key)}">▶ Run</button>
+        <button type="button" class="btn-ghost btn-view-dataset" data-key="${escapeHtml(ds.key)}">📊 View last results</button>
+      </div>
+      <div class="dataset-card-progress" hidden>
+        <div class="progress-track"><div class="progress-fill"></div></div>
+        <div class="progress-label muted">idle</div>
+      </div>
+    `;
+    grid.appendChild(card);
+  }
+  grid.addEventListener("click", (e) => {
+    const runBtn = e.target.closest(".btn-run-dataset");
+    const viewBtn = e.target.closest(".btn-view-dataset");
+    if (runBtn) runFromCard(runBtn.dataset.key);
+    else if (viewBtn) viewFromCard(viewBtn.dataset.key);
+  });
+}
+
+async function runFromCard(key) {
+  selectedDataset.key = key;
+  selectedDataset.category = null;
+  // Sync the main page (if open in another tab it won't matter; if same tab
+  // the dropdown will pick this up next time it's bound).
+  window.dispatchEvent(new CustomEvent("dataset-changed", { detail: { key } }));
+  setStatus(`running benchmark on ${key}…`);
+  try {
+    const r = await fetch(`/api/run?dataset=${encodeURIComponent(key)}`, { method: "POST" });
+    if (!r.ok) throw new Error("run failed");
+    const started = await r.json();
+    if (started.started) {
+      // Show inline progress in the card; the global SSE will also reflect it.
+      const card = document.querySelector(`.dataset-card[data-key="${key}"]`);
+      if (card) {
+        card.classList.add("is-running");
+        card.querySelector(".dataset-card-progress").hidden = false;
+        card.querySelector(".progress-label").textContent = "starting…";
+      }
+    } else {
+      setStatus("already running — wait for it to finish");
+    }
+  } catch (e) {
+    setStatus(`error: ${e.message}`);
+  }
+}
+
+async function viewFromCard(key) {
+  // Jump to the per-category detail of the most recent run for this dataset.
+  // We don't know which category was last — fetch /api/summary which now
+  // carries the active dataset's last overall dict.
+  try {
+    const r = await fetch("/api/summary");
+    if (!r.ok) { setStatus("no results yet"); return; }
+    const data = await r.json();
+    const cats = (data.per_category || []).map(c => c.category);
+    const cat = cats[0];
+    if (!cat) { setStatus("no categories in latest run"); return; }
+    window.location.href = `index.html#cat=${encodeURIComponent(cat)}`;
+  } catch (e) {
+    setStatus(`error: ${e.message}`);
+  }
 }
 
 /* ─── Model Selector (card-based) ────────────────────────── */
@@ -620,6 +824,8 @@ async function runBenchmark(force = false) {
   setStatus(force ? "restarting…" : "starting…");
   try {
     const params = new URLSearchParams();
+    if (selectedDataset.key) params.set("dataset", selectedDataset.key);
+    if (selectedDataset.category) params.set("category", selectedDataset.category);
     if (selectedModel.ocr_version) params.set("ocr_version", selectedModel.ocr_version);
     if (selectedModel.model_type) params.set("model_type", selectedModel.model_type);
     // Send knob overrides only when they differ from server defaults — keeps
@@ -1127,6 +1333,8 @@ async function loadAndRender() {
 
 fetchModels().then((d) => { if (d) initModelSelector(d); });
 fetchConfig().then((d) => { if (d) applyKnobDefaults(d); });
+initDatasetSelector();
+initDatasetsPage();  // no-op on non-datasets pages
 
 document.addEventListener("input", (e) => {
   if (e.target.closest(".knobs")) updateKnobsSummary();

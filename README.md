@@ -41,6 +41,32 @@ restrict to specific categories:
 uv run python scripts/run_benchmark.py --category "IDENTITY CARDS" --category NEWSPAPERS
 ```
 
+## Datasets
+
+The benchmark supports **multiple datasets** behind a single registry. Pick one
+from the Run-panel dropdown in the UI, or via the CLI / `.env`.
+
+| Key | Root | Format | Categories |
+|---|---|---|---|
+| `ind_cn` *(default)* | `IMG_OCR_IND_CN/` | labelme JSON sidecars | 11 (BADGES, BILLS, BOOK CONTENTS, …) |
+| `new` | `dataset/dataset/{testing,training}_data/` | FUNSD-form | 2 (`TESTING DATA`, `TRAINING DATA`) |
+
+**From the UI**: top-nav → **Datasets** page lists both with image/line counts
+and one-click Run / View-last-results. The Run-panel **Dataset** dropdown
+repopulates the Category dropdown live as you switch.
+
+**From the CLI**:
+```bash
+uv run python scripts/run_benchmark.py --dataset ind_cn
+uv run python scripts/run_benchmark.py --dataset new
+# --dataset <path> still works as a literal-path override
+```
+
+**From `.env`**:
+```env
+OCR_BENCH_DATASET=new
+```
+
 ## OCR Models
 
 The benchmark uses **`rapidocr` v3.9.0+** (replaces the old `rapidocr-onnxruntime`).

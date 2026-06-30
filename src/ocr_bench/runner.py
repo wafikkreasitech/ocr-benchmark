@@ -164,7 +164,11 @@ def _serialize_page_metrics(pm: PageMetrics, page: GroundTruthPage, pred: PagePr
 
 def run(root: Path | None = None, only_categories: list[str] | None = None, verbose: bool = True,
         ocr_version: str | None = None, model_type: str | None = None,
-        det_overrides: dict | None = None) -> dict:
+        det_overrides: dict | None = None, dataset_key: str | None = None) -> dict:
+    # Resolve dataset root via the registry unless caller supplied a literal path.
+    if root is None:
+        from .paths import resolve_dataset_root
+        dataset_key, root = resolve_dataset_root(dataset_key)
     cats = list_categories(root)
     if only_categories:
         only_set = set(only_categories)
@@ -248,9 +252,11 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
         "total": len(cats),
         "completed": completed,
         "current": None,
+        "dataset": dataset_key,
     })
 
     run_settings = {
+        "dataset": dataset_key,
         "ocr_version": ver,
         "model_type": mtype,
         "det_box_thresh": box_thresh,
@@ -315,6 +321,7 @@ def _run_categories(cats, engine, corrector, settings, run_settings,
             "total": len(cats),
             "completed": completed,
             "current": {"name": cat_dir.name, "total_images": len(pages), "done_images": 0},
+            "dataset": run_settings.get("dataset", ""),
         })
 
         cat_pages: list[PageMetrics] = []
@@ -351,6 +358,7 @@ def _run_categories(cats, engine, corrector, settings, run_settings,
                     "total_images": len(pages),
                     "done_images": len(cat_pages),
                 },
+                "dataset": run_settings.get("dataset", ""),
             })
             if verbose:
                 cer_c = (
@@ -379,6 +387,7 @@ def _run_categories(cats, engine, corrector, settings, run_settings,
             json.dumps(
                 {
                     "category": cat_dir.name,
+                    "dataset": run_settings.get("dataset", ""),
                     "summary": asdict(summary),
                     "images": per_image_payload,
                     "corrector_enabled": corrector.enabled,
@@ -398,6 +407,7 @@ def _run_categories(cats, engine, corrector, settings, run_settings,
     overall_dict["total_elapsed_s"] = total_elapsed
     overall_dict["last_run"] = _now_iso()
     overall_dict["corrector_enabled"] = corrector.enabled
+    overall_dict["dataset"] = run_settings.get("dataset", "")
     overall_dict["ocr_version"] = run_settings["ocr_version"]
     overall_dict["model_type"] = run_settings["model_type"]
     overall_dict["det_box_thresh"] = run_settings["det_box_thresh"]
@@ -429,6 +439,7 @@ def _run_categories(cats, engine, corrector, settings, run_settings,
         "total": len(cats),
         "completed": completed,
         "current": None,
+        "dataset": run_settings.get("dataset", ""),
     })
 
     if verbose:
@@ -560,8 +571,10 @@ def _save_to_history(overall: dict, per_cat: list[CategorySummary]) -> None:
     snapshot = {
         "id": run_id,
         "timestamp": overall["last_run"],
+        "dataset": overall.get("dataset", ""),
         # Config snapshot — all knobs, so we can diff against the best run later.
         "config": {
+            "dataset": overall.get("dataset", ""),
             "ocr_version": overall.get("ocr_version", ""),
             "model_type": overall.get("model_type", ""),
             "det_box_thresh": overall.get("det_box_thresh", 0.5),
@@ -615,6 +628,7 @@ def _save_to_history(overall: dict, per_cat: list[CategorySummary]) -> None:
     index.append({
         "id": run_id,
         "timestamp": overall["last_run"],
+        "dataset": cfg.get("dataset", ""),
         # Flat keys preserved for UI backward-compat (history table reads these).
         "ocr_version": cfg["ocr_version"],
         "model_type": cfg["model_type"],

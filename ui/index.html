@@ -29,6 +29,13 @@
       </div>
     </div>
     <div class="topbar-right">
+      <nav class="topbar-nav">
+        <a href="datasets.html" class="topbar-link" data-nav="datasets">Datasets</a>
+      </nav>
+      <div id="dataset-badge" class="dataset-badge" title="Active dataset">
+        <span class="badge-dot"></span>
+        <span id="dataset-badge-text">–</span>
+      </div>
       <div id="model-badge" class="model-badge" title="Current OCR model">
         <span class="badge-dot"></span>
         <span id="model-badge-text">–</span>
@@ -46,6 +53,24 @@
       <h2>OCR Model</h2>
       <span class="muted">select engine and model size</span>
     </div>
+
+    <!-- Dataset + Category selectors — primary control for which dataset to
+         run on. Populated by app.js from /api/config.dataset_keys and
+         /api/datasets/<key>/categories. -->
+    <div class="dataset-row">
+      <label class="dataset-field">
+        <span class="dataset-label">Dataset</span>
+        <select id="dataset-select" class="dataset-select"></select>
+      </label>
+      <label class="dataset-field">
+        <span class="dataset-label">Category</span>
+        <select id="category-select" class="dataset-select">
+          <option value="">All</option>
+        </select>
+      </label>
+      <span id="dataset-summary" class="dataset-summary muted">–</span>
+    </div>
+
     <div class="model-grid" id="model-grid">
       <div class="model-loading muted">loading models…</div>
     </div>

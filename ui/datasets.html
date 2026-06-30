@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Datasets · OCR Benchmark</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+<!-- ─── Topbar ─────────────────────────────────────────────── -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="logo">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <rect x="2" y="2" width="24" height="24" rx="6" fill="var(--accent)" opacity="0.12"/>
+          <rect x="6" y="8" width="16" height="2" rx="1" fill="var(--accent)"/>
+          <rect x="6" y="13" width="12" height="2" rx="1" fill="var(--accent)" opacity="0.6"/>
+          <rect x="6" y="18" width="14" height="2" rx="1" fill="var(--accent)" opacity="0.35"/>
+        </svg>
+      </div>
+      <div>
+        <div class="title">OCR Benchmark</div>
+        <div class="sub">ai4db · Indonesian documents</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <nav class="topbar-nav">
+        <a href="datasets.html" class="topbar-link" data-nav="datasets">Datasets</a>
+      </nav>
+      <div id="dataset-badge" class="dataset-badge" title="Active dataset">
+        <span class="badge-dot"></span>
+        <span id="dataset-badge-text">–</span>
+      </div>
+      <div id="model-badge" class="model-badge" title="Current OCR model">
+        <span class="badge-dot"></span>
+        <span id="model-badge-text">–</span>
+      </div>
+      <span id="last-run" class="last-run" title="When the last benchmark finished">–</span>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="panel">
+    <div class="panel-head">
+      <h2>Datasets</h2>
+      <span class="muted">pick a dataset to run, view its last results, or open it on the dashboard</span>
+    </div>
+
+    <div id="datasets-grid" class="datasets-grid">
+      <div class="muted">loading datasets…</div>
+    </div>
+  </section>
+
+</main>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
