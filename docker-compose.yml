@@ -7,6 +7,7 @@ services:
     volumes:
       - ./IMG_OCR_IND_CN:/app/IMG_OCR_IND_CN:ro
       - ./dataset:/app/dataset:ro
+      - ./models:/app/models:ro          # Piper TTS voice — run `download_voice` on host first (else /api/tts 503s)
       - ocr-reports:/app/reports
       - ./.env:/app/.env:ro
     restart: unless-stopped

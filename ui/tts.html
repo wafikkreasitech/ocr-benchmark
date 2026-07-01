@@ -1,0 +1,1026 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>TTS Benchmark · ai4db</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/static/style.css" />
+<style>
+  /* ── TTS page — editorial / calm-technical ─────────────────────
+     Distinctive decisions:
+       - serif display for the hero (Instrument Serif) — every other page
+         uses sans, so this one reads "magazine, not dashboard"
+       - single accent, plain chips, hairline rules, no gradients
+       - responsive collapse at 900px (cards stack, picker rows collapse) */
+  :root {
+    --tts-display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  }
+  body { background: var(--bg); }
+
+  /* Hero */
+  .tts-hero {
+    margin: 28px 0 24px;
+    padding: 28px 0 24px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 32px;
+    align-items: end;
+  }
+  .tts-hero h1 {
+    font-family: var(--tts-display);
+    font-weight: 400;
+    font-size: clamp(40px, 6vw, 64px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin: 0;
+    color: var(--text);
+  }
+  .tts-hero h1 em { font-style: italic; color: var(--accent); }
+  .tts-hero .dek {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.55;
+    max-width: 38ch;
+  }
+  .tts-hero .dek strong { color: var(--text); font-weight: 600; }
+
+  /* Run row */
+  .tts-run-row {
+    display: flex; gap: 14px; align-items: center;
+    margin: 18px 0 32px;
+  }
+  .tts-run-row #run-status {
+    font-family: var(--mono); font-size: 12px;
+    color: var(--text-secondary); min-height: 1em;
+  }
+
+  /* Section masthead (number + title + subtitle) */
+  .tts-section {
+    margin: 36px 0 14px;
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    gap: 14px;
+    align-items: baseline;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .tts-section .num {
+    font-family: var(--tts-display);
+    font-size: 28px; font-style: italic;
+    color: var(--accent); text-align: right;
+  }
+  .tts-section h2 {
+    margin: 0; font-family: var(--sans);
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text);
+  }
+  .tts-section .sub {
+    font-family: var(--sans);
+    font-size: 12px; color: var(--text-muted);
+  }
+
+  /* Metric cards */
+  .tts-cards {
+    display: grid; gap: 12px;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 16px 0 8px;
+  }
+  .tts-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 18px 16px;
+    box-shadow: var(--shadow-sm);
+    display: grid;
+    grid-template-rows: auto auto auto auto;
+    gap: 4px;
+  }
+  .tts-card .label {
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-muted); font-weight: 500;
+  }
+  .tts-card .value {
+    font-family: var(--mono);
+    font-size: 32px; font-weight: 500;
+    color: var(--text); line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+  }
+  .tts-card .caption {
+    font-size: 12px; color: var(--text-secondary); line-height: 1.4;
+  }
+  .tts-card .tag {
+    display: inline-block; font-size: 11px; font-family: var(--mono);
+    padding: 2px 8px; border-radius: 999px;
+  }
+  .tts-card .tag.good { background: var(--good-bg); color: var(--good); }
+  .tts-card .tag.bad  { background: var(--bad-bg);  color: var(--bad); }
+
+  /* ── 03 · RTF chart (calligraphic axis + ink bars) ──────────── */
+  .tts-chart {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 0;
+    margin: 6px 0 12px;
+  }
+  .tts-chart-axis {
+    position: relative;
+    /* Single calm column of typeset numerals — feels like a magazine
+       figure caption, not a matplotlib axis. */
+    font-family: var(--tts-display);
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1;
+    height: 280px;
+    border-right: 1px solid var(--border);
+  }
+  .tts-chart-axis .tick {
+    position: absolute; right: 10px;
+    transform: translateY(-50%);
+    font-feature-settings: "lnum";
+    letter-spacing: 0.02em;
+  }
+  .tts-chart-axis .tick.live { color: var(--accent); font-style: italic; }
+  .tts-chart-axis .tick.slow { color: var(--text-muted); font-style: italic; }
+
+  .tts-chart-plot {
+    position: relative;
+    height: 280px;
+    margin-left: 16px;
+    padding: 6px 0;
+  }
+  /* Horizontal hairline at RTF = 1.0 — the live threshold. Drawn as a
+     1px dotted rule with a small italic label, like a printed "fold here" mark. */
+  .tts-chart-threshold {
+    position: absolute; left: 0; right: 0;
+    border-top: 1px dashed var(--text-muted);
+    pointer-events: none;
+  }
+  .tts-chart-threshold .lbl {
+    position: absolute; right: 6px; top: -10px;
+    font-family: var(--tts-display);
+    font-size: 12px; font-style: italic;
+    color: var(--accent);
+    background: var(--bg);
+    padding: 0 6px;
+  }
+  /* Baseline rule under the plot — just a hairline, not a box. */
+  .tts-chart-plot::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .tts-bar-row {
+    position: relative;
+    display: grid;
+    grid-template-columns: 160px 1fr 80px;
+    align-items: center;
+    gap: 14px;
+    height: 26px;
+    font-size: 13px;
+    /* Staggered fade-in: only first paint, not on every render. */
+    opacity: 0; transform: translateX(-6px);
+    animation: tts-bar-in 540ms cubic-bezier(.2,.8,.2,1) forwards;
+    transition: background 160ms ease;
+  }
+  @keyframes tts-bar-in {
+    to { opacity: 1; transform: none; }
+  }
+  .tts-bar-row:hover { background: var(--accent-light); }
+  .tts-bar-row .name {
+    font-family: var(--sans);
+    color: var(--text-secondary);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    font-feature-settings: "ss01";
+  }
+  .tts-bar-row .name .pg {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-left: 6px;
+    letter-spacing: 0.04em;
+  }
+  .tts-bar-row .name .dot {
+    display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+    margin-right: 8px; vertical-align: 2px;
+  }
+  .tts-bar-row.is-slow .name .dot { background: var(--bad); }
+  .tts-bar-track {
+    position: relative;
+    height: 14px;
+    background: transparent;     /* no fill behind the bar — ink on paper */
+  }
+  /* The bar itself — a single calm fill, no rounded pill, no gradient. */
+  .tts-bar-fill {
+    position: absolute; left: 0; top: 0; bottom: 0;
+    background: var(--accent);
+    /* grow left-to-right on first paint only (set width: 0 in initial state) */
+    width: 0;
+    transition: width 720ms cubic-bezier(.2,.8,.2,1);
+  }
+  .tts-bar-row.is-slow .tts-bar-fill { background: var(--bad); }
+  .tts-bar-row .num {
+    text-align: right;
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 13px;
+    color: var(--text);
+  }
+  .tts-bar-row .num .x {
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-left: 2px;
+  }
+
+  /* Editorial deck under the chart title */
+  .tts-chart-deck {
+    font-family: var(--tts-display);
+    font-size: 16px; line-height: 1.4;
+    color: var(--text);
+    font-style: italic;
+    margin: 0 0 12px 0;
+    max-width: 56ch;
+  }
+  .tts-chart-deck em { color: var(--accent); font-style: italic; }
+
+  /* ── 04 · Per-category editorial appendix ───────────────────── */
+  .tts-table {
+    display: grid; gap: 0; margin-top: 8px;
+  }
+  .tts-table-head {
+    display: grid;
+    grid-template-columns: 1.6fr 0.6fr 0.6fr 0.7fr 0.8fr 0.8fr 0.7fr 0.6fr;
+    gap: 0;
+    padding: 6px 0 8px;
+    border-top: 1px solid var(--text);
+    border-bottom: 1px solid var(--border);
+    font-family: var(--sans);
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  .tts-table-head > div:not(:first-child) { text-align: right; }
+  .tts-table-row {
+    display: grid;
+    grid-template-columns: 1.6fr 0.6fr 0.6fr 0.7fr 0.8fr 0.8fr 0.7fr 0.6fr;
+    gap: 0;
+    padding: 12px 0;
+    align-items: baseline;
+    border-bottom: 1px solid var(--border-light);
+    cursor: pointer;
+    transition: background 160ms ease, padding-left 200ms ease;
+  }
+  .tts-table-row:hover { background: var(--accent-light); padding-left: 8px; }
+  .tts-table-row.is-active { background: var(--accent-light); padding-left: 8px; }
+
+  .tts-table-row .cat {
+    font-family: var(--tts-display);
+    font-size: 18px;
+    color: var(--text);
+    line-height: 1.2;
+    /* The serif name is the only big type in the table; the rest is mono small caps. */
+  }
+  .tts-table-row .cat .live-tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 1px 6px; border-radius: 999px;
+    margin-left: 8px; vertical-align: 4px;
+    background: var(--good-bg); color: var(--good);
+  }
+  .tts-table-row.is-slow .cat .live-tag {
+    background: var(--bad-bg); color: var(--bad);
+  }
+  .tts-table-row .v {
+    text-align: right;
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  .tts-table-row .v .unit {
+    display: block;
+    font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 1px;
+  }
+
+  /* Empty + error states */
+  .tts-empty, .tts-error {
+    color: var(--text-muted);
+    padding: 60px 20px; text-align: center;
+    border: 1px dashed var(--border); border-radius: var(--radius);
+    font-size: 14px; line-height: 1.6;
+  }
+  .tts-error { color: var(--bad); border-color: var(--bad); border-style: solid; background: var(--bad-bg); }
+
+  /* ── Pick + Try (playground) ───────────────────────────────── */
+  .tts-pick {
+    display: grid; gap: 14px;
+    grid-template-columns: 1.2fr 1fr;
+    margin: 16px 0 6px;
+  }
+  .tts-pick-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px; box-shadow: var(--shadow-sm);
+    display: grid; gap: 10px;
+  }
+  .tts-pick-card .lede {
+    font-family: var(--tts-display);
+    font-size: 22px; color: var(--text); margin: 0; line-height: 1.15;
+  }
+  .tts-pick-card .lede em { color: var(--accent); font-style: italic; }
+  .tts-pick-card .row {
+    display: grid; grid-template-columns: 130px 1fr; gap: 10px; align-items: center;
+  }
+  .tts-pick-card label {
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .tts-select, .tts-textarea {
+    font: inherit; font-family: var(--sans);
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 8px 10px; color: var(--text);
+    transition: border-color 120ms ease;
+    width: 100%; box-sizing: border-box;
+  }
+  .tts-select:focus, .tts-textarea:focus {
+    outline: none; border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-light);
+  }
+  .tts-textarea { font-family: var(--mono); font-size: 13px; min-height: 120px; resize: vertical; line-height: 1.5; }
+  .tts-toggle {
+    display: inline-flex; gap: 0;
+    border: 1px solid var(--border); border-radius: var(--radius-sm);
+    overflow: hidden; background: var(--surface-alt);
+  }
+  .tts-toggle button {
+    background: transparent; border: none; padding: 7px 12px;
+    font: inherit; font-size: 12px; font-family: var(--sans);
+    color: var(--text-muted); cursor: pointer;
+    transition: background 120ms ease, color 120ms ease;
+  }
+  .tts-toggle button.on { background: var(--accent); color: white; }
+
+  .tts-line-list {
+    max-height: 240px; overflow-y: auto; border: 1px solid var(--border);
+    border-radius: var(--radius-sm); background: var(--surface-alt);
+    padding: 6px; display: grid; gap: 2px;
+  }
+  .tts-line-item {
+    display: grid; grid-template-columns: auto 1fr auto;
+    gap: 10px; align-items: center;
+    padding: 6px 10px; border-radius: var(--radius-xs);
+    cursor: pointer; transition: background 100ms ease;
+    font-size: 13px;
+  }
+  .tts-line-item:hover { background: var(--bg-warm); }
+  .tts-line-item .num {
+    font-family: var(--mono); font-size: 11px; color: var(--text-muted); width: 26px;
+  }
+  .tts-line-item .txt {
+    font-family: var(--mono); font-size: 12px; color: var(--text);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .tts-line-item .src {
+    font-family: var(--mono); font-size: 10px;
+    padding: 1px 6px; border-radius: 999px;
+  }
+  .tts-line-item .src.pr { background: var(--accent-light); color: var(--accent); }
+  .tts-line-item .src.gt { background: var(--bg-warm); color: var(--text-muted); }
+
+  .tts-listen-bar {
+    display: flex; gap: 10px; align-items: center; margin-top: 8px;
+  }
+  .tts-listen-bar button.play {
+    background: var(--accent); color: white; border: none;
+    padding: 9px 18px; border-radius: var(--radius-sm);
+    font: inherit; font-size: 13px; font-weight: 500;
+    cursor: pointer; transition: background 120ms ease, transform 80ms ease;
+  }
+  .tts-listen-bar button.play:hover { background: var(--accent-hover); }
+  .tts-listen-bar button.play:active { transform: scale(0.98); }
+  .tts-listen-bar button.play:disabled { opacity: 0.5; cursor: not-allowed; }
+  .tts-listen-bar button.swap {
+    background: transparent; border: 1px solid var(--border);
+    color: var(--text-secondary); padding: 9px 14px;
+    border-radius: var(--radius-sm); cursor: pointer;
+    font: inherit; font-size: 12px;
+    transition: border-color 120ms ease, color 120ms ease;
+  }
+  .tts-listen-bar button.swap:hover { border-color: var(--accent); color: var(--accent); }
+
+  .tts-playback {
+    margin-top: 10px;
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    display: grid; gap: 8px;
+  }
+  .tts-playback audio { width: 100%; }
+  .tts-playback .meta {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+    font-family: var(--mono); font-size: 11px; color: var(--text-secondary);
+  }
+  .tts-playback .meta .k { color: var(--text-muted); }
+  .tts-playback .meta .v { color: var(--text); }
+
+  /* Footnote / legend */
+  .tts-foot {
+    margin-top: 40px; padding-top: 16px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted); font-size: 12px;
+  }
+  .tts-foot .legend {
+    display: flex; gap: 18px; flex-wrap: wrap;
+    margin-top: 8px; font-family: var(--mono); font-size: 11px;
+  }
+  .tts-foot .legend .live::before {
+    content: ""; display: inline-block; width: 14px;
+    border-top: 1px dashed var(--text-muted); vertical-align: middle; margin-right: 6px;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .tts-hero { grid-template-columns: 1fr; gap: 14px; }
+    .tts-cards { grid-template-columns: repeat(2, 1fr); }
+    .tts-pick { grid-template-columns: 1fr; }
+    .tts-section { grid-template-columns: 40px 1fr; }
+    .tts-section .sub { grid-column: 2; margin-top: 4px; }
+    .tts-chart { grid-template-columns: 44px 1fr; }
+    .tts-table-head, .tts-table-row { grid-template-columns: 1.4fr repeat(7, 0.8fr); font-size: 11px; }
+    .tts-table-row .cat { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="logo">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <rect x="2" y="2" width="24" height="24" rx="6" fill="var(--accent)" opacity="0.12"/>
+          <path d="M8 11h3l4-3v12l-4-3H8z" fill="var(--accent)"/>
+          <path d="M18 10c1.5 1 1.5 7 0 8" stroke="var(--accent)" stroke-width="1.6" fill="none" stroke-linecap="round" opacity="0.7"/>
+        </svg>
+      </div>
+      <div>
+        <div class="title">TTS Benchmark</div>
+        <div class="sub">ai4db · Piper · Indonesian voice</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <nav class="topbar-nav">
+        <a href="/" class="topbar-link">OCR</a>
+        <a href="datasets.html" class="topbar-link">Datasets</a>
+        <a href="/tts" class="topbar-link is-active">TTS</a>
+      </nav>
+      <span id="voice-badge" class="model-badge" title="Piper voice"><span class="badge-dot"></span><span id="voice-text">–</span></span>
+      <span id="last-run" class="last-run" title="When the last TTS benchmark finished">–</span>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- ── Hero (editorial) ─────────────────────────────────────── -->
+  <section class="tts-hero">
+    <h1>How <em>fast</em> does<br>ai4db read aloud?</h1>
+    <p class="dek">
+      Same <strong>Piper</strong> voice the production pipeline uses, fed the
+      text the OCR benchmark just produced. We measure <strong>synthesis speed</strong>,
+      not voice quality — there's no ground-truth audio, so quality claims would
+      be guessing.
+    </p>
+  </section>
+
+  <div class="tts-run-row">
+    <button id="run-btn" class="btn-run">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 2.5L13 8L4 13.5V2.5Z" fill="currentColor"/></svg>
+      Run TTS benchmark
+    </button>
+    <span id="run-status"></span>
+  </div>
+
+  <div id="empty" class="tts-empty" style="display:none;">
+    No TTS benchmark results yet.<br>
+    Run the OCR benchmark first, then click <strong>Run TTS benchmark</strong>.
+  </div>
+
+  <div id="summary-error" class="tts-error" style="display:none;"></div>
+
+  <!-- ── 01 · OVERALL ────────────────────────────────────────── -->
+  <section id="content" style="display:none;">
+  <div class="tts-section">
+    <div class="num">01</div>
+    <div>
+      <h2>Overall</h2>
+      <div class="sub">across every OCR page the benchmark produced</div>
+    </div>
+    <div></div>
+  </div>
+
+  <div class="tts-cards">
+    <div class="tts-card">
+      <div class="label">Real-time factor</div>
+      <div class="value" id="m-rtf">–</div>
+      <div><span class="tag" id="m-rtf-tag"></span></div>
+      <div class="caption"><strong>RTF &lt; 1.0</strong> means ai4db synthesizes faster than the text plays — the platform can read a page live. &gt; 1.0 = a blind user would hear pauses.</div>
+    </div>
+    <div class="tts-card">
+      <div class="label">Synth latency</div>
+      <div class="value" id="m-synth">–</div>
+      <div class="caption" style="visibility:hidden">.</div>
+      <div class="caption">Average wall-clock to synthesize one OCR page end-to-end. Lower = snappier page turn.</div>
+    </div>
+    <div class="tts-card">
+      <div class="label">First chunk</div>
+      <div class="value" id="m-first">–</div>
+      <div class="caption" style="visibility:hidden">.</div>
+      <div class="caption">Time until the <em>first</em> audio arrives. This is the lag a blind user actually feels before the speaker says anything.</div>
+    </div>
+    <div class="tts-card">
+      <div class="label">Throughput</div>
+      <div class="value" id="m-cps">–</div>
+      <div class="caption" style="visibility:hidden">.</div>
+      <div class="caption">Characters synthesized per second of wall-clock. Higher = the engine moves text-to-speech faster.</div>
+    </div>
+  </div>
+
+  <!-- ── 02 · PICK & TRY (playground) ────────────────────────── -->
+  <div class="tts-section">
+    <div class="num">02</div>
+    <div>
+      <h2>Pick a line · hear it</h2>
+      <div class="sub">choose any text the OCR benchmark just produced and hear the platform speak it</div>
+    </div>
+    <div></div>
+  </div>
+
+  <div class="tts-pick">
+    <div class="tts-pick-card">
+      <p class="lede">From the <em>OCR result</em></p>
+      <div class="row">
+        <label for="pick-category">Category</label>
+        <select id="pick-category" class="tts-select" disabled><option>loading…</option></select>
+      </div>
+      <div class="row">
+        <label for="pick-image">Page</label>
+        <select id="pick-image" class="tts-select" disabled><option>–</option></select>
+      </div>
+      <div>
+        <label style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted); display:block; margin-bottom:6px;">Lines on this page <span style="color:var(--text-muted); font-weight:400; text-transform:none; letter-spacing:0; font-size:11px;">(click to send to playground)</span></label>
+        <div id="pick-lines" class="tts-line-list">
+          <div style="color:var(--text-muted); padding:14px; font-size:12px;">Pick a category &amp; page.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tts-pick-card">
+      <p class="lede">Or <em>try it yourself</em></p>
+      <div class="row">
+        <label>Source</label>
+        <div id="source-toggle" class="tts-toggle">
+          <button data-src="pr" class="on" type="button">OCR predicted</button>
+          <button data-src="gt" type="button">Ground truth</button>
+          <button data-src="free" type="button">Type anything</button>
+        </div>
+      </div>
+      <textarea id="play-text" class="tts-textarea" placeholder="Click a line on the left, or type your own text.">Hello.</textarea>
+      <div class="tts-listen-bar">
+        <button id="play-btn" class="play" type="button">▶  Speak this</button>
+        <button id="swap-btn" class="swap" type="button" title="Swap GT ↔ PR for current line">Swap GT/PR</button>
+        <span id="play-status" style="font-family:var(--mono); font-size:11px; color:var(--text-muted); margin-left:auto;"></span>
+      </div>
+      <div id="playback" class="tts-playback" style="display:none;">
+        <audio id="audio" controls></audio>
+        <div class="meta">
+          <div><span class="k">chars</span> <span class="v" id="pb-chars">–</span></div>
+          <div><span class="k">synth</span> <span class="v" id="pb-synth">–</span></div>
+          <div><span class="k">audio</span> <span class="v" id="pb-audio">–</span></div>
+          <div><span class="k">RTF</span> <span class="v" id="pb-rtf">–</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 03 · RTF BY CATEGORY ───────────────────────────────── -->
+  <div class="tts-section">
+    <div class="num">03</div>
+    <div>
+      <h2>RTF by category</h2>
+      <div class="sub">dotted rule marks the live-capable threshold — anything left of it is faster than real-time</div>
+    </div>
+    <div></div>
+  </div>
+
+  <p class="tts-chart-deck" id="tts-deck">
+    Every category sits comfortably <em>left of the line</em> — synthesis is
+    orders of magnitude faster than the words play. The slowest category still
+    synthesises in a small fraction of its audio length.
+  </p>
+
+  <div class="tts-chart">
+    <div class="tts-chart-axis" id="tts-axis"></div>
+    <div class="tts-chart-plot" id="tts-plot"></div>
+  </div>
+
+  <!-- ── 04 · TABLE ──────────────────────────────────────────── -->
+  <div class="tts-section">
+    <div class="num">04</div>
+    <div>
+      <h2>Per category</h2>
+      <div class="sub">click a row to hear a sample line from that category</div>
+    </div>
+    <div></div>
+  </div>
+  <div class="tts-table">
+    <div class="tts-table-head">
+      <div>Category</div>
+      <div>Pages</div>
+      <div>Chars</div>
+      <div>RTF</div>
+      <div>Synth</div>
+      <div>1st chunk</div>
+      <div>Audio</div>
+      <div>Fail</div>
+    </div>
+    <div id="cat-rows"></div>
+  </div>
+
+  <div class="tts-foot">
+    Voice <span id="foot-voice">–</span> · Source <span id="foot-source">–</span> ·
+    Directional benchmark · n ≈ <span id="foot-pages">–</span> pages
+    <div class="legend">
+      <span class="live">RTF = 1.0 (live threshold)</span>
+      <span>Pipe = ai4db's exact voice</span>
+    </div>
+  </div>
+  </section>
+</main>
+
+<script>
+/* ── helpers ─────────────────────────────────────────────────── */
+const $ = (s, r=document) => r.querySelector(s);
+const fmt = (v, d=3) => (v == null || isNaN(v)) ? "–" : Number(v).toFixed(d);
+const fmtMs = v => v == null ? "–" : `${Math.round(v).toLocaleString()} ms`;
+const fmtSec = v => v == null ? "–" : `${v.toFixed(2)} s`;
+
+/* ── overall + table + bars (the "magazine spread") ─────────── */
+let _audioRow = null;
+async function load() {
+  try {
+    const r = await fetch("/api/tts/summary");
+    if (r.status === 404) { $("#empty").style.display = "block"; return; }
+    if (!r.ok) throw new Error("server " + r.status);
+    renderSummary(await r.json());
+  } catch (e) {
+    $("#empty").style.display = "none";
+    $("#summary-error").textContent = `Could not load TTS summary: ${e.message}`;
+    $("#summary-error").style.display = "block";
+    $("#run-status").textContent = "";
+  }
+}
+
+function renderSummary(data) {
+  const o = data.overall || {};
+  $("#empty").style.display = "none";
+  $("#summary-error").style.display = "none";
+  $("#content").style.display = "block";
+
+  $("#m-rtf").textContent = fmt(o.rtf_mean, 3);
+  const live = (o.rtf_mean ?? 1) < 1.0;
+  $("#m-rtf-tag").textContent = live ? "✔ faster than live" : "⚠ slower than live";
+  $("#m-rtf-tag").className = "tag " + (live ? "good" : "bad");
+  $("#m-synth").textContent = fmtMs(o.synth_ms_mean);
+  $("#m-first").textContent = fmtMs(o.first_chunk_ms_mean);
+  $("#m-cps").textContent = (Math.round(o.chars_per_sec_mean || 0)).toLocaleString();
+
+  $("#voice-text").textContent = o.voice || "piper";
+  $("#foot-voice").textContent = o.voice || "–";
+  $("#foot-source").textContent = o.source || "pred";
+  $("#foot-pages").textContent = o.pages ?? "–";
+  $("#last-run").textContent = o.last_run
+    ? "last run " + o.last_run.replace("T"," ").replace("Z"," UTC") : "–";
+
+  const cats = (data.per_category || []).filter(c => c.pages > 0);
+
+  // ── §03 · RTF chart ──────────────────────────────────────────
+  // Fixed axis: 0 → ceil(max * 1.15). Ticks at evenly spaced RTF values.
+  // The 1.0 threshold gets a dotted rule + italic label.
+  const rawMax = Math.max(0.001, ...cats.map(c => c.rtf_mean || 0));
+  const axisMax = Math.max(1.2, Math.ceil(rawMax * 1.15 * 10) / 10);
+  const ticks = [];
+  const step = axisMax <= 1.5 ? 0.25 : axisMax <= 3 ? 0.5 : 1;
+  for (let v = 0; v <= axisMax + 1e-9; v += step) ticks.push(+v.toFixed(2));
+  // always include 1.0
+  if (!ticks.includes(1.0)) ticks.push(1.0);
+  ticks.sort((a,b) => a-b);
+  // paint axis (top = 0, bottom = axisMax)
+  $("#tts-axis").innerHTML = ticks.map(v => {
+    const top = (1 - v / axisMax) * 100;
+    const cls = v === 1.0 ? "tick live" : v > 1.0 ? "tick slow" : "tick";
+    return `<div class="${cls}" style="top:${top}%">${v.toFixed(v < 1 ? 2 : 1)}</div>`;
+  }).join("");
+  // threshold rule
+  const threshold = (1 - 1.0 / axisMax) * 100;
+  $("#tts-plot").innerHTML = `
+    <div class="tts-chart-threshold" style="top:${threshold}%">
+      <span class="lbl">live · rtf 1.0</span>
+    </div>
+  `;
+  // rows (bars in % of axisMax so the threshold line stays meaningful)
+  const rows = cats.map(c => {
+    const pct = Math.min(100, (c.rtf_mean / axisMax) * 100);
+    const slow = c.rtf_mean >= 1.0;
+    return `
+      <div class="tts-bar-row ${slow ? "is-slow" : ""}" data-cat="${encodeURIComponent(c.category)}" style="animation-delay:${60 * cats.indexOf(c)}ms">
+        <div class="name"><span class="dot"></span>${escapeHtml(c.category)}<span class="pg">${c.pages}pg</span></div>
+        <div class="tts-bar-track">
+          <div class="tts-bar-fill" style="width:${pct}%"></div>
+        </div>
+        <div class="num">${fmt(c.rtf_mean,3)}<span class="x">×</span></div>
+      </div>`;
+  }).join("");
+  // append rows after the threshold overlay (positioned absolutely inside the plot)
+  $("#tts-plot").insertAdjacentHTML("beforeend", rows);
+  // populate the deck with a one-line read of the data
+  const liveCount = cats.filter(c => c.rtf_mean < 1.0).length;
+  const total = cats.length;
+  const slowest = cats.slice().sort((a,b) => (b.rtf_mean||0) - (a.rtf_mean||0))[0];
+  if (slowest) {
+    const best = cats.slice().sort((a,b) => (a.rtf_mean||0) - (b.rtf_mean||0))[0];
+    $("#tts-deck").innerHTML = `
+      <em>${liveCount} of ${total}</em> categories are live-capable. Fastest:
+      <em>${escapeHtml(best.category)}</em> at
+      <em>${fmt(best.rtf_mean,2)}×</em> · slowest:
+      <em>${escapeHtml(slowest.category)}</em> at
+      <em>${fmt(slowest.rtf_mean,2)}×</em> &mdash; all well clear of the line.
+    `;
+  }
+
+  // ── §04 · Editorial appendix ─────────────────────────────────
+  // Each row is a 2-column "card": serif name on the left, mono stats on the right.
+  // Hover cross-links to the matching bar in §03.
+  const table = $("#cat-rows");
+  table.innerHTML = cats.map(c => {
+    const slow = c.rtf_mean >= 1.0;
+    return `
+      <div class="tts-table-row ${slow ? "is-slow" : ""}" data-cat="${encodeURIComponent(c.category)}">
+        <div class="cat">${escapeHtml(c.category)}<span class="live-tag">${slow ? "slow" : "live"}</span></div>
+        <div class="v">${c.pages}<span class="unit">pages</span></div>
+        <div class="v">${(c.chars||0).toLocaleString()}<span class="unit">chars</span></div>
+        <div class="v">${fmt(c.rtf_mean,3)}<span class="unit">× real time</span></div>
+        <div class="v">${Math.round(c.synth_ms_mean||0).toLocaleString()}<span class="unit">ms synth</span></div>
+        <div class="v">${Math.round(c.first_chunk_ms_mean||0).toLocaleString()}<span class="unit">ms 1st</span></div>
+        <div class="v">${(c.audio_seconds_total||0).toFixed(1)}<span class="unit">s audio</span></div>
+        <div class="v">${c.failures||0}<span class="unit">fail</span></div>
+      </div>`;
+  }).join("");
+
+  // Cross-link: hovering a bar highlights its table row, and vice versa.
+  const allRows = document.querySelectorAll(".tts-table-row, .tts-bar-row");
+  allRows.forEach(row => {
+    row.addEventListener("mouseenter", () => {
+      const cat = row.dataset.cat; if (!cat) return;
+      document.querySelectorAll(`.tts-table-row[data-cat="${cssEscape(cat)}"]`)
+        .forEach(r => r.classList.add("is-active"));
+    });
+    row.addEventListener("mouseleave", () => {
+      document.querySelectorAll(".tts-table-row.is-active")
+        .forEach(r => r.classList.remove("is-active"));
+    });
+    row.addEventListener("click", () => {
+      const cat = decodeURIComponent(row.dataset.cat);
+      const tableRow = document.querySelector(`.tts-table-row[data-cat="${cssEscape(cat)}"]`);
+      const tmp = document.createElement("div");
+      tmp.className = "tts-table-row is-active";
+      speakRow(tableRow || tmp);
+    });
+  });
+}
+
+function cssEscape(s) {
+  // Tiny escape for selector values that may contain spaces / quotes.
+  return (s || "").replace(/(["\\])/g, "\\$1");
+}
+
+async function speakRow(row) {
+  if (_audioRow) { _audioRow.pause(); _audioRow = null; }
+  const cat = row.dataset.cat;
+  if (!cat) return;
+  document.querySelectorAll(".tts-table-row").forEach(r => r.classList.remove("is-active"));
+  row.classList.add("is-active");
+  try {
+    const data = await (await fetch("/api/results/" + decodeURIComponent(cat))).json();
+    let text = "";
+    for (const img of (data.images || [])) {
+      for (const ov of (img.overlays || [])) {
+        if (ov.pr_text && ov.pr_text.trim()) { text = ov.pr_text.trim(); break; }
+      }
+      if (text) break;
+    }
+    if (!text) return;
+    setPlayground(text);
+    await doPlay(text);
+  } finally {
+    setTimeout(() => row.classList.remove("is-active"), 1200);
+  }
+}
+
+function escapeHtml(s) {
+  return (s || "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[c]));
+}
+
+/* ── playground + OCR picker ────────────────────────────────── */
+let _curLine = null;   // { pr, gt, src }
+function setPlayground(text) {
+  $("#play-text").value = text || "";
+}
+$("#source-toggle").addEventListener("click", e => {
+  const btn = e.target.closest("button[data-src]");
+  if (!btn) return;
+  $("#source-toggle").querySelectorAll("button").forEach(b => b.classList.remove("on"));
+  btn.classList.add("on");
+  const src = btn.dataset.src;
+  if (src === "free") { $("#play-text").focus(); return; }
+  if (_curLine) setPlayground(src === "gt" ? (_curLine.gt || "") : (_curLine.pr || ""));
+});
+$("#play-text").addEventListener("input", () => {
+  // typing forces free mode visually
+  const buttons = $("#source-toggle").querySelectorAll("button");
+  buttons.forEach(b => b.classList.remove("on"));
+  buttons[2].classList.add("on"); // "Type anything"
+});
+$("#swap-btn").addEventListener("click", () => {
+  if (!_curLine) return;
+  const onBtn = $("#source-toggle").querySelector("button.on");
+  const cur = onBtn ? onBtn.dataset.src : "pr";
+  const next = cur === "pr" ? "gt" : "pr";
+  $("#source-toggle").querySelectorAll("button").forEach(b => b.classList.remove("on"));
+  const target = $("#source-toggle").querySelector(`button[data-src="${next}"]`);
+  target.classList.add("on");
+  setPlayground(_curLine[next] || "");
+});
+
+$("#play-btn").addEventListener("click", async () => {
+  const t = $("#play-text").value.trim();
+  if (!t) return;
+  await doPlay(t);
+});
+
+async function doPlay(text) {
+  const btn = $("#play-btn");
+  const status = $("#play-status");
+  btn.disabled = true;
+  status.textContent = "speaking…";
+  try {
+    // POST so long OCR pages aren't truncated by a GET URL.
+    let blob, resp;
+    if (text.length > 1500) {
+      resp = await fetch("/api/tts", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({text}),
+      });
+    } else {
+      resp = await fetch("/api/tts?text=" + encodeURIComponent(text));
+    }
+    if (!resp.ok) {
+      const msg = resp.status === 503
+        ? "voice model missing — run: uv run python -m scripts.download_voice"
+        : `server ${resp.status}`;
+      throw new Error(msg);
+    }
+    blob = await resp.blob();
+    const a = $("#audio");
+    a.src = URL.createObjectURL(blob);
+    a.play();
+    $("#playback").style.display = "grid";
+    $("#pb-chars").textContent  = resp.headers.get("X-Chars") || "–";
+    $("#pb-synth").textContent  = (parseFloat(resp.headers.get("X-Synth-Ms") || 0)).toFixed(0) + " ms";
+    $("#pb-audio").textContent  = (parseFloat(resp.headers.get("X-Audio-Seconds") || 0)).toFixed(2) + " s";
+    $("#pb-rtf").textContent    = (parseFloat(resp.headers.get("X-Rtf") || 0)).toFixed(3);
+    const rtf = parseFloat(resp.headers.get("X-Rtf") || 0);
+    status.textContent = rtf < 1 ? `done · live (${rtf.toFixed(2)}×)` : `done · slow (${rtf.toFixed(2)}×)`;
+    a.onended = () => { status.textContent = ""; };
+  } catch (e) {
+    status.textContent = e.message;
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+/* ── category / image / line picker ─────────────────────────── */
+let _catList = [];
+let _imgList = [];
+let _lines = [];
+
+async function loadCategories() {
+  try {
+    // Per-category files live in reports/per_category — list them and reuse.
+    // We don't have a single "list categories" endpoint, so we infer from the
+    // TTS summary's per_category array (already loaded) and from a probe.
+    const data = (await (await fetch("/api/tts/summary")).json());
+    _catList = (data.per_category || []).map(c => c.category);
+  } catch { _catList = []; }
+  const sel = $("#pick-category");
+  sel.innerHTML = _catList.length
+    ? _catList.map(c => `<option value="${encodeURIComponent(c)}">${escapeHtml(c)}</option>`).join("")
+    : '<option>–</option>';
+  sel.disabled = !_catList.length;
+  if (_catList.length) await loadImages();
+}
+
+async function loadImages() {
+  const cat = decodeURIComponent($("#pick-category").value);
+  if (!cat) return;
+  try {
+    const data = await (await fetch("/api/results/" + encodeURIComponent(cat))).json();
+    _imgList = (data.images || []).map(img => ({
+      name: img.image, overlays: img.overlays || []
+    }));
+  } catch { _imgList = []; }
+  const sel = $("#pick-image");
+  sel.innerHTML = _imgList.length
+    ? _imgList.map((img, i) => `<option value="${i}">${escapeHtml(img.name)}</option>`).join("")
+    : '<option>–</option>';
+  sel.disabled = !_imgList.length;
+  if (_imgList.length) showLines();
+}
+$("#pick-category").addEventListener("change", loadImages);
+$("#pick-image").addEventListener("change", showLines);
+
+function showLines() {
+  const i = parseInt($("#pick-image").value || "0", 10);
+  const img = _imgList[i];
+  const list = $("#pick-lines");
+  _lines = (img?.overlays || []).filter(o => o.pr_text && o.pr_text.trim());
+  if (!_lines.length) {
+    list.innerHTML = `<div style="color:var(--text-muted); padding:14px; font-size:12px;">No predicted text on this page.</div>`;
+    _curLine = null;
+    return;
+  }
+  list.innerHTML = _lines.map((o, idx) => `
+    <div class="tts-line-item" data-idx="${idx}">
+      <span class="num">${String(idx+1).padStart(2,"0")}</span>
+      <span class="txt">${escapeHtml(o.pr_text)}</span>
+      <span class="src pr">PR</span>
+    </div>`).join("");
+  list.querySelectorAll(".tts-line-item").forEach(el => {
+    el.addEventListener("click", () => {
+      const idx = parseInt(el.dataset.idx, 10);
+      const o = _lines[idx];
+      _curLine = { pr: o.pr_text || "", gt: o.gt_text || "" };
+      const onBtn = $("#source-toggle").querySelector("button.on");
+      const src = onBtn?.dataset.src || "pr";
+      setPlayground(src === "gt" ? _curLine.gt : _curLine.pr);
+    });
+  });
+}
+
+/* ── run benchmark ──────────────────────────────────────────── */
+$("#run-btn").addEventListener("click", async () => {
+  const btn = $("#run-btn"), status = $("#run-status");
+  btn.disabled = true;
+  status.textContent = "starting…";
+  try {
+    const r = await (await fetch("/api/tts/run", { method: "POST" })).json();
+    if (r.already_running) status.textContent = "already running…";
+  } catch { status.textContent = "failed to start"; btn.disabled = false; return; }
+  const poll = setInterval(async () => {
+    try {
+      const p = await (await fetch("/api/tts/progress")).json();
+      if (p.running) {
+        status.textContent = `${p.done||0}/${p.total||0} · ${p.current || ""}`;
+      } else {
+        clearInterval(poll);
+        status.textContent = "done";
+        btn.disabled = false;
+        load();
+        loadCategories();
+      }
+    } catch { clearInterval(poll); btn.disabled = false; }
+  }, 1000);
+});
+
+load();
+loadCategories();
+</script>
+</body>
+</html>

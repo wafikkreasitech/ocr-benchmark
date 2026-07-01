@@ -49,6 +49,11 @@ class Settings(BaseSettings):
     serve_host: str = "127.0.0.1"
     serve_port: int = 8765                        # change in .env if 8765 is taken
 
+    # TTS benchmark — Piper voice (same path ai4db's config uses for Indonesian).
+    # Download with: uv run python -m scripts.download_voice
+    piper_voice_path: str = "models/piper-voices/id/id_ID-news_tts-medium.onnx"
+    tts_source: str = "pred"                      # which text to speak: pred (OCR output) | gt (clean)
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",

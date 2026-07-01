@@ -899,26 +899,52 @@ function showImageDetail(category, img, summary) {
       li.innerHTML = `
         <span class="mark">${mark}</span>
         <span>
-          <span><span class="lbl">GT</span><span class="gt">${escapeHtml(o.gt_text || "")}</span></span>
-          <span><span class="lbl">PR</span><span class="pr">${escapeHtml(o.pr_text || "")}${o.pr_score ? ` · conf ${(o.pr_score*100).toFixed(0)}%` : ""}</span></span>
+          <span><span class="lbl">GT</span><span class="gt">${escapeHtml(o.gt_text || "")}</span>${_listenBtn(o.gt_text)}</span>
+          <span><span class="lbl">PR</span><span class="pr">${escapeHtml(o.pr_text || "")}${o.pr_score ? ` · conf ${(o.pr_score*100).toFixed(0)}%` : ""}</span>${_listenBtn(o.pr_text)}</span>
           ${cerLabel}
           ${correctedLine}
         </span>`;
     } else if (o.status === "missed") {
       li.className = "miss";
-      li.innerHTML = `<span class="mark">✗</span><span><span class="lbl">MISSED</span><span class="gt">${escapeHtml(o.gt_text || "")}</span></span>`;
+      li.innerHTML = `<span class="mark">✗</span><span><span class="lbl">MISSED</span><span class="gt">${escapeHtml(o.gt_text || "")}</span>${_listenBtn(o.gt_text)}</span>`;
     } else if (o.status === "spurious") {
       const corrected = o.pr_text_corrected;
       const correctedLine = (correctorOn && corrected !== undefined && corrected !== o.pr_text)
         ? `<span><span class="lbl">FIX</span><span class="pr" style="color:var(--accent)">${escapeHtml(corrected)}</span></span>`
         : "";
       li.className = "spur";
-      li.innerHTML = `<span class="mark">+</span><span><span class="lbl">EXTRA</span><span class="pr">${escapeHtml(o.pr_text || "")}</span></span>${correctedLine ? `<span></span>` : ""}`;
+      li.innerHTML = `<span class="mark">+</span><span><span class="lbl">EXTRA</span><span class="pr">${escapeHtml(o.pr_text || "")}</span>${_listenBtn(o.pr_text)}</span>${correctedLine ? `<span></span>` : ""}`;
       if (correctedLine) li.innerHTML += correctedLine;
     }
     ul.appendChild(li);
   }
 }
+
+// TTS: speaker button per line. Speaks via /api/tts (Piper). One shared
+// <audio> so a new click cancels the previous playback. ponytail: native
+// Audio element, no library.
+function _listenBtn(text) {
+  const t = (text || "").trim();
+  if (!t) return "";
+  return `<button class="listen" title="Listen (Piper TTS)" data-tts="${escapeHtml(t)}">🔊</button>`;
+}
+let _ttsAudio = null;
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest("button.listen");
+  if (!btn) return;
+  const text = btn.getAttribute("data-tts");
+  if (!text) return;
+  if (_ttsAudio) { _ttsAudio.pause(); _ttsAudio = null; }
+  btn.classList.add("playing");
+  _ttsAudio = new Audio("/api/tts?text=" + encodeURIComponent(text));
+  const clear = () => btn.classList.remove("playing");
+  _ttsAudio.addEventListener("ended", clear);
+  _ttsAudio.addEventListener("error", () => {
+    clear();
+    btn.title = "TTS unavailable — run scripts/download_voice";
+  });
+  _ttsAudio.play().catch(clear);
+});
 
 function _normalize(s) { return (s || "").normalize("NFKC").toLowerCase().replace(/\s+/g, " ").trim(); }
 function _f1(d) {

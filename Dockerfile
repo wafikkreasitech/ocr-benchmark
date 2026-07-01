@@ -34,7 +34,7 @@ COPY --from=builder /build/ui /app/ui
 COPY --from=builder /build/pyproject.toml /app/pyproject.toml
 COPY --from=builder /build/dataset /app/dataset
 
-RUN mkdir -p /app/reports /app/IMG_OCR_IND_CN /app/dataset/dataset && chown -R bench:bench /app
+RUN mkdir -p /app/reports /app/IMG_OCR_IND_CN /app/dataset/dataset /app/models && chown -R bench:bench /app
 
 USER bench
 

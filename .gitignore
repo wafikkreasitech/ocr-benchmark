@@ -3,6 +3,12 @@ reports/per_category/
 reports/summary.csv
 reports/summary.json
 reports/.run_status.json
+reports/tts_summary.json
+reports/tts_summary.csv
+reports/.tts_status.json
+
+# TTS voice model (~63MB, downloaded via scripts/download_voice.py)
+models/
 
 # secrets
 .env
