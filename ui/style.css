@@ -1995,6 +1995,15 @@ button.listen:hover { opacity: 1; transform: scale(1.15); }
 button.listen.playing { opacity: 1; animation: listen-pulse 0.9s ease-in-out infinite; }
 @keyframes listen-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.25); } }
 
+/* "Play page" button in detail header — bigger, sits in the title row */
+button.listen-page {
+  font-size: 12px; padding: 5px 12px; margin-left: 12px;
+  background: var(--accent); color: #fff; border-radius: 6px;
+  opacity: 1; font-weight: 500;
+}
+button.listen-page:hover { opacity: 0.88; transform: none; }
+button.listen-page.playing { animation: listen-pulse 0.9s ease-in-out infinite; }
+
 .tts-hero { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 20px 0; }
 .tts-card {
   background: var(--surface); border: 1px solid var(--border);

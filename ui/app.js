@@ -837,6 +837,22 @@ function showImageDetail(category, img, summary) {
   imgEl.onload = () => drawOverlay(img);
   if (imgEl.complete) drawOverlay(img);
 
+  // "Play page" button — speak all PR lines joined with a single space,
+  // exactly the same join the TTS benchmark uses (tts_runner._page_text).
+  const playBtn = $("#d-play-page");
+  const joined = (img.overlays || [])
+    .map(o => (o.pr_text || "").trim()).filter(t => t).join(" ");
+  if (playBtn) {
+    if (joined) {
+      playBtn.hidden = false;
+      playBtn.dataset.tts = joined;
+      playBtn.dataset.ttsLabel = `all PR lines (${img.overlays.length})`;
+      playBtn.textContent = `▶ Play page (${img.overlays.length} lines)`;
+    } else {
+      playBtn.hidden = true;
+    }
+  }
+
   const samples = img.overlays || [];
   const ul = $("#samples");
   ul.innerHTML = "";
