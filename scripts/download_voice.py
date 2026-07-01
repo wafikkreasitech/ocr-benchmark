@@ -56,6 +56,12 @@ def _fetch(url: str, target: Path, name: str) -> None:
     req = urllib.request.Request(url, headers={"User-Agent": "ocr-benchmark/download_voice"})
     with urllib.request.urlopen(req) as resp, target.open("wb") as out:
         total = int(resp.headers.get("Content-Length", "0") or 0)
+        # surface the resolved URL + size so users on slow links see progress
+        # isn't frozen on the redirect
+        if total > 0:
+            print(f"    → {_human(total)}  ({resp.url})", flush=True)
+        else:
+            print(f"    → size unknown, streaming  ({resp.url})", flush=True)
         done = 0
         while True:
             chunk = resp.read(_CHUNK)
