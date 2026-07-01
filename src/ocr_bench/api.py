@@ -8,7 +8,11 @@ Endpoints:
   GET  /api/image/<cat>/<file>  raw image bytes
   GET  /api/models              available OCR model combinations
   GET  /api/config              current runtime config
+  GET  /api/tts?text=…          synthesize text -> WAV (503 if voice missing)
+  POST /api/tts/run             run TTS benchmark over OCR results (background)
+  GET  /api/tts/summary         aggregated TTS metrics (overall + per-category)
   GET  /                        dashboard (ui/index.html)
+  GET  /tts                     TTS benchmark dashboard (ui/tts.html)
 """
 from __future__ import annotations
 
@@ -18,12 +22,41 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-from fastapi import BackgroundTasks, FastAPI, HTTPException
-from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
+from fastapi import BackgroundTasks, FastAPI, HTTPException, Request
+from fastapi.responses import FileResponse, JSONResponse, Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 
 from .paths import DATASETS, DEFAULT_DATASET_ROOT, HISTORY_ROOT, REPORTS_ROOT, UI_ROOT, resolve_dataset_root
 from .runner import RUN_STATUS_PATH, run as run_benchmark
+
+# Lazy TTS engine — loaded on first /api/tts call so a clone with no voice
+# model still starts and serves the OCR dashboard. None until loaded.
+_tts_engine = None
+
+
+def _get_tts_engine():
+    """Return a cached TTSEngine, or raise HTTPException(503) if unavailable.
+
+    503 (not 500) so the UI's Listen button can show "voice model not
+    downloaded — run scripts/download_voice" instead of a stack trace.
+    """
+    global _tts_engine
+    if _tts_engine is not None:
+        return _tts_engine
+    from .config import get_settings
+    from .tts_engine import TTSEngine
+    voice_path = Path(get_settings().piper_voice_path)
+    if not voice_path.exists():
+        raise HTTPException(
+            503,
+            f"TTS voice model not found at {voice_path}. "
+            f"Run: uv run python -m scripts.download_voice",
+        )
+    try:
+        _tts_engine = TTSEngine(str(voice_path))
+    except Exception as e:  # noqa: BLE001 — piper load failure -> 503, not 500
+        raise HTTPException(503, f"TTS voice failed to load: {e}") from e
+    return _tts_engine
 
 AVAILABLE_MODELS = {
     "PP-OCRv6": {"model_types": ["tiny", "small", "medium"], "default": "small",
@@ -243,6 +276,81 @@ def create_app() -> FastAPI:
             "rec_img_width": s.rec_img_width,
         }
 
+    def _synth_response(text: str) -> Response:
+        """Synthesize -> WAV, with timing metrics on response headers so the
+        playground can show the real RTF for exactly what was spoken."""
+        text = (text or "").strip()
+        if not text:
+            raise HTTPException(400, "empty text")
+        from .tts_engine import pcm_to_wav
+        engine = _get_tts_engine()  # raises 503 if voice missing
+        pcm, r = engine.synthesize(text)
+        return Response(
+            content=pcm_to_wav(pcm, r.sample_rate),
+            media_type="audio/wav",
+            headers={
+                # Exposed to fetch() so the playground reads accurate numbers.
+                "Access-Control-Expose-Headers": "X-Synth-Ms,X-Audio-Seconds,X-Rtf,X-Chars,X-First-Chunk-Ms,X-Chars-Per-Sec",
+                "X-Synth-Ms": f"{r.synth_ms:.1f}",
+                "X-Audio-Seconds": f"{r.audio_seconds:.3f}",
+                "X-Rtf": f"{r.rtf:.4f}",
+                "X-Chars": str(r.n_chars),
+                "X-First-Chunk-Ms": f"{r.first_chunk_ms:.1f}",
+                "X-Chars-Per-Sec": f"{r.chars_per_sec:.1f}",
+            },
+        )
+
+    @app.get("/api/tts")
+    def api_tts_get(text: str):
+        """Synthesize short ``text`` to WAV (query param). Powers Listen buttons."""
+        return _synth_response(text)
+
+    @app.post("/api/tts")
+    async def api_tts_post(request: Request):
+        """Synthesize long text (JSON body {text}). Used by the playground —
+        whole OCR pages exceed a safe GET URL length."""
+        try:
+            body = await request.json()
+        except Exception:  # noqa: BLE001
+            raise HTTPException(400, "invalid JSON body")
+        return _synth_response((body or {}).get("text", ""))
+
+    @app.post("/api/tts/run")
+    def api_tts_run(background: BackgroundTasks, source: str | None = None,
+                    force: bool = False):
+        """Run the TTS benchmark over the current OCR reports (background)."""
+        from .tts_runner import TTS_STATUS_PATH, run as run_tts
+        if TTS_STATUS_PATH.exists():
+            try:
+                current = json.loads(TTS_STATUS_PATH.read_text(encoding="utf-8"))
+                if current.get("running") and not force and not _is_stale(current):
+                    return {"ok": False, "already_running": True}
+            except (json.JSONDecodeError, OSError):
+                pass
+        background.add_task(run_tts, source)
+        return {"ok": True, "started": True}
+
+    @app.get("/api/tts/progress")
+    def api_tts_progress():
+        from .tts_runner import TTS_STATUS_PATH
+        idle = {"running": False, "total": 0, "done": 0, "current": None}
+        if not TTS_STATUS_PATH.exists():
+            return JSONResponse(idle)
+        try:
+            status = json.loads(TTS_STATUS_PATH.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            return JSONResponse(idle)
+        if status.get("running") and _is_stale(status):
+            status["stale"] = True
+        return JSONResponse(status)
+
+    @app.get("/api/tts/summary")
+    def api_tts_summary():
+        path = REPORTS_ROOT / "tts_summary.json"
+        if not path.exists():
+            raise HTTPException(404, "no TTS reports yet — run POST /api/tts/run")
+        return JSONResponse(json.loads(path.read_text(encoding="utf-8")))
+
     @app.get("/api/results/{category}")
     def api_results(category: str):
         for f in (REPORTS_ROOT / "per_category").glob("*.json"):
@@ -457,6 +565,13 @@ def create_app() -> FastAPI:
         page = UI_ROOT / "datasets.html"
         if not page.exists():
             raise HTTPException(404, "ui/datasets.html not found")
+        return FileResponse(page, media_type="text/html")
+
+    @app.get("/tts")
+    def tts_page():
+        page = UI_ROOT / "tts.html"
+        if not page.exists():
+            raise HTTPException(404, "ui/tts.html not found")
         return FileResponse(page, media_type="text/html")
 
     if UI_ROOT.exists():

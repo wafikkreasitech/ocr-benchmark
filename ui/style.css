@@ -949,6 +949,9 @@ body {
 .knobs[open] > summary::before { transform: rotate(90deg); }
 .knobs > summary::-webkit-details-marker { display: none; }
 .btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   background: transparent;
   border: 1px solid var(--border);
   color: var(--text-muted);
@@ -957,6 +960,7 @@ body {
   border-radius: var(--radius-xs);
   cursor: pointer;
   font-family: var(--mono);
+  text-decoration: none;
   transition: color 120ms, border-color 120ms, background 120ms;
 }
 .btn-ghost:hover {
@@ -1979,3 +1983,32 @@ tbody tr:hover { background: var(--surface-alt); }
 @media (max-width: 700px) {
   .datasets-grid { grid-template-columns: 1fr; }
 }
+
+/* ── TTS: Listen buttons + dashboard ─────────────────────────────── */
+button.listen {
+  border: none; background: transparent; cursor: pointer;
+  font-size: 12px; line-height: 1; padding: 1px 4px; margin-left: 4px;
+  opacity: 0.45; transition: opacity 120ms ease-out, transform 120ms ease-out;
+  vertical-align: middle;
+}
+button.listen:hover { opacity: 1; transform: scale(1.15); }
+button.listen.playing { opacity: 1; animation: listen-pulse 0.9s ease-in-out infinite; }
+@keyframes listen-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.25); } }
+
+.tts-hero { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 20px 0; }
+.tts-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow-sm);
+}
+.tts-card .tts-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+.tts-card .tts-value { font-size: 34px; font-variant-numeric: tabular-nums; margin-top: 6px; color: var(--text); }
+.tts-card .tts-sub { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+.tts-badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+.tts-badge.good { background: var(--good-bg); color: var(--good); }
+.tts-badge.bad  { background: var(--bad-bg);  color: var(--bad); }
+.tts-bars { display: grid; gap: 6px; margin: 8px 0 24px; }
+.tts-bar-row { display: grid; grid-template-columns: 160px 1fr 64px; align-items: center; gap: 10px; font-size: 13px; }
+.tts-bar-track { background: var(--bg-warm); border-radius: var(--radius-xs); height: 14px; overflow: hidden; }
+.tts-bar-fill { background: var(--accent); height: 100%; }
+tr.tts-row { cursor: pointer; }
+tr.tts-row:hover { background: var(--accent-light); }

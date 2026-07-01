@@ -133,6 +133,36 @@ reports/
 predicted text, confidence, IoU, and status (`matched` / `missed` /
 `spurious`) — the data backing the drill-down overlay in the dashboard.
 
+## TTS benchmark (speaks the OCR output)
+
+The second ai4db stage: after OCR reads the page, Piper speaks it. This measures
+**how fast** — the same Piper voice ai4db runs, fed the OCR output. See
+[`docs/plan-tts.md`](docs/plan-tts.md).
+
+```bash
+# 1. Download the Indonesian Piper voice (~63MB, not bundled in the wheel)
+uv run python -m scripts.download_voice
+
+# 2. Run the OCR benchmark first (TTS speaks its results), then:
+uv run python -m scripts.run_tts_benchmark          # speak OCR output (default)
+uv run python -m scripts.run_tts_benchmark --source gt   # speak clean ground truth
+
+# 3. Dashboard → http://127.0.0.1:8765/tts  (also the "TTS" nav link)
+```
+
+The headline metric is **RTF (real-time factor)**: `synth_time / audio_length`.
+**RTF < 1.0 = faster than real-time** — the platform can read a page aloud live.
+Also reports synth latency, first-chunk latency (perceived lag before speech),
+and chars/sec. We measure *speed*, not voice quality — there's no ground-truth
+audio, so quality claims would be dishonest (stated in the UI).
+
+In the OCR per-image drill-down, a 🔊 button on any GT/PR line speaks it via
+`/api/tts`. Outputs: `reports/tts_summary.json` + `.csv`.
+
+The voice is **not** in the wheel (unlike the OCR model pack) — you must run
+`download_voice` once. If it's missing, `/api/tts` returns a clear 503 and the
+🔊 buttons degrade gracefully.
+
 ## Why standalone
 
 The whole point of this repo is **moving OCR benchmarking to a different

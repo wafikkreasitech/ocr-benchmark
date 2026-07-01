@@ -15,10 +15,12 @@ dependencies = [
   "jiwer>=3.0",
   "symspellpy>=6.7",            # post-processing spell correction
   "pydantic-settings>=2.0",     # .env-driven feature flag
+  "piper-tts>=1.4",             # TTS benchmark — same backend/voice ai4db runs (reuses onnxruntime)
 ]
 
 [project.optional-dependencies]
 dev = ["pytest>=8.0", "pytest-timeout>=2.0"]
+intelligibility = ["faster-whisper>=1.0"]   # only for the opt-in TTS->STT->CER loop (plan-tts §7); not installed by default
 
 [project.scripts]
 ocr-bench-serve = "ocr_bench.api:serve"
