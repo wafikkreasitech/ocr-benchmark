@@ -379,7 +379,49 @@ def create_app() -> FastAPI:
             data["ocr_version"] = cfg.get("ocr_version") or ov.get("ocr_version") or ""
         if not data.get("model_type"):
             data["model_type"] = cfg.get("model_type") or ov.get("model_type") or ""
+        # Dataset key is in cfg.overall for newer runs but might be missing in
+        # older snapshots; leave it blank rather than guess.
+        if not data.get("dataset"):
+            ds = cfg.get("dataset") or ov.get("dataset") or ""
+            if ds:
+                data["dataset"] = ds
         return JSONResponse(data)
+
+    @app.post("/api/history/backfill")
+    def api_history_backfill():
+        """One-shot migration: rewrite every history file so top-level
+        ``ocr_version``, ``model_type``, and ``dataset`` are present.
+
+        Older snapshots from before the saver change only stored these inside
+        ``config``/``overall``; the UI reads top-level so the table would show
+        ``? · ?``. Idempotent — only patches missing fields, never overwrites.
+        """
+        if not HISTORY_ROOT.exists():
+            return {"patched": 0, "scanned": 0}
+        patched = 0
+        scanned = 0
+        for path in HISTORY_ROOT.glob("*.json"):
+            if path.name == "index.json":
+                continue
+            scanned += 1
+            try:
+                data = json.loads(path.read_text(encoding="utf-8"))
+            except (json.JSONDecodeError, OSError):
+                continue
+            cfg = data.get("config") or {}
+            ov = data.get("overall") or {}
+            changed = False
+            for k in ("ocr_version", "model_type", "dataset"):
+                if not data.get(k):
+                    src = cfg.get(k) or ov.get(k) or ""
+                    if src:
+                        data[k] = src
+                        changed = True
+            if changed:
+                path.write_text(json.dumps(data, ensure_ascii=False, indent=2),
+                                encoding="utf-8")
+                patched += 1
+        return {"patched": patched, "scanned": scanned}
 
     @app.get("/api/image/{category}/{filename}")
     def api_image(category: str, filename: str):

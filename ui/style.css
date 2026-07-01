@@ -1314,6 +1314,99 @@ tbody tr:hover { background: var(--surface-alt); }
 }
 .btn-restart:hover { background: var(--warn); color: #fff; }
 
+/* ─── Detailed-results toolbar (Latest / All / Best tabs) ──── */
+.dr-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding: 4px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  width: fit-content;
+}
+.dr-toolbar-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-left: 6px;
+}
+.dr-tab {
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 120ms, color 120ms;
+}
+.dr-tab:hover { background: var(--surface); color: var(--text); }
+.dr-tab-active {
+  background: var(--surface);
+  color: var(--accent);
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+.dr-toolbar-meta {
+  margin-left: 12px;
+  font-size: 11px;
+}
+.dr-model-chip {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--accent);
+  background: var(--accent-light);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-weight: 500;
+}
+.dr-best-chip {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--good);
+  background: var(--good-bg);
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-weight: 600;
+}
+.dr-dataset-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+.dr-dataset-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.dr-dataset-select {
+  font-family: var(--sans);
+  font-size: 12px;
+  padding: 5px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+}
+.dr-hint { padding: 16px; text-align: left; line-height: 1.5; }
+.dr-note {
+  background: var(--warn-bg);
+  color: var(--warn);
+  font-size: 11px;
+  padding: 8px 12px;
+  font-family: var(--sans);
+  font-weight: 500;
+}
+.dr-note-row td { border-bottom: 1px dashed var(--warn); }
+
 /* ─── Detail View ────────────────────────────────────────── */
 .detail-grid {
   display: grid;
@@ -1393,6 +1486,28 @@ tbody tr:hover { background: var(--surface-alt); }
   color: var(--text-muted);
   margin-bottom: 10px;
   font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.samples-legend {
+  font-family: var(--sans);
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+.d-interpretation {
+  font-size: 12px;
+  color: var(--text);
+  background: var(--surface-alt);
+  border-left: 3px solid var(--accent);
+  padding: 8px 12px;
+  border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+  margin-bottom: 10px;
+  line-height: 1.5;
 }
 .samples ul { list-style: none; display: flex; flex-direction: column; gap: 6px; max-height: 480px; overflow-y: auto; padding-right: 4px; }
 .samples li {
@@ -1579,6 +1694,125 @@ tbody tr:hover { background: var(--surface-alt); }
 }
 .compare-delta.up { color: var(--bad); }
 .compare-delta.down { color: var(--good); }
+
+/* History row — small chips alongside the model label. */
+.history-dataset {
+  display: inline-block;
+  margin-left: 6px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-secondary);
+  background: var(--surface-alt);
+  border: 1px solid var(--border-light);
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+.history-tag {
+  display: inline-block;
+  margin-left: 4px;
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 1px 5px;
+  border-radius: 3px;
+  vertical-align: middle;
+}
+.history-tag-corrector {
+  background: var(--accent-light);
+  color: var(--accent);
+  font-weight: 600;
+}
+.history-tag-override {
+  background: var(--warn-bg);
+  color: var(--warn);
+  font-weight: 600;
+}
+
+/* Run-detail pills — header chips. */
+.rd-pill {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: var(--surface-alt);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-light);
+  margin-right: 6px;
+  font-family: var(--mono);
+}
+.rd-pill-dataset {
+  background: var(--accent-light);
+  color: var(--accent);
+  border-color: var(--accent-light);
+  font-weight: 600;
+}
+.rd-pill-on {
+  background: var(--good-bg);
+  color: var(--good);
+  border-color: var(--good-bg);
+  font-weight: 600;
+}
+.rd-pill-off {
+  background: var(--surface-alt);
+  color: var(--text-muted);
+}
+
+/* Run-detail sections — config / interpretation / category table. */
+.rd-section {
+  margin-top: 16px;
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+}
+.rd-section-head {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.rd-section .compare-table { margin-top: 0; }
+.rd-interpretation {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.5;
+}
+.rd-cfg {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 6px 16px;
+  font-family: var(--mono);
+  font-size: 11px;
+}
+.rd-cfg-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0;
+  border-bottom: 1px dashed var(--border-light);
+}
+.rd-cfg-k {
+  color: var(--text-muted);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  min-width: 140px;
+}
+.rd-cfg-v {
+  font-weight: 600;
+  color: var(--text);
+}
+.rd-cfg-d {
+  font-size: 10px;
+  margin-left: auto;
+}
 
 /* ─── Glossary ───────────────────────────────────────────── */
 .glossary {

@@ -502,23 +502,25 @@
   <section class="panel">
     <header class="panel-head">
       <h2>Detailed results</h2>
-      <span class="muted">click a row to drill down</span>
+      <span class="muted">click a row to drill down · toggle view by model below</span>
     </header>
+    <div class="dr-toolbar">
+      <span class="dr-toolbar-label muted">View:</span>
+      <button type="button" class="dr-tab dr-tab-active" data-dr-view="latest">Latest run</button>
+      <button type="button" class="dr-tab" data-dr-view="all">All models</button>
+      <button type="button" class="dr-tab" data-dr-view="best">Best per model</button>
+      <span class="dr-toolbar-meta muted" id="dr-toolbar-meta"></span>
+    </div>
+    <div class="dr-dataset-row">
+      <label class="dr-dataset-field">
+        <span class="dr-toolbar-label muted">Dataset</span>
+        <select id="dr-dataset-select" class="dr-dataset-select"></select>
+      </label>
+      <span id="dr-dataset-summary" class="dataset-summary muted">–</span>
+    </div>
     <div class="table-wrap">
       <table id="cat-table">
-        <thead>
-          <tr>
-            <th class="sortable" data-key="category">category</th>
-            <th class="num sortable" data-key="n_images">imgs</th>
-            <th class="num sortable" data-key="n_lines">lines</th>
-            <th class="num sortable" data-key="f1">F1</th>
-            <th class="num sortable" data-key="cer">CER</th>
-            <th class="num sortable" data-key="wer">WER</th>
-            <th class="num sortable" data-key="conf">conf</th>
-            <th class="num sortable" data-key="ms">ms/img</th>
-            <th></th>
-          </tr>
-        </thead>
+        <thead id="cat-thead"></thead>
         <tbody id="cat-tbody"></tbody>
       </table>
     </div>
@@ -565,16 +567,20 @@
           <div title="Predicted"><span class="k">Predicted</span><span id="d-pr" class="v">–</span></div>
           <div title="TP / FP / FN"><span class="k">TP / FP / FN</span><span id="d-det" class="v">–</span></div>
           <div title="Detection F1"><span class="k">Detection F1</span><span id="d-f1" class="v">–</span></div>
-          <div title="Matched CER"><span class="k">Matched CER</span><span id="d-cer" class="v">–</span></div>
-          <div title="Joined-page CER"><span class="k">Joined CER</span><span id="d-jcer" class="v">–</span></div>
-          <div title="CER corrected"><span class="k">CER (c)</span><span id="d-cer-c" class="v">–</span></div>
-          <div title="Joined CER corrected"><span class="k">Joined CER (c)</span><span id="d-jcer-c" class="v">–</span></div>
-          <div title="Correction status"><span class="k">Correction</span><span id="d-cstatus" class="v">–</span></div>
-          <div title="Mean confidence"><span class="k">Mean conf</span><span id="d-conf" class="v">–</span></div>
-          <div title="Latency"><span class="k">Latency</span><span id="d-ms" class="v">–</span></div>
+          <div title="CER on the matched lines (after IoU match)"><span class="k">Matched CER</span><span id="d-cer" class="v">–</span></div>
+          <div title="CER computed on the whole page as a single string. Punctuation/ordering errors are counted"><span class="k">Joined CER</span><span id="d-jcer" class="v">–</span></div>
+          <div title="CER after SymSpell + KBBI correction (if enabled)"><span class="k">CER (c)</span><span id="d-cer-c" class="v">–</span></div>
+          <div title="Joined CER after correction"><span class="k">Joined CER (c)</span><span id="d-jcer-c" class="v">–</span></div>
+          <div title="Correction status: unchanged · corrected · not_found in KBBI"><span class="k">Correction</span><span id="d-cstatus" class="v">–</span></div>
+          <div title="Mean confidence of OCR predictions on matched lines"><span class="k">Mean conf</span><span id="d-conf" class="v">–</span></div>
+          <div title="Latency per image"><span class="k">Latency</span><span id="d-ms" class="v">–</span></div>
         </div>
         <div class="samples">
-          <div class="samples-head">Sample comparison · <span style="font-weight:400;color:var(--text-muted)">conf = OCR confidence · CER = character error rate</span></div>
+          <div class="samples-head">
+            <span>Sample comparison</span>
+            <span class="samples-legend muted">— ✓ = exact · ≠ = wrong · ✗ = missed · + = extra · * = corrected to match · conf = OCR confidence · CER% = line-level character error rate</span>
+          </div>
+          <div id="d-interpretation" class="d-interpretation"></div>
           <ul id="samples"></ul>
         </div>
       </div>

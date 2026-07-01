@@ -420,10 +420,155 @@ function renderChart(cats) {
 
 /* ─── Category Table ─────────────────────────────────────── */
 
-function renderTable(cats) {
+let drView = "latest"; // "latest" | "all" | "best"
+let drDatasetKey = null; // dataset key the Detailed Results table is showing
+let drModelData = null;  // { cats: Set, latestByModel: Map(model -> run) } for the active dataset
+
+async function fetchDrModelData() {
+  if (!drDatasetKey) return null;
+  try {
+    const r = await fetch("/api/history");
+    if (!r.ok) return null;
+    const data = await r.json();
+    const runs = (data.runs || []).filter(run => {
+      const ds = run.dataset || run.config?.dataset || run.overall?.dataset || "";
+      return ds === drDatasetKey;
+    });
+    // index.json entries only carry top-level metrics; per_category lives in
+    // the per-run file. Fetch those in parallel and keep only the latest run
+    // per (model) on this dataset.
+    const detailed = await Promise.all(runs.map(async run => {
+      try {
+        const d = await fetch(`/api/history/${encodeURIComponent(run.id)}`);
+        if (!d.ok) return null;
+        const full = await d.json();
+        // Splice the index row's timestamp + dataset hint onto the detail so
+        // the rest of the code can find them in one place.
+        full._index = run;
+        return full;
+      } catch { return null; }
+    }));
+    const latestByModel = new Map();
+    for (const run of detailed.filter(Boolean)) {
+      const ver = run.ocr_version || run.config?.ocr_version || "?";
+      const mtype = run.model_type || run.config?.model_type || "?";
+      const key = `${ver} · ${mtype}`;
+      const prev = latestByModel.get(key);
+      if (!prev || (run.timestamp || "") > (prev.timestamp || "")) {
+        latestByModel.set(key, run);
+      }
+    }
+    const cats = new Set();
+    for (const run of latestByModel.values()) {
+      for (const c of (run.per_category || [])) cats.add(c.category);
+    }
+    drModelData = { cats, latestByModel };
+    return drModelData;
+  } catch { return null; }
+}
+
+async function renderTable(cats) {
   const tbody = $("#cat-tbody");
+  const thead = $("#cat-thead");
   tbody.innerHTML = "";
-  const rows = cats.map((c) => ({
+  thead.innerHTML = "";
+  // Always recompute model data when the dataset changes.
+  if (!drModelData || drModelData.datasetKey !== drDatasetKey) {
+    drModelData = null;
+    await fetchDrModelData();
+    drModelData = { ...drModelData, datasetKey: drDatasetKey };
+  }
+
+  if (drView === "latest") {
+    renderTableLatest(thead, tbody, cats);
+  } else if (drView === "all") {
+    renderTableAllModels(thead, tbody);
+  } else if (drView === "best") {
+    renderTableBestPerModel(thead, tbody);
+  }
+  updateDrToolbarMeta();
+  updateDrDatasetSummary();
+}
+
+function renderTableLatest(thead, tbody, cats) {
+  // If the user picked a dataset that summary.json doesn't cover (because the
+  // most recent OCR run was on the other dataset), fall back to the latest
+  // history run for that dataset so the table still shows real per-category
+  // rows instead of an empty hint.
+  const summaryDs = summaryData?.overall?.dataset || "";
+  let sourceCats = cats;
+  let sourceVer = summaryData?.overall?.ocr_version || "?";
+  let sourceMtype = summaryData?.overall?.model_type || "?";
+  let sourceNote = null;
+  // sourceVer/sourceMtype reserved for a future header-row "viewing run"
+  // label so when summary != drDatasetKey the user sees which run they're
+  // actually looking at, not just "model · dataset".
+  if (drDatasetKey && summaryDs && drDatasetKey !== summaryDs) {
+    // Find the latest history run for drDatasetKey.
+    let fallback = null;
+    if (drModelData?.latestByModel) {
+      for (const run of drModelData.latestByModel.values()) {
+        if (!fallback || (run.timestamp || "") > (fallback.timestamp || "")) {
+          fallback = run;
+        }
+      }
+    }
+    if (fallback && (fallback.per_category || []).length) {
+      const o = fallback.overall || {};
+      sourceCats = (fallback.per_category || []).map(c => ({
+        category: c.category,
+        n_images: c.n_images,
+        n_lines: c.n_lines,
+        detection: { f1: c.f1 },
+        cer_mean: c.cer,
+        wer_mean: c.wer,
+        mean_confidence: c.mean_conf,
+        mean_ms_per_image: c.ms_per_img,
+      }));
+      sourceVer = o.ocr_version || fallback.ocr_version || "?";
+      sourceMtype = o.model_type || fallback.model_type || "?";
+      sourceNote = `latest summary is for ${datasetLabelFor(summaryDs)} — showing the most recent history run for ${datasetLabelFor(drDatasetKey)} instead`;
+    } else {
+      thead.innerHTML = `
+        <tr>
+          <th class="sortable" data-key="category">category</th>
+          <th class="num sortable" data-key="n_images">imgs</th>
+          <th class="num sortable" data-key="n_lines">lines</th>
+          <th class="num sortable" data-key="f1">F1</th>
+          <th class="num sortable" data-key="cer">CER</th>
+          <th class="num sortable" data-key="wer">WER</th>
+          <th class="num sortable" data-key="conf">conf</th>
+          <th class="num sortable" data-key="ms">ms/img</th>
+          <th></th>
+        </tr>`;
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td colspan="9" class="muted dr-hint">
+        No runs yet for <strong>${escapeHtml(datasetLabelFor(drDatasetKey))}</strong> —
+        click <em>Run benchmark</em> at the top of the page to populate it.
+      </td>`;
+      tbody.appendChild(tr);
+      return;
+    }
+  }
+  thead.innerHTML = `
+    <tr>
+      <th class="sortable" data-key="category">category</th>
+      <th class="num sortable" data-key="n_images">imgs</th>
+      <th class="num sortable" data-key="n_lines">lines</th>
+      <th class="num sortable" data-key="f1">F1</th>
+      <th class="num sortable" data-key="cer">CER</th>
+      <th class="num sortable" data-key="wer">WER</th>
+      <th class="num sortable" data-key="conf">conf</th>
+      <th class="num sortable" data-key="ms">ms/img</th>
+      <th></th>
+    </tr>`;
+  if (sourceNote) {
+    const noteTr = document.createElement("tr");
+    noteTr.className = "dr-note-row";
+    noteTr.innerHTML = `<td colspan="9" class="dr-note">${escapeHtml(sourceNote)}</td>`;
+    tbody.appendChild(noteTr);
+  }
+  const rows = sourceCats.map((c) => ({
     category: c.category,
     n_images: c.n_images,
     n_lines: c.n_lines,
@@ -459,8 +604,193 @@ function renderTable(cats) {
   }
 }
 
+/* "All models" view: one row per (category, model). Same metric columns as
+   Latest; the first cell shows category + sub-line with the model chip so the
+   row reads cleanly when sorted by category or F1. */
+function renderTableAllModels(thead, tbody) {
+  if (!drModelData || !drModelData.latestByModel.size) {
+    tbody.innerHTML = `<tr><td colspan="9" class="muted">no history yet — run a benchmark first</td></tr>`;
+    return;
+  }
+  thead.innerHTML = `
+    <tr>
+      <th class="sortable" data-key="category">category</th>
+      <th>model</th>
+      <th class="num sortable" data-key="f1">F1</th>
+      <th class="num sortable" data-key="cer">CER</th>
+      <th class="num sortable" data-key="wer">WER</th>
+      <th class="num sortable" data-key="conf">conf</th>
+      <th class="num sortable" data-key="ms">ms/img</th>
+    </tr>`;
+
+  // Build flat rows then sort by current sort key (default F1 asc → worst first).
+  const rows = [];
+  for (const [model, run] of drModelData.latestByModel) {
+    for (const c of (run.per_category || [])) {
+      rows.push({
+        category: c.category,
+        model,
+        f1: c.f1 ?? 0,
+        cer: c.cer ?? 0,
+        wer: c.wer ?? 0,
+        conf: c.mean_conf ?? 0,
+        ms: c.ms_per_img ?? 0,
+      });
+    }
+  }
+  const { key, dir } = currentSort;
+  rows.sort((a, b) => {
+    const va = a[key] ?? -Infinity;
+    const vb = b[key] ?? -Infinity;
+    if (typeof va === "string") return dir === "asc" ? va.localeCompare(vb) : vb.localeCompare(va);
+    return dir === "asc" ? va - vb : vb - va;
+  });
+  for (const r of rows) {
+    const tr = document.createElement("tr");
+    tr.dataset.category = r.category;
+    tr.innerHTML = `
+      <td>${escapeHtml(r.category)}</td>
+      <td><span class="dr-model-chip">${escapeHtml(r.model)}</span></td>
+      <td class="num"><span class="mini-bar f1" style="width:${Math.round((r.f1 || 0) * 30)}px"></span>${fmt(r.f1)}</td>
+      <td class="num"><span class="mini-bar cer" style="width:${Math.round((r.cer || 0) * 30)}px"></span>${fmt(r.cer)}</td>
+      <td class="num">${fmt(r.wer)}</td>
+      <td class="num">${fmt(r.conf, 2)}</td>
+      <td class="num">${fmt(r.ms, 0)}</td>`;
+    tr.addEventListener("click", () => openCategory(r.category));
+    tbody.appendChild(tr);
+  }
+}
+
+/* "Best per model" view: one row per category, one column per model, value is
+   F1 (best F1 wins). Empty cell means that model has no result for that category.
+   Empty categories get "no runs" placeholder text. */
+function renderTableBestPerModel(thead, tbody) {
+  if (!drModelData || !drModelData.latestByModel.size) {
+    tbody.innerHTML = `<tr><td colspan="3" class="muted">no history yet</td></tr>`;
+    return;
+  }
+  const models = [...drModelData.latestByModel.keys()].sort();
+  thead.innerHTML = `
+    <tr>
+      <th class="sortable" data-key="category">category</th>
+      ${models.map(m => `<th class="num">${escapeHtml(m)}</th>`).join("")}
+      <th class="num">best model</th>
+    </tr>`;
+  const cats = [...drModelData.cats].sort();
+  if (!cats.length) {
+    tbody.innerHTML = `<tr><td colspan="${models.length + 2}" class="muted">no per-category data in history</td></tr>`;
+    return;
+  }
+  for (const cat of cats) {
+    const cells = [];
+    let best = null;
+    for (const m of models) {
+      const run = drModelData.latestByModel.get(m);
+      const c = (run?.per_category || []).find(x => x.category === cat);
+      if (!c) { cells.push(`<td class="num muted">–</td>`); continue; }
+      if (best === null || (c.f1 ?? 0) > best.f1) best = { model: m, ...c };
+      cells.push(`<td class="num">${fmt(c.f1)}</td>`);
+    }
+    const bestCell = best
+      ? `<td class="num"><span class="dr-best-chip" title="F1 ${fmt(best.f1)} · CER ${fmt(best.cer)}">${escapeHtml(best.model)}</span></td>`
+      : `<td class="num muted">–</td>`;
+    const tr = document.createElement("tr");
+    tr.dataset.category = cat;
+    tr.innerHTML = `<td>${escapeHtml(cat)}</td>${cells.join("")}${bestCell}`;
+    tr.addEventListener("click", () => openCategory(cat));
+    tbody.appendChild(tr);
+  }
+}
+
+function updateDrToolbarMeta() {
+  const el = $("#dr-toolbar-meta");
+  if (!el) return;
+  const dsLabel = drDatasetKey ? datasetLabelFor(drDatasetKey) : "(no dataset)";
+  if (drView === "latest") {
+    const summaryDs = summaryData?.overall?.dataset || "";
+    if (drDatasetKey && summaryDs && drDatasetKey !== summaryDs) {
+      el.textContent = `latest summary covers ${datasetLabelFor(summaryDs)} — falling back to history for ${dsLabel}`;
+    } else {
+      const ver = summaryData?.overall?.ocr_version || "?";
+      const mtype = summaryData?.overall?.model_type || "?";
+      el.textContent = `${ver} · ${mtype} · ${dsLabel}`;
+    }
+  } else if (drView === "all") {
+    const n = drModelData?.latestByModel?.size || 0;
+    el.textContent = `${n} model${n === 1 ? "" : "s"} on ${dsLabel}`;
+  } else if (drView === "best") {
+    const n = drModelData?.cats?.size || 0;
+    el.textContent = `best F1 across ${n} categor${n === 1 ? "y" : "ies"} on ${dsLabel}`;
+  }
+}
+
+function updateDrDatasetSummary() {
+  const el = $("#dr-dataset-summary");
+  if (!el) return;
+  if (!drDatasetKey) { el.textContent = "–"; return; }
+  const ds = (datasetsCache || []).find(d => d.key === drDatasetKey);
+  if (!ds) { el.textContent = drDatasetKey; return; }
+  el.textContent = `${ds.n_categories} categories · ${ds.n_images} images · ${ds.n_lines.toLocaleString()} GT lines · ${ds.format}`;
+}
+
+function initDrDatasetSelector() {
+  const sel = $("#dr-dataset-select");
+  if (!sel) return;
+  // Honour the page's main dataset selector: pre-select the active key.
+  const active = (datasetsCache || []).find(d => d.active) || (datasetsCache || [])[0];
+  if (active) drDatasetKey = active.key;
+
+  function populate() {
+    sel.innerHTML = "";
+    for (const ds of datasetsCache) {
+      const opt = document.createElement("option");
+      opt.value = ds.key;
+      opt.textContent = ds.label;
+      sel.appendChild(opt);
+    }
+    if (drDatasetKey) sel.value = drDatasetKey;
+  }
+  populate();
+
+  sel.addEventListener("change", () => {
+    drDatasetKey = sel.value || null;
+    drModelData = null;  // force re-fetch on next render
+    if (summaryData) renderTable(summaryData.per_category);
+  });
+
+  // Stay in sync with the main dataset selector (top of page).
+  window.addEventListener("dataset-changed", (e) => {
+    if (!e?.detail?.key || e.detail.key === drDatasetKey) return;
+    sel.value = e.detail.key;
+    drDatasetKey = e.detail.key;
+    drModelData = null;
+    if (summaryData) renderTable(summaryData.per_category);
+  });
+}
+
+function initDrTabs() {
+  const tabs = $$(".dr-tab");
+  tabs.forEach((t) => {
+    t.addEventListener("click", () => {
+      drView = t.dataset.drView;
+      tabs.forEach((x) => x.classList.toggle("dr-tab-active", x === t));
+      if (summaryData) renderTable(summaryData.per_category);
+    });
+  });
+}
+
 function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+
+// Mirror of the API's _DATASET_LABELS — keeps the History table readable
+// without an extra round-trip to /api/datasets.
+const DATASET_LABELS = {
+  ind_cn: "IMG_OCR_IND_CN",
+  new:    "FUNSD-form",
+};
+function datasetLabelFor(key) {
+  return DATASET_LABELS[key] || key || "";
 }
 
 /* ─── Category Detail ────────────────────────────────────── */
@@ -511,6 +841,43 @@ function showImageDetail(category, img, summary) {
   const ul = $("#samples");
   ul.innerHTML = "";
   const correctorOn = img.correction_enabled === true;
+
+  // Compose a short interpretation line so the user doesn't have to read every
+  // sample to know how this image went. Counts come from the overlays — same
+  // source the table renders from.
+  const counts = { matched: 0, missed: 0, spurious: 0, corrected_to_match: 0 };
+  for (const o of samples) {
+    if (o.status === "matched") counts.matched++;
+    else if (o.status === "missed") counts.missed++;
+    else if (o.status === "spurious") counts.spurious++;
+    if (o.status === "matched" && o.pr_text_corrected !== undefined
+        && _normalize(o.pr_text_corrected) === _normalize(o.gt_text)
+        && _normalize(o.pr_text) !== _normalize(o.gt_text)) {
+      counts.corrected_to_match++;
+    }
+  }
+  const interpEl = $("#d-interpretation");
+  if (interpEl) {
+    const parts = [];
+    const tpRatio = img.detection?.tp != null && img.n_gt
+      ? (img.detection.tp / img.n_gt) : 0;
+    if (tpRatio >= 0.9) parts.push("Detection: nearly all GT lines found.");
+    else if (tpRatio >= 0.7) parts.push("Detection: most GT lines found; misses are usually small.");
+    else if (tpRatio > 0) parts.push(`Detection: ${Math.round(tpRatio * 100)}% of GT lines matched.`);
+    if (counts.spurious > 0) parts.push(`${counts.spurious} extra region${counts.spurious > 1 ? "s" : ""} the engine invented.`);
+    if (counts.missed > 0) parts.push(`${counts.missed} region${counts.missed > 1 ? "s" : ""} missed entirely.`);
+    if (correctorOn && counts.corrected_to_match > 0) {
+      parts.push(`Corrector salvaged ${counts.corrected_to_match} line${counts.corrected_to_match > 1 ? "s" : ""} that were wrong before.`);
+    }
+    const cerJoined = img.joined_cer;
+    if (typeof cerJoined === "number") {
+      if (cerJoined <= 0.1) parts.push(`Joined CER ${(cerJoined * 100).toFixed(0)}% — readable.`);
+      else if (cerJoined <= 0.4) parts.push(`Joined CER ${(cerJoined * 100).toFixed(0)}% — partial errors; readable with effort.`);
+      else parts.push(`Joined CER ${(cerJoined * 100).toFixed(0)}% — many errors; hard to read without correction.`);
+    }
+    interpEl.textContent = parts.length ? parts.join(" ") : "No regions to score on this image.";
+  }
+
   for (const o of samples) {
     const li = document.createElement("li");
     if (o.status === "matched") {
@@ -1054,10 +1421,17 @@ function renderHistory() {
     if (isSelected) tr.classList.add("selected-for-compare");
     const checked = isSelected ? "checked" : "";
     const ts = run.timestamp ? fmtDateShort(run.timestamp) : run.id;
+    const datasetKey = run.dataset || run.config?.dataset || run.overall?.dataset || "";
+    const datasetLabel = datasetKey ? datasetLabelFor(datasetKey) : "";
+    const correctorOn = !!(run.corrector_enabled ?? run.config?.enable_symspell_correction);
     tr.innerHTML = `
       <td><input type="checkbox" data-id="${run.id}" ${checked} /></td>
       <td>${ts}</td>
-      <td><span class="history-model">${modelLabel(run)}</span></td>
+      <td>
+        <span class="history-model">${modelLabel(run)}</span>
+        ${datasetLabel ? `<span class="history-dataset" title="Dataset used">${escapeHtml(datasetLabel)}</span>` : ""}
+        ${correctorOn ? '<span class="history-tag history-tag-corrector" title="SymSpell corrector was ON for this run">corrector</span>' : ""}
+      </td>
       <td class="num history-f1">${fmt(run.f1)}</td>
       <td class="num">${fmt(run.cer)}</td>
       <td class="num">${fmt(run.wer)}</td>
@@ -1270,7 +1644,22 @@ async function openRunDetail(id) {
     return;
   }
 
+  // Keep the Detailed Results dropdown in sync with this run's dataset, so the
+  // per-category tables below show the same categories the run produced.
+  const runDs = run.dataset || run.config?.dataset || run.overall?.dataset || "";
+  if (runDs && runDs !== drDatasetKey) {
+    drDatasetKey = runDs;
+    drModelData = null;  // force re-fetch in next renderTable call
+    const sel = $("#dr-dataset-select");
+    if (sel) sel.value = runDs;
+    if (summaryData) renderTable(summaryData.per_category);
+    // Mirror the change in the top dataset selector + main badge so the rest
+    // of the page (model badge, footer) reflects the same dataset.
+    window.dispatchEvent(new CustomEvent("dataset-changed", { detail: { key: runDs } }));
+  }
+
   const o = run.overall || {};
+  const cfg = run.config || {};
   const dur = run.total_elapsed_s ? fmtDuration(Math.round(run.total_elapsed_s)) : "–";
   const cards = [
     ["F1", fmt(o.detection_f1)],
@@ -1283,27 +1672,128 @@ async function openRunDetail(id) {
     ["Duration", dur],
   ].map(([k, v]) => `<div class="rd-card"><div class="rd-k">${k}</div><div class="rd-v">${v}</div></div>`).join("");
 
-  $("#run-detail-title").textContent = modelLabel(run);
-  $("#run-detail-sub").textContent = `${run.timestamp ? fmtDate(run.timestamp) : run.id} · corrector ${run.corrector_enabled ? "ON" : "OFF"}`;
+  // Header — model + dataset + corrector + age, all in one row so the user
+  // can tell at a glance *which* run they're looking at without reading JSON.
+  const datasetKey = run.dataset || cfg.dataset || o.dataset || "";
+  const datasetLabel = datasetKey ? datasetLabelFor(datasetKey) : "–";
+  const ver = o.ocr_version || cfg.ocr_version || run.ocr_version || "?";
+  const mtype = o.model_type || cfg.model_type || run.model_type || "?";
+  const correctorOn = !!(run.corrector_enabled ?? cfg.enable_symspell_correction ?? o.corrector_enabled);
+  const iou = (cfg.iou_threshold ?? o.iou_threshold ?? 0.5);
 
+  $("#run-detail-title").textContent = `${ver} · ${mtype}`;
+  $("#run-detail-sub").innerHTML = `
+    <span class="rd-pill rd-pill-dataset">${escapeHtml(datasetLabel)}</span>
+    <span class="rd-pill ${correctorOn ? "rd-pill-on" : "rd-pill-off"}">corrector ${correctorOn ? "ON" : "OFF"}</span>
+    <span class="rd-pill">IoU ≥ ${Number(iou).toFixed(2)}</span>
+    <span class="muted">·</span>
+    <span>${run.timestamp ? fmtDate(run.timestamp) : run.id}</span>
+  `;
+
+  // Config block — show only values that differ from the live .env defaults so
+  // the section answers "what was different about this run?" not "all 14 knobs".
+  let cfgBlock = "";
+  if (knobDefaults) {
+    const lines = [];
+    for (const f of KNOB_FIELDS) {
+      const cf = cfg[f.param];
+      const cur = cf !== undefined && cf !== null ? cf : o[f.param];
+      const def = knobDefaults[f.param];
+      if (cur === undefined || cur === null) continue;
+      const diff = typeof cur === "boolean"
+        ? cur !== !!def
+        : Math.abs(Number(cur) - Number(def)) > 1e-9;
+      const display = typeof cur === "boolean" ? (cur ? "true" : "false") : cur;
+      const tag = diff
+        ? `<span class="history-tag history-tag-override">override</span>`
+        : "";
+      lines.push(`<div class="rd-cfg-row">
+        <span class="rd-cfg-k">${f.param}</span>
+        <span class="rd-cfg-v">${display}</span>
+        <span class="rd-cfg-d muted">default ${typeof def === "boolean" ? (def ? "true" : "false") : def}</span>
+        ${tag}
+      </div>`);
+    }
+    cfgBlock = `
+      <div class="rd-section">
+        <div class="rd-section-head">Knobs used by this run <span class="muted">— overrides highlighted</span></div>
+        <div class="rd-cfg">${lines.join("") || '<div class="muted">no config recorded</div>'}</div>
+      </div>`;
+  }
+
+  // Per-category table — added Joined CER + corrected columns when the
+  // corrector was on for this run, so a comparison of "raw vs corrected" is
+  // visible without opening the per-image detail page.
   const cats = run.per_category || [];
-  let catRows = cats.map(c => `
-    <tr>
+  const correctorCol = correctorOn
+    ? `<th class="num">CER (c)</th><th class="num">WER (c)</th>`
+    : "";
+  const catRows = cats.map(c => {
+    const cer_c = correctorOn ? `<td class="num">${fmt(c.cer_corrected)}</td><td class="num">${fmt(c.wer_corrected)}</td>` : "";
+    return `<tr>
       <td>${escapeHtml(c.category)}</td>
       <td class="num">${c.n_images ?? "–"}</td>
+      <td class="num">${c.n_lines ?? "–"}</td>
       <td class="num"><span class="mini-bar f1" style="width:${Math.round((c.f1 || 0) * 30)}px"></span>${fmt(c.f1)}</td>
       <td class="num">${fmt(c.cer)}</td>
       <td class="num">${fmt(c.wer)}</td>
+      ${cer_c}
       <td class="num">${fmt(c.mean_conf, 2)}</td>
       <td class="num">${fmt(c.ms_per_img, 0)}</td>
-    </tr>`).join("");
+    </tr>`;
+  }).join("");
+
+  const tableHead = `
+    <tr>
+      <th>Category</th>
+      <th class="num">Imgs</th>
+      <th class="num">Lines</th>
+      <th class="num">F1</th>
+      <th class="num">CER</th>
+      <th class="num">WER</th>
+      ${correctorCol}
+      <th class="num">Conf</th>
+      <th class="num">ms/img</th>
+    </tr>`;
+
+  // Quick interpretation — a single sentence that says what these numbers
+  // mean for this run, so the user doesn't have to compare to the glossary.
+  const f1 = o.detection_f1 ?? 0;
+  let interpretation;
+  if (f1 >= 0.9) interpretation = "Excellent detection — the engine is finding almost every text region.";
+  else if (f1 >= 0.75) interpretation = "Good detection — most regions are found; misses cluster on small or rotated text.";
+  else if (f1 >= 0.5) interpretation = "Moderate detection — half the regions are missed or over-segmented.";
+  else interpretation = "Weak detection — many text regions are missed.";
+  const cer = o.cer_mean ?? 0;
+  let cerInterpretation;
+  if (cer <= 0.05) cerInterpretation = "Characters are read almost perfectly.";
+  else if (cer <= 0.15) cerInterpretation = "Minor recognition errors; readable.";
+  else cerInterpretation = "Frequent character errors; readable only with manual correction.";
+  if (correctorOn) {
+    const cerC = o.cer_corrected_mean ?? 0;
+    const dCER = cerC - cer;
+    if (Math.abs(dCER) < 0.01) cerInterpretation += ` Corrector: no meaningful change (Δ ${(dCER).toFixed(3)}).`;
+    else if (dCER < 0) cerInterpretation += ` Corrector helps: CER ${(dCER * 100).toFixed(1)}% lower.`;
+    else cerInterpretation += ` Corrector hurts here: CER ${(dCER * 100).toFixed(1)}% higher.`;
+  }
 
   content.innerHTML = `
     <div class="rd-cards">${cards}</div>
-    <table class="compare-table" style="margin-top:16px">
-      <thead><tr><th>Category</th><th class="num">Imgs</th><th class="num">F1</th><th class="num">CER</th><th class="num">WER</th><th class="num">Conf</th><th class="num">ms/img</th></tr></thead>
-      <tbody>${catRows || '<tr><td colspan="7" class="muted">no per-category data</td></tr>'}</tbody>
-    </table>`;
+    <div class="rd-section">
+      <div class="rd-section-head">Interpretation</div>
+      <div class="rd-interpretation">
+        <div>${interpretation}</div>
+        <div>${cerInterpretation}</div>
+      </div>
+    </div>
+    ${cfgBlock}
+    <div class="rd-section">
+      <div class="rd-section-head">Per-category breakdown</div>
+      <table class="compare-table">
+        <thead>${tableHead}</thead>
+        <tbody>${catRows || '<tr><td colspan="9" class="muted">no per-category data</td></tr>'}</tbody>
+      </table>
+    </div>`;
 }
 
 /* ─── Load & Render ──────────────────────────────────────── */
@@ -1355,6 +1845,8 @@ $$("thead th.sortable").forEach((th) => {
 });
 
 $("#btn-run").addEventListener("click", () => runBenchmark(false));
+initDrTabs();
+initDrDatasetSelector();
 $("#back").addEventListener("click", () => {
   $("#detail").classList.add("hidden");
   setStatus("idle");
