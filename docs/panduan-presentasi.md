@@ -246,6 +246,71 @@ Yang perlu diperhatikan:
 
 ---
 
+## 8.5 · Pertanyaan Kritis: "Kenapa Hasilnya Terpotong-potong?"
+
+Ini pertanyaan yang **pasti ditanya**. Cara menjawabnya:
+
+### Apa yang Sebenarnya Terjadi
+
+OCR mengembalikan teks **per baris** (satu baris = satu bounding box).
+TTS runner (`tts_runner.py:45-49`) **menggabungkan semua baris jadi satu
+string** dengan satu spasi pemisah:
+
+```python
+lines = [ov.get("pr_text", "") for ov in image.get("overlays", [])]
+return " ".join(t.strip() for t in lines if t and t.strip())
+```
+
+### Contoh Konkret
+
+Misalnya KTP hasil OCR:
+
+```
+Baris 1: "PROVINSI DKI JAKARTA"
+Baris 2: "JAKARTA SELATAN"
+Baris 3: "NIK: 3174012345670001"
+
+Yang dikirim ke Piper:
+"PROVINSI DKI JAKARTA JAKARTA SELATAN NIK: 3174012345670001"
+
+Yang didengar user:
+"Provinsi DKI Jakarta... Jakarta Selatan... NIK: tiga satu tujuh empat..."
+(dengan jeda natural antar baris)
+```
+
+### Kenapa Digabung, Bukan Baca per Baris?
+
+| Opsi | Konsekuensi |
+|---|---|
+| **Baca per baris terpisah** | 100 baris × 3 detik overhead Piper = 5 menit startup sia-sia. Suara patah-patah, tidak natural. |
+| **Gabung tanpa spasi** (`"".join`) | "DKIJAKARTA" jadi satu kata. Lebih parah dari CER-nya. |
+| **✔ Gabung dengan spasi** (yang dipakai) | Piper otomatis beri jeda pendek di spasi. Natural dan efisien. |
+
+### Tabel Dampak Kesalahan OCR ke Suara
+
+| Kesalahan OCR | Contoh | Efek di Suara TTS |
+|---|---|---|
+| Spasi hilang | "DKI JAKARTA" → "DKIJAKARTA" | Huruf disambung, jadi satu kata |
+| Karakter salah | "Budi" → "Bun1" | Dibaca sesuai ejaan salah |
+| Kata terpotong | "KARTU TANDA" → "KARTU TAN" | Arti/frasa berubah |
+| Baris tidak terdeteksi | "PENDUDUK" hilang | Baris itu skip, kalimat loncat |
+| Noise | "PROVINSI" → "PR0VINSI" | "nol" alih-alih "O" |
+| Garis jadi karakter | "==" jadi "=" | Tanda baca salah baca |
+
+### Pesan Presentasi yang Kuat
+
+> "Kami mengukur **kecepatan** TTS, bukan kualitas pengucapan.
+> Suara yang aneh itu **bukan salah TTS** — itu cerminan langsung
+> dari kesalahan OCR. Justru itulah kekuatan benchmark ini:
+> angka CER yang abstrak bisa **didengar** dan **dirasakan**
+> oleh audiens lewat 🔊 button di dashboard."
+
+**Demo**: klik 🔊 di baris ground truth pada kategori sulit
+(Whiteboard / Notes). Audiens langsung tahu tanpa perlu baca angka
+bahwa OCR memang struggle di kategori itu.
+
+---
+
 ## 9 · Struktur Repo (Referensi)
 
 ```
@@ -256,7 +321,7 @@ src/ocr_bench/
 ├── metrics.py        ← hitung CER/WER/F1
 ├── runner.py         ← orchestrator OCR
 ├── tts_engine.py     ← Piper wrapper
-├── tts_runner.py     ← orchestrator TTS
+├── tts_runner.py     ← orchestrator TTS (gabung baris dengan spasi)
 ├── api.py            ← FastAPI server
 └── config.py         ← .env loader
 
