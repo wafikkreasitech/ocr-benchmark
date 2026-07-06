@@ -20,6 +20,14 @@ import numpy as np
 from rapidocr import RapidOCR
 from rapidocr.utils.typings import ModelType, OCRVersion
 
+def _detect_cuda() -> bool:
+    """Auto-detect CUDA availability for onnxruntime-gpu."""
+    try:
+        import onnxruntime as ort
+        return "CUDAExecutionProvider" in ort.get_available_providers()
+    except Exception:
+        return False
+
 log = logging.getLogger(__name__)
 
 
@@ -94,7 +102,11 @@ class BenchEngine:
         # for parity with the env knob; if you ever need to disable it, swap
         # RapidOCR for a pipeline that accepts the flag.
         self._use_angle_cls = use_angle_cls
+        use_cuda = _detect_cuda()
+        params["EngineConfig.onnxruntime.use_cuda"] = use_cuda
         self._ocr = RapidOCR(params=params)
+        if use_cuda:
+            log.info("CUDA acceleration enabled for onnxruntime")
         self._enable_preprocessing = enable_preprocessing
         self._preproc_upscale_min_side = preproc_upscale_min_side
         self._timeout_s = 300  # 5 min per image
