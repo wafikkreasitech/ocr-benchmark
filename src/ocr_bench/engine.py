@@ -184,6 +184,21 @@ class BenchEngine:
             params["Rec.engine_type"] = EngineType.TENSORRT
             params["EngineConfig.tensorrt.use_fp16"] = True
             params["EngineConfig.tensorrt.cache_dir"] = str(cache_dir)
+            # rapidocr's bundled TRT det profile caps at 2048x2048 (square).
+            # Det preprocessing scales the *short* side up to det_limit_side_len
+            # while preserving aspect ratio, so a portrait/landscape image can
+            # end up with a *long* side well past 2048 (e.g. a 928x1470 ID
+            # card at limit_side_len=1536 resizes to 1536x2432) — silently
+            # failing TensorRT's shape check (throws inside rapidocr, caught,
+            # and returned as an empty/near-empty result with no error
+            # surfaced to the caller). Widen the profile's max_shape so it
+            # covers realistic aspect ratios at every det_limit_side_len this
+            # UI exposes (up to 2048 — see .env.example).
+            params["EngineConfig.tensorrt.det_profile"] = {
+                "min_shape": [1, 3, 32, 32],
+                "opt_shape": [1, 3, det_limit_side_len, det_limit_side_len],
+                "max_shape": [1, 3, 4096, 4096],
+            }
             # The TensorRT backend has no ONNX metadata to read the rec
             # character dict from (unlike ONNXRuntime) and its own
             # dict-resolution falls back to the wrong (PP-OCRv4) dict for
