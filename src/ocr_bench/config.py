@@ -40,6 +40,10 @@ class Settings(BaseSettings):
     rec_batch_num: int = 6
     rec_img_width: int = 320           # height is fixed at 48 by the model
 
+    # Inference backend: "onnxruntime" (CUDA) or "tensorrt" (TRT FP16, ~40x faster)
+    use_tensorrt: bool = False                     # flip to True to use TensorRT engine
+    trt_cache_dir: str = "models/trt_engines"     # where TRT caches compiled engines
+
     # Runner
     iou_threshold: float = 0.5                    # detection match threshold
     enable_preprocessing: bool = False            # grayscale + CLAHE + 2x upscale (helps faint/low-contrast text)

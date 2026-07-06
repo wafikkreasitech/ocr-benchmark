@@ -192,6 +192,7 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
     use_angle_cls = overrides.get("use_angle_cls", settings.use_angle_cls)
     rec_batch = overrides.get("rec_batch_num", settings.rec_batch_num)
     rec_width = overrides.get("rec_img_width", settings.rec_img_width)
+    use_tensorrt = overrides.get("use_tensorrt", settings.use_tensorrt)
     # Pre / post overrides — previously hardcoded from settings, now overridable
     # per-run so the UI toggles / sliders actually take effect.
     enable_preprocessing = overrides.get("enable_preprocessing", settings.enable_preprocessing)
@@ -217,6 +218,8 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
         use_angle_cls=use_angle_cls,
         rec_batch_num=rec_batch,
         rec_img_width=rec_width,
+        use_tensorrt=use_tensorrt,
+        trt_cache_dir=settings.trt_cache_dir,
     )
     # Build a per-run corrector when any override differs from .env so the UI
     # toggles/sliders actually take effect. The singleton is reused when
@@ -273,6 +276,9 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
         "use_angle_cls": use_angle_cls,
         "rec_batch_num": rec_batch,
         "rec_img_width": rec_width,
+        "use_tensorrt": use_tensorrt,
+        "backend": engine.backend,           # actual backend used (cuda/tensorrt/cpu — may differ from
+                                              # use_tensorrt if TRT deps are missing and it fell back)
         "enable_preprocessing": enable_preprocessing,
         "preproc_upscale_min_side": settings.preproc_upscale_min_side,
         "iou_threshold": iou_threshold,
@@ -429,6 +435,8 @@ def _run_categories(cats, engine, corrector, settings, run_settings,
     overall_dict["use_angle_cls"] = run_settings["use_angle_cls"]
     overall_dict["rec_batch_num"] = run_settings["rec_batch_num"]
     overall_dict["rec_img_width"] = run_settings["rec_img_width"]
+    overall_dict["use_tensorrt"] = run_settings["use_tensorrt"]
+    overall_dict["backend"] = run_settings["backend"]
     overall_dict["enable_preprocessing"] = run_settings["enable_preprocessing"]
     overall_dict["iou_threshold"] = run_settings["iou_threshold"]
     overall_dict["enable_symspell_correction"] = run_settings["enable_symspell_correction"]
@@ -603,6 +611,8 @@ def _save_to_history(overall: dict, per_cat: list[CategorySummary]) -> None:
             "use_angle_cls": overall.get("use_angle_cls", False),
             "rec_batch_num": overall.get("rec_batch_num", 6),
             "rec_img_width": overall.get("rec_img_width", 320),
+            "use_tensorrt": overall.get("use_tensorrt", False),
+            "backend": overall.get("backend", "cpu"),
             "enable_preprocessing": overall.get("enable_preprocessing", False),
             "iou_threshold": overall.get("iou_threshold", 0.5),
             "enable_symspell_correction": overall.get("enable_symspell_correction", False),
@@ -652,6 +662,7 @@ def _save_to_history(overall: dict, per_cat: list[CategorySummary]) -> None:
         # Flat keys preserved for UI backward-compat (history table reads these).
         "ocr_version": cfg["ocr_version"],
         "model_type": cfg["model_type"],
+        "backend": cfg.get("backend", "cpu"),   # cuda/tensorrt/cpu — shown as a column so runs are comparable at a glance
         "config": cfg,  # nested block — full snapshot for /api/history/best etc.
         "n_images": overall.get("n_images", 0),
         "f1": overall.get("detection_f1", 0),

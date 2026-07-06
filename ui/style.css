@@ -778,6 +778,11 @@ body {
 .chip-all        { color: var(--text-muted); border-color: var(--border); background: var(--bg-warm); }
 .chip-throughput { color: #4a3e5a; border-color: #b8a8c8; background: #e8e2ee; }
 .chip-scoring    { color: #3e5a5a; border-color: #a8c0c0; background: #dce8e8; }
+/* TensorRT active badge — green to read as "fast path engaged" at a glance */
+.chip-trt-on     { color: #1e6b3e; border-color: #9cd4b4; background: #dcf2e4; }
+/* TensorRT toggle disabled when tensorrt/cuda-python aren't importable on host */
+.knob-disabled { opacity: 0.5; }
+.knob-disabled .switch { cursor: not-allowed; }
 .knob-hint {
   font-family: var(--mono);
   color: var(--text-muted);
@@ -1794,6 +1799,16 @@ tbody tr:hover { background: var(--surface-alt); }
 .history-tag-override {
   background: var(--warn-bg);
   color: var(--warn);
+  font-weight: 600;
+}
+.history-tag-trt {
+  background: #dcf2e4;
+  color: #1e6b3e;
+  font-weight: 600;
+}
+.history-tag-cuda {
+  background: #e2ecf7;
+  color: #1c5a99;
   font-weight: 600;
 }
 

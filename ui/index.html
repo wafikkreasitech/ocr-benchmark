@@ -138,7 +138,7 @@
       <header class="knobs-head">
         <div class="knobs-title-block">
           <div class="knobs-title">
-            <span class="knobs-title-meta">9 parameters · 11 categories</span>
+            <span class="knobs-title-meta">10 parameters · 11 categories</span>
           </div>
           <p class="knobs-sub">Edit any value — overrides persist into run history so each run remembers what produced its score.</p>
         </div>
@@ -314,9 +314,28 @@
               <span class="knob-card-index">CARD 03</span>
               <h4 class="knob-card-title">Pipeline</h4>
             </div>
-            <span class="knob-card-tally">3 parameters</span>
+            <span class="knob-card-tally">4 parameters</span>
           </header>
           <div class="knob-card-body knob-card-mixed">
+            <div class="knob knob-toggle" data-knob="use_tensorrt" id="knob-tensorrt-wrap">
+              <div class="knob-row">
+                <span class="knob-name">TensorRT</span>
+                <span class="knob-value-wrap">
+                  <span class="knob-delta" id="knob-delta-use_tensorrt"></span>
+                  <span class="knob-value" id="knob-val-use_tensorrt">off</span>
+                </span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="knob-tensorrt">
+                <span class="switch-slider"></span>
+              </label>
+              <div class="knob-meta">
+                <span class="knob-affects">backend</span>
+                <span class="chip" id="knob-tensorrt-badge">CUDA</span>
+              </div>
+              <div class="knob-hint" id="knob-tensorrt-hint">FP16 engine — first run compiles (~15min), then ~40x faster det</div>
+            </div>
+
             <div class="knob knob-toggle" data-knob="use_angle_cls">
               <div class="knob-row">
                 <span class="knob-name">angle_cls</span>

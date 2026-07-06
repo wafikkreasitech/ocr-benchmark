@@ -140,6 +140,7 @@ def create_app() -> FastAPI:
                 use_angle_cls: bool | None = None,
                 rec_batch_num: int | None = None,
                 rec_img_width: int | None = None,
+                use_tensorrt: bool | None = None,
                 enable_preprocessing: bool | None = None,
                 iou_threshold: float | None = None,
                 enable_symspell_correction: bool | None = None,
@@ -165,6 +166,7 @@ def create_app() -> FastAPI:
                 "use_angle_cls": use_angle_cls,
                 "rec_batch_num": rec_batch_num,
                 "rec_img_width": rec_img_width,
+                "use_tensorrt": use_tensorrt,
                 "enable_preprocessing": enable_preprocessing,
                 "iou_threshold": iou_threshold,
                 "enable_symspell_correction": enable_symspell_correction,
@@ -258,6 +260,7 @@ def create_app() -> FastAPI:
     def api_config():
         from .config import get_settings
         from .corrector import get_corrector
+        from .engine import _detect_cuda, _detect_tensorrt
         s = get_settings()
         c = get_corrector()
         active_key, _ = resolve_dataset_root()
@@ -286,6 +289,13 @@ def create_app() -> FastAPI:
             "use_angle_cls": s.use_angle_cls,
             "rec_batch_num": s.rec_batch_num,
             "rec_img_width": s.rec_img_width,
+            # Inference backend: which acceleration is configured vs actually
+            # installed on this host. The UI uses *_available to grey out
+            # options that would silently fall back (e.g. TensorRT toggle on
+            # a machine with no tensorrt/cuda-python package).
+            "use_tensorrt": s.use_tensorrt,
+            "cuda_available": _detect_cuda(),
+            "tensorrt_available": _detect_tensorrt(),
         }
 
     def _synth_response(text: str) -> Response:

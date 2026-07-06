@@ -22,6 +22,11 @@ dependencies = [
 [project.optional-dependencies]
 dev = ["pytest>=8.0", "pytest-timeout>=2.0"]
 intelligibility = ["faster-whisper>=1.0"]   # only for the opt-in TTS->STT->CER loop (plan-tts §7); not installed by default
+# TensorRT backend (~40x faster det inference on Jetson vs CUDAExecutionProvider).
+# `tensorrt` itself ships via JetPack system packages on Jetson (not this venv) —
+# this extra only adds the cuda-python bindings rapidocr's TRT backend needs.
+# Not installed by default: desktop/CI hosts without an NVIDIA GPU don't need it.
+tensorrt = ["cuda-python>=12.0"]
 
 [project.scripts]
 ocr-bench-serve = "ocr_bench.api:serve"

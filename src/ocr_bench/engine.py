@@ -18,7 +18,10 @@ from pathlib import Path
 import cv2
 import numpy as np
 from rapidocr import RapidOCR
-from rapidocr.utils.typings import ModelType, OCRVersion
+from rapidocr.utils.typings import EngineType, ModelType, OCRVersion
+
+log = logging.getLogger(__name__)
+
 
 def _detect_cuda() -> bool:
     """Auto-detect CUDA availability for onnxruntime-gpu."""
@@ -28,7 +31,67 @@ def _detect_cuda() -> bool:
     except Exception:
         return False
 
-log = logging.getLogger(__name__)
+
+def _detect_tensorrt() -> bool:
+    """Auto-detect TensorRT + cuda-python bindings availability.
+
+    rapidocr's native TensorRT backend needs both the ``tensorrt`` package
+    and ``cuda-python`` (for the cudart bindings) — both are pre-installed
+    on Jetson via JetPack, but not everywhere, so check before enabling.
+    """
+    try:
+        import tensorrt  # noqa: F401
+        from cuda.bindings import runtime  # noqa: F401
+        return True
+    except Exception:
+        return False
+
+
+def _find_rapidocr_models_dir() -> Path | None:
+    """Locate the installed rapidocr package's bundled ``models/`` dir.
+
+    That's where rapidocr downloads/caches its ONNX files — same directory
+    the ONNXRuntime backend reads from, so the TensorRT dict extraction (see
+    ``_rec_dict_path``) looks in the same place.
+    """
+    try:
+        import rapidocr
+        return Path(rapidocr.__file__).parent / "models"
+    except Exception:
+        return None
+
+
+def _rec_dict_path(models_dir: Path, ocr_version: str, model_type: str) -> Path | None:
+    """Extract the rec character dict embedded in the ONNX model's metadata.
+
+    rapidocr's ONNXRuntime backend reads ``character`` straight from the ONNX
+    model's custom_metadata_map. The TensorRT backend has no such metadata
+    (engines don't carry it) and falls back to downloading a dict — which for
+    PP-OCRv6 resolves to the wrong (PP-OCRv4) dict and breaks decoding
+    (IndexError: token id doesn't exist in the smaller dict). Extract once
+    and cache alongside the ONNX model.
+    """
+    cache_name = f"{ocr_version}_rec_{model_type}_dict.txt"
+    cache_path = models_dir / cache_name
+    if cache_path.exists():
+        return cache_path
+    onnx_name = f"{ocr_version}_rec_{model_type}.onnx"
+    onnx_path = models_dir / onnx_name
+    if not onnx_path.exists():
+        return None
+    try:
+        import onnxruntime as ort
+        sess = ort.InferenceSession(str(onnx_path), providers=["CPUExecutionProvider"])
+        meta = sess.get_modelmeta().custom_metadata_map
+        chars = meta.get("character")
+        if not chars:
+            return None
+        cache_path.write_text(chars, encoding="utf-8")
+        log.info("Extracted %d-char rec dict -> %s", len(chars.splitlines()), cache_path)
+        return cache_path
+    except Exception as e:  # noqa: BLE001 — dict extraction must never crash init
+        log.warning("Failed to extract rec dict from %s: %s", onnx_path, e)
+        return None
 
 
 @dataclass
@@ -82,7 +145,8 @@ class BenchEngine:
                  det_thresh: float = 0.3,
                  det_limit_side_len: int = 1536,
                  use_angle_cls: bool = False,
-                 rec_batch_num: int = 6, rec_img_width: int = 320) -> None:
+                 rec_batch_num: int = 6, rec_img_width: int = 320,
+                 use_tensorrt: bool = False, trt_cache_dir: str = "models/trt_engines") -> None:
         ver = OCRVersion(ocr_version)
         mtype = ModelType(model_type)
         params = {
@@ -102,17 +166,52 @@ class BenchEngine:
         # for parity with the env knob; if you ever need to disable it, swap
         # RapidOCR for a pipeline that accepts the flag.
         self._use_angle_cls = use_angle_cls
-        use_cuda = _detect_cuda()
-        params["EngineConfig.onnxruntime.use_cuda"] = use_cuda
-        self._ocr = RapidOCR(params=params)
-        if use_cuda:
-            log.info("CUDA acceleration enabled for onnxruntime")
+
+        self.backend = "cpu"
+        if use_tensorrt and _detect_tensorrt():
+            # rapidocr's native TensorRT backend: builds a fused FP16 .engine
+            # on first run (cached to disk keyed by GPU arch, ~40x faster det
+            # inference on Jetson vs CUDAExecutionProvider — see docs/plan.md).
+            # First run per model/shape combo takes minutes to compile; every
+            # run after that loads the cached .engine in <1s.
+            from .paths import PACKAGE_ROOT
+            cache_dir = Path(trt_cache_dir)
+            if not cache_dir.is_absolute():
+                cache_dir = PACKAGE_ROOT / cache_dir
+            cache_dir.mkdir(parents=True, exist_ok=True)
+
+            params["Det.engine_type"] = EngineType.TENSORRT
+            params["Rec.engine_type"] = EngineType.TENSORRT
+            params["EngineConfig.tensorrt.use_fp16"] = True
+            params["EngineConfig.tensorrt.cache_dir"] = str(cache_dir)
+            # The TensorRT backend has no ONNX metadata to read the rec
+            # character dict from (unlike ONNXRuntime) and its own
+            # dict-resolution falls back to the wrong (PP-OCRv4) dict for
+            # PP-OCRv6 models — extract the correct one from the ONNX model
+            # metadata once and point rec_keys_path at it.
+            onnx_models_dir = _find_rapidocr_models_dir()
+            if onnx_models_dir is not None:
+                dict_path = _rec_dict_path(onnx_models_dir, ocr_version, model_type)
+                if dict_path is not None:
+                    params["Rec.rec_keys_path"] = str(dict_path)
+            self.backend = "tensorrt"
+            self._ocr = RapidOCR(params=params)
+            log.info("TensorRT acceleration enabled (FP16, cache=%s)", cache_dir)
+        else:
+            if use_tensorrt:
+                log.warning("use_tensorrt=True but tensorrt/cuda-python not importable; falling back to CUDA/CPU")
+            use_cuda = _detect_cuda()
+            params["EngineConfig.onnxruntime.use_cuda"] = use_cuda
+            self._ocr = RapidOCR(params=params)
+            self.backend = "cuda" if use_cuda else "cpu"
+            if use_cuda:
+                log.info("CUDA acceleration enabled for onnxruntime")
         self._enable_preprocessing = enable_preprocessing
         self._preproc_upscale_min_side = preproc_upscale_min_side
         self._timeout_s = 300  # 5 min per image
         log.info(
-            "Engine initialized: %s %s (preprocessing=%s, box_thresh=%.2f, unclip=%.2f, side=%d, angle_cls=%s)",
-            ocr_version, model_type, enable_preprocessing, det_box_thresh, det_unclip_ratio,
+            "Engine initialized: %s %s backend=%s (preprocessing=%s, box_thresh=%.2f, unclip=%.2f, side=%d, angle_cls=%s)",
+            ocr_version, model_type, self.backend, enable_preprocessing, det_box_thresh, det_unclip_ratio,
             det_limit_side_len, use_angle_cls,
         )
 

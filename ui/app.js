@@ -990,6 +990,7 @@ const KNOB_FIELDS = [
   { id: "knob-rec-batch",   param: "rec_batch_num",         float: false, min: 1,    max: 32,   step: 1,    dec: 0 },
   { id: "knob-rec-width",   param: "rec_img_width",         float: false, min: 64,   max: 1024, step: 32,   dec: 0 },
   // Pipeline / runtime
+  { id: "knob-tensorrt",    param: "use_tensorrt",          bool: true },
   { id: "knob-angle-cls",   param: "use_angle_cls",         bool: true },
   { id: "knob-preprocessing", param: "enable_preprocessing", bool: true },
   { id: "knob-iou",         param: "iou_threshold",         float: true,  min: 0.10, max: 0.90, step: 0.05, dec: 2 },
@@ -1024,12 +1025,43 @@ function applyKnobDefaults(d) {
   set("knob-rec-batch",  d.rec_batch_num);
   set("knob-rec-width",  d.rec_img_width);
   set("knob-iou",        d.iou_threshold);
+  const trtEl = document.getElementById("knob-tensorrt");
+  if (trtEl) trtEl.checked = !!d.use_tensorrt;
+  applyTensorRtAvailability(d);
   const angleEl = document.getElementById("knob-angle-cls");
   if (angleEl) angleEl.checked = !!d.use_angle_cls;
   const preEl = document.getElementById("knob-preprocessing");
   if (preEl) preEl.checked = !!d.enable_preprocessing;
   updateKnobsSummary();
   refreshKnobVisuals();
+}
+
+/* TensorRT toggle reflects what's actually installed on the host, not just
+   the .env default — greys out + explains itself when tensorrt/cuda-python
+   aren't importable, and shows CUDA vs TensorRT as the current backend badge
+   so runs made with each are easy to tell apart at a glance. */
+function applyTensorRtAvailability(d) {
+  const wrap = document.getElementById("knob-tensorrt-wrap");
+  const input = document.getElementById("knob-tensorrt");
+  const badge = document.getElementById("knob-tensorrt-badge");
+  const hint = document.getElementById("knob-tensorrt-hint");
+  if (!wrap || !input || !badge || !hint) return;
+
+  const trtAvailable = !!d.tensorrt_available;
+  const cudaAvailable = !!d.cuda_available;
+
+  input.disabled = !trtAvailable;
+  wrap.classList.toggle("knob-disabled", !trtAvailable);
+
+  if (trtAvailable) {
+    badge.textContent = input.checked ? "TensorRT" : "CUDA";
+    badge.className = input.checked ? "chip chip-trt-on" : "chip";
+    hint.textContent = "FP16 engine — first run compiles (~15min per model), then ~40x faster det";
+  } else {
+    badge.textContent = cudaAvailable ? "CUDA only" : "CPU only";
+    badge.className = "chip";
+    hint.textContent = "tensorrt/cuda-python not installed on this host — install to enable";
+  }
 }
 
 function updateKnobsSummary() {
@@ -1129,6 +1161,12 @@ function wireKnobInputs() {
     if (!el) continue;
     el.addEventListener("input", () => { refreshKnobVisuals(); updateKnobsSummary(); });
   }
+  const trtEl = document.getElementById("knob-tensorrt");
+  if (trtEl) {
+    trtEl.addEventListener("input", () => {
+      if (knobDefaults) applyTensorRtAvailability({ ...knobDefaults, use_tensorrt: trtEl.checked });
+    });
+  }
 }
 
 /* ─── Recent runs strip ─────────────────────────────────────────
@@ -1195,8 +1233,10 @@ async function refreshKnobsHistory() {
           set("knob-rec-batch", cfg.rec_batch_num);
           set("knob-rec-width", cfg.rec_img_width);
           set("knob-iou", cfg.iou_threshold);
+          setBool("knob-tensorrt", cfg.use_tensorrt);
           setBool("knob-angle-cls", cfg.use_angle_cls);
           setBool("knob-preprocessing", cfg.enable_preprocessing);
+          if (knobDefaults) applyTensorRtAvailability({ ...knobDefaults, use_tensorrt: cfg.use_tensorrt });
           refreshKnobVisuals();
           updateKnobsSummary();
         } catch {}
@@ -1520,6 +1560,12 @@ function renderHistory() {
     const datasetKey = run.dataset || run.config?.dataset || run.overall?.dataset || "";
     const datasetLabel = datasetKey ? datasetLabelFor(datasetKey) : "";
     const correctorOn = !!(run.corrector_enabled ?? run.config?.enable_symspell_correction);
+    const backend = run.backend || run.config?.backend || "";
+    const backendTag = backend === "tensorrt"
+      ? '<span class="history-tag history-tag-trt" title="Ran on TensorRT (FP16 engine)">TensorRT</span>'
+      : backend === "cuda"
+        ? '<span class="history-tag history-tag-cuda" title="Ran on CUDAExecutionProvider">CUDA</span>'
+        : "";
     const res = run.resources || {};
     const cpuCell = res.cpu_percent_max !== undefined && res.cpu_percent_max !== null
       ? `${fmt(res.cpu_percent_max, 0)}%` : "–";
@@ -1533,6 +1579,7 @@ function renderHistory() {
       <td>
         <span class="history-model">${modelLabel(run)}</span>
         ${datasetLabel ? `<span class="history-dataset" title="Dataset used">${escapeHtml(datasetLabel)}</span>` : ""}
+        ${backendTag}
         ${correctorOn ? '<span class="history-tag history-tag-corrector" title="SymSpell corrector was ON for this run">corrector</span>' : ""}
       </td>
       <td class="num history-f1">${fmt(run.f1)}</td>
