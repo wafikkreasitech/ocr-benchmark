@@ -58,7 +58,76 @@ def _nvidia_smi_path() -> str | None:
     return shutil.which("nvidia-smi")
 
 
+@lru_cache(maxsize=1)
+def _tegrastats_path() -> str | None:
+    return shutil.which("tegrastats")
+
+
+def _parse_tegrastats_line(line: str) -> dict | None:
+    """Parse one tegrastats line and return GPU util/temp + CPU/RAM info.
+
+    Format: RAM 3360/7546MB CPU [17%@729,...] GR3D_FREQ 0% gpu@52.718C/... tj@53.25C/...
+    Returns dict with keys: gpu_pct, gpu_temp_c, cpu_pct, ram_used_mb, ram_total_mb.
+    """
+    import re
+    ram_m = re.search(r"RAM (\d+)/(\d+)MB", line)
+    cpu_m = re.search(r"CPU \[(.*?)\]", line)
+    gpu_m = re.search(r"GR3D_FREQ (\d+)%", line)
+    gpu_temp_m = re.search(r"gpu@([\d.]+)C", line)
+    if not (ram_m and cpu_m and gpu_m):
+        return None
+    cpu_cores = re.findall(r"(\d+)%", cpu_m.group(1))
+    if not cpu_cores:
+        return None
+    return {
+        "gpu_pct": int(gpu_m.group(1)),
+        "gpu_temp_c": float(gpu_temp_m.group(1)) if gpu_temp_m else None,
+        "cpu_pct": sum(int(c) for c in cpu_cores) / len(cpu_cores),
+        "ram_used_mb": int(ram_m.group(1)),
+        "ram_total_mb": int(ram_m.group(2)),
+    }
+
+
+def _read_tegrastats() -> GpuSample | None:
+    """One-shot tegrastats sample (runs tegrastats --interval 1000, reads 2 lines)."""
+    exe = _tegrastats_path()
+    if not exe:
+        return None
+    try:
+        proc = subprocess.Popen(
+            [exe, "--interval", "1000"],
+            stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True,
+        )
+        # Read 2 lines (first may be stale, second is a fresh sample)
+        line = ""
+        for _ in range(2):
+            next_line = proc.stdout.readline()
+            if next_line:
+                line = next_line
+        proc.terminate()
+        proc.wait(timeout=2)
+    except (OSError, subprocess.SubprocessError) as e:
+        log.debug("tegrastats read failed: %s", e)
+        return None
+    parsed = _parse_tegrastats_line(line) if line else None
+    if not parsed:
+        return None
+    return GpuSample(
+        index=0,
+        name="Orin GPU (GR3D)",
+        util_percent=float(parsed["gpu_pct"]),
+        mem_used_mb=None,  # tegrastats doesn't expose GPU dedicated mem (unified memory)
+        mem_total_mb=None,
+        temp_c=parsed.get("gpu_temp_c"),
+    )
+
+
 def _read_gpus() -> list[GpuSample]:
+    # Prefer tegrastats on Jetson (nvidia-smi shows N/A for integrated GPU)
+    tegrastats = _read_tegrastats()
+    if tegrastats is not None:
+        return [tegrastats]
+    # Fall back to nvidia-smi (discrete GPUs, desktop)
     exe = _nvidia_smi_path()
     if not exe:
         return []
