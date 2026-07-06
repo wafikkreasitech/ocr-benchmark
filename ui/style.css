@@ -1251,6 +1251,71 @@ tbody tr:hover { background: var(--surface-alt); }
 .delta-down { color: var(--good); }
 .delta-zero { color: var(--text-muted); }
 
+/* ─── System Resources ───────────────────────────────────── */
+.sysmon-panel .panel-head { margin-bottom: 12px; }
+.sysmon-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+}
+@media (max-width: 1100px) {
+  .sysmon-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 640px) {
+  .sysmon-grid { grid-template-columns: repeat(2, 1fr); }
+}
+.sysmon-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  box-shadow: var(--shadow-sm);
+}
+.sysmon-card.unavailable { opacity: 0.45; }
+.sysmon-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.sysmon-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.sysmon-value {
+  font-family: var(--mono);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  font-feature-settings: "tnum";
+}
+.sysmon-bar-track {
+  height: 4px;
+  background: var(--bg);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+.sysmon-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 400ms ease-out, background-color 400ms ease-out;
+}
+.sysmon-bar.sysmon-warn { background: var(--warn); }
+.sysmon-bar.sysmon-bad { background: var(--bad); }
+.sysmon-bar-temp { background: var(--warn); }
+.sysmon-sub {
+  font-size: 11px;
+  font-family: var(--mono);
+  color: var(--text-muted);
+  min-height: 14px;
+}
+
 /* ─── Progress ───────────────────────────────────────────── */
 .progress-bar {
   width: 100%;

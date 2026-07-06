@@ -8,6 +8,7 @@ Endpoints:
   GET  /api/image/<cat>/<file>  raw image bytes
   GET  /api/models              available OCR model combinations
   GET  /api/config              current runtime config
+  GET  /api/system              live CPU/RAM/GPU/temperature snapshot
   GET  /api/tts?text=…          synthesize text -> WAV (503 if voice missing)
   POST /api/tts/run             run TTS benchmark over OCR results (background)
   GET  /api/tts/summary         aggregated TTS metrics (overall + per-category)
@@ -193,6 +194,17 @@ def create_app() -> FastAPI:
     @app.get("/api/progress")
     def api_progress():
         return JSONResponse(_read_status())
+
+    @app.get("/api/system")
+    def api_system():
+        """One-shot CPU/RAM/GPU/temperature snapshot.
+
+        Used by the dashboard's always-on resource widget (polled every few
+        seconds), independent of whether a benchmark run is active — so the
+        user can see machine load even when idle.
+        """
+        from .sysmon import sample_dict
+        return JSONResponse(sample_dict())
 
     @app.get("/api/progress/stream")
     async def api_progress_stream():

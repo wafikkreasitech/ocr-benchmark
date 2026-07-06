@@ -24,6 +24,7 @@ from .metrics import (
     wer,
 )
 from .paths import HISTORY_ROOT, REPORTS_ROOT
+from .sysmon import ResourceMonitor
 
 log = logging.getLogger(__name__)
 
@@ -243,6 +244,11 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
 
     gen = _next_gen()  # claim this run; older loops will see a newer gen and bail
 
+    # Sample CPU/RAM/GPU/temp every 2s for the duration of the run — powers
+    # the live resource panel and gets rolled up (avg/peak) into history.
+    monitor = ResourceMonitor(interval_s=2.0)
+    monitor.start()
+
     # Progress sidecar — read by /api/progress for the dashboard.
     started_at = _now_iso()
     completed: list[dict] = []
@@ -253,6 +259,7 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
         "completed": completed,
         "current": None,
         "dataset": dataset_key,
+        "system": monitor.latest,
     })
 
     run_settings = {
@@ -279,7 +286,7 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
         return _run_categories(cats, engine, corrector, settings, run_settings,
                                 started_at, completed, overall,
                                 overall_start, per_cat_dir, verbose, gen,
-                                iou_threshold=iou_threshold)
+                                iou_threshold=iou_threshold, monitor=monitor)
     except _Superseded:
         log.info("Run %d superseded by a newer run; bailing without touching status", gen)
         return {}
@@ -296,11 +303,14 @@ def run(root: Path | None = None, only_categories: list[str] | None = None, verb
                 "error": f"{type(e).__name__}: {e}",
             })
         raise
+    finally:
+        monitor.stop()
 
 
 def _run_categories(cats, engine, corrector, settings, run_settings,
                     started_at, completed, overall, overall_start, per_cat_dir,
-                    verbose, gen, iou_threshold: float = 0.5) -> dict:
+                    verbose, gen, iou_threshold: float = 0.5,
+                    monitor: ResourceMonitor | None = None) -> dict:
     def _check_superseded():
         if gen != _RUN_GEN:
             raise _Superseded()
@@ -322,6 +332,7 @@ def _run_categories(cats, engine, corrector, settings, run_settings,
             "completed": completed,
             "current": {"name": cat_dir.name, "total_images": len(pages), "done_images": 0},
             "dataset": run_settings.get("dataset", ""),
+            "system": monitor.latest if monitor else None,
         })
 
         cat_pages: list[PageMetrics] = []
@@ -359,6 +370,7 @@ def _run_categories(cats, engine, corrector, settings, run_settings,
                     "done_images": len(cat_pages),
                 },
                 "dataset": run_settings.get("dataset", ""),
+                "system": monitor.latest if monitor else None,
             })
             if verbose:
                 cer_c = (
@@ -424,6 +436,10 @@ def _run_categories(cats, engine, corrector, settings, run_settings,
     overall_dict["symspell_max_edit_distance"] = run_settings["symspell_max_edit_distance"]
     overall_dict["kbbi_top_n"] = run_settings["kbbi_top_n"]
 
+    # Resource usage rolled up over the whole run — avg/peak CPU/RAM/GPU/temp.
+    resource_summary = monitor.summary() if monitor else {}
+    overall_dict["resources"] = resource_summary
+
     log.info("=== Benchmark done: %d images in %.1fs, F1=%.3f CER=%.3f ===",
              overall_dict["n_images"], total_elapsed,
              overall_dict["detection_f1"], overall_dict["cer_mean"])
@@ -440,6 +456,8 @@ def _run_categories(cats, engine, corrector, settings, run_settings,
         "completed": completed,
         "current": None,
         "dataset": run_settings.get("dataset", ""),
+        "system": monitor.latest if monitor else None,
+        "resources": resource_summary,
     })
 
     if verbose:
@@ -536,6 +554,7 @@ def _write_summary_csv(per_cat: list[CategorySummary], overall: dict) -> None:
 def _write_overall_json(per_cat: list[CategorySummary], overall: dict) -> None:
     out = {
         "overall": overall,
+        "resources": overall.get("resources", {}),
         "per_category": [
             {
                 "category": c.category,
@@ -593,6 +612,7 @@ def _save_to_history(overall: dict, per_cat: list[CategorySummary]) -> None:
         },
         "corrector_enabled": overall.get("corrector_enabled", False),
         "total_elapsed_s": overall.get("total_elapsed_s", 0),
+        "resources": overall.get("resources", {}),
         "overall": overall,
         "per_category": [
             {
@@ -640,6 +660,7 @@ def _save_to_history(overall: dict, per_cat: list[CategorySummary]) -> None:
         "cer_corrected": overall.get("cer_corrected_mean", 0),
         "wer_corrected": overall.get("wer_corrected_mean", 0),
         "total_elapsed_s": overall.get("total_elapsed_s", 0),
+        "resources": overall.get("resources", {}),
     })
     # Keep last 50 runs
     index = index[-50:]

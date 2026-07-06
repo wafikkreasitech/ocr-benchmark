@@ -1309,6 +1309,10 @@ function handleProgress(p) {
     setRunActive(false);
   }
   lastRunning = !!p.running;
+  // Progress payload carries a live system snapshot while a run is active —
+  // reuse it instead of a second fetch so the widget updates every ~1s during
+  // a run (matches the SSE cadence) instead of the idle poll's 3s.
+  if (p.system) renderSysmon(p.system);
 }
 
 async function pollProgressFallback() {
@@ -1319,6 +1323,72 @@ async function pollProgressFallback() {
       if (r.ok) handleProgress(await r.json());
     } catch {}
     await new Promise((res) => setTimeout(res, 1500));
+  }
+}
+
+/* ─── System Resource Monitor ────────────────────────────── */
+
+function _sysmonBarClass(pct) {
+  if (pct >= 90) return "sysmon-bad";
+  if (pct >= 75) return "sysmon-warn";
+  return "";
+}
+
+function _setSysmonCard(prefix, pct, valueText, subText, available = true) {
+  const val = $(`#sysmon-${prefix}-val`);
+  const bar = $(`#sysmon-${prefix}-bar`);
+  const sub = $(`#sysmon-${prefix}-sub`);
+  const card = val ? val.closest(".sysmon-card") : null;
+  if (val) val.textContent = available ? valueText : "n/a";
+  if (sub) sub.textContent = available ? (subText || "") : "not available on this host";
+  if (bar) {
+    bar.style.width = available ? `${Math.min(100, Math.max(0, pct || 0))}%` : "0%";
+    bar.classList.remove("sysmon-warn", "sysmon-bad");
+    const cls = _sysmonBarClass(pct || 0);
+    if (available && cls) bar.classList.add(cls);
+  }
+  if (card) card.classList.toggle("unavailable", !available);
+}
+
+function renderSysmon(s) {
+  if (!s) return;
+  const updated = $("#sysmon-updated");
+  if (updated) updated.textContent = s.timestamp ? `updated ${fmtDateAge(s.timestamp)}` : "";
+
+  _setSysmonCard("cpu", s.cpu_percent, `${fmt(s.cpu_percent, 0)}%`, `${s.cpu_count || "?"} cores`);
+
+  const ramGb = (s.ram_used_mb / 1024).toFixed(1);
+  const ramTotalGb = (s.ram_total_mb / 1024).toFixed(1);
+  _setSysmonCard("ram", s.ram_percent, `${fmt(s.ram_percent, 0)}%`, `${ramGb} / ${ramTotalGb} GB`);
+
+  const hasCpuTemp = s.cpu_temp_c !== null && s.cpu_temp_c !== undefined;
+  _setSysmonCard("cputemp", hasCpuTemp ? (s.cpu_temp_c / 100) * 100 : 0,
+    hasCpuTemp ? `${fmt(s.cpu_temp_c, 0)}°C` : "n/a", hasCpuTemp ? "core sensor" : "", hasCpuTemp);
+
+  const gpu = (s.gpus && s.gpus[0]) || null;
+  _setSysmonCard("gpu", gpu ? gpu.util_percent : 0,
+    gpu ? `${fmt(gpu.util_percent, 0)}%` : "n/a", gpu ? gpu.name : "", !!gpu);
+
+  const gpuMemPct = gpu && gpu.mem_total_mb ? (gpu.mem_used_mb / gpu.mem_total_mb) * 100 : 0;
+  _setSysmonCard("gpumem", gpuMemPct,
+    gpu ? `${fmt(gpuMemPct, 0)}%` : "n/a",
+    gpu ? `${(gpu.mem_used_mb / 1024).toFixed(1)} / ${(gpu.mem_total_mb / 1024).toFixed(1)} GB` : "", !!gpu);
+
+  const hasGpuTemp = gpu && gpu.temp_c !== null && gpu.temp_c !== undefined;
+  _setSysmonCard("gputemp", hasGpuTemp ? (gpu.temp_c / 100) * 100 : 0,
+    hasGpuTemp ? `${fmt(gpu.temp_c, 0)}°C` : "n/a", hasGpuTemp ? "GPU die" : "", !!hasGpuTemp);
+}
+
+async function pollSysmon() {
+  // Idle-cadence poll (3s) — independent of run state, so the widget stays
+  // live even when no benchmark is running. handleProgress() overrides this
+  // with faster (~1s) updates whenever a run is active.
+  while (true) {
+    try {
+      const r = await fetch("/api/system");
+      if (r.ok) renderSysmon(await r.json());
+    } catch {}
+    await new Promise((res) => setTimeout(res, 3000));
   }
 }
 
@@ -1450,6 +1520,13 @@ function renderHistory() {
     const datasetKey = run.dataset || run.config?.dataset || run.overall?.dataset || "";
     const datasetLabel = datasetKey ? datasetLabelFor(datasetKey) : "";
     const correctorOn = !!(run.corrector_enabled ?? run.config?.enable_symspell_correction);
+    const res = run.resources || {};
+    const cpuCell = res.cpu_percent_max !== undefined && res.cpu_percent_max !== null
+      ? `${fmt(res.cpu_percent_max, 0)}%` : "–";
+    const ramCell = res.ram_percent_max !== undefined && res.ram_percent_max !== null
+      ? `${fmt(res.ram_percent_max, 0)}%` : "–";
+    const gpuCell = res.gpu_percent_max !== undefined && res.gpu_percent_max !== null
+      ? `${fmt(res.gpu_percent_max, 0)}%` : "–";
     tr.innerHTML = `
       <td><input type="checkbox" data-id="${run.id}" ${checked} /></td>
       <td>${ts}</td>
@@ -1463,6 +1540,9 @@ function renderHistory() {
       <td class="num">${fmt(run.wer)}</td>
       <td class="num">${run.n_images || 0}</td>
       <td class="num">${run.total_elapsed_s ? fmtDuration(Math.round(run.total_elapsed_s)) : "–"}</td>
+      <td class="num muted" title="peak CPU usage">${cpuCell}</td>
+      <td class="num muted" title="peak RAM usage">${ramCell}</td>
+      <td class="num muted" title="peak GPU usage">${gpuCell}</td>
       <td class="num muted">${run.timestamp ? fmtDateAge(run.timestamp) : "–"}</td>
       <td class="num muted">›</td>
     `;
@@ -1747,6 +1827,38 @@ async function openRunDetail(id) {
       </div>`;
   }
 
+  // Resource usage block — avg/peak CPU/RAM/GPU/temp sampled while this run
+  // was in flight (recorded by ResourceMonitor in runner.py). Absent for runs
+  // saved before this feature shipped, or when nothing was sampled.
+  const res = run.resources || o.resources || {};
+  let resBlock = "";
+  if (res && res.samples) {
+    const rows = [
+      ["CPU", res.cpu_percent_avg, res.cpu_percent_max, "%"],
+      ["RAM", res.ram_percent_avg, res.ram_percent_max, "%",
+        `${(res.ram_used_mb_avg / 1024).toFixed(1)} / ${(res.ram_total_mb / 1024).toFixed(1)} GB avg`],
+      ["CPU temp", res.cpu_temp_c_avg, res.cpu_temp_c_max, "°C"],
+      ["GPU" + (res.gpu_name ? ` (${res.gpu_name})` : ""), res.gpu_percent_avg, res.gpu_percent_max, "%"],
+      ["GPU mem", res.gpu_mem_used_mb_avg && res.gpu_mem_total_mb ? (res.gpu_mem_used_mb_avg / res.gpu_mem_total_mb) * 100 : null,
+        res.gpu_mem_used_mb_max && res.gpu_mem_total_mb ? (res.gpu_mem_used_mb_max / res.gpu_mem_total_mb) * 100 : null, "%",
+        res.gpu_mem_total_mb ? `${(res.gpu_mem_used_mb_avg / 1024).toFixed(2)} / ${(res.gpu_mem_total_mb / 1024).toFixed(2)} GB avg` : ""],
+      ["GPU temp", res.gpu_temp_c_avg, res.gpu_temp_c_max, "°C"],
+    ].filter(([, avg, max]) => avg !== null && avg !== undefined);
+
+    const resRows = rows.map(([label, avg, max, unit, hint]) => `
+      <div class="rd-cfg-row">
+        <span class="rd-cfg-k">${label}</span>
+        <span class="rd-cfg-v">${fmt(avg, 1)}${unit} avg</span>
+        <span class="rd-cfg-d muted">peak ${fmt(max, 1)}${unit}${hint ? " · " + hint : ""}</span>
+      </div>`).join("");
+
+    resBlock = `
+      <div class="rd-section">
+        <div class="rd-section-head">Resource usage <span class="muted">— ${res.samples} samples over the run</span></div>
+        <div class="rd-cfg">${resRows || '<div class="muted">no resource data recorded</div>'}</div>
+      </div>`;
+  }
+
   // Per-category table — added Joined CER + corrected columns when the
   // corrector was on for this run, so a comparison of "raw vs corrected" is
   // visible without opening the per-image detail page.
@@ -1813,6 +1925,7 @@ async function openRunDetail(id) {
       </div>
     </div>
     ${cfgBlock}
+    ${resBlock}
     <div class="rd-section">
       <div class="rd-section-head">Per-category breakdown</div>
       <table class="compare-table">
@@ -1888,5 +2001,6 @@ $("#btn-run-detail-close").addEventListener("click", () => {
 loadAndRender();
 loadHistory();
 subscribeProgress();  // always-on: reflects any background run, survives refresh
+pollSysmon();          // always-on: CPU/RAM/GPU/temp widget, independent of runs
 wireKnobInputs();
 refreshKnobsHistory();

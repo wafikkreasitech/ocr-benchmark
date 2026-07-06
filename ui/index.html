@@ -48,6 +48,64 @@
 
 <main class="container">
 
+  <!-- ─── System Resources ────────────────────────────────── -->
+  <section class="panel sysmon-panel">
+    <header class="panel-head">
+      <h2>System resources</h2>
+      <span class="muted" id="sysmon-updated">–</span>
+    </header>
+    <div class="sysmon-grid" id="sysmon-grid">
+      <div class="sysmon-card" data-metric="cpu">
+        <div class="sysmon-head">
+          <span class="sysmon-label">CPU</span>
+          <span class="sysmon-value" id="sysmon-cpu-val">–</span>
+        </div>
+        <div class="sysmon-bar-track"><div class="sysmon-bar" id="sysmon-cpu-bar"></div></div>
+        <div class="sysmon-sub muted" id="sysmon-cpu-sub"></div>
+      </div>
+      <div class="sysmon-card" data-metric="ram">
+        <div class="sysmon-head">
+          <span class="sysmon-label">RAM</span>
+          <span class="sysmon-value" id="sysmon-ram-val">–</span>
+        </div>
+        <div class="sysmon-bar-track"><div class="sysmon-bar" id="sysmon-ram-bar"></div></div>
+        <div class="sysmon-sub muted" id="sysmon-ram-sub"></div>
+      </div>
+      <div class="sysmon-card" data-metric="cpu-temp">
+        <div class="sysmon-head">
+          <span class="sysmon-label">CPU temp</span>
+          <span class="sysmon-value" id="sysmon-cputemp-val">–</span>
+        </div>
+        <div class="sysmon-bar-track"><div class="sysmon-bar sysmon-bar-temp" id="sysmon-cputemp-bar"></div></div>
+        <div class="sysmon-sub muted" id="sysmon-cputemp-sub"></div>
+      </div>
+      <div class="sysmon-card" data-metric="gpu">
+        <div class="sysmon-head">
+          <span class="sysmon-label">GPU</span>
+          <span class="sysmon-value" id="sysmon-gpu-val">–</span>
+        </div>
+        <div class="sysmon-bar-track"><div class="sysmon-bar" id="sysmon-gpu-bar"></div></div>
+        <div class="sysmon-sub muted" id="sysmon-gpu-sub"></div>
+      </div>
+      <div class="sysmon-card" data-metric="gpu-mem">
+        <div class="sysmon-head">
+          <span class="sysmon-label">GPU mem</span>
+          <span class="sysmon-value" id="sysmon-gpumem-val">–</span>
+        </div>
+        <div class="sysmon-bar-track"><div class="sysmon-bar" id="sysmon-gpumem-bar"></div></div>
+        <div class="sysmon-sub muted" id="sysmon-gpumem-sub"></div>
+      </div>
+      <div class="sysmon-card" data-metric="gpu-temp">
+        <div class="sysmon-head">
+          <span class="sysmon-label">GPU temp</span>
+          <span class="sysmon-value" id="sysmon-gputemp-val">–</span>
+        </div>
+        <div class="sysmon-bar-track"><div class="sysmon-bar sysmon-bar-temp" id="sysmon-gputemp-bar"></div></div>
+        <div class="sysmon-sub muted" id="sysmon-gputemp-sub"></div>
+      </div>
+    </div>
+  </section>
+
   <!-- ─── Model Selector ──────────────────────────────────── -->
   <section class="panel model-panel">
     <div class="panel-head">
@@ -474,6 +532,9 @@
             <th class="num">WER</th>
             <th class="num">Imgs</th>
             <th class="num">Duration</th>
+            <th class="num" title="Peak CPU usage during this run">CPU</th>
+            <th class="num" title="Peak RAM usage during this run">RAM</th>
+            <th class="num" title="Peak GPU usage during this run">GPU</th>
             <th class="num">Age</th>
             <th></th>
           </tr>
