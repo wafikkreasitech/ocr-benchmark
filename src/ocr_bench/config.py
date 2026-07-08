@@ -52,6 +52,7 @@ class Settings(BaseSettings):
     # Server
     serve_host: str = "127.0.0.1"
     serve_port: int = 8765                        # change in .env if 8765 is taken
+    auth_password: str = "AI4DB-BENCH"             # HTTP Basic Auth password (any username works)
 
     # TTS benchmark — Piper voice (same path ai4db's config uses for Indonesian).
     # Download with: uv run python -m scripts.download_voice

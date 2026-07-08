@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import secrets
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -26,6 +27,7 @@ from pathlib import Path
 from fastapi import BackgroundTasks, FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse, JSONResponse, Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
+from starlette.middleware.base import BaseHTTPMiddleware
 
 from .paths import DATASETS, DEFAULT_DATASET_ROOT, HISTORY_ROOT, REPORTS_ROOT, UI_ROOT, resolve_dataset_root
 from .runner import RUN_STATUS_PATH, run as run_benchmark
@@ -107,8 +109,33 @@ def _image_root_for_category(category: str, filename: str):
     return None
 
 
+def _check_auth(request: Request) -> bool:
+    from .config import get_settings
+    header = request.headers.get("authorization", "")
+    if not header.startswith("Basic "):
+        return False
+    import base64
+    try:
+        _, password = base64.b64decode(header[6:]).decode("utf-8").split(":", 1)
+    except (ValueError, UnicodeDecodeError):
+        return False
+    return secrets.compare_digest(password, get_settings().auth_password)
+
+
+class _BasicAuthMiddleware(BaseHTTPMiddleware):
+    """Static password gate. Browser handles the login prompt (no login
+    page/session needed) — any username, password from AUTH_PASSWORD."""
+
+    async def dispatch(self, request: Request, call_next):
+        # Unauthenticated: only the Docker healthcheck, so it doesn't need creds.
+        if request.url.path == "/api/health" or _check_auth(request):
+            return await call_next(request)
+        return Response(status_code=401, headers={"WWW-Authenticate": "Basic realm=\"OCR Benchmark\""})
+
+
 def create_app() -> FastAPI:
     app = FastAPI(title="OCR Benchmark", version="0.1.0")
+    app.add_middleware(_BasicAuthMiddleware)
 
     # A run with no status update for this long is assumed dead (the per-image
     # OCR timeout is 5 min; give it margin before declaring the lock stale).
@@ -190,6 +217,10 @@ def create_app() -> FastAPI:
         if status.get("running") and _is_stale(status):
             status["stale"] = True  # UI shows a calm "looks stuck" notice + re-run
         return status
+
+    @app.get("/api/health")
+    def api_health():
+        return {"ok": True}
 
     @app.get("/api/progress")
     def api_progress():
