@@ -1899,10 +1899,20 @@ async function openRunDetail(id) {
         <span class="rd-cfg-d muted">peak ${fmt(max, 1)}${unit}${hint ? " · " + hint : ""}</span>
       </div>`).join("");
 
+    let highLoadRow = "";
+    if (res.high_load_samples) {
+      highLoadRow = `
+      <div class="rd-cfg-row">
+        <span class="rd-cfg-k">Peak load (≥${fmt(res.high_load_threshold, 0)}%)</span>
+        <span class="rd-cfg-v">~${fmt(res.high_load_duration_s, 0)}s</span>
+        <span class="rd-cfg-d muted">CPU temp up to ${fmt(res.high_load_cpu_temp_c_max, 1)}°C · GPU temp up to ${fmt(res.high_load_gpu_temp_c_max, 1)}°C</span>
+      </div>`;
+    }
+
     resBlock = `
       <div class="rd-section">
         <div class="rd-section-head">Resource usage <span class="muted">— ${res.samples} samples over the run</span></div>
-        <div class="rd-cfg">${resRows || '<div class="muted">no resource data recorded</div>'}</div>
+        <div class="rd-cfg">${resRows || '<div class="muted">no resource data recorded</div>'}${highLoadRow}</div>
       </div>`;
   }
 

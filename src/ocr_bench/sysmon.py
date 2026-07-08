@@ -25,6 +25,8 @@ import psutil
 
 log = logging.getLogger(__name__)
 
+HIGH_LOAD_THRESHOLD = 90.0  # percent — CPU/GPU utilization considered "peak load"
+
 # Prime psutil's internal CPU-percent tracker so the very first real sample
 # isn't a meaningless 0.0 (psutil.cpu_percent compares against the last call).
 psutil.cpu_percent(interval=None)
@@ -269,6 +271,17 @@ class ResourceMonitor:
         def avg(vals: list[float]) -> float | None:
             return (sum(vals) / len(vals)) if vals else None
 
+        # Peak-load window: samples where CPU or GPU hit HIGH_LOAD_THRESHOLD.
+        # Duration is approximate (sample count * interval), good enough for
+        # "how long was this run pegged" without needing raw time-series storage.
+        high_load = [
+            s for s in samples
+            if s.cpu_percent >= HIGH_LOAD_THRESHOLD
+            or any(g.util_percent is not None and g.util_percent >= HIGH_LOAD_THRESHOLD for g in s.gpus)
+        ]
+        high_load_cpu_temps = [s.cpu_temp_c for s in high_load if s.cpu_temp_c is not None]
+        high_load_gpu_temps = [g.temp_c for s in high_load for g in s.gpus if g.temp_c is not None]
+
         return {
             "samples": len(samples),
             "cpu_percent_avg": avg(cpu_vals),
@@ -288,4 +301,11 @@ class ResourceMonitor:
             "gpu_mem_total_mb": last_gpus[0].mem_total_mb if last_gpus else None,
             "gpu_temp_c_avg": avg(gpu_temp),
             "gpu_temp_c_max": max(gpu_temp) if gpu_temp else None,
+            "high_load_threshold": HIGH_LOAD_THRESHOLD,
+            "high_load_samples": len(high_load),
+            "high_load_duration_s": len(high_load) * self.interval_s,
+            "high_load_cpu_temp_c_avg": avg(high_load_cpu_temps),
+            "high_load_cpu_temp_c_max": max(high_load_cpu_temps) if high_load_cpu_temps else None,
+            "high_load_gpu_temp_c_avg": avg(high_load_gpu_temps),
+            "high_load_gpu_temp_c_max": max(high_load_gpu_temps) if high_load_gpu_temps else None,
         }
