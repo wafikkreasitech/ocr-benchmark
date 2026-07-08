@@ -1258,6 +1258,8 @@ tbody tr:hover { background: var(--surface-alt); }
 
 /* ─── System Resources ───────────────────────────────────── */
 .sysmon-panel .panel-head { margin-bottom: 12px; }
+#sysmon-updated { margin-left: auto; }
+#sysmon-highload:not(:empty) { color: var(--bad); font-weight: 500; }
 .sysmon-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);

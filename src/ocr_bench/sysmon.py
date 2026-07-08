@@ -27,6 +27,12 @@ log = logging.getLogger(__name__)
 
 HIGH_LOAD_THRESHOLD = 90.0  # percent — CPU/GPU utilization considered "peak load"
 
+
+def _is_high_load(s: "SystemSample") -> bool:
+    return s.cpu_percent >= HIGH_LOAD_THRESHOLD or any(
+        g.util_percent is not None and g.util_percent >= HIGH_LOAD_THRESHOLD for g in s.gpus
+    )
+
 # Prime psutil's internal CPU-percent tracker so the very first real sample
 # isn't a meaningless 0.0 (psutil.cpu_percent compares against the last call).
 psutil.cpu_percent(interval=None)
@@ -228,6 +234,7 @@ class ResourceMonitor:
         self._thread: threading.Thread | None = None
         self._lock = threading.Lock()
         self._samples: list[SystemSample] = []
+        self._high_load_count = 0
         self.latest: dict | None = None
 
     def start(self) -> None:
@@ -241,7 +248,13 @@ class ResourceMonitor:
                 s = sample(cpu_interval=None)
                 with self._lock:
                     self._samples.append(s)
+                    if _is_high_load(s):
+                        self._high_load_count += 1
                     self.latest = asdict(s)
+                    # Running "how long has this run been pegged" — read live by
+                    # the progress sidecar so the UI can reassure the user mid-run
+                    # instead of only reporting it after the fact in history.
+                    self.latest["high_load_elapsed_s"] = self._high_load_count * self.interval_s
             except Exception:  # noqa: BLE001 — monitoring must never kill the run
                 log.debug("resource sample failed", exc_info=True)
             self._stop.wait(self.interval_s)
@@ -274,11 +287,7 @@ class ResourceMonitor:
         # Peak-load window: samples where CPU or GPU hit HIGH_LOAD_THRESHOLD.
         # Duration is approximate (sample count * interval), good enough for
         # "how long was this run pegged" without needing raw time-series storage.
-        high_load = [
-            s for s in samples
-            if s.cpu_percent >= HIGH_LOAD_THRESHOLD
-            or any(g.util_percent is not None and g.util_percent >= HIGH_LOAD_THRESHOLD for g in s.gpus)
-        ]
+        high_load = [s for s in samples if _is_high_load(s)]
         high_load_cpu_temps = [s.cpu_temp_c for s in high_load if s.cpu_temp_c is not None]
         high_load_gpu_temps = [g.temp_c for s in high_load for g in s.gpus if g.temp_c is not None]
 

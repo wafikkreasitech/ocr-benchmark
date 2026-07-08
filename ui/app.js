@@ -1395,6 +1395,13 @@ function renderSysmon(s) {
   const updated = $("#sysmon-updated");
   if (updated) updated.textContent = s.timestamp ? `updated ${fmtDateAge(s.timestamp)}` : "";
 
+  const highLoad = $("#sysmon-highload");
+  if (highLoad) {
+    highLoad.textContent = s.high_load_elapsed_s
+      ? `⚠ peak load (≥90%) for ${fmtDuration(s.high_load_elapsed_s)}`
+      : "";
+  }
+
   _setSysmonCard("cpu", s.cpu_percent, `${fmt(s.cpu_percent, 0)}%`, `${s.cpu_count || "?"} cores`);
 
   const ramGb = (s.ram_used_mb / 1024).toFixed(1);
