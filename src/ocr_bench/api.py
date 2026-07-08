@@ -59,13 +59,11 @@ def _get_tts_engine():
         raise HTTPException(503, f"TTS voice failed to load: {e}") from e
     return _tts_engine
 
+# v4/v5 stay supported in config/engine for existing history runs — only
+# hidden from the frontend's model picker since v6 supersedes them.
 AVAILABLE_MODELS = {
     "PP-OCRv6": {"model_types": ["tiny", "small", "medium"], "default": "small",
                  "desc": "Latest, best accuracy"},
-    "PP-OCRv5": {"model_types": ["mobile", "server"], "default": "mobile",
-                 "desc": "Per-language rec models"},
-    "PP-OCRv4": {"model_types": ["mobile", "server"], "default": "mobile",
-                 "desc": "Legacy, stable"},
 }
 
 # Display labels for the dataset registry. Keep keys in sync with paths.DATASETS.
