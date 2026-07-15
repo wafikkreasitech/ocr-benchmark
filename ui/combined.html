@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Combined OCR+TTS · ai4db</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/static/style.css" />
+<style>
+  :root { --cb-display: 'Instrument Serif', Georgia, 'Times New Roman', serif; }
+  body { background: var(--bg); }
+
+  .cb-hero {
+    margin: 28px 0 24px; padding: 28px 0 24px;
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; align-items: end;
+  }
+  .cb-hero h1 {
+    font-family: var(--cb-display); font-weight: 400;
+    font-size: clamp(36px, 5.5vw, 56px); line-height: 0.98; letter-spacing: -0.02em;
+    margin: 0; color: var(--text);
+  }
+  .cb-hero h1 em { font-style: italic; color: var(--accent); }
+  .cb-hero .dek { margin: 0; color: var(--text-secondary); font-size: 14px; line-height: 1.55; max-width: 42ch; }
+  .cb-hero .dek strong { color: var(--text); font-weight: 600; }
+
+  .cb-panel {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 20px 22px; box-shadow: var(--shadow-sm);
+    margin-bottom: 20px;
+  }
+  .cb-panel-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 14px; }
+  .cb-panel-head h2 { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text); margin: 0; }
+  .cb-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin-bottom: 14px; }
+  .cb-field { display: flex; flex-direction: column; gap: 5px; }
+  .cb-field label { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+  .cb-field select, .cb-field input[type="number"] {
+    font: inherit; font-size: 13px; padding: 7px 10px;
+    background: var(--surface-alt, var(--surface)); color: var(--text);
+    border: 1px solid var(--border); border-radius: 6px;
+  }
+  .cb-toggle-row { display: flex; align-items: center; gap: 8px; }
+  .cb-toggle-row label { font-size: 12px; color: var(--text); }
+  .cb-source-toggle { display: inline-flex; border: 1px solid var(--border); border-radius: var(--radius-sm, 8px); overflow: hidden; }
+  .cb-source-toggle button {
+    background: transparent; border: none; padding: 7px 14px; font: inherit; font-size: 12px;
+    color: var(--text-muted); cursor: pointer; transition: background 120ms, color 120ms;
+  }
+  .cb-source-toggle button.on { background: var(--accent); color: white; }
+
+  .cb-run-row { display: flex; align-items: center; gap: 14px; margin-top: 6px; }
+  .cb-run-row #cb-status { font-family: var(--mono); font-size: 12px; color: var(--text-secondary); min-height: 1em; }
+
+  .cb-cards { display: grid; gap: 12px; grid-template-columns: repeat(4, 1fr); margin: 16px 0 8px; }
+  @media (max-width: 900px) { .cb-cards { grid-template-columns: repeat(2, 1fr); } }
+  .cb-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 16px 18px; box-shadow: var(--shadow-sm); display: grid; gap: 4px;
+  }
+  .cb-card .label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); font-weight: 500; }
+  .cb-card .value { font-family: var(--mono); font-size: 28px; font-weight: 500; color: var(--text); line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .cb-card .caption { font-size: 11px; color: var(--text-secondary); line-height: 1.4; }
+  .cb-card .tag { display: inline-block; font-size: 11px; font-family: var(--mono); padding: 2px 8px; border-radius: 999px; }
+  .cb-card .tag.good { background: var(--good-bg); color: var(--good); }
+  .cb-card .tag.bad { background: var(--bad-bg); color: var(--bad); }
+
+  .cb-breakdown-note {
+    font-family: var(--cb-display); font-style: italic; font-size: 14px;
+    color: var(--text-secondary); margin: 4px 0 14px 0;
+  }
+  .cb-table { display: grid; gap: 0; margin-top: 4px; }
+  .cb-table-head {
+    display: grid; grid-template-columns: 1.3fr 0.6fr 0.7fr 0.7fr 0.8fr 0.7fr 0.6fr 0.6fr;
+    gap: 0; padding: 6px 0 8px; border-top: 1px solid var(--text); border-bottom: 1px solid var(--border);
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); font-weight: 500;
+  }
+  .cb-table-head > div:not(:first-child) { text-align: right; }
+  .cb-table-row {
+    display: grid; grid-template-columns: 1.3fr 0.6fr 0.7fr 0.7fr 0.8fr 0.7fr 0.6fr 0.6fr;
+    gap: 0; padding: 11px 0; align-items: baseline; border-bottom: 1px solid var(--border-light);
+  }
+  .cb-table-row .cat { font-family: var(--cb-display); font-size: 16px; color: var(--text); }
+  .cb-table-row .v { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 13px; color: var(--text); }
+  .cb-table-row .v .unit { display: block; font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); margin-top: 1px; }
+
+  .cb-empty, .cb-error {
+    color: var(--text-muted); padding: 50px 20px; text-align: center;
+    border: 1px dashed var(--border); border-radius: var(--radius); font-size: 14px; line-height: 1.6;
+  }
+  .cb-error { color: var(--bad); border-color: var(--bad); border-style: solid; background: var(--bad-bg); }
+
+  .cb-foot { margin-top: 16px; font-size: 12px; color: var(--text-muted); font-family: var(--mono); }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="logo">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <rect x="2" y="2" width="24" height="24" rx="6" fill="var(--accent)" opacity="0.12"/>
+          <rect x="6" y="8" width="16" height="2" rx="1" fill="var(--accent)"/>
+          <rect x="6" y="13" width="12" height="2" rx="1" fill="var(--accent)" opacity="0.6"/>
+          <rect x="6" y="18" width="14" height="2" rx="1" fill="var(--accent)" opacity="0.35"/>
+        </svg>
+      </div>
+      <div>
+        <div class="title">Combined OCR+TTS</div>
+        <div class="sub">ai4db · end-to-end pipeline</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <nav class="topbar-nav">
+        <a href="/" class="topbar-link">OCR</a>
+        <a href="datasets.html" class="topbar-link">Datasets</a>
+        <a href="/tts" class="topbar-link">TTS</a>
+        <a href="/combined" class="topbar-link is-active">Combined</a>
+      </nav>
+      <span id="last-run" class="last-run" title="When the last combined benchmark finished">–</span>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="cb-hero">
+    <h1>What does it cost to<br><em>see and speak</em> at once?</h1>
+    <p class="dek">
+      Runs OCR immediately followed by TTS on <strong>every page</strong> — the real
+      ai4db pipeline (camera → OCR → TTS → audio) end-to-end. Both engines stay
+      loaded in GPU/RAM together, so this measures the real combined cost, not
+      two isolated benchmarks added up on paper.
+    </p>
+  </section>
+
+  <section class="cb-panel">
+    <div class="cb-panel-head">
+      <h2>Run configuration</h2>
+      <span class="muted" id="cb-knobs-summary">defaults</span>
+    </div>
+
+    <div class="cb-row">
+      <div class="cb-field">
+        <label>Dataset</label>
+        <select id="cb-dataset-select"></select>
+      </div>
+      <div class="cb-field">
+        <label>Category</label>
+        <select id="cb-category-select"><option value="">All</option></select>
+      </div>
+      <div class="cb-field">
+        <label>OCR model</label>
+        <select id="cb-model-select"></select>
+      </div>
+      <div class="cb-field">
+        <label>TTS text source</label>
+        <div class="cb-source-toggle" id="cb-source-toggle">
+          <button data-src="pred" class="on" type="button">OCR predicted</button>
+          <button data-src="gt" type="button">Ground truth</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="cb-row">
+      <div class="cb-field">
+        <label>det_box_thresh</label>
+        <input type="number" id="cb-det-box-thresh" step="0.05" min="0.10" max="0.90" value="0.50">
+      </div>
+      <div class="cb-field">
+        <label>det_thresh</label>
+        <input type="number" id="cb-det-thresh" step="0.05" min="0.10" max="0.70" value="0.30">
+      </div>
+      <div class="cb-field">
+        <label>det_unclip_ratio</label>
+        <input type="number" id="cb-det-unclip" step="0.10" min="0.80" max="2.60" value="1.60">
+      </div>
+      <div class="cb-field">
+        <label>det_limit_side_len</label>
+        <input type="number" id="cb-det-limit-side" step="32" min="320" max="2048" value="1536">
+      </div>
+      <div class="cb-field">
+        <label>rec_batch_num</label>
+        <input type="number" id="cb-rec-batch" step="1" min="1" max="32" value="6">
+      </div>
+      <div class="cb-field">
+        <label>rec_img_width</label>
+        <input type="number" id="cb-rec-width" step="32" min="64" max="1024" value="320">
+      </div>
+    </div>
+
+    <div class="cb-row">
+      <div class="cb-toggle-row">
+        <label class="switch"><input type="checkbox" id="cb-tensorrt"><span class="switch-slider"></span></label>
+        <label for="cb-tensorrt">TensorRT</label>
+      </div>
+      <div class="cb-toggle-row">
+        <label class="switch"><input type="checkbox" id="cb-angle-cls"><span class="switch-slider"></span></label>
+        <label for="cb-angle-cls">Angle classifier</label>
+      </div>
+      <div class="cb-toggle-row">
+        <label class="switch"><input type="checkbox" id="cb-preprocessing"><span class="switch-slider"></span></label>
+        <label for="cb-preprocessing">Preprocessing</label>
+      </div>
+    </div>
+
+    <div class="cb-run-row">
+      <button id="cb-run-btn" class="btn-run">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 2.5L13 8L4 13.5V2.5Z" fill="currentColor"/></svg>
+        Run combined benchmark
+      </button>
+      <span id="cb-status"></span>
+    </div>
+  </section>
+
+  <div id="cb-empty" class="cb-empty" style="display:none;">
+    No combined benchmark results yet. Configure above and click <strong>Run combined benchmark</strong>.
+  </div>
+  <div id="cb-summary-error" class="cb-error" style="display:none;"></div>
+
+  <section id="cb-content" style="display:none;">
+    <div class="cb-cards">
+      <div class="cb-card">
+        <div class="label">Total end-to-end</div>
+        <div class="value" id="cb-m-total">–</div>
+        <div><span class="tag" id="cb-m-total-tag"></span></div>
+        <div class="caption">Mean wall-clock from OCR start to TTS audio ready, per page.</div>
+      </div>
+      <div class="cb-card">
+        <div class="label">OCR stage</div>
+        <div class="value" id="cb-m-ocr">–</div>
+        <div class="caption">Mean detection+recognition time per page.</div>
+      </div>
+      <div class="cb-card">
+        <div class="label">TTS stage</div>
+        <div class="value" id="cb-m-tts">–</div>
+        <div class="caption">Mean Piper synthesis time per page.</div>
+      </div>
+      <div class="cb-card">
+        <div class="label">Overhead</div>
+        <div class="value" id="cb-m-overhead">–</div>
+        <div class="caption">Text join/extraction between OCR output and TTS input.</div>
+      </div>
+    </div>
+
+    <p class="cb-breakdown-note">
+      Both engines resident in GPU/RAM at once — this is the number that
+      answers "if I run both together, how slow does it actually get."
+    </p>
+
+    <div class="cb-table">
+      <div class="cb-table-head">
+        <div>Category</div>
+        <div>Pages</div>
+        <div>OCR</div>
+        <div>TTS</div>
+        <div>Total</div>
+        <div>RTF</div>
+        <div>Chars</div>
+        <div>Fail</div>
+      </div>
+      <div id="cb-cat-rows"></div>
+    </div>
+
+    <div class="cb-foot">
+      Dataset <span id="cb-foot-dataset">–</span> · Source <span id="cb-foot-source">–</span> ·
+      Backend OCR <span id="cb-foot-ocr-backend">–</span> / TTS <span id="cb-foot-tts-backend">–</span> ·
+      n ≈ <span id="cb-foot-pages">–</span> pages
+    </div>
+  </section>
+
+</main>
+
+<script>
+const $ = (s, r=document) => r.querySelector(s);
+const fmt = (v, d=3) => (v == null || isNaN(v)) ? "–" : Number(v).toFixed(d);
+const fmtMs = v => v == null ? "–" : `${Math.round(v).toLocaleString()} ms`;
+function escapeHtml(s) {
+  return (s || "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[c]));
+}
+
+let cbSelectedDataset = { key: null, category: null };
+let cbSource = "pred";
+let cbModelDefaults = null;
+
+/* ── init: dataset / category / model dropdowns ─────────────── */
+async function cbInitDatasets() {
+  try {
+    const r = await fetch("/api/datasets");
+    const j = await r.json();
+    const datasets = j.datasets || [];
+    const sel = $("#cb-dataset-select");
+    sel.innerHTML = datasets.map(d => `<option value="${d.key}">${escapeHtml(d.label)}</option>`).join("");
+    const active = datasets.find(d => d.active) || datasets[0];
+    if (active) { cbSelectedDataset.key = active.key; sel.value = active.key; }
+    sel.addEventListener("change", () => {
+      cbSelectedDataset.key = sel.value;
+      cbSelectedDataset.category = null;
+      cbLoadCategories();
+    });
+    await cbLoadCategories();
+  } catch {}
+}
+
+async function cbLoadCategories() {
+  if (!cbSelectedDataset.key) return;
+  try {
+    const r = await fetch(`/api/datasets/${encodeURIComponent(cbSelectedDataset.key)}/categories`);
+    const j = await r.json();
+    const cats = (j.categories || []).filter(c => c.name !== "All");
+    const sel = $("#cb-category-select");
+    sel.innerHTML = '<option value="">All</option>' + cats.map(c =>
+      `<option value="${escapeHtml(c.name)}">${escapeHtml(c.name)} (${c.n_images} imgs)</option>`).join("");
+    sel.value = "";
+    sel.onchange = () => { cbSelectedDataset.category = sel.value || null; };
+  } catch {}
+}
+
+async function cbInitModels() {
+  try {
+    const r = await fetch("/api/models");
+    const j = await r.json();
+    const sel = $("#cb-model-select");
+    const opts = [];
+    for (const [ver, info] of Object.entries(j.available || {})) {
+      for (const t of info.model_types) opts.push(`${ver}::${t}`);
+    }
+    sel.innerHTML = opts.map(o => {
+      const [ver, t] = o.split("::");
+      return `<option value="${o}">${ver} · ${t}</option>`;
+    }).join("");
+    const cur = j.current || {};
+    if (cur.ocr_version && cur.model_type) sel.value = `${cur.ocr_version}::${cur.model_type}`;
+  } catch {}
+}
+
+async function cbInitKnobDefaults() {
+  try {
+    const r = await fetch("/api/config");
+    const d = await r.json();
+    cbModelDefaults = d;
+    const set = (id, val) => { const el = $(id); if (el && val !== undefined && val !== null) el.value = val; };
+    set("#cb-det-box-thresh", d.det_box_thresh);
+    set("#cb-det-thresh", d.det_thresh);
+    set("#cb-det-unclip", d.det_unclip_ratio);
+    set("#cb-det-limit-side", d.det_limit_side_len);
+    set("#cb-rec-batch", d.rec_batch_num);
+    set("#cb-rec-width", d.rec_img_width);
+    $("#cb-tensorrt").checked = !!d.use_tensorrt;
+    $("#cb-angle-cls").checked = !!d.use_angle_cls;
+    $("#cb-preprocessing").checked = !!d.enable_preprocessing;
+  } catch {}
+}
+
+$("#cb-source-toggle").addEventListener("click", e => {
+  const btn = e.target.closest("button[data-src]");
+  if (!btn) return;
+  $("#cb-source-toggle").querySelectorAll("button").forEach(b => b.classList.remove("on"));
+  btn.classList.add("on");
+  cbSource = btn.dataset.src;
+});
+
+/* ── run ──────────────────────────────────────────────────── */
+async function cbRun(force = false) {
+  const btn = $("#cb-run-btn"), status = $("#cb-status");
+  btn.disabled = true;
+  status.textContent = force ? "restarting…" : "starting…";
+  try {
+    const params = new URLSearchParams();
+    if (cbSelectedDataset.key) params.set("dataset", cbSelectedDataset.key);
+    if (cbSelectedDataset.category) params.set("category", cbSelectedDataset.category);
+    const modelVal = $("#cb-model-select").value;
+    if (modelVal) {
+      const [ver, mtype] = modelVal.split("::");
+      params.set("ocr_version", ver);
+      params.set("model_type", mtype);
+    }
+    params.set("source", cbSource);
+    params.set("det_box_thresh", $("#cb-det-box-thresh").value);
+    params.set("det_thresh", $("#cb-det-thresh").value);
+    params.set("det_unclip_ratio", $("#cb-det-unclip").value);
+    params.set("det_limit_side_len", $("#cb-det-limit-side").value);
+    params.set("rec_batch_num", $("#cb-rec-batch").value);
+    params.set("rec_img_width", $("#cb-rec-width").value);
+    params.set("use_tensorrt", $("#cb-tensorrt").checked);
+    params.set("use_angle_cls", $("#cb-angle-cls").checked);
+    params.set("enable_preprocessing", $("#cb-preprocessing").checked);
+    if (force) params.set("force", "true");
+
+    const r = await fetch("/api/combined/run?" + params.toString(), { method: "POST" });
+    const started = await r.json();
+    if (started.already_running) {
+      status.textContent = "already running…";
+    }
+  } catch (e) {
+    status.textContent = `error: ${e.message}`;
+    btn.disabled = false;
+    return;
+  }
+  cbPollProgress();
+}
+
+function cbPollProgress() {
+  const btn = $("#cb-run-btn"), status = $("#cb-status");
+  const poll = setInterval(async () => {
+    try {
+      const p = await (await fetch("/api/combined/progress")).json();
+      if (p.running) {
+        const cur = p.current ? `${p.current.name || ""} / ${p.current.file || ""}` : "";
+        status.textContent = `${p.done || 0}/${p.total || 0} · ${cur}`;
+      } else {
+        clearInterval(poll);
+        status.textContent = p.error ? `error: ${p.error}` : "done";
+        btn.disabled = false;
+        cbLoad();
+      }
+    } catch { clearInterval(poll); btn.disabled = false; }
+  }, 1000);
+}
+
+/* ── render results ──────────────────────────────────────── */
+async function cbLoad() {
+  let data;
+  try {
+    const r = await fetch("/api/combined/summary");
+    if (!r.ok) {
+      $("#cb-empty").style.display = "block";
+      $("#cb-content").style.display = "none";
+      $("#cb-summary-error").style.display = "none";
+      return;
+    }
+    data = await r.json();
+  } catch {
+    $("#cb-summary-error").textContent = "failed to load combined summary";
+    $("#cb-summary-error").style.display = "block";
+    return;
+  }
+  $("#cb-empty").style.display = "none";
+  $("#cb-summary-error").style.display = "none";
+  $("#cb-content").style.display = "block";
+
+  const o = data.overall || {};
+  $("#cb-m-total").textContent = fmtMs(o.total_ms_mean);
+  const live = (o.total_ms_mean ?? 0) < 3000; // heuristic: sub-3s feels responsive
+  $("#cb-m-total-tag").textContent = live ? "✔ responsive" : "⚠ noticeable delay";
+  $("#cb-m-total-tag").className = "tag " + (live ? "good" : "bad");
+  $("#cb-m-ocr").textContent = fmtMs(o.ocr_ms_mean);
+  $("#cb-m-tts").textContent = fmtMs(o.tts_ms_mean);
+  $("#cb-m-overhead").textContent = fmtMs(o.overhead_ms_mean);
+
+  $("#cb-foot-dataset").textContent = o.dataset || "–";
+  $("#cb-foot-source").textContent = o.source || "–";
+  $("#cb-foot-ocr-backend").textContent = o.ocr_backend || "–";
+  $("#cb-foot-tts-backend").textContent = o.tts_backend || "–";
+  $("#cb-foot-pages").textContent = o.pages ?? "–";
+  $("#last-run").textContent = o.last_run
+    ? "last run " + o.last_run.replace("T"," ").replace("Z"," UTC") : "–";
+
+  const cats = (data.per_category || []).filter(c => c.pages > 0);
+  const rows = $("#cb-cat-rows");
+  rows.innerHTML = cats.map(c => `
+    <div class="cb-table-row">
+      <div class="cat">${escapeHtml(c.category)}</div>
+      <div class="v">${c.pages}<span class="unit">pages</span></div>
+      <div class="v">${Math.round(c.ocr_ms_mean||0).toLocaleString()}<span class="unit">ms</span></div>
+      <div class="v">${Math.round(c.tts_ms_mean||0).toLocaleString()}<span class="unit">ms</span></div>
+      <div class="v">${Math.round(c.total_ms_mean||0).toLocaleString()}<span class="unit">ms</span></div>
+      <div class="v">${fmt(c.rtf_mean,2)}<span class="unit">rtf</span></div>
+      <div class="v">${(c.chars||0).toLocaleString()}<span class="unit">chars</span></div>
+      <div class="v">${(c.ocr_failures||0)+(c.tts_failures||0)}<span class="unit">fail</span></div>
+    </div>`).join("");
+}
+
+$("#cb-run-btn").addEventListener("click", () => cbRun(false));
+
+/* ── init ─────────────────────────────────────────────────── */
+cbInitDatasets();
+cbInitModels();
+cbInitKnobDefaults();
+cbLoad();
+
+// Resume polling if a run is already in flight (e.g. page refresh mid-run).
+(async () => {
+  try {
+    const p = await (await fetch("/api/combined/progress")).json();
+    if (p.running) {
+      $("#cb-run-btn").disabled = true;
+      $("#cb-status").textContent = `${p.done || 0}/${p.total || 0}`;
+      cbPollProgress();
+    }
+  } catch {}
+})();
+</script>
+</body>
+</html>

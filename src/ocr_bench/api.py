@@ -12,8 +12,12 @@ Endpoints:
   GET  /api/tts?text=…          synthesize text -> WAV (503 if voice missing)
   POST /api/tts/run             run TTS benchmark over OCR results (background)
   GET  /api/tts/summary         aggregated TTS metrics (overall + per-category)
+  POST /api/combined/run        run OCR immediately followed by TTS per page (background)
+  GET  /api/combined/progress   live combined run status
+  GET  /api/combined/summary    aggregated combined (OCR+TTS) metrics
   GET  /                        dashboard (ui/index.html)
   GET  /tts                     TTS benchmark dashboard (ui/tts.html)
+  GET  /combined                combined OCR+TTS benchmark dashboard (ui/combined.html)
 """
 from __future__ import annotations
 
@@ -151,7 +155,8 @@ class _BasicAuthMiddleware(BaseHTTPMiddleware):
 
     async def dispatch(self, request: Request, call_next):
         global _last_activity_time
-        if request.url.path not in ("/api/system", "/api/progress", "/api/tts/progress"):
+        if request.url.path not in ("/api/system", "/api/progress", "/api/tts/progress",
+                                     "/api/combined/progress"):
             _last_activity_time = time.time()
         # Unauthenticated: only the Docker healthcheck, so it doesn't need creds.
         if request.url.path == "/api/health" or _check_auth(request):
@@ -438,6 +443,103 @@ def create_app() -> FastAPI:
             raise HTTPException(404, "no TTS reports yet — run POST /api/tts/run")
         return JSONResponse(json.loads(path.read_text(encoding="utf-8")))
 
+    @app.post("/api/combined/run")
+    def api_combined_run(background: BackgroundTasks, category: str | None = None,
+                          ocr_version: str | None = None, model_type: str | None = None,
+                          det_box_thresh: float | None = None,
+                          det_thresh: float | None = None,
+                          det_unclip_ratio: float | None = None,
+                          det_limit_side_len: int | None = None,
+                          use_angle_cls: bool | None = None,
+                          rec_batch_num: int | None = None,
+                          rec_img_width: int | None = None,
+                          use_tensorrt: bool | None = None,
+                          enable_preprocessing: bool | None = None,
+                          dataset: str | None = None,
+                          source: str | None = None,
+                          force: bool = False):
+        """Run OCR immediately followed by TTS per page (background)."""
+        from .combined_runner import COMBINED_STATUS_PATH, run as run_combined
+        if COMBINED_STATUS_PATH.exists():
+            try:
+                current = json.loads(COMBINED_STATUS_PATH.read_text(encoding="utf-8"))
+                if current.get("running") and not force and not _is_stale(current):
+                    return {"ok": False, "already_running": True}
+            except (json.JSONDecodeError, OSError):
+                pass
+        only = [category] if category else None
+        overrides = {
+            k: v for k, v in {
+                "det_box_thresh": det_box_thresh,
+                "det_thresh": det_thresh,
+                "det_unclip_ratio": det_unclip_ratio,
+                "det_limit_side_len": det_limit_side_len,
+                "use_angle_cls": use_angle_cls,
+                "rec_batch_num": rec_batch_num,
+                "rec_img_width": rec_img_width,
+                "use_tensorrt": use_tensorrt,
+                "enable_preprocessing": enable_preprocessing,
+            }.items() if v is not None
+        }
+        background.add_task(run_combined, only, ocr_version, model_type, overrides, dataset, source)
+        global _gpu_initialized
+        _gpu_initialized = True
+        return {"ok": True, "started": True}
+
+    @app.get("/api/combined/progress")
+    def api_combined_progress():
+        from .combined_runner import COMBINED_STATUS_PATH
+        idle = {"running": False, "total": 0, "done": 0, "current": None}
+        if not COMBINED_STATUS_PATH.exists():
+            return JSONResponse(idle)
+        try:
+            status = json.loads(COMBINED_STATUS_PATH.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            return JSONResponse(idle)
+        if status.get("running") and _is_stale(status):
+            status["stale"] = True
+        return JSONResponse(status)
+
+    @app.get("/api/combined/progress/stream")
+    async def api_combined_progress_stream():
+        """Server-Sent Events: push combined run status as it changes."""
+        from .combined_runner import COMBINED_STATUS_PATH
+
+        def _read() -> dict:
+            idle = {"running": False, "total": 0, "done": 0, "current": None}
+            if not COMBINED_STATUS_PATH.exists():
+                return idle
+            try:
+                status = json.loads(COMBINED_STATUS_PATH.read_text(encoding="utf-8"))
+            except (json.JSONDecodeError, OSError):
+                return idle
+            if status.get("running") and _is_stale(status):
+                status["stale"] = True
+            return status
+
+        async def gen():
+            last = None
+            try:
+                while True:
+                    payload = json.dumps(_read())
+                    if payload != last:
+                        yield f"data: {payload}\n\n"
+                        last = payload
+                    await asyncio.sleep(1.0)
+            except asyncio.CancelledError:
+                return
+
+        return StreamingResponse(gen(), media_type="text/event-stream",
+                                 headers={"Cache-Control": "no-cache",
+                                          "X-Accel-Buffering": "no"})
+
+    @app.get("/api/combined/summary")
+    def api_combined_summary():
+        path = REPORTS_ROOT / "combined_summary.json"
+        if not path.exists():
+            raise HTTPException(404, "no combined reports yet — run POST /api/combined/run")
+        return JSONResponse(json.loads(path.read_text(encoding="utf-8")))
+
     @app.get("/api/results/{category}")
     def api_results(category: str):
         for f in (REPORTS_ROOT / "per_category").glob("*.json"):
@@ -659,6 +761,13 @@ def create_app() -> FastAPI:
         page = UI_ROOT / "tts.html"
         if not page.exists():
             raise HTTPException(404, "ui/tts.html not found")
+        return FileResponse(page, media_type="text/html")
+
+    @app.get("/combined")
+    def combined_page():
+        page = UI_ROOT / "combined.html"
+        if not page.exists():
+            raise HTTPException(404, "ui/combined.html not found")
         return FileResponse(page, media_type="text/html")
 
     if UI_ROOT.exists():
