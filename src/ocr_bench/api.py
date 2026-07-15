@@ -47,8 +47,9 @@ def _get_tts_engine():
     if _tts_engine is not None:
         return _tts_engine
     from .config import get_settings
-    from .tts_engine import TTSEngine
-    voice_path = Path(get_settings().piper_voice_path)
+    from .tts_engine import TTSEngine, _detect_cuda
+    settings = get_settings()
+    voice_path = Path(settings.piper_voice_path)
     if not voice_path.exists():
         raise HTTPException(
             503,
@@ -56,7 +57,8 @@ def _get_tts_engine():
             f"Run: uv run python -m scripts.download_voice",
         )
     try:
-        _tts_engine = TTSEngine(str(voice_path))
+        use_cuda = settings.use_cuda_tts and _detect_cuda()
+        _tts_engine = TTSEngine(str(voice_path), use_cuda=use_cuda)
     except Exception as e:  # noqa: BLE001 — piper load failure -> 503, not 500
         raise HTTPException(503, f"TTS voice failed to load: {e}") from e
     return _tts_engine
@@ -325,6 +327,8 @@ def create_app() -> FastAPI:
             "use_tensorrt": s.use_tensorrt,
             "cuda_available": _detect_cuda(),
             "tensorrt_available": _detect_tensorrt(),
+            "use_cuda_tts": s.use_cuda_tts,
+            "tts_cuda_available": _detect_cuda(),
         }
 
     def _synth_response(text: str) -> Response:

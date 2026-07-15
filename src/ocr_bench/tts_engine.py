@@ -37,6 +37,15 @@ class TTSResult:
         return self.n_chars / (self.synth_ms / 1000) if self.synth_ms else 0.0
 
 
+def _detect_cuda() -> bool:
+    """Auto-detect CUDA availability for onnxruntime-gpu."""
+    try:
+        import onnxruntime as ort
+        return "CUDAExecutionProvider" in ort.get_available_providers()
+    except Exception:
+        return False
+
+
 @dataclass
 class TTSEngine:
     """Loads the Piper voice once; synthesize() returns (pcm_bytes, TTSResult).
@@ -45,10 +54,15 @@ class TTSEngine:
     (api.py) turn that into a 503 with a "run download_voice" message.
     """
     voice_path: str
+    use_cuda: bool = field(default_factory=_detect_cuda)
     voice: PiperVoice = field(init=False)
 
     def __post_init__(self) -> None:
-        self.voice = PiperVoice.load(self.voice_path)
+        self.voice = PiperVoice.load(self.voice_path, use_cuda=self.use_cuda)
+
+    @property
+    def backend(self) -> str:
+        return "cuda" if self.use_cuda else "cpu"
 
     def synthesize(self, text: str) -> tuple[bytes, TTSResult]:
         t0 = time.perf_counter()
@@ -98,7 +112,7 @@ if __name__ == "__main__":
     pcm, r = engine.synthesize("Halo, ini uji coba benchmark.")
     assert pcm, "no audio produced"
     assert 0.0 < r.rtf < 5.0, f"RTF out of sane range: {r.rtf}"
-    print(f"OK  chars={r.n_chars}  synth={r.synth_ms:.0f}ms  "
+    print(f"OK  backend={engine.backend}  chars={r.n_chars}  synth={r.synth_ms:.0f}ms  "
           f"audio={r.audio_seconds:.2f}s  RTF={r.rtf:.3f}  "
           f"first_chunk={r.first_chunk_ms:.0f}ms  {r.chars_per_sec:.0f} chars/s",
           file=sys.stderr)

@@ -489,6 +489,7 @@
         <a href="/tts" class="topbar-link is-active">TTS</a>
       </nav>
       <span id="voice-badge" class="model-badge" title="Piper voice"><span class="badge-dot"></span><span id="voice-text">–</span></span>
+      <span id="backend-badge" class="dataset-badge" title="TTS inference backend" style="display: none; border: 1px solid var(--border);"><span class="badge-dot" style="background: var(--text-muted);"></span><span id="backend-text">–</span></span>
       <span id="last-run" class="last-run" title="When the last TTS benchmark finished">–</span>
     </div>
   </div>
@@ -662,7 +663,7 @@
   </div>
 
   <div class="tts-foot">
-    Voice <span id="foot-voice">–</span> · Source <span id="foot-source">–</span> ·
+    Voice <span id="foot-voice">–</span> · Backend <span id="foot-backend">–</span> · Source <span id="foot-source">–</span> ·
     Directional benchmark · n ≈ <span id="foot-pages">–</span> pages
     <div class="legend">
       <span class="live">RTF = 1.0 (live threshold)</span>
@@ -710,6 +711,14 @@ function renderSummary(data) {
   $("#m-cps").textContent = (Math.round(o.chars_per_sec_mean || 0)).toLocaleString();
 
   $("#voice-text").textContent = o.voice || "piper";
+  if (o.backend) {
+    $("#backend-text").textContent = o.backend.toUpperCase();
+    $("#backend-badge").style.display = "inline-flex";
+    $("#foot-backend").textContent = o.backend.toUpperCase();
+  } else {
+    $("#backend-badge").style.display = "none";
+    $("#foot-backend").textContent = "–";
+  }
   $("#foot-voice").textContent = o.voice || "–";
   $("#foot-source").textContent = o.source || "pred";
   $("#foot-pages").textContent = o.pages ?? "–";

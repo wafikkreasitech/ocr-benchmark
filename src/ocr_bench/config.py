@@ -58,6 +58,7 @@ class Settings(BaseSettings):
     # Download with: uv run python -m scripts.download_voice
     piper_voice_path: str = "models/piper-voices/id/id_ID-news_tts-medium.onnx"
     tts_source: str = "pred"                      # which text to speak: pred (OCR output) | gt (clean)
+    use_cuda_tts: bool = True                     # enable GPU/CUDA for TTS if available
 
     model_config = SettingsConfigDict(
         env_file=".env",

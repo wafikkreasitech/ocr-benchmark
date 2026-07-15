@@ -18,7 +18,7 @@ from pathlib import Path
 
 from .config import get_settings
 from .paths import REPORTS_ROOT
-from .tts_engine import TTSEngine
+from .tts_engine import TTSEngine, _detect_cuda
 
 log = logging.getLogger(__name__)
 
@@ -82,7 +82,8 @@ def run(source: str | None = None) -> dict:
     _write_status({"running": True, "started_at": _now_iso(),
                    "total": total_pages, "done": 0, "current": None, "source": source})
 
-    engine = TTSEngine(settings.piper_voice_path)  # raises if voice missing
+    use_cuda = settings.use_cuda_tts and _detect_cuda()
+    engine = TTSEngine(settings.piper_voice_path, use_cuda=use_cuda)  # raises if voice missing
 
     per_category: list[dict] = []
     all_rtf: list[float] = []
@@ -150,6 +151,7 @@ def run(source: str | None = None) -> dict:
         "failures": total_failures,
         "source": source,
         "voice": Path(settings.piper_voice_path).stem,
+        "backend": engine.backend,
         "last_run": _now_iso(),
     }
     summary = {"overall": overall, "per_category": per_category}
