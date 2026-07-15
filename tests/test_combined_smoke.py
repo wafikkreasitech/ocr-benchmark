@@ -26,7 +26,7 @@ _needs_all = pytest.mark.skipif(
 
 @_needs_all
 def test_combined_mini_run():
-    from ocr_bench.combined_runner import COMBINED_STATUS_PATH, COMBINED_SUMMARY_PATH, run as run_combined
+    from ocr_bench.combined_runner import COMBINED_HISTORY_ROOT, run as run_combined
 
     with tempfile.TemporaryDirectory() as tmp:
         backup = Path(tmp) / "reports_backup"
@@ -36,6 +36,15 @@ def test_combined_mini_run():
 
         try:
             summary = run_combined(only_categories=["IDENTITY CARDS"], source="pred")
+
+            # History snapshot must exist so /api/combined/history can list
+            # this run — check before the reports/ dir gets restored below.
+            overall = summary["overall"]
+            run_id = overall["last_run"].replace(":", "-").replace("T", "_").replace("Z", "")
+            hist_file = COMBINED_HISTORY_ROOT / f"{run_id}.json"
+            assert hist_file.exists(), "combined run was not saved to history"
+            index_file = COMBINED_HISTORY_ROOT / "index.json"
+            assert index_file.exists(), "combined history index was not written"
         finally:
             if backup.exists():
                 shutil.rmtree(live_reports, ignore_errors=True)
@@ -59,6 +68,10 @@ def test_combined_mini_run():
         )
     assert overall["ocr_backend"] in ("cpu", "cuda", "tensorrt")
     assert overall["tts_backend"] in ("cpu", "cuda")
+    # Resource sampling must be present — this is the sysmon data the history
+    # detail view reads (CPU/RAM/GPU/temp while both engines were resident).
+    assert "resources" in overall
+    assert overall["resources"].get("samples", 0) >= 0
 
 
 if __name__ == "__main__":

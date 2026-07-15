@@ -34,6 +34,7 @@ log = logging.getLogger(__name__)
 COMBINED_STATUS_PATH = REPORTS_ROOT / ".combined_status.json"
 COMBINED_SUMMARY_PATH = REPORTS_ROOT / "combined_summary.json"
 COMBINED_SUMMARY_CSV = REPORTS_ROOT / "combined_summary.csv"
+COMBINED_HISTORY_ROOT = REPORTS_ROOT / "combined_history"
 
 _CSV_COLUMNS = ["category", "pages", "chars", "ocr_ms_mean", "tts_ms_mean",
                 "overhead_ms_mean", "total_ms_mean", "rtf_mean",
@@ -77,6 +78,65 @@ def _agg(values: list[float]) -> dict:
     if not values:
         return {"mean": 0.0, "median": 0.0}
     return {"mean": statistics.fmean(values), "median": statistics.median(values)}
+
+
+def _save_to_history(summary: dict) -> None:
+    """Save a snapshot of this combined run to reports/combined_history/.
+
+    Mirrors runner.py's _save_to_history — same shape (id/timestamp/config/
+    resources/overall) so the sysmon block in a run's detail view works the
+    same way it does for OCR-only and TTS-only runs.
+    """
+    COMBINED_HISTORY_ROOT.mkdir(parents=True, exist_ok=True)
+    overall = summary["overall"]
+    run_id = overall["last_run"].replace(":", "-").replace("T", "_").replace("Z", "")
+    snapshot = {
+        "id": run_id,
+        "timestamp": overall["last_run"],
+        "dataset": overall.get("dataset", ""),
+        "source": overall.get("source", "pred"),
+        "ocr_version": overall.get("ocr_version", ""),
+        "model_type": overall.get("model_type", ""),
+        "ocr_backend": overall.get("ocr_backend", "cpu"),
+        "tts_backend": overall.get("tts_backend", "cpu"),
+        "total_elapsed_s": overall.get("total_elapsed_s", 0),
+        "resources": overall.get("resources", {}),
+        "overall": overall,
+        "per_category": summary.get("per_category", []),
+    }
+
+    out_file = COMBINED_HISTORY_ROOT / f"{run_id}.json"
+    out_file.write_text(json.dumps(snapshot, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    index_path = COMBINED_HISTORY_ROOT / "index.json"
+    if index_path.exists():
+        try:
+            index = json.loads(index_path.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            index = []
+    else:
+        index = []
+
+    index = [e for e in index if e.get("id") != run_id]  # dedupe same-timestamp reruns
+    index.append({
+        "id": run_id,
+        "timestamp": overall["last_run"],
+        "dataset": overall.get("dataset", ""),
+        "source": overall.get("source", "pred"),
+        "ocr_version": overall.get("ocr_version", ""),
+        "model_type": overall.get("model_type", ""),
+        "ocr_backend": overall.get("ocr_backend", "cpu"),
+        "tts_backend": overall.get("tts_backend", "cpu"),
+        "pages": overall.get("pages", 0),
+        "total_ms_mean": overall.get("total_ms_mean", 0),
+        "ocr_ms_mean": overall.get("ocr_ms_mean", 0),
+        "tts_ms_mean": overall.get("tts_ms_mean", 0),
+        "rtf_mean": overall.get("rtf_mean", 0),
+        "total_elapsed_s": overall.get("total_elapsed_s", 0),
+        "resources": overall.get("resources", {}),
+    })
+    index = index[-50:]  # keep last 50 runs, same cap as runner.py
+    index_path.write_text(json.dumps(index, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
 def run(only_categories: list[str] | None = None,
@@ -301,6 +361,7 @@ def run(only_categories: list[str] | None = None,
             w.writeheader()
             for c in per_category:
                 w.writerow({k: c[k] for k in _CSV_COLUMNS})
+        _save_to_history(summary)
 
         _write_status({
             "running": False, "started_at": started_at, "finished_at": _now_iso(),

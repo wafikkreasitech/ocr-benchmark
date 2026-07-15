@@ -9,6 +9,7 @@ reports/.tts_status.json
 reports/combined_summary.json
 reports/combined_summary.csv
 reports/.combined_status.json
+reports/combined_history/
 
 # TTS voice model (~63MB, downloaded via scripts/download_voice.py)
 models/

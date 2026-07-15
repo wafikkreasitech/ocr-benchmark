@@ -92,6 +92,15 @@
   .cb-error { color: var(--bad); border-color: var(--bad); border-style: solid; background: var(--bad-bg); }
 
   .cb-foot { margin-top: 16px; font-size: 12px; color: var(--text-muted); font-family: var(--mono); }
+
+  /* History table + detail panel reuse global .rd-cfg/.compare-panel look */
+  .cb-history-row { cursor: pointer; }
+  .cb-history-row:hover { background: var(--surface-alt); }
+  .cb-backend-tag {
+    display: inline-block; font-size: 9px; font-family: var(--mono);
+    padding: 1px 6px; border-radius: 999px; margin-left: 6px;
+    background: var(--accent-light); color: var(--accent);
+  }
 </style>
 </head>
 <body>
@@ -125,6 +134,65 @@
 </header>
 
 <main class="container">
+
+  <!-- ─── System Resources (live, same widget as OCR page) ─────── -->
+  <section class="panel sysmon-panel">
+    <header class="panel-head">
+      <h2>System resources</h2>
+      <span class="muted" id="sysmon-highload"></span>
+      <span class="muted" id="sysmon-updated">–</span>
+    </header>
+    <div class="sysmon-grid" id="sysmon-grid">
+      <div class="sysmon-card" data-metric="cpu">
+        <div class="sysmon-head">
+          <span class="sysmon-label">CPU</span>
+          <span class="sysmon-value" id="sysmon-cpu-val">–</span>
+        </div>
+        <div class="sysmon-bar-track"><div class="sysmon-bar" id="sysmon-cpu-bar"></div></div>
+        <div class="sysmon-sub muted" id="sysmon-cpu-sub"></div>
+      </div>
+      <div class="sysmon-card" data-metric="ram">
+        <div class="sysmon-head">
+          <span class="sysmon-label">RAM</span>
+          <span class="sysmon-value" id="sysmon-ram-val">–</span>
+        </div>
+        <div class="sysmon-bar-track"><div class="sysmon-bar" id="sysmon-ram-bar"></div></div>
+        <div class="sysmon-sub muted" id="sysmon-ram-sub"></div>
+      </div>
+      <div class="sysmon-card" data-metric="cpu-temp">
+        <div class="sysmon-head">
+          <span class="sysmon-label">CPU temp</span>
+          <span class="sysmon-value" id="sysmon-cputemp-val">–</span>
+        </div>
+        <div class="sysmon-bar-track"><div class="sysmon-bar sysmon-bar-temp" id="sysmon-cputemp-bar"></div></div>
+        <div class="sysmon-sub muted" id="sysmon-cputemp-sub"></div>
+      </div>
+      <div class="sysmon-card" data-metric="gpu">
+        <div class="sysmon-head">
+          <span class="sysmon-label">GPU</span>
+          <span class="sysmon-value" id="sysmon-gpu-val">–</span>
+        </div>
+        <div class="sysmon-bar-track"><div class="sysmon-bar" id="sysmon-gpu-bar"></div></div>
+        <div class="sysmon-sub muted" id="sysmon-gpu-sub"></div>
+      </div>
+      <div class="sysmon-card" data-metric="gpu-mem">
+        <div class="sysmon-head">
+          <span class="sysmon-label">GPU mem</span>
+          <span class="sysmon-value" id="sysmon-gpumem-val">–</span>
+        </div>
+        <div class="sysmon-bar-track"><div class="sysmon-bar" id="sysmon-gpumem-bar"></div></div>
+        <div class="sysmon-sub muted" id="sysmon-gpumem-sub"></div>
+      </div>
+      <div class="sysmon-card" data-metric="gpu-temp">
+        <div class="sysmon-head">
+          <span class="sysmon-label">GPU temp</span>
+          <span class="sysmon-value" id="sysmon-gputemp-val">–</span>
+        </div>
+        <div class="sysmon-bar-track"><div class="sysmon-bar sysmon-bar-temp" id="sysmon-gputemp-bar"></div></div>
+        <div class="sysmon-sub muted" id="sysmon-gputemp-sub"></div>
+      </div>
+    </div>
+  </section>
 
   <section class="cb-hero">
     <h1>What does it cost to<br><em>see and speak</em> at once?</h1>
@@ -268,6 +336,52 @@
       Dataset <span id="cb-foot-dataset">–</span> · Source <span id="cb-foot-source">–</span> ·
       Backend OCR <span id="cb-foot-ocr-backend">–</span> / TTS <span id="cb-foot-tts-backend">–</span> ·
       n ≈ <span id="cb-foot-pages">–</span> pages
+    </div>
+
+    <!-- ── Resource usage for the last run (avg/peak while both engines were loaded) ── -->
+    <div class="rd-section" id="cb-resources-block" style="display:none; margin-top:20px;">
+      <div class="rd-section-head">Resource usage this run <span class="muted" id="cb-res-samples"></span></div>
+      <div class="rd-cfg" id="cb-resources-rows"></div>
+    </div>
+  </section>
+
+  <!-- ─── Combined run history ───────────────────────────────── -->
+  <section class="panel" style="margin-top:20px;">
+    <header class="panel-head">
+      <h2>Combined run history</h2>
+      <span class="muted">click a row to see full sysmon detail for that run</span>
+    </header>
+    <div class="history-table-wrap">
+      <table id="cb-history-table">
+        <thead>
+          <tr>
+            <th>When</th>
+            <th>Backend</th>
+            <th>Source</th>
+            <th class="num">Pages</th>
+            <th class="num">OCR</th>
+            <th class="num">TTS</th>
+            <th class="num">Total</th>
+            <th class="num" title="Peak CPU usage during this run">CPU</th>
+            <th class="num" title="Peak RAM usage during this run">RAM</th>
+            <th class="num" title="Peak GPU usage during this run">GPU</th>
+            <th class="num">Age</th>
+          </tr>
+        </thead>
+        <tbody id="cb-history-tbody"></tbody>
+      </table>
+    </div>
+    <div id="cb-empty-history" class="cb-empty" style="display:none;">No combined runs yet.</div>
+
+    <div id="cb-detail-panel" class="compare-panel hidden">
+      <div class="compare-head">
+        <div>
+          <h3 id="cb-detail-title">Run detail</h3>
+          <div id="cb-detail-sub" class="muted"></div>
+        </div>
+        <button id="cb-detail-close" class="btn-back">close</button>
+      </div>
+      <div id="cb-detail-content"></div>
     </div>
   </section>
 
@@ -417,6 +531,7 @@ function cbPollProgress() {
         status.textContent = p.error ? `error: ${p.error}` : "done";
         btn.disabled = false;
         cbLoad();
+        cbLoadHistory();
       }
     } catch { clearInterval(poll); btn.disabled = false; }
   }, 1000);
@@ -473,7 +588,226 @@ async function cbLoad() {
       <div class="v">${(c.chars||0).toLocaleString()}<span class="unit">chars</span></div>
       <div class="v">${(c.ocr_failures||0)+(c.tts_failures||0)}<span class="unit">fail</span></div>
     </div>`).join("");
+
+  renderResourceBlock("#cb-resources-block", "#cb-resources-rows", "#cb-res-samples", o.resources);
 }
+
+/* ── System Resource Monitor (same widget/logic as index.html) ─────── */
+function _sysmonBarClass(pct) {
+  if (pct >= 90) return "sysmon-bad";
+  if (pct >= 75) return "sysmon-warn";
+  return "";
+}
+function _setSysmonCard(prefix, pct, valueText, subText, available = true) {
+  const val = $(`#sysmon-${prefix}-val`);
+  const bar = $(`#sysmon-${prefix}-bar`);
+  const sub = $(`#sysmon-${prefix}-sub`);
+  const card = val ? val.closest(".sysmon-card") : null;
+  if (val) val.textContent = available ? valueText : "n/a";
+  if (sub) sub.textContent = available ? (subText || "") : "not available on this host";
+  if (bar) {
+    bar.style.width = available ? `${Math.min(100, Math.max(0, pct || 0))}%` : "0%";
+    bar.classList.remove("sysmon-warn", "sysmon-bad");
+    const cls = _sysmonBarClass(pct || 0);
+    if (available && cls) bar.classList.add(cls);
+  }
+  if (card) card.classList.toggle("unavailable", !available);
+}
+function fmtDateAge(ts) {
+  try {
+    const d = new Date(ts);
+    const s = (Date.now() - d.getTime()) / 1000;
+    if (s < 60) return "just now";
+    if (s < 3600) return `${Math.round(s/60)}m ago`;
+    if (s < 86400) return `${Math.round(s/3600)}h ago`;
+    return `${Math.round(s/86400)}d ago`;
+  } catch { return ""; }
+}
+function renderSysmon(s) {
+  if (!s) return;
+  const updated = $("#sysmon-updated");
+  if (updated) updated.textContent = s.timestamp ? `updated ${fmtDateAge(s.timestamp)}` : "";
+  const highLoad = $("#sysmon-highload");
+  if (highLoad) {
+    highLoad.textContent = s.high_load_elapsed_s ? `⚠ peak load (≥90%) for ${Math.round(s.high_load_elapsed_s)}s` : "";
+  }
+  _setSysmonCard("cpu", s.cpu_percent, `${fmt(s.cpu_percent, 0)}%`, `${s.cpu_count || "?"} cores`);
+  const ramGb = (s.ram_used_mb / 1024).toFixed(1);
+  const ramTotalGb = (s.ram_total_mb / 1024).toFixed(1);
+  _setSysmonCard("ram", s.ram_percent, `${fmt(s.ram_percent, 0)}%`, `${ramGb} / ${ramTotalGb} GB`);
+  const hasCpuTemp = s.cpu_temp_c !== null && s.cpu_temp_c !== undefined;
+  _setSysmonCard("cputemp", hasCpuTemp ? (s.cpu_temp_c / 100) * 100 : 0,
+    hasCpuTemp ? `${fmt(s.cpu_temp_c, 0)}°C` : "n/a", hasCpuTemp ? "core sensor" : "", hasCpuTemp);
+  const gpu = (s.gpus && s.gpus[0]) || null;
+  _setSysmonCard("gpu", gpu ? gpu.util_percent : 0,
+    gpu ? `${fmt(gpu.util_percent, 0)}%` : "n/a", gpu ? gpu.name : "", !!gpu);
+  const gpuMemPct = gpu && gpu.mem_total_mb ? (gpu.mem_used_mb / gpu.mem_total_mb) * 100 : 0;
+  _setSysmonCard("gpumem", gpuMemPct,
+    gpu ? `${fmt(gpuMemPct, 0)}%` : "n/a",
+    gpu ? `${(gpu.mem_used_mb / 1024).toFixed(1)} / ${(gpu.mem_total_mb / 1024).toFixed(1)} GB` : "", !!gpu);
+  const hasGpuTemp = gpu && gpu.temp_c !== null && gpu.temp_c !== undefined;
+  _setSysmonCard("gputemp", hasGpuTemp ? (gpu.temp_c / 100) * 100 : 0,
+    hasGpuTemp ? `${fmt(gpu.temp_c, 0)}°C` : "n/a", hasGpuTemp ? "GPU die" : "", !!hasGpuTemp);
+}
+async function pollSysmon() {
+  while (true) {
+    try {
+      const r = await fetch("/api/system");
+      if (r.ok) renderSysmon(await r.json());
+    } catch {}
+    await new Promise(res => setTimeout(res, 3000));
+  }
+}
+
+/* ── Resource usage block (avg/peak for one run — reused for last-run + history detail) ── */
+function renderResourceBlock(blockSel, rowsSel, samplesSel, res) {
+  const block = $(blockSel), rowsEl = $(rowsSel), samplesEl = $(samplesSel);
+  if (!block || !rowsEl) return;
+  if (!res || !res.samples) {
+    block.style.display = "none";
+    return;
+  }
+  block.style.display = "block";
+  if (samplesEl) samplesEl.textContent = `— ${res.samples} samples over the run`;
+  const rows = [
+    ["CPU", res.cpu_percent_avg, res.cpu_percent_max, "%"],
+    ["RAM", res.ram_percent_avg, res.ram_percent_max, "%",
+      `${(res.ram_used_mb_avg/1024).toFixed(1)} / ${(res.ram_total_mb/1024).toFixed(1)} GB avg`],
+    ["CPU temp", res.cpu_temp_c_avg, res.cpu_temp_c_max, "°C"],
+    ["GPU" + (res.gpu_name ? ` (${res.gpu_name})` : ""), res.gpu_percent_avg, res.gpu_percent_max, "%"],
+    ["GPU temp", res.gpu_temp_c_avg, res.gpu_temp_c_max, "°C"],
+  ].filter(([, avg, max]) => avg !== null && avg !== undefined);
+  rowsEl.innerHTML = rows.map(([label, avg, max, unit, hint]) => `
+    <div class="rd-cfg-row">
+      <span class="rd-cfg-k">${label}</span>
+      <span class="rd-cfg-v">${fmt(avg,1)}${unit} avg</span>
+      <span class="rd-cfg-d muted">peak ${fmt(max,1)}${unit}${hint ? " · " + hint : ""}</span>
+    </div>`).join("") || '<div class="muted">no resource data recorded</div>';
+}
+
+/* ── Combined run history ────────────────────────────────── */
+let cbHistoryRuns = [];
+async function cbLoadHistory() {
+  try {
+    const r = await fetch("/api/combined/history");
+    const j = await r.json();
+    cbHistoryRuns = j.runs || [];
+  } catch { cbHistoryRuns = []; }
+  renderCbHistory();
+}
+function renderCbHistory() {
+  const tbody = $("#cb-history-tbody");
+  const empty = $("#cb-empty-history");
+  if (!cbHistoryRuns.length) {
+    tbody.innerHTML = "";
+    empty.style.display = "block";
+    return;
+  }
+  empty.style.display = "none";
+  tbody.innerHTML = cbHistoryRuns.map(run => {
+    const res = run.resources || {};
+    const cpuCell = res.cpu_percent_max != null ? `${fmt(res.cpu_percent_max,0)}%` : "–";
+    const ramCell = res.ram_percent_max != null ? `${fmt(res.ram_percent_max,0)}%` : "–";
+    const gpuCell = res.gpu_percent_max != null ? `${fmt(res.gpu_percent_max,0)}%` : "–";
+    const ocrBackend = run.ocr_backend || "cpu";
+    const ttsBackend = run.tts_backend || "cpu";
+    return `
+    <tr class="cb-history-row" data-id="${run.id}">
+      <td>${run.timestamp ? run.timestamp.replace("T"," ").replace("Z","") : run.id}</td>
+      <td>${ocrBackend}<span class="cb-backend-tag">${ttsBackend}</span></td>
+      <td>${run.source || "pred"}</td>
+      <td class="num">${run.pages ?? "–"}</td>
+      <td class="num">${Math.round(run.ocr_ms_mean||0)}ms</td>
+      <td class="num">${Math.round(run.tts_ms_mean||0)}ms</td>
+      <td class="num">${Math.round(run.total_ms_mean||0)}ms</td>
+      <td class="num muted" title="peak CPU usage">${cpuCell}</td>
+      <td class="num muted" title="peak RAM usage">${ramCell}</td>
+      <td class="num muted" title="peak GPU usage">${gpuCell}</td>
+      <td class="num muted">${run.timestamp ? fmtDateAge(run.timestamp) : "–"}</td>
+    </tr>`;
+  }).join("");
+  tbody.querySelectorAll("tr").forEach(tr => {
+    tr.addEventListener("click", () => cbOpenDetail(tr.dataset.id));
+  });
+}
+
+async function cbOpenDetail(id) {
+  const panel = $("#cb-detail-panel");
+  panel.classList.remove("hidden");
+  $("#cb-detail-title").textContent = "Loading…";
+  $("#cb-detail-content").innerHTML = "";
+  let run;
+  try {
+    run = await (await fetch("/api/combined/history/" + encodeURIComponent(id))).json();
+  } catch {
+    $("#cb-detail-title").textContent = "Failed to load";
+    return;
+  }
+  const o = run.overall || {};
+  $("#cb-detail-title").textContent = `Combined run · ${run.timestamp ? run.timestamp.replace("T"," ").replace("Z","") : id}`;
+  $("#cb-detail-sub").textContent = `${run.dataset || "–"} · source ${run.source || "pred"} · ${o.pages || 0} pages`;
+
+  const cards = [
+    ["Total end-to-end", fmtMs(o.total_ms_mean)],
+    ["OCR stage", fmtMs(o.ocr_ms_mean)],
+    ["TTS stage", fmtMs(o.tts_ms_mean)],
+    ["Overhead", fmtMs(o.overhead_ms_mean)],
+    ["OCR backend", run.ocr_backend || "cpu"],
+    ["TTS backend", run.tts_backend || "cpu"],
+  ].map(([k,v]) => `<div class="rd-card"><div class="rd-k">${k}</div><div class="rd-v">${v}</div></div>`).join("");
+
+  const cats = run.per_category || [];
+  const catRows = cats.map(c => `<tr>
+    <td>${escapeHtml(c.category)}</td>
+    <td class="num">${c.pages ?? "–"}</td>
+    <td class="num">${Math.round(c.ocr_ms_mean||0)}ms</td>
+    <td class="num">${Math.round(c.tts_ms_mean||0)}ms</td>
+    <td class="num">${Math.round(c.total_ms_mean||0)}ms</td>
+    <td class="num">${fmt(c.rtf_mean,2)}</td>
+    <td class="num">${(c.ocr_failures||0)+(c.tts_failures||0)}</td>
+  </tr>`).join("");
+
+  $("#cb-detail-content").innerHTML = `
+    <div class="rd-cards">${cards}</div>
+    <div class="rd-section" id="cb-detail-resources"></div>
+    <div class="rd-section">
+      <div class="rd-section-head">Per-category breakdown</div>
+      <table class="compare-table">
+        <thead><tr><th>Category</th><th class="num">Pages</th><th class="num">OCR</th><th class="num">TTS</th><th class="num">Total</th><th class="num">RTF</th><th class="num">Fail</th></tr></thead>
+        <tbody>${catRows || '<tr><td colspan="7" class="muted">no per-category data</td></tr>'}</tbody>
+      </table>
+    </div>`;
+
+  // Resource usage for this specific historical run.
+  const res = run.resources || o.resources || {};
+  const resBlock = $("#cb-detail-resources");
+  if (res && res.samples) {
+    const rows = [
+      ["CPU", res.cpu_percent_avg, res.cpu_percent_max, "%"],
+      ["RAM", res.ram_percent_avg, res.ram_percent_max, "%",
+        `${(res.ram_used_mb_avg/1024).toFixed(1)} / ${(res.ram_total_mb/1024).toFixed(1)} GB avg`],
+      ["CPU temp", res.cpu_temp_c_avg, res.cpu_temp_c_max, "°C"],
+      ["GPU" + (res.gpu_name ? ` (${res.gpu_name})` : ""), res.gpu_percent_avg, res.gpu_percent_max, "%"],
+      ["GPU temp", res.gpu_temp_c_avg, res.gpu_temp_c_max, "°C"],
+    ].filter(([, avg, max]) => avg !== null && avg !== undefined);
+    const resRows = rows.map(([label, avg, max, unit, hint]) => `
+      <div class="rd-cfg-row">
+        <span class="rd-cfg-k">${label}</span>
+        <span class="rd-cfg-v">${fmt(avg,1)}${unit} avg</span>
+        <span class="rd-cfg-d muted">peak ${fmt(max,1)}${unit}${hint ? " · " + hint : ""}</span>
+      </div>`).join("");
+    resBlock.innerHTML = `
+      <div class="rd-section-head">Resource usage <span class="muted">— ${res.samples} samples over this run</span></div>
+      <div class="rd-cfg">${resRows || '<div class="muted">no resource data recorded</div>'}</div>`;
+  } else {
+    resBlock.innerHTML = "";
+  }
+}
+
+$("#cb-detail-close").addEventListener("click", () => {
+  $("#cb-detail-panel").classList.add("hidden");
+});
+
 
 $("#cb-run-btn").addEventListener("click", () => cbRun(false));
 
@@ -482,6 +816,8 @@ cbInitDatasets();
 cbInitModels();
 cbInitKnobDefaults();
 cbLoad();
+cbLoadHistory();
+pollSysmon();  // always-on: CPU/RAM/GPU/temp widget, independent of runs
 
 // Resume polling if a run is already in flight (e.g. page refresh mid-run).
 (async () => {

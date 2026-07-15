@@ -15,6 +15,8 @@ Endpoints:
   POST /api/combined/run        run OCR immediately followed by TTS per page (background)
   GET  /api/combined/progress   live combined run status
   GET  /api/combined/summary    aggregated combined (OCR+TTS) metrics
+  GET  /api/combined/history    list past combined runs (sysmon + timing)
+  GET  /api/combined/history/<id> single combined run detail incl. sysmon
   GET  /                        dashboard (ui/index.html)
   GET  /tts                     TTS benchmark dashboard (ui/tts.html)
   GET  /combined                combined OCR+TTS benchmark dashboard (ui/combined.html)
@@ -538,6 +540,27 @@ def create_app() -> FastAPI:
         path = REPORTS_ROOT / "combined_summary.json"
         if not path.exists():
             raise HTTPException(404, "no combined reports yet — run POST /api/combined/run")
+        return JSONResponse(json.loads(path.read_text(encoding="utf-8")))
+
+    @app.get("/api/combined/history")
+    def api_combined_history():
+        from .combined_runner import COMBINED_HISTORY_ROOT
+        index_path = COMBINED_HISTORY_ROOT / "index.json"
+        if not index_path.exists():
+            return {"runs": []}
+        try:
+            runs = json.loads(index_path.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            return {"runs": []}
+        return {"runs": list(reversed(runs))}  # newest first
+
+    @app.get("/api/combined/history/{run_id}")
+    def api_combined_history_detail(run_id: str):
+        from .combined_runner import COMBINED_HISTORY_ROOT
+        safe = "".join(c if c.isalnum() or c in "_-" else "" for c in run_id)
+        path = COMBINED_HISTORY_ROOT / f"{safe}.json"
+        if not path.exists():
+            raise HTTPException(404, f"combined run not found: {run_id}")
         return JSONResponse(json.loads(path.read_text(encoding="utf-8")))
 
     @app.get("/api/results/{category}")
