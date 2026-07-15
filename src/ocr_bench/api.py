@@ -36,6 +36,25 @@ from .runner import RUN_STATUS_PATH, run as run_benchmark
 # model still starts and serves the OCR dashboard. None until loaded.
 _tts_engine = None
 
+import time
+_last_activity_time = time.time()
+_gpu_initialized = False
+
+
+def _idle_monitor():
+    global _last_activity_time, _gpu_initialized
+    import os
+    import logging
+    # Check every 30 seconds
+    while True:
+        time.sleep(30)
+        if _gpu_initialized and (time.time() - _last_activity_time > 300):
+            logging.getLogger("ocr_bench").info(
+                "Idle timeout (5 mins) reached after GPU initialization. "
+                "Recycling process to release memory."
+            )
+            os._exit(0)
+
 
 def _get_tts_engine():
     """Return a cached TTSEngine, or raise HTTPException(503) if unavailable.
@@ -59,6 +78,8 @@ def _get_tts_engine():
     try:
         use_cuda = settings.use_cuda_tts and _detect_cuda()
         _tts_engine = TTSEngine(str(voice_path), use_cuda=use_cuda)
+        global _gpu_initialized
+        _gpu_initialized = True
     except Exception as e:  # noqa: BLE001 — piper load failure -> 503, not 500
         raise HTTPException(503, f"TTS voice failed to load: {e}") from e
     return _tts_engine
@@ -129,6 +150,9 @@ class _BasicAuthMiddleware(BaseHTTPMiddleware):
     page/session needed) — any username, password from AUTH_PASSWORD."""
 
     async def dispatch(self, request: Request, call_next):
+        global _last_activity_time
+        if request.url.path not in ("/api/system", "/api/progress", "/api/tts/progress"):
+            _last_activity_time = time.time()
         # Unauthenticated: only the Docker healthcheck, so it doesn't need creds.
         if request.url.path == "/api/health" or _check_auth(request):
             return await call_next(request)
@@ -138,6 +162,12 @@ class _BasicAuthMiddleware(BaseHTTPMiddleware):
 def create_app() -> FastAPI:
     app = FastAPI(title="OCR Benchmark", version="0.1.0")
     app.add_middleware(_BasicAuthMiddleware)
+
+    @app.on_event("startup")
+    def startup_event():
+        import threading
+        thread = threading.Thread(target=_idle_monitor, daemon=True)
+        thread.start()
 
     # A run with no status update for this long is assumed dead (the per-image
     # OCR timeout is 5 min; give it margin before declaring the lock stale).
@@ -204,6 +234,8 @@ def create_app() -> FastAPI:
         }
         background.add_task(run_benchmark, None, only, False,
                             ocr_version, model_type, overrides, dataset)
+        global _gpu_initialized
+        _gpu_initialized = True
         return {"ok": True, "started": True}
 
     def _read_status() -> dict:
