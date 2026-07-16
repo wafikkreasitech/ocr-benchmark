@@ -47,6 +47,31 @@ _last_activity_time = time.time()
 _gpu_initialized = False
 
 
+def _any_run_active() -> bool:
+    """True if the OCR, TTS, or Combined benchmark is currently in flight.
+
+    Read straight from the status sidecars (not in-memory state) so this
+    works regardless of which runner set it. Never treat a benchmark that's
+    actively running as "idle" — the idle-recycle must not kill a process
+    mid-run just because progress-polling doesn't count as activity.
+    """
+    import json as _json
+    for path in (
+        REPORTS_ROOT / ".run_status.json",
+        REPORTS_ROOT / ".tts_status.json",
+        REPORTS_ROOT / ".combined_status.json",
+    ):
+        if not path.exists():
+            continue
+        try:
+            status = _json.loads(path.read_text(encoding="utf-8"))
+        except (_json.JSONDecodeError, OSError):
+            continue
+        if status.get("running"):
+            return True
+    return False
+
+
 def _idle_monitor():
     global _last_activity_time, _gpu_initialized
     import os
@@ -54,7 +79,8 @@ def _idle_monitor():
     # Check every 30 seconds
     while True:
         time.sleep(30)
-        if _gpu_initialized and (time.time() - _last_activity_time > 300):
+        if (_gpu_initialized and (time.time() - _last_activity_time > 300)
+                and not _any_run_active()):
             logging.getLogger("ocr_bench").info(
                 "Idle timeout (5 mins) reached after GPU initialization. "
                 "Recycling process to release memory."
@@ -97,8 +123,9 @@ def _clear_stranded_run_locks() -> None:
         status["running"] = False
         status["current"] = None
         status["error"] = (
-            "process was killed before this run finished (likely OOM — check "
-            "the model/backend combo used, or server crash/restart)"
+            "process was interrupted before this run finished (server "
+            "restart, crash, or out-of-memory — check the server logs "
+            "around the last update time for the exact cause)"
         )
         status["finished_at"] = _now_iso()
         try:
