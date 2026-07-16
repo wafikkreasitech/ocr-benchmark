@@ -1899,6 +1899,14 @@ tbody tr:hover { background: var(--surface-alt); }
   font-size: 10px;
   margin-left: auto;
 }
+.rd-cfg-highlight {
+  background: var(--accent-light);
+  border-radius: 4px;
+  padding: 6px 8px;
+  border-bottom: none;
+}
+.rd-cfg-highlight .rd-cfg-k { color: var(--accent); }
+.rd-cfg-highlight .rd-cfg-v { color: var(--accent); }
 
 /* ─── Glossary ───────────────────────────────────────────── */
 .glossary {

@@ -363,7 +363,7 @@
             <th class="num">TTS</th>
             <th class="num">Total</th>
             <th class="num" title="Peak CPU usage during this run">CPU</th>
-            <th class="num" title="Peak RAM usage during this run">RAM</th>
+            <th class="num" title="Peak RAM this run added on top of idle baseline">RAM Δ</th>
             <th class="num" title="Peak GPU usage during this run">GPU</th>
             <th class="num">Age</th>
           </tr>
@@ -660,6 +660,17 @@ async function pollSysmon() {
 }
 
 /* ── Resource usage block (avg/peak for one run — reused for last-run + history detail) ── */
+function _ramDeltaRowHtml(res) {
+  // Idle-baseline-subtracted delta — the honest "this run actually needed
+  // X MB on top of whatever was already resident" number.
+  if (res.ram_used_mb_delta_max === null || res.ram_used_mb_delta_max === undefined) return "";
+  return `
+    <div class="rd-cfg-row rd-cfg-highlight">
+      <span class="rd-cfg-k">RAM needed by this run</span>
+      <span class="rd-cfg-v">${fmt(res.ram_used_mb_delta_max,0)} MB peak</span>
+      <span class="rd-cfg-d muted">baseline ${fmt(res.baseline_ram_used_mb,0)} MB idle · avg delta ${fmt(res.ram_used_mb_delta_avg,0)} MB</span>
+    </div>`;
+}
 function renderResourceBlock(blockSel, rowsSel, samplesSel, res) {
   const block = $(blockSel), rowsEl = $(rowsSel), samplesEl = $(samplesSel);
   if (!block || !rowsEl) return;
@@ -677,12 +688,13 @@ function renderResourceBlock(blockSel, rowsSel, samplesSel, res) {
     ["GPU" + (res.gpu_name ? ` (${res.gpu_name})` : ""), res.gpu_percent_avg, res.gpu_percent_max, "%"],
     ["GPU temp", res.gpu_temp_c_avg, res.gpu_temp_c_max, "°C"],
   ].filter(([, avg, max]) => avg !== null && avg !== undefined);
-  rowsEl.innerHTML = rows.map(([label, avg, max, unit, hint]) => `
+  const rowsHtml = rows.map(([label, avg, max, unit, hint]) => `
     <div class="rd-cfg-row">
       <span class="rd-cfg-k">${label}</span>
       <span class="rd-cfg-v">${fmt(avg,1)}${unit} avg</span>
       <span class="rd-cfg-d muted">peak ${fmt(max,1)}${unit}${hint ? " · " + hint : ""}</span>
-    </div>`).join("") || '<div class="muted">no resource data recorded</div>';
+    </div>`).join("");
+  rowsEl.innerHTML = _ramDeltaRowHtml(res) + (rowsHtml || '<div class="muted">no resource data recorded</div>');
 }
 
 /* ── Combined run history ────────────────────────────────── */
@@ -707,7 +719,11 @@ function renderCbHistory() {
   tbody.innerHTML = cbHistoryRuns.map(run => {
     const res = run.resources || {};
     const cpuCell = res.cpu_percent_max != null ? `${fmt(res.cpu_percent_max,0)}%` : "–";
-    const ramCell = res.ram_percent_max != null ? `${fmt(res.ram_percent_max,0)}%` : "–";
+    // RAM delta: what this run actually added on top of idle baseline (MB),
+    // not raw peak-used — idle RAM is never zero, so raw peak overstates cost.
+    const ramCell = res.ram_used_mb_delta_max != null
+      ? `${Math.round(res.ram_used_mb_delta_max).toLocaleString()} MB`
+      : (res.ram_percent_max != null ? `${fmt(res.ram_percent_max,0)}%` : "–");
     const gpuCell = res.gpu_percent_max != null ? `${fmt(res.gpu_percent_max,0)}%` : "–";
     const ocrBackend = run.ocr_backend || "cpu";
     const ttsBackend = run.tts_backend || "cpu";
@@ -721,7 +737,7 @@ function renderCbHistory() {
       <td class="num">${Math.round(run.tts_ms_mean||0)}ms</td>
       <td class="num">${Math.round(run.total_ms_mean||0)}ms</td>
       <td class="num muted" title="peak CPU usage">${cpuCell}</td>
-      <td class="num muted" title="peak RAM usage">${ramCell}</td>
+      <td class="num muted" title="peak RAM this run added on top of idle">${ramCell}</td>
       <td class="num muted" title="peak GPU usage">${gpuCell}</td>
       <td class="num muted">${run.timestamp ? fmtDateAge(run.timestamp) : "–"}</td>
     </tr>`;
@@ -798,7 +814,7 @@ async function cbOpenDetail(id) {
       </div>`).join("");
     resBlock.innerHTML = `
       <div class="rd-section-head">Resource usage <span class="muted">— ${res.samples} samples over this run</span></div>
-      <div class="rd-cfg">${resRows || '<div class="muted">no resource data recorded</div>'}</div>`;
+      <div class="rd-cfg">${_ramDeltaRowHtml(res)}${resRows || '<div class="muted">no resource data recorded</div>'}</div>`;
   } else {
     resBlock.innerHTML = "";
   }

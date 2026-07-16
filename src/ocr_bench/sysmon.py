@@ -226,6 +226,12 @@ class ResourceMonitor:
     ``.latest`` is read by the progress sidecar so the UI can show live usage
     during a run; ``.summary()`` (avg/peak) is saved into the run's history
     snapshot when the run finishes.
+
+    Idle RAM/GPU-mem is never zero (OS + drivers + the web server itself sit
+    on a baseline before any model loads), so raw peak-used numbers overstate
+    what the *benchmark* actually costs. ``start()`` grabs one baseline sample
+    before the run's engines are constructed; ``summary()`` subtracts it so
+    ``ram_used_mb_delta_*`` reports only what this run added on top of idle.
     """
 
     def __init__(self, interval_s: float = 2.0):
@@ -236,9 +242,17 @@ class ResourceMonitor:
         self._samples: list[SystemSample] = []
         self._high_load_count = 0
         self.latest: dict | None = None
+        self.baseline: SystemSample | None = None
 
     def start(self) -> None:
         self._stop.clear()
+        # ponytail: synchronous baseline read at the exact "run started" moment
+        # (before OCR/TTS engines get constructed) — must never crash the run.
+        try:
+            self.baseline = sample(cpu_interval=None)
+        except Exception:  # noqa: BLE001
+            log.debug("baseline resource sample failed", exc_info=True)
+            self.baseline = None
         self._thread = threading.Thread(target=self._loop, daemon=True)
         self._thread.start()
 
@@ -291,6 +305,26 @@ class ResourceMonitor:
         high_load_cpu_temps = [s.cpu_temp_c for s in high_load if s.cpu_temp_c is not None]
         high_load_gpu_temps = [g.temp_c for s in high_load for g in s.gpus if g.temp_c is not None]
 
+        # Delta vs idle baseline — the honest "what did THIS run actually
+        # cost" number, since RAM/GPU-mem/CPU never start at zero (OS,
+        # drivers, the web server process itself all sit on a baseline).
+        # None when no baseline was captured (e.g. monitor constructed but
+        # start() never called) rather than silently reporting raw peak.
+        base = self.baseline
+        ram_used_delta_avg = ram_used_delta_max = None
+        ram_percent_delta_max = None
+        gpu_mem_delta_avg = gpu_mem_delta_max = None
+        cpu_percent_delta_max = None
+        if base is not None:
+            ram_used_delta_avg = avg(ram_used) - base.ram_used_mb if ram_used else None
+            ram_used_delta_max = (max(ram_used) - base.ram_used_mb) if ram_used else None
+            ram_percent_delta_max = (max(ram_vals) - base.ram_percent) if ram_vals else None
+            cpu_percent_delta_max = (max(cpu_vals) - base.cpu_percent) if cpu_vals else None
+            base_gpu = base.gpus[0] if base.gpus else None
+            if base_gpu is not None and base_gpu.mem_used_mb is not None and gpu_mem:
+                gpu_mem_delta_avg = avg(gpu_mem) - base_gpu.mem_used_mb
+                gpu_mem_delta_max = max(gpu_mem) - base_gpu.mem_used_mb
+
         return {
             "samples": len(samples),
             "cpu_percent_avg": avg(cpu_vals),
@@ -317,4 +351,14 @@ class ResourceMonitor:
             "high_load_cpu_temp_c_max": max(high_load_cpu_temps) if high_load_cpu_temps else None,
             "high_load_gpu_temp_c_avg": avg(high_load_gpu_temps),
             "high_load_gpu_temp_c_max": max(high_load_gpu_temps) if high_load_gpu_temps else None,
+            # ── Idle-baseline-subtracted deltas — the "real" cost of this run ──
+            "baseline_ram_used_mb": base.ram_used_mb if base else None,
+            "baseline_ram_percent": base.ram_percent if base else None,
+            "baseline_cpu_percent": base.cpu_percent if base else None,
+            "ram_used_mb_delta_avg": ram_used_delta_avg,
+            "ram_used_mb_delta_max": ram_used_delta_max,
+            "ram_percent_delta_max": ram_percent_delta_max,
+            "cpu_percent_delta_max": cpu_percent_delta_max,
+            "gpu_mem_used_mb_delta_avg": gpu_mem_delta_avg,
+            "gpu_mem_used_mb_delta_max": gpu_mem_delta_max,
         }

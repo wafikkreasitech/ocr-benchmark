@@ -1906,6 +1906,19 @@ async function openRunDetail(id) {
         <span class="rd-cfg-d muted">peak ${fmt(max, 1)}${unit}${hint ? " · " + hint : ""}</span>
       </div>`).join("");
 
+    // Idle-baseline-subtracted delta — the honest "this run actually needed
+    // X MB on top of whatever was already resident" number, since idle RAM
+    // is never zero (OS + web server baseline).
+    let deltaRow = "";
+    if (res.ram_used_mb_delta_max !== null && res.ram_used_mb_delta_max !== undefined) {
+      deltaRow = `
+      <div class="rd-cfg-row rd-cfg-highlight">
+        <span class="rd-cfg-k">RAM needed by this run</span>
+        <span class="rd-cfg-v">${fmt(res.ram_used_mb_delta_max, 0)} MB peak</span>
+        <span class="rd-cfg-d muted">baseline ${fmt(res.baseline_ram_used_mb, 0)} MB idle · avg delta ${fmt(res.ram_used_mb_delta_avg, 0)} MB</span>
+      </div>`;
+    }
+
     let highLoadRow = "";
     if (res.high_load_samples) {
       highLoadRow = `
@@ -1919,7 +1932,7 @@ async function openRunDetail(id) {
     resBlock = `
       <div class="rd-section">
         <div class="rd-section-head">Resource usage <span class="muted">— ${res.samples} samples over the run</span></div>
-        <div class="rd-cfg">${resRows || '<div class="muted">no resource data recorded</div>'}${highLoadRow}</div>
+        <div class="rd-cfg">${deltaRow}${resRows || '<div class="muted">no resource data recorded</div>'}${highLoadRow}</div>
       </div>`;
   }
 
