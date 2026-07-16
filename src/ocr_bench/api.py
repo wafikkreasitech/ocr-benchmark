@@ -62,6 +62,52 @@ def _idle_monitor():
             os._exit(0)
 
 
+def _clear_stranded_run_locks() -> None:
+    """On process startup, mark any run left ``running: true`` by a process
+    that died without cleaning up (killed -9, OOM-killed, power loss) as
+    failed — instead of leaving the UI's progress bar stuck forever.
+
+    Every fresh process start (including systemd's automatic restart after a
+    crash) means whatever run was "in flight" belonged to the *previous*
+    process and can never make progress again — there is no reconnecting to
+    a dead run. So on startup, any status sidecar still claiming
+    ``running: true`` is definitionally stranded.
+    """
+    import json as _json
+    import logging
+    log = logging.getLogger("ocr_bench")
+
+    def _now_iso() -> str:
+        from datetime import datetime, timezone
+        return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+    for path, label in (
+        (REPORTS_ROOT / ".run_status.json", "OCR"),
+        (REPORTS_ROOT / ".tts_status.json", "TTS"),
+        (REPORTS_ROOT / ".combined_status.json", "Combined"),
+    ):
+        if not path.exists():
+            continue
+        try:
+            status = _json.loads(path.read_text(encoding="utf-8"))
+        except (_json.JSONDecodeError, OSError):
+            continue
+        if not status.get("running"):
+            continue
+        status["running"] = False
+        status["current"] = None
+        status["error"] = (
+            "process was killed before this run finished (likely OOM — check "
+            "the model/backend combo used, or server crash/restart)"
+        )
+        status["finished_at"] = _now_iso()
+        try:
+            path.write_text(_json.dumps(status, ensure_ascii=False), encoding="utf-8")
+            log.warning("%s run was stranded (process died mid-run) — marked as failed", label)
+        except OSError:
+            pass
+
+
 def _get_tts_engine():
     """Return a cached TTSEngine, or raise HTTPException(503) if unavailable.
 
@@ -175,6 +221,7 @@ def create_app() -> FastAPI:
         import threading
         thread = threading.Thread(target=_idle_monitor, daemon=True)
         thread.start()
+        _clear_stranded_run_locks()
 
     # A run with no status update for this long is assumed dead (the per-image
     # OCR timeout is 5 min; give it margin before declaring the lock stale).
