@@ -149,6 +149,22 @@ class BenchEngine:
                  use_tensorrt: bool = False, trt_cache_dir: str = "models/trt_engines") -> None:
         ver = OCRVersion(ocr_version)
         mtype = ModelType(model_type)
+
+        # Store config for subprocess isolation (predict() recreates engine in
+        # a child process so a TRT/GPU hang can be force-killed cleanly).
+        self._ocr_version = ocr_version
+        self._model_type = model_type
+        self._det_box_thresh = det_box_thresh
+        self._det_unclip_ratio = det_unclip_ratio
+        self._det_thresh = det_thresh
+        self._det_limit_side_len = det_limit_side_len
+        self._rec_batch_num = rec_batch_num
+        self._rec_img_width = rec_img_width
+        self._use_tensorrt = use_tensorrt
+        self._trt_cache_dir = trt_cache_dir
+        self._enable_preprocessing = enable_preprocessing
+        self._preproc_upscale_min_side = preproc_upscale_min_side
+
         params = {
             "Det.ocr_version": ver,
             "Det.model_type": mtype,
@@ -233,29 +249,52 @@ class BenchEngine:
     def predict(self, image_path: Path) -> PagePrediction:
         t0 = time.perf_counter()
         log.debug("OCR start: %s", image_path.name)
-        result_holder = [None, None]  # [result, error]
 
-        def _run():
+        # Use subprocess isolation instead of threading — when TRT hangs on
+        # GPU, a daemon thread can never be killed and holds the GPU lock
+        # forever. Killing the subprocess releases all GPU resources cleanly.
+        import multiprocessing as _mp
+
+        def _worker(img_path, result_queue):
             try:
-                result_holder[0] = self._do_ocr(image_path)
+                engine = BenchEngine(
+                    enable_preprocessing=self._enable_preprocessing,
+                    preproc_upscale_min_side=self._preproc_upscale_min_side,
+                    ocr_version=self._ocr_version, model_type=self._model_type,
+                    det_box_thresh=self._det_box_thresh, det_thresh=self._det_thresh,
+                    det_unclip_ratio=self._det_unclip_ratio, det_limit_side_len=self._det_limit_side_len,
+                    use_angle_cls=self._use_angle_cls, rec_batch_num=self._rec_batch_num,
+                    rec_img_width=self._rec_img_width, use_tensorrt=self._use_tensorrt,
+                    trt_cache_dir=self._trt_cache_dir,
+                )
+                pred = engine.predict(img_path)
+                result_queue.put(("ok", pred))
             except Exception as e:
-                result_holder[1] = e
+                result_queue.put(("error", e))
 
-        thread = threading.Thread(target=_run, daemon=True)
-        thread.start()
-        thread.join(timeout=self._timeout_s)
+        result_queue = _mp.Queue()
+        proc = _mp.Process(target=_worker, args=(str(image_path), result_queue), daemon=True)
+        proc.start()
+        proc.join(timeout=self._timeout_s)
 
-        if thread.is_alive():
-            log.error("OCR TIMEOUT: %s after %ds", image_path.name, self._timeout_s)
-            print(f"  !! OCR TIMEOUT: {image_path.name} after {self._timeout_s}s — skipping", flush=True)
+        if proc.is_alive():
+            log.error("OCR TIMEOUT: %s after %ds — killing subprocess", image_path.name, self._timeout_s)
+            print(f"  !! OCR TIMEOUT: {image_path.name} after {self._timeout_s}s — killing subprocess", flush=True)
+            proc.kill()
+            proc.join(timeout=5)
             return PagePrediction(image=image_path.name, lines=[], elapsed_ms=self._timeout_s * 1000)
 
-        if result_holder[1]:
-            log.error("OCR ERROR: %s — %s", image_path.name, result_holder[1])
-            print(f"  !! OCR ERROR: {image_path.name} — {result_holder[1]}", flush=True)
+        try:
+            status, data = result_queue.get_nowait()
+        except Exception:
             return PagePrediction(image=image_path.name, lines=[], elapsed_ms=(time.perf_counter() - t0) * 1000)
 
-        pred = result_holder[0]
+        if status == "error":
+            log.error("OCR ERROR: %s — %s", image_path.name, data)
+            print(f"  !! OCR ERROR: {image_path.name} — {data}", flush=True)
+            return PagePrediction(image=image_path.name, lines=[], elapsed_ms=(time.perf_counter() - t0) * 1000)
+
+        pred = data
         elapsed = (time.perf_counter() - t0) * 1000
         log.info("OCR done: %s → %d lines in %.0fms", image_path.name, len(pred.lines), elapsed)
         return pred
